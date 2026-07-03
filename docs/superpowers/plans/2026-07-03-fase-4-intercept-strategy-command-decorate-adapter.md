@@ -333,7 +333,7 @@ git commit -m "feat: patrón Strategy (StrategySelector y @StrategyFor)"
 - Modify: `src/index.ts`
 - Test: `tests/command.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/command.test.ts`:
 
@@ -389,12 +389,12 @@ describe('CommandHistory + @Revertible', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/command.test.ts`
 Expected: FAIL — no existe `src/patterns/command.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/command.ts`:
 
@@ -474,12 +474,12 @@ export function Revertible(history: CommandHistory, undoMethod: string) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/command.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 
