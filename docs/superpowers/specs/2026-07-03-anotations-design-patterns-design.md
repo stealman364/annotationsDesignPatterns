@@ -124,7 +124,20 @@ Facade, Bridge, Composite, Visitor (estructura multi-clase), Template Method
 
 Descartados adicionales: Abstract Factory (cubierto por `Factory<Base>` por
 familia) e Interpreter (árboles de expresiones, nada que decorar). Con la
-Fase 6 el catálogo queda cerrado.
+Fase 6 el catálogo GoF queda cerrado.
+
+### Ampliación v1.3 (Fase 8: resiliencia, aprobada 2026-07-03)
+
+La Fase 7 (preparación para npm: README, metadatos, dry-run) queda pendiente
+y no genera código de patrones.
+
+| Fase | Contenido | Categoría |
+|---|---|---|
+| 8 | `@Fallback` (valor/función de respaldo ante fallo), `@Semaphore(n)` (Bulkhead: máx. N ejecuciones concurrentes, generaliza `@Mutex`), backoff exponencial para `@Retry` (`backoffFactor`, retrocompatible) | utility/ |
+
+Nota de tipado: el argumento de `@Fallback` se tipa como `unknown` porque las
+factorías de decoradores fijan sus genéricos antes de ver el método (limitación
+de inferencia de TS con decoradores TC39); se documenta en el JSDoc.
 
 ## Fuera de alcance (v1)
 
