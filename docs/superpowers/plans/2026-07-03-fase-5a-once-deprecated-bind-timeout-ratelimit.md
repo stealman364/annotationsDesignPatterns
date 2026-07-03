@@ -156,7 +156,7 @@ git commit -m "feat: decorador @Once"
 - Modify: `src/index.ts`
 - Test: `tests/deprecated.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/deprecated.test.ts`:
 
@@ -201,12 +201,12 @@ describe('@Deprecated', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/deprecated.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/deprecated.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/deprecated.ts`:
 
@@ -245,12 +245,12 @@ export function Deprecated(message?: string) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/deprecated.test.ts`
 Expected: PASS (2 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// Utilitarios de método`:
 
