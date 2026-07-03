@@ -21,6 +21,7 @@ export { CommandHistory, Revertible, type Command } from './patterns/behavioral/
 export { Snapshot, SnapshotHistory } from './patterns/behavioral/snapshot';
 export { HandlerChain, HandlerFor, type Handler } from './patterns/behavioral/handler-chain';
 export { IterableOver, type WithIterator } from './patterns/behavioral/iterable-over';
+export { StateMachine, TransitionTo, When } from './patterns/behavioral/state-machine';
 
 // Utilitarios de método
 export { Memoize } from './patterns/utility/memoize';
