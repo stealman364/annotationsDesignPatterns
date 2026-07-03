@@ -19,7 +19,7 @@
 - Modify: `src/index.ts`
 - Test: `tests/debounce.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/debounce.test.ts`:
 
@@ -80,12 +80,12 @@ describe('@Debounce', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/debounce.test.ts`
 Expected: FAIL — no existe `src/patterns/debounce.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/debounce.ts`:
 
@@ -133,7 +133,7 @@ export function Debounce(delayMs: number) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/debounce.test.ts`
 Expected: PASS (3 tests).
@@ -154,6 +154,8 @@ git add -A
 git commit -m "feat: decorador @Debounce"
 ```
 
+- [x] **Step 5: Exportar, suite completa y commit** ✓ (completado)
+
 ### Task 2: @Throttle
 
 **Files:**
@@ -161,7 +163,7 @@ git commit -m "feat: decorador @Debounce"
 - Modify: `src/index.ts`
 - Test: `tests/throttle.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/throttle.test.ts`:
 
@@ -219,7 +221,7 @@ describe('@Throttle', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/throttle.test.ts`
 Expected: FAIL — no existe `src/patterns/throttle.ts`.
@@ -268,7 +270,9 @@ export function Throttle(intervalMs: number) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 3: Implementación** ✓ (completado)
+
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/throttle.test.ts`
 Expected: PASS (3 tests).
@@ -289,6 +293,8 @@ git add -A
 git commit -m "feat: decorador @Throttle"
 ```
 
+- [x] **Step 5: Exportar, suite completa y commit** ✓ (completado)
+
 ### Task 3: @Retry
 
 **Files:**
@@ -296,7 +302,7 @@ git commit -m "feat: decorador @Throttle"
 - Modify: `src/index.ts`
 - Test: `tests/retry.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/retry.test.ts`:
 
@@ -359,7 +365,7 @@ describe('@Retry', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/retry.test.ts`
 Expected: FAIL — no existe `src/patterns/retry.ts`.
@@ -417,7 +423,9 @@ export function Retry({ attempts, delayMs = 0 }: RetryOptions) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 3: Implementación** ✓ (completado)
+
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/retry.test.ts`
 Expected: PASS (4 tests).
@@ -438,6 +446,8 @@ git add -A
 git commit -m "feat: decorador @Retry"
 ```
 
+- [x] **Step 5: Exportar, suite completa y commit** ✓ (completado)
+
 ### Task 4: @Lazy
 
 **Files:**
@@ -445,7 +455,7 @@ git commit -m "feat: decorador @Retry"
 - Modify: `src/index.ts`
 - Test: `tests/lazy.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/lazy.test.ts`:
 
@@ -507,7 +517,7 @@ describe('@Lazy', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/lazy.test.ts`
 Expected: FAIL — no existe `src/patterns/lazy.ts`.
@@ -549,7 +559,9 @@ export function Lazy<This, Return>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 3: Implementación** ✓ (completado)
+
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/lazy.test.ts`
 Expected: PASS (3 tests).
@@ -566,7 +578,9 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, `dist/patterns/` contiene los 4 patrones nuevos.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 5: Exportar, suite completa, build y commit** ✓ (completado)
+
+- [x] **Step 6: Invocar la skill `verify` y después commitear** ✓ (completado)
 
 ```bash
 git add -A
