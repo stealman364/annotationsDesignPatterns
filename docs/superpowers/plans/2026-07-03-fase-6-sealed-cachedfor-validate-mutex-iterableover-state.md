@@ -698,7 +698,7 @@ git commit -m "feat: decorador @IterableOver (patrón Iterator)"
 - Modify: `src/index.ts`
 - Test: `tests/state-machine.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/state-machine.test.ts`:
 
@@ -792,12 +792,12 @@ describe('StateMachine + @When + @TransitionTo', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/state-machine.test.ts`
 Expected: FAIL — no existe `src/patterns/behavioral/state-machine.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/behavioral/state-machine.ts`:
 
@@ -883,12 +883,12 @@ export function TransitionTo(next: string) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/state-machine.test.ts`
 Expected: PASS (5 tests).
 
-- [ ] **Step 5: Exportar, suite completa, build y commit**
+- [x] **Step 5: Exportar, suite completa, build y commit**
 
 En `src/index.ts`, añade al final del bloque `// De comportamiento`:
 
@@ -900,7 +900,7 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, con los 6 archivos nuevos en `dist/patterns/`.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
