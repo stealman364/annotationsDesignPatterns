@@ -116,6 +116,16 @@ Descartados deliberadamente como decoradores por no aportar en una sola clase:
 Facade, Bridge, Composite, Visitor (estructura multi-clase), Template Method
 (lo da la herencia) y Mediator (equivale al `Subject` existente).
 
+### Ampliación v1.2 (Fase 6, aprobada 2026-07-03) — cierre del catálogo
+
+| Fase | Contenido | Categoría |
+|---|---|---|
+| 6 | `@Sealed` (structural), `@CachedFor` + `@Validate` + `@Mutex` (utility), `@IterableOver` + `WithIterator<T,I>` (Iterator, behavioral), `StateMachine` + `@When` + `@TransitionTo` (State, behavioral) | mixta |
+
+Descartados adicionales: Abstract Factory (cubierto por `Factory<Base>` por
+familia) e Interpreter (árboles de expresiones, nada que decorar). Con la
+Fase 6 el catálogo queda cerrado.
+
 ## Fuera de alcance (v1)
 
 - Decoradores de parámetros e inyección de dependencias (requieren el sistema
