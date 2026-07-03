@@ -4,6 +4,7 @@ export const LIB_NAME = 'annotations-design-patterns';
 export { Singleton } from './patterns/creational/singleton';
 export { Factory, RegisterIn } from './patterns/creational/factory';
 export { builderFor, type Builder } from './patterns/creational/builder';
+export { Cloneable, type WithClone } from './patterns/creational/cloneable';
 
 // Estructurales
 export { Adapt, type Adapted } from './patterns/structural/adapt';
