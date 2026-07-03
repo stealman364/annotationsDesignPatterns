@@ -7,3 +7,4 @@ export { Debounce } from './patterns/debounce';
 export { Throttle } from './patterns/throttle';
 export { Retry, type RetryOptions } from './patterns/retry';
 export { Lazy } from './patterns/lazy';
+export { Emits, Subject, type Listener } from './patterns/observer';
