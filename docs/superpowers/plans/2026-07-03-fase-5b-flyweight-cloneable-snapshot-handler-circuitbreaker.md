@@ -5,7 +5,7 @@
 > Al terminar, invoca `verify`. Prerrequisito: Fase 5a completada (`npm test` en verde).
 > Los patrones van en la carpeta de su categoría (indicada en cada task). Los tests
 > siguen planos en `tests/`. Marca los checkboxes editando la línea existente
-> (`- [x]` → `- [x]`), sin añadir líneas nuevas.
+> (`- [ ]` → `- [x]`), sin añadir líneas nuevas.
 
 **Goal:** Cuatro patrones GoF que faltaban — `@Flyweight` (instancias compartidas por argumentos), `@Cloneable` (Prototype), `SnapshotHistory` + `@Snapshot` (Memento) y `HandlerChain` + `@HandlerFor` (Chain of Responsibility) — más `@CircuitBreaker` (corta llamadas a métodos async que fallan repetidamente).
 
