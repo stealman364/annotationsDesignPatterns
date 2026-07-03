@@ -24,7 +24,7 @@ export { IterableOver, type WithIterator } from './patterns/behavioral/iterable-
 export { StateMachine, TransitionTo, When } from './patterns/behavioral/state-machine';
 
 // Utilitarios de método
-export { Memoize } from './patterns/utility/memoize';
+export { Memoize, type KeyResolver, type MemoizeOptions } from './patterns/utility/memoize';
 export { Debounce } from './patterns/utility/debounce';
 export { Throttle } from './patterns/utility/throttle';
 export { Retry, type RetryOptions } from './patterns/utility/retry';

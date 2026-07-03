@@ -50,3 +50,64 @@ describe('@Memoize', () => {
     expect(new Greeter('Ana').greet()).toBe('Hola, Ana');
   });
 });
+
+describe('@Memoize con resolver de clave', () => {
+  it('usa la clave personalizada: literales distintos con el mismo id comparten entrada', () => {
+    let calls = 0;
+
+    class Repo {
+      @Memoize({ key: (user: { id: number }) => String(user.id) })
+      permissions(user: { id: number }): number {
+        void user;
+        return ++calls;
+      }
+    }
+
+    const repo = new Repo();
+    expect(repo.permissions({ id: 1 })).toBe(1);
+    expect(repo.permissions({ id: 1 })).toBe(1);
+    expect(repo.permissions({ id: 2 })).toBe(2);
+    expect(calls).toBe(2);
+  });
+
+  it('la clave personalizada admite argumentos circulares (JSON.stringify lanzaría)', () => {
+    interface Node {
+      name: string;
+      self?: Node;
+    }
+    let calls = 0;
+
+    class Walker {
+      @Memoize({ key: (node: Node) => node.name })
+      visit(node: Node): number {
+        void node;
+        return ++calls;
+      }
+    }
+
+    const node: Node = { name: 'a' };
+    node.self = node;
+
+    const w = new Walker();
+    expect(w.visit(node)).toBe(1);
+    expect(w.visit(node)).toBe(1);
+    expect(calls).toBe(1);
+  });
+
+  it('@Memoize() sin opciones equivale al comportamiento por defecto', () => {
+    let calls = 0;
+
+    class Calc {
+      @Memoize()
+      double(n: number): number {
+        void n;
+        return ++calls;
+      }
+    }
+
+    const c = new Calc();
+    expect(c.double(1)).toBe(1);
+    expect(c.double(1)).toBe(1);
+    expect(calls).toBe(1);
+  });
+});
