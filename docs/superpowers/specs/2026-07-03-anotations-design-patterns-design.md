@@ -95,8 +95,12 @@ Cada fase termina con tests en verde y es usable por sí sola.
 | 0 | Scaffolding: tsconfig, tsup, vitest, package.json con exports | — |
 | 1 | `@Singleton`, `@Memoize`, `@Frozen` (Immutable) | Fácil: decoradores puros sin estado compartido |
 | 2 | `@Debounce`, `@Throttle`, `@Retry`, `@Lazy` | Media: temporización y estado interno por método |
-| 3 | `@Observable` / `@Emits` (Observer), `@Factory`, `@Builder` | Media-alta: requieren event-emitter o registro propio |
-| 4 | `@Intercept` (Proxy), `@Strategy`, `@Command`, `@Decorate`, `@Adapter` | Alta: tipado avanzado con genéricos |
+| 3 | `Subject` + `@Emits` (Observer), `Factory` + `@RegisterIn`, `builderFor` (Builder) | Media-alta: requieren event-emitter o registro propio |
+| 4 | `@Intercept` (Proxy), `StrategySelector` + `@StrategyFor`, `CommandHistory` + `@Revertible` (Command), `@Decorate`, `@Adapt` (Adapter) | Alta: tipado avanzado con genéricos |
+
+Nota: Builder se expone como helper `builderFor(Clase)` y no como decorador
+`@Buildable`, porque los decoradores TC39 no pueden ampliar el tipo estático de
+una clase y el decorador no podría tiparse honestamente.
 
 ## Fuera de alcance (v1)
 
