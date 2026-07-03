@@ -281,7 +281,7 @@ git commit -m "feat: decorador @Memoize"
 - Modify: `src/index.ts`
 - Test: `tests/frozen.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/frozen.test.ts`:
 
@@ -326,12 +326,12 @@ describe('@Frozen', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/frozen.test.ts`
 Expected: FAIL — no existe `src/patterns/frozen.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/frozen.ts`:
 
@@ -366,12 +366,12 @@ export function Frozen<T extends new (...args: any[]) => object>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/frozen.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar desde el barrel**
+- [x] **Step 5: Exportar desde el barrel**
 
 En `src/index.ts`, añade al final:
 
@@ -379,13 +379,13 @@ En `src/index.ts`, añade al final:
 export { Frozen } from './patterns/frozen';
 ```
 
-- [ ] **Step 6: Suite completa, build y commit**
+- [x] **Step 6: Suite completa, build y commit**
 
 Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: `dist/` contiene `index.*` y `patterns/singleton.*`, `patterns/memoize.*`, `patterns/frozen.*`.
 
-- [ ] **Step 7: Invocar la skill `verify` y después commitear**
+- [x] **Step 7: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
