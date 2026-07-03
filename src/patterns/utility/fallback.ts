@@ -4,16 +4,18 @@
  * `(error, ...argsOriginales) => valor | Promise<valor>` (las funciones se
  * tratan SIEMPRE como proveedor, nunca como valor).
  *
- * Nota de tipado: `fallback` se tipa como `unknown` porque las factorías de
- * decoradores fijan sus genéricos antes de conocer el método decorado; es
- * responsabilidad del llamante que el respaldo sea compatible con el tipo
- * de retorno. Combínalo con @Retry/@Timeout/@CircuitBreaker para completar
- * la cadena de resiliencia.
+ * Nota de tipado: las factorías de decoradores fijan sus genéricos antes de
+ * conocer el método decorado, así que el compilador NO puede comprobar solo
+ * que el respaldo case con el tipo de retorno. Pasa el genérico
+ * explícitamente (`@Fallback<User[]>([])`) para que al menos el valor de
+ * respaldo quede validado; sin genérico se acepta cualquier valor.
+ * Combínalo con @Retry/@Timeout/@CircuitBreaker para completar la cadena
+ * de resiliencia.
  *
  * @example
  * ```ts
  * class Api {
- *   @Fallback([])
+ *   @Fallback<Item[]>([]) // el [] se comprueba contra Item[]
  *   async fetchItems(): Promise<Item[]> { ... }
  *
  *   @Fallback((error, id: string) => cache.get(id))
@@ -21,7 +23,7 @@
  * }
  * ```
  */
-export function Fallback(fallback: unknown) {
+export function Fallback<R = unknown>(fallback: R | ((...args: never[]) => R | Promise<R>)) {
   return function <This, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
     context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>
@@ -35,7 +37,10 @@ export function Fallback(fallback: unknown) {
       } catch (error) {
         const value =
           typeof fallback === 'function'
-            ? await (fallback as (error: unknown, ...args: Args) => unknown)(error, ...args)
+            ? await (fallback as unknown as (error: unknown, ...args: Args) => unknown)(
+                error,
+                ...args
+              )
             : fallback;
         return value as Return;
       }
