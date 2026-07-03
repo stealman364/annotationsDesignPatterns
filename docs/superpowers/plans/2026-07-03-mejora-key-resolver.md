@@ -23,7 +23,7 @@
 - Modify: `tests/memoize.test.ts` (añadir un describe al final)
 - Modify: `src/index.ts` (ampliar una línea de export)
 
-- [ ] **Step 1: Añadir los tests que fallan**
+- [x] **Step 1: Añadir los tests que fallan**
 
 En `tests/memoize.test.ts`, añade AL FINAL DEL ARCHIVO (después del cierre `});` del
 `describe('@Memoize', ...)` existente) este bloque:
@@ -92,14 +92,14 @@ describe('@Memoize con resolver de clave', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/memoize.test.ts`
 Expected: FAIL — los 3 tests antiguos pasan; los nuevos fallan (la forma con opciones
 no existe todavía). Nota: puede fallar en transformación/typecheck del archivo; es el
 rojo esperado.
 
-- [ ] **Step 3: Sobrescribir la implementación**
+- [x] **Step 3: Sobrescribir la implementación**
 
 Sobrescribe `src/patterns/utility/memoize.ts` COMPLETO con:
 
@@ -196,12 +196,12 @@ function memoizeMethod<This, Args extends unknown[], Return>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/memoize.test.ts`
 Expected: PASS (6 tests: 3 antiguos + 3 nuevos).
 
-- [ ] **Step 5: Ampliar el export, suite completa y commit**
+- [x] **Step 5: Ampliar el export, suite completa y commit**
 
 En `src/index.ts`, sustituye la línea:
 
@@ -230,7 +230,7 @@ git commit -m "feat: opcion key (resolver de clave) en @Memoize"
 - Modify: `tests/cached-for.test.ts` (añadir un test dentro del describe existente)
 - Modify: `src/index.ts` (ampliar una línea de export)
 
-- [ ] **Step 1: Añadir el test que falla**
+- [x] **Step 1: Añadir el test que falla**
 
 En `tests/cached-for.test.ts`, añade este test DENTRO del
 `describe('@CachedFor', ...)` existente, justo ANTES del test
@@ -258,13 +258,13 @@ En `tests/cached-for.test.ts`, añade este test DENTRO del
 
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/cached-for.test.ts`
 Expected: FAIL — los 3 tests antiguos pasan; el nuevo falla (el segundo parámetro no
 existe todavía).
 
-- [ ] **Step 3: Sobrescribir la implementación**
+- [x] **Step 3: Sobrescribir la implementación**
 
 Sobrescribe `src/patterns/utility/cached-for.ts` COMPLETO con:
 
@@ -337,12 +337,12 @@ export function CachedFor(ttlMs: number, options: CachedForOptions = {}) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/cached-for.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Ampliar el export, suite completa, lint, build y commit**
+- [x] **Step 5: Ampliar el export, suite completa, lint, build y commit**
 
 En `src/index.ts`, sustituye la línea:
 
@@ -362,7 +362,7 @@ Run: `npm run format` — aplica el formato.
 Run: `npm run lint` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
