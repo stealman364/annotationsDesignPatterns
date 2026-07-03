@@ -22,7 +22,7 @@
 - Modify: `src/index.ts`
 - Test: `tests/memoize-by-ref.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/memoize-by-ref.test.ts`:
 
@@ -151,12 +151,12 @@ describe('@MemoizeByRef', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/memoize-by-ref.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/memoize-by-ref.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/memoize-by-ref.ts`:
 
@@ -245,12 +245,12 @@ export function MemoizeByRef<This, Args extends unknown[], Return>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/memoize-by-ref.test.ts`
 Expected: PASS (6 tests).
 
-- [ ] **Step 5: Referencia cruzada en el JSDoc de @Memoize**
+- [x] **Step 5: Referencia cruzada en el JSDoc de @Memoize**
 
 En `src/patterns/utility/memoize.ts`, sustituye la línea:
 
@@ -265,7 +265,7 @@ por estas dos líneas:
  * @MemoizeByRef si prefieres comparar los argumentos por referencia.
 ```
 
-- [ ] **Step 6: Exportar, suite completa, lint, build y commit**
+- [x] **Step 6: Exportar, suite completa, lint, build y commit**
 
 En `src/index.ts`, añade justo después de la línea del export de `Memoize`:
 

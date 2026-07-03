@@ -21,7 +21,8 @@ export interface MemoizeOptions {
  *   así que argumentos distintos pueden COLISIONAR en la misma entrada;
  * - `{a:1, b:2}` y `{b:2, a:1}` generan claves distintas (el orden de las
  *   propiedades importa).
- * Para esos casos, aporta tu propio resolver con la opción `key`.
+ * Para esos casos, aporta tu propio resolver con la opción `key`, o usa
+ * @MemoizeByRef si prefieres comparar los argumentos por referencia.
  *
  * @example
  * ```ts

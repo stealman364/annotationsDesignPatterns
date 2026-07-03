@@ -25,6 +25,7 @@ export { StateMachine, TransitionTo, When } from './patterns/behavioral/state-ma
 
 // Utilitarios de método
 export { Memoize, type KeyResolver, type MemoizeOptions } from './patterns/utility/memoize';
+export { MemoizeByRef } from './patterns/utility/memoize-by-ref';
 export { Debounce } from './patterns/utility/debounce';
 export { Throttle } from './patterns/utility/throttle';
 export { Retry, type RetryOptions } from './patterns/utility/retry';
