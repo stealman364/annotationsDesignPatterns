@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Intercept, type Invocation } from '../src/patterns/intercept';
+import { Intercept, type Invocation } from '../src/patterns/structural/intercept';
 
 describe('@Intercept', () => {
   it('el interceptor puede observar la llamada y delegar con proceed()', () => {

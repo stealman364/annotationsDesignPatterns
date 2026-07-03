@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { StrategyFor, StrategySelector } from '../src/patterns/strategy';
+import { StrategyFor, StrategySelector } from '../src/patterns/behavioral/strategy';
 
 interface Compression {
   compress(data: string): string;

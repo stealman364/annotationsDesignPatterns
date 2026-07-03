@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { Adapt, type Adapted } from '../src/patterns/adapt';
+import { Adapt, type Adapted } from '../src/patterns/structural/adapt';
 
 describe('@Adapt', () => {
   it('expone los métodos existentes bajo los alias indicados', () => {

@@ -46,20 +46,23 @@ class Api {
 
 ```
 src/
-  patterns/
-    singleton.ts      // cada patrón: implementación + tipos + JSDoc con ejemplo
-    memoize.ts
-    frozen.ts
-    ...
+  patterns/           // cada patrón: implementación + tipos + JSDoc con ejemplo
+    creational/       // singleton, factory, builder
+    structural/       // adapt, decorate, intercept, frozen
+    behavioral/       // observer, strategy, command
+    utility/          // memoize, debounce, throttle, retry, lazy (no-GoF)
   index.ts            // re-exporta todo (tree-shakeable)
 tests/
-  singleton.test.ts   // un archivo de test por patrón
+  singleton.test.ts   // un archivo de test por patrón (planos, sin carpetas)
   ...
 package.json          // type: module, exports con subpaths, sideEffects: false
 tsconfig.json         // strict: true, target ES2022
 tsup.config.ts
-vitest.config.ts
 ```
+
+Los imports granulares incluyen la categoría:
+`import { Singleton } from 'annotations-design-patterns/creational/singleton'`
+(el subpath export `"./*"` de Node cubre rutas anidadas sin cambios en package.json).
 
 ## Contrato de cada patrón
 

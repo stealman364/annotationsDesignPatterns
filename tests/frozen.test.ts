@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Frozen } from '../src/patterns/frozen';
+import { Frozen } from '../src/patterns/structural/frozen';
 
 describe('@Frozen', () => {
   it('congela las instancias tras construirlas', () => {

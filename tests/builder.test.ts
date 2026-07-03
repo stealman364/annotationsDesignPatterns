@@ -1,5 +1,5 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
-import { builderFor, type Builder } from '../src/patterns/builder';
+import { builderFor, type Builder } from '../src/patterns/creational/builder';
 
 class User {
   name = '';

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Factory, RegisterIn } from '../src/patterns/factory';
+import { Factory, RegisterIn } from '../src/patterns/creational/factory';
 
 interface Shape {
   area(): number;

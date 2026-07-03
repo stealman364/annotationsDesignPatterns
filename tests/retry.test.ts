@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Retry } from '../src/patterns/retry';
+import { Retry } from '../src/patterns/utility/retry';
 
 describe('@Retry', () => {
   it('reintenta hasta que el método tiene éxito', async () => {

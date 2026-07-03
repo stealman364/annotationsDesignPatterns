@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { Throttle } from '../src/patterns/throttle';
+import { Throttle } from '../src/patterns/utility/throttle';
 
 describe('@Throttle', () => {
   beforeEach(() => {

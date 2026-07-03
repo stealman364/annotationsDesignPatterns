@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Singleton } from '../src/patterns/singleton';
+import { Singleton } from '../src/patterns/creational/singleton';
 
 describe('@Singleton', () => {
   it('devuelve siempre la misma instancia', () => {

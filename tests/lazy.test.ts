@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Lazy } from '../src/patterns/lazy';
+import { Lazy } from '../src/patterns/utility/lazy';
 
 describe('@Lazy', () => {
   it('calcula el getter una sola vez por instancia', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Decorate, type MethodWrapper } from '../src/patterns/decorate';
+import { Decorate, type MethodWrapper } from '../src/patterns/structural/decorate';
 
 const withLogging = (log: string[]): MethodWrapper<unknown, [number, number], number> => {
   return (original) =>

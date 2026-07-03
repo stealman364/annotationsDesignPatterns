@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Emits, Subject } from '../src/patterns/observer';
+import { Emits, Subject } from '../src/patterns/behavioral/observer';
 
 describe('Subject', () => {
   it('notifica a los suscriptores del evento', () => {

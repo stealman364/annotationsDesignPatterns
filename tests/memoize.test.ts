@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Memoize } from '../src/patterns/memoize';
+import { Memoize } from '../src/patterns/utility/memoize';
 
 describe('@Memoize', () => {
   it('solo ejecuta el método una vez por combinación de argumentos', () => {

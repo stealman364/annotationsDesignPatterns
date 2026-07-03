@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CommandHistory, Revertible } from '../src/patterns/command';
+import { CommandHistory, Revertible } from '../src/patterns/behavioral/command';
 
 describe('CommandHistory + @Revertible', () => {
   it('registra cada llamada y permite deshacerla en orden inverso', () => {
