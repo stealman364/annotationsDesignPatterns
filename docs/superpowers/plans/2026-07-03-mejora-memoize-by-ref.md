@@ -279,7 +279,7 @@ Run: `npm run format` — aplica el formato.
 Run: `npm run lint` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, con `memoize-by-ref.*` en `dist/patterns/utility/`.
 
-- [ ] **Step 7: Invocar la skill `verify` y después commitear**
+- [x] **Step 7: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
