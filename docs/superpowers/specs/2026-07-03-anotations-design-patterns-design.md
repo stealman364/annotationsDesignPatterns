@@ -1,4 +1,4 @@
-# Diseño: anotations-design-patterns
+# Diseño: annotations-design-patterns
 
 **Fecha:** 2026-07-03
 **Estado:** Aprobado
@@ -10,7 +10,7 @@ estándar TC39 (TypeScript 5+, sin flags especiales), aplicables a clases y mét
 Ejemplo de uso:
 
 ```ts
-import { Singleton, Memoize } from 'anotations-design-patterns';
+import { Singleton, Memoize } from 'annotations-design-patterns';
 
 @Singleton
 class Database {
