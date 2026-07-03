@@ -105,6 +105,17 @@ Nota: Builder se expone como helper `builderFor(Clase)` y no como decorador
 `@Buildable`, porque los decoradores TC39 no pueden ampliar el tipo estático de
 una clase y el decorador no podría tiparse honestamente.
 
+### Ampliación v1.1 (Fase 5, aprobada 2026-07-03)
+
+| Fase | Contenido | Categoría |
+|---|---|---|
+| 5a | `@Once`, `@Deprecated`, `@Bind`, `@Timeout`, `@RateLimit` | utility/ |
+| 5b | `@Flyweight` (GoF estructural), `@Cloneable` + `WithClone<T>` (Prototype, creacional), `SnapshotHistory` + `@Snapshot` (Memento, comportamiento), `HandlerChain` + `@HandlerFor` (Chain of Responsibility, comportamiento), `@CircuitBreaker` (utility) | mixta |
+
+Descartados deliberadamente como decoradores por no aportar en una sola clase:
+Facade, Bridge, Composite, Visitor (estructura multi-clase), Template Method
+(lo da la herencia) y Mediator (equivale al `Subject` existente).
+
 ## Fuera de alcance (v1)
 
 - Decoradores de parámetros e inyección de dependencias (requieren el sistema
