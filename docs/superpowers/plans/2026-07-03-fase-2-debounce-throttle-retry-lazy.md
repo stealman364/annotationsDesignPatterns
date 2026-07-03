@@ -138,7 +138,7 @@ export function Debounce(delayMs: number) {
 Run: `npx vitest run tests/debounce.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 
@@ -154,7 +154,6 @@ git add -A
 git commit -m "feat: decorador @Debounce"
 ```
 
-- [x] **Step 5: Exportar, suite completa y commit** ✓ (completado)
 
 ### Task 2: @Throttle
 
@@ -226,7 +225,7 @@ describe('@Throttle', () => {
 Run: `npx vitest run tests/throttle.test.ts`
 Expected: FAIL — no existe `src/patterns/throttle.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/throttle.ts`:
 
@@ -270,14 +269,13 @@ export function Throttle(intervalMs: number) {
 }
 ```
 
-- [x] **Step 3: Implementación** ✓ (completado)
 
 - [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/throttle.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 
@@ -293,7 +291,6 @@ git add -A
 git commit -m "feat: decorador @Throttle"
 ```
 
-- [x] **Step 5: Exportar, suite completa y commit** ✓ (completado)
 
 ### Task 3: @Retry
 
@@ -370,7 +367,7 @@ describe('@Retry', () => {
 Run: `npx vitest run tests/retry.test.ts`
 Expected: FAIL — no existe `src/patterns/retry.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/retry.ts`:
 
@@ -423,14 +420,13 @@ export function Retry({ attempts, delayMs = 0 }: RetryOptions) {
 }
 ```
 
-- [x] **Step 3: Implementación** ✓ (completado)
 
 - [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/retry.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 
@@ -446,7 +442,6 @@ git add -A
 git commit -m "feat: decorador @Retry"
 ```
 
-- [x] **Step 5: Exportar, suite completa y commit** ✓ (completado)
 
 ### Task 4: @Lazy
 
@@ -522,7 +517,7 @@ describe('@Lazy', () => {
 Run: `npx vitest run tests/lazy.test.ts`
 Expected: FAIL — no existe `src/patterns/lazy.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/lazy.ts`:
 
@@ -559,14 +554,13 @@ export function Lazy<This, Return>(
 }
 ```
 
-- [x] **Step 3: Implementación** ✓ (completado)
 
 - [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/lazy.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa, build y commit**
+- [x] **Step 5: Exportar, suite completa, build y commit**
 
 En `src/index.ts`, añade al final:
 
@@ -578,9 +572,7 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, `dist/patterns/` contiene los 4 patrones nuevos.
 
-- [x] **Step 5: Exportar, suite completa, build y commit** ✓ (completado)
 
-- [x] **Step 6: Invocar la skill `verify` y después commitear** ✓ (completado)
 
 ```bash
 git add -A
