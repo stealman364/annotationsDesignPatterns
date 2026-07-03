@@ -19,7 +19,7 @@
 - Modify: `src/index.ts`
 - Test: `tests/singleton.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/singleton.test.ts`:
 
@@ -73,12 +73,12 @@ describe('@Singleton', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/singleton.test.ts`
 Expected: FAIL — no existe `src/patterns/singleton.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/singleton.ts`:
 
@@ -114,12 +114,12 @@ export function Singleton<T extends new (...args: any[]) => object>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/singleton.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar desde el barrel**
+- [x] **Step 5: Exportar desde el barrel**
 
 En `src/index.ts`, añade al final:
 
@@ -127,7 +127,7 @@ En `src/index.ts`, añade al final:
 export { Singleton } from './patterns/singleton';
 ```
 
-- [ ] **Step 6: Suite completa y commit**
+- [x] **Step 6: Suite completa y commit**
 
 Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
