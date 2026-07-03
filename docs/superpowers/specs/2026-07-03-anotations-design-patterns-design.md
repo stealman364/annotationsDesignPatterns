@@ -154,6 +154,18 @@ de inferencia de TS con decoradores TC39); se documenta en el JSDoc.
   `ignoreRestArgs` como única excepción) y Prettier (`printWidth: 100`,
   comillas simples). Scripts `lint`, `format`, `format:check`.
 
+### Mejoras de cache (v1.5, 2026-07-03)
+
+- Opción `key` en `@Memoize` y `@CachedFor`: resolver de clave definido por el
+  usuario que sustituye al `JSON.stringify(args)` por defecto (escape para
+  argumentos circulares, funciones u objetos con orden variable).
+- `@MemoizeByRef`: variante de memoización por IDENTIDAD de argumentos — trie
+  de `Map` (primitivos) y `WeakMap` (objetos/funciones), un nivel por
+  argumento. Sin serialización (nada colisiona ni lanza) y con liberación
+  automática de entradas cuando los objetos argumento son recolectados.
+  Semántica distinta a `@Memoize`: dos literales estructuralmente iguales son
+  entradas distintas; por eso es un decorador aparte y no un reemplazo.
+
 ## Fuera de alcance (v1)
 
 - Decoradores de parámetros e inyección de dependencias (requieren el sistema
