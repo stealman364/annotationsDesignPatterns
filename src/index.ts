@@ -11,3 +11,4 @@ export { Emits, Subject, type Listener } from './patterns/observer';
 export { Factory, RegisterIn } from './patterns/factory';
 export { builderFor, type Builder } from './patterns/builder';
 export { Intercept, type Interceptor, type Invocation } from './patterns/intercept';
+export { StrategyFor, StrategySelector } from './patterns/strategy';
