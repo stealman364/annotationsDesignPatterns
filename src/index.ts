@@ -25,3 +25,4 @@ export { Lazy } from './patterns/utility/lazy';
 export { Once } from './patterns/utility/once';
 export { Deprecated } from './patterns/utility/deprecated';
 export { Bind } from './patterns/utility/bind';
+export { Timeout } from './patterns/utility/timeout';
