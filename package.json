@@ -1,7 +1,26 @@
 {
   "name": "annotations-design-patterns",
-  "version": "0.1.0",
-  "description": "Patrones de diseño como decoradores TypeScript estándar (TC39)",
+  "version": "1.0.0",
+  "description": "Design patterns as standard TC39 TypeScript decorators: GoF patterns, resilience toolkit (retry, circuit breaker, fallback) and method utilities. Zero dependencies, tree-shakeable.",
+  "keywords": [
+    "decorators",
+    "typescript",
+    "design-patterns",
+    "tc39",
+    "gof",
+    "singleton",
+    "observer",
+    "strategy",
+    "factory",
+    "state-machine",
+    "memoize",
+    "debounce",
+    "throttle",
+    "retry",
+    "circuit-breaker",
+    "fallback",
+    "resilience"
+  ],
   "type": "module",
   "sideEffects": false,
   "main": "./dist/index.cjs",
@@ -39,10 +58,14 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src tests *.ts",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\"",
-    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\""
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\"",
+    "prepublishOnly": "npm test && npm run typecheck && npm run lint && npm run build"
   },
-  "author": "",
+  "author": "Enrique <enrique.azarquiel@gmail.com>",
   "license": "ISC",
+  "engines": {
+    "node": ">=18"
+  },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "eslint": "^10.6.0",
