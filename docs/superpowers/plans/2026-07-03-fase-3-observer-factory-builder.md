@@ -361,7 +361,7 @@ template literal keys.
 - Modify: `src/index.ts`
 - Test: `tests/builder.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/builder.test.ts`:
 
@@ -414,12 +414,12 @@ describe('builderFor', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/builder.test.ts`
 Expected: FAIL — no existe `src/patterns/builder.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/builder.ts`:
 
@@ -478,12 +478,12 @@ export function builderFor<T extends object>(ctor: new () => T): Builder<T> {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/builder.test.ts`
 Expected: PASS (5 tests).
 
-- [ ] **Step 5: Exportar, suite completa, build y commit**
+- [x] **Step 5: Exportar, suite completa, build y commit**
 
 En `src/index.ts`, añade al final:
 
@@ -495,7 +495,7 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
@@ -504,6 +504,6 @@ git commit -m "feat: patrón Builder (builderFor con tipos fluidos)"
 
 ## Criterio de salida de la Fase 3
 
-- `npm test`, `npm run typecheck` y `npm run build` en verde.
-- `Subject`, `@Emits`, `Factory`, `@RegisterIn`, `builderFor` y `Builder<T>` exportados.
-- Todo commiteado. La Fase 4 puede empezar.
+- [x] `npm test`, `npm run typecheck` y `npm run build` en verde.
+- [x] `Subject`, `@Emits`, `Factory`, `@RegisterIn`, `builderFor` y `Builder<T>` exportados.
+- [x] Todo commiteado. La Fase 4 puede empezar.
