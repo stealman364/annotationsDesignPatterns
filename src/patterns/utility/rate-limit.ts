@@ -21,7 +21,7 @@ export function RateLimit(maxCalls: number, windowMs: number) {
   }
   return function <This, Args extends unknown[]>(
     target: (this: This, ...args: Args) => void,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => void>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => void>,
   ): (this: This, ...args: Args) => void {
     if (context.kind !== 'method') {
       throw new TypeError('@RateLimit solo puede aplicarse a un método');

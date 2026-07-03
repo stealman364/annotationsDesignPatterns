@@ -29,7 +29,7 @@ describe('@Validate', () => {
 
     const account = new Account();
     expect(() => account.deposit(-5)).toThrow(
-      'Argumentos inválidos en deposit: el importe debe ser positivo'
+      'Argumentos inválidos en deposit: el importe debe ser positivo',
     );
     expect(account.balance).toBe(0);
   });
@@ -42,9 +42,7 @@ describe('@Validate', () => {
       }
     }
 
-    expect(() => new Calc().sqrt(-1)).toThrow(
-      'Argumentos inválidos en sqrt: la validación falló'
-    );
+    expect(() => new Calc().sqrt(-1)).toThrow('Argumentos inválidos en sqrt: la validación falló');
   });
 
   it('valida varios argumentos a la vez', () => {

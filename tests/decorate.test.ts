@@ -52,10 +52,11 @@ describe('@Decorate', () => {
     class Greeter {
       name = 'Ana';
 
-      @Decorate<Greeter, [], string>((original) =>
-        function () {
-          return `[${original.apply(this)}]`;
-        }
+      @Decorate<Greeter, [], string>(
+        (original) =>
+          function () {
+            return `[${original.apply(this)}]`;
+          },
       )
       greet(): string {
         return `Hola, ${this.name}`;

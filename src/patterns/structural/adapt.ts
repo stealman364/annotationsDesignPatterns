@@ -28,7 +28,7 @@ export type Adapted<T, M extends Record<string, keyof T>> = T & {
 export function Adapt(aliases: Record<string, string>) {
   return function <T extends new (...args: any[]) => object>(
     target: T,
-    context: ClassDecoratorContext<T>
+    context: ClassDecoratorContext<T>,
   ): T {
     if (context.kind !== 'class') {
       throw new TypeError('@Adapt solo puede aplicarse a una clase');
@@ -38,7 +38,7 @@ export function Adapt(aliases: Record<string, string>) {
       const method = prototype[existing];
       if (typeof method !== 'function') {
         throw new TypeError(
-          `No existe el método "${existing}" en la clase para adaptarlo como "${alias}"`
+          `No existe el método "${existing}" en la clase para adaptarlo como "${alias}"`,
         );
       }
       Object.defineProperty(target.prototype, alias, {

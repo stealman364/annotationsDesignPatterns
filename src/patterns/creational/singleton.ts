@@ -14,7 +14,7 @@
  */
 export function Singleton<T extends new (...args: any[]) => object>(
   target: T,
-  context: ClassDecoratorContext<T>
+  context: ClassDecoratorContext<T>,
 ): T {
   if (context.kind !== 'class') {
     throw new TypeError('@Singleton solo puede aplicarse a una clase');

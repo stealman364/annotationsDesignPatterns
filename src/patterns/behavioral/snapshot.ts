@@ -44,7 +44,7 @@ export class SnapshotHistory {
 export function Snapshot(history: SnapshotHistory) {
   return function <This extends object, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
   ): (this: This, ...args: Args) => Return {
     if (context.kind !== 'method') {
       throw new TypeError('@Snapshot solo puede aplicarse a un método');

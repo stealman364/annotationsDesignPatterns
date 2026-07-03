@@ -139,6 +139,21 @@ Nota de tipado: el argumento de `@Fallback` se tipa como `unknown` porque las
 factorías de decoradores fijan sus genéricos antes de ver el método (limitación
 de inferencia de TS con decoradores TC39); se documenta en el JSDoc.
 
+### Endurecimiento v1.4 (2026-07-03)
+
+- JSDoc con advertencias explícitas: limitaciones de la clave `JSON.stringify`
+  en `@Memoize`/`@CachedFor` y retención de memoria en `@Flyweight`.
+- `@Fallback<R>` acepta genérico opcional que valida el valor de respaldo
+  (`@Fallback<User[]>([])`); sin genérico, comportamiento anterior.
+- `Subject<Events>` genérico con mapa de eventos tipado, retrocompatible
+  (`Subject` a secas sigue siendo `unknown`).
+- Tests nuevos: composición de decoradores apilados (cadena de resiliencia
+  `@Fallback`+`@Retry`+`@Timeout`, `@Validate`+`@Memoize`,
+  `@Singleton`+`@Frozen`) y decoradores sobre métodos estáticos y privados.
+- Tooling: ESLint (flat config, typescript-eslint, `no-explicit-any` con
+  `ignoreRestArgs` como única excepción) y Prettier (`printWidth: 100`,
+  comillas simples). Scripts `lint`, `format`, `format:check`.
+
 ## Fuera de alcance (v1)
 
 - Decoradores de parámetros e inyección de dependencias (requieren el sistema

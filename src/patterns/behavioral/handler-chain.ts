@@ -43,7 +43,7 @@ export class HandlerChain<Request, Result> {
 export function HandlerFor<Request, Result>(chain: HandlerChain<Request, Result>, priority = 0) {
   return function <T extends new () => Handler<Request, Result>>(
     target: T,
-    context: ClassDecoratorContext<T>
+    context: ClassDecoratorContext<T>,
   ): T {
     if (context.kind !== 'class') {
       throw new TypeError('@HandlerFor solo puede aplicarse a una clase');

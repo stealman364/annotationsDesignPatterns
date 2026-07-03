@@ -44,7 +44,7 @@ export function builderFor<T extends object>(ctor: new () => T): Builder<T> {
         };
       }
       throw new TypeError(
-        `Método desconocido en el builder: "${prop}". Usa with<Propiedad>(valor) o build()`
+        `Método desconocido en el builder: "${prop}". Usa with<Propiedad>(valor) o build()`,
       );
     },
   });

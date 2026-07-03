@@ -12,7 +12,7 @@
  */
 export function Lazy<This, Return>(
   target: (this: This) => Return,
-  context: ClassGetterDecoratorContext<This, Return>
+  context: ClassGetterDecoratorContext<This, Return>,
 ): (this: This) => Return {
   if (context.kind !== 'getter') {
     throw new TypeError('@Lazy solo puede aplicarse a un getter');

@@ -7,7 +7,7 @@ describe('@Cloneable', () => {
     class Document {
       constructor(
         public title: string,
-        public tags: string[]
+        public tags: string[],
       ) {}
     }
 

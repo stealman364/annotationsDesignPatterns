@@ -29,6 +29,7 @@ describe('Factory + @RegisterIn', () => {
     const square = shapes.create('square', 3);
 
     expect(circle).toBeInstanceOf(Circle);
+    expect(square).toBeInstanceOf(Square);
     expect(square.area()).toBe(9);
     expect(shapes.keys().sort()).toEqual(['circle', 'square']);
   });
@@ -49,18 +50,24 @@ describe('Factory + @RegisterIn', () => {
 
   it('lanza si se registra dos veces la misma clave', () => {
     const shapes = new Factory<Shape>();
-    shapes.register('circle', class implements Shape {
-      area(): number {
-        return 0;
-      }
-    });
+    shapes.register(
+      'circle',
+      class implements Shape {
+        area(): number {
+          return 0;
+        }
+      },
+    );
 
     expect(() =>
-      shapes.register('circle', class implements Shape {
-        area(): number {
-          return 1;
-        }
-      })
+      shapes.register(
+        'circle',
+        class implements Shape {
+          area(): number {
+            return 1;
+          }
+        },
+      ),
     ).toThrow('ya está registrada');
   });
 });

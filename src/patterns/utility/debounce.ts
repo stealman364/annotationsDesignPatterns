@@ -17,7 +17,7 @@ export function Debounce(delayMs: number) {
   }
   return function <This, Args extends unknown[]>(
     target: (this: This, ...args: Args) => void,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => void>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => void>,
   ): (this: This, ...args: Args) => void {
     if (context.kind !== 'method') {
       throw new TypeError('@Debounce solo puede aplicarse a un método');
@@ -34,7 +34,7 @@ export function Debounce(delayMs: number) {
         setTimeout(() => {
           timers.delete(self);
           target.call(this, ...args);
-        }, delayMs)
+        }, delayMs),
       );
     };
   };

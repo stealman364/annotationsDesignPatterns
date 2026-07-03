@@ -78,8 +78,12 @@ describe('Subject tipado', () => {
     subject.emit('count', 3);
 
     expect(names).toEqual(['Ana']);
-    expectTypeOf(subject.on<'count'>).parameter(1).toEqualTypeOf<(payload: number) => void>();
-    expectTypeOf(subject.emit<'user:created'>).parameter(1).toEqualTypeOf<User>();
+    expectTypeOf(subject.on<'count'>)
+      .parameter(1)
+      .toEqualTypeOf<(payload: number) => void>();
+    expectTypeOf(subject.emit<'user:created'>)
+      .parameter(1)
+      .toEqualTypeOf<User>();
   });
 
   it('@Emits funciona sobre una subclase tipada', () => {

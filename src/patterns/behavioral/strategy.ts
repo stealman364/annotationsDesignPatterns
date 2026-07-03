@@ -17,7 +17,7 @@ export class StrategySelector<S extends object> {
   use(key: string): void {
     if (!this.#strategies.has(key)) {
       throw new Error(
-        `Estrategia "${key}" no registrada. Disponibles: ${this.keys().join(', ') || '(ninguna)'}`
+        `Estrategia "${key}" no registrada. Disponibles: ${this.keys().join(', ') || '(ninguna)'}`,
       );
     }
     this.#active = key;

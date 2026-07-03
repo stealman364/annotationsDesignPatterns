@@ -30,9 +30,7 @@ export function IterableOver(property: string) {
     Object.defineProperty(target.prototype, Symbol.iterator, {
       value: function (this: Record<string, unknown>): Iterator<unknown> {
         const source = this[property] as
-          | { [Symbol.iterator]?: () => Iterator<unknown> }
-          | null
-          | undefined;
+          { [Symbol.iterator]?: () => Iterator<unknown> } | null | undefined;
         const iteratorFn = source?.[Symbol.iterator];
         if (typeof iteratorFn !== 'function') {
           throw new TypeError(

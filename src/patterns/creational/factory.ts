@@ -18,7 +18,7 @@ export class Factory<Base extends object = object> {
     const ctor = this.#ctors.get(key);
     if (!ctor) {
       throw new Error(
-        `Clave "${key}" no registrada en la factoría. Disponibles: ${this.keys().join(', ') || '(ninguna)'}`
+        `Clave "${key}" no registrada en la factoría. Disponibles: ${this.keys().join(', ') || '(ninguna)'}`,
       );
     }
     return new ctor(...args);

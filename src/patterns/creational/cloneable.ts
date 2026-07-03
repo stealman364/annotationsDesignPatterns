@@ -19,7 +19,7 @@ export type WithClone<T> = T & { clone(): WithClone<T> };
  */
 export function Cloneable<T extends new (...args: any[]) => object>(
   target: T,
-  context: ClassDecoratorContext<T>
+  context: ClassDecoratorContext<T>,
 ): T {
   if (context.kind !== 'class') {
     throw new TypeError('@Cloneable solo puede aplicarse a una clase');

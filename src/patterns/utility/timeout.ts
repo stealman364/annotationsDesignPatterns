@@ -18,7 +18,7 @@ export function Timeout(ms: number) {
   }
   return function <This, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>,
   ): (this: This, ...args: Args) => Promise<Return> {
     if (context.kind !== 'method') {
       throw new TypeError('@Timeout solo puede aplicarse a un método');
@@ -29,7 +29,7 @@ export function Timeout(ms: number) {
       const limit = new Promise<never>((_resolve, reject) => {
         timer = setTimeout(
           () => reject(new Error(`El método ${methodName} superó el límite de ${ms} ms`)),
-          ms
+          ms,
         );
       });
       try {

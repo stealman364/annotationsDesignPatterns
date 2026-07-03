@@ -46,7 +46,7 @@ export class Subject<Events extends Record<string, unknown> = Record<string, unk
 export function Emits(event: string) {
   return function <This extends Subject<Record<string, unknown>>, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
   ): (this: This, ...args: Args) => Return {
     if (context.kind !== 'method') {
       throw new TypeError('@Emits solo puede aplicarse a un método');

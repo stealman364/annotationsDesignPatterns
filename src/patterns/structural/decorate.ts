@@ -1,6 +1,6 @@
 /** Función que recibe el método original y devuelve su versión envuelta. */
 export type MethodWrapper<This, Args extends unknown[], Return> = (
-  original: (this: This, ...args: Args) => Return
+  original: (this: This, ...args: Args) => Return,
 ) => (this: This, ...args: Args) => Return;
 
 /**
@@ -23,11 +23,11 @@ export type MethodWrapper<This, Args extends unknown[], Return> = (
  * ```
  */
 export function Decorate<This, Args extends unknown[], Return>(
-  wrapper: MethodWrapper<This, Args, Return>
+  wrapper: MethodWrapper<This, Args, Return>,
 ) {
   return function (
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
   ): (this: This, ...args: Args) => Return {
     if (context.kind !== 'method') {
       throw new TypeError('@Decorate solo puede aplicarse a un método');

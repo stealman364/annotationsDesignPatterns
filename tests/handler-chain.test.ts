@@ -46,7 +46,7 @@ describe('HandlerChain + @HandlerFor', () => {
     void OnlyHello;
 
     expect(() => chain.dispatch('adiós')).toThrow(
-      'Ningún handler de la cadena pudo procesar la petición'
+      'Ningún handler de la cadena pudo procesar la petición',
     );
   });
 

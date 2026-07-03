@@ -18,7 +18,7 @@ export function Semaphore(maxConcurrent: number) {
   }
   return function <This, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>,
   ): (this: This, ...args: Args) => Promise<Return> {
     if (context.kind !== 'method') {
       throw new TypeError('@Semaphore solo puede aplicarse a un método');

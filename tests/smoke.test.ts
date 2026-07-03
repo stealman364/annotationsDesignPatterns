@@ -10,7 +10,7 @@ describe('toolchain', () => {
     let decorated = false;
     function Marker<T extends new (...args: any[]) => object>(
       target: T,
-      context: ClassDecoratorContext<T>
+      context: ClassDecoratorContext<T>,
     ): T {
       decorated = context.kind === 'class';
       return target;

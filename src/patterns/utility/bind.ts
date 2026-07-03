@@ -13,7 +13,7 @@
  */
 export function Bind<This extends object, Args extends unknown[], Return>(
   target: (this: This, ...args: Args) => Return,
-  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
 ): void {
   if (context.kind !== 'method') {
     throw new TypeError('@Bind solo puede aplicarse a un método');

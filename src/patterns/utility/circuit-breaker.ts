@@ -34,7 +34,7 @@ export function CircuitBreaker({ failures, resetMs }: CircuitBreakerOptions) {
   }
   return function <This, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>,
   ): (this: This, ...args: Args) => Promise<Return> {
     if (context.kind !== 'method') {
       throw new TypeError('@CircuitBreaker solo puede aplicarse a un método');
@@ -50,9 +50,7 @@ export function CircuitBreaker({ failures, resetMs }: CircuitBreakerOptions) {
       }
       if (state.openedAt !== undefined) {
         if (Date.now() - state.openedAt < resetMs) {
-          throw new Error(
-            `Circuito abierto para ${methodName}: demasiados fallos consecutivos`
-          );
+          throw new Error(`Circuito abierto para ${methodName}: demasiados fallos consecutivos`);
         }
         state.openedAt = undefined; // semiabierto: se permite un intento
       }

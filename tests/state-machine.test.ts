@@ -37,7 +37,7 @@ describe('StateMachine + @When + @TransitionTo', () => {
     const doc = new Doc();
     doc.submit();
     expect(() => doc.submit()).toThrow(
-      'El método submit no puede llamarse en el estado "review" (permitidos: draft)'
+      'El método submit no puede llamarse en el estado "review" (permitidos: draft)',
     );
   });
 

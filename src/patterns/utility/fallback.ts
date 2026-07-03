@@ -26,7 +26,7 @@
 export function Fallback<R = unknown>(fallback: R | ((...args: never[]) => R | Promise<R>)) {
   return function <This, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>,
   ): (this: This, ...args: Args) => Promise<Return> {
     if (context.kind !== 'method') {
       throw new TypeError('@Fallback solo puede aplicarse a un método');
@@ -39,7 +39,7 @@ export function Fallback<R = unknown>(fallback: R | ((...args: never[]) => R | P
           typeof fallback === 'function'
             ? await (fallback as unknown as (error: unknown, ...args: Args) => unknown)(
                 error,
-                ...args
+                ...args,
               )
             : fallback;
         return value as Return;

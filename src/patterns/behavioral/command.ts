@@ -46,7 +46,7 @@ export class CommandHistory {
 export function Revertible(history: CommandHistory, undoMethod: string) {
   return function <This extends object, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
   ): (this: This, ...args: Args) => Return {
     if (context.kind !== 'method') {
       throw new TypeError('@Revertible solo puede aplicarse a un método');
@@ -55,7 +55,7 @@ export function Revertible(history: CommandHistory, undoMethod: string) {
       const undoFn = (this as Record<string, unknown>)[undoMethod];
       if (typeof undoFn !== 'function') {
         throw new TypeError(
-          `El método de deshacer "${undoMethod}" no existe en la clase decorada con @Revertible`
+          `El método de deshacer "${undoMethod}" no existe en la clase decorada con @Revertible`,
         );
       }
       const result = target.call(this, ...args);

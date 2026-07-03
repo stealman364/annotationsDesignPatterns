@@ -11,7 +11,7 @@ export interface Invocation<This, Args extends unknown[], Return> {
 }
 
 export type Interceptor<This, Args extends unknown[], Return> = (
-  invocation: Invocation<This, Args, Return>
+  invocation: Invocation<This, Args, Return>,
 ) => Return;
 
 /**
@@ -31,11 +31,11 @@ export type Interceptor<This, Args extends unknown[], Return> = (
  * ```
  */
 export function Intercept<This, Args extends unknown[], Return>(
-  interceptor: Interceptor<This, Args, Return>
+  interceptor: Interceptor<This, Args, Return>,
 ) {
   return function (
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
   ): (this: This, ...args: Args) => Return {
     if (context.kind !== 'method') {
       throw new TypeError('@Intercept solo puede aplicarse a un método');
