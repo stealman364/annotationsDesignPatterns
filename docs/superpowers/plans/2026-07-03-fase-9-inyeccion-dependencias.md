@@ -21,7 +21,7 @@
 - Modify: `src/index.ts`
 - Test: `tests/injection.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/injection.test.ts`:
 
@@ -155,12 +155,12 @@ describe('@Injectable + @Inject', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/injection.test.ts`
 Expected: FAIL — no existe `src/patterns/creational/injection.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/creational/injection.ts`:
 
@@ -310,12 +310,12 @@ export function Inject<T>(container: Container, token: Token<T>) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/injection.test.ts`
 Expected: PASS (11 tests).
 
-- [ ] **Step 5: Exportar, suite completa, lint, build y commit**
+- [x] **Step 5: Exportar, suite completa, lint, build y commit**
 
 En `src/index.ts`, añade al final del bloque `// Creacionales`:
 
@@ -336,7 +336,7 @@ Run: `npm run format` — aplica el formato.
 Run: `npm run lint` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, con `injection.*` en `dist/patterns/creational/`.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
