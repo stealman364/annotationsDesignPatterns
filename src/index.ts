@@ -22,3 +22,4 @@ export { Debounce } from './patterns/utility/debounce';
 export { Throttle } from './patterns/utility/throttle';
 export { Retry, type RetryOptions } from './patterns/utility/retry';
 export { Lazy } from './patterns/utility/lazy';
+export { Once } from './patterns/utility/once';
