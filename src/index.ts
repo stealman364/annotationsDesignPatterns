@@ -31,3 +31,4 @@ export { Deprecated } from './patterns/utility/deprecated';
 export { Bind } from './patterns/utility/bind';
 export { Timeout } from './patterns/utility/timeout';
 export { RateLimit } from './patterns/utility/rate-limit';
+export { CircuitBreaker, type CircuitBreakerOptions } from './patterns/utility/circuit-breaker';
