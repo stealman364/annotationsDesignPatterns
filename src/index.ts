@@ -17,6 +17,7 @@ export { Flyweight } from './patterns/structural/flyweight';
 export { Emits, Subject, type Listener } from './patterns/behavioral/observer';
 export { StrategyFor, StrategySelector } from './patterns/behavioral/strategy';
 export { CommandHistory, Revertible, type Command } from './patterns/behavioral/command';
+export { Snapshot, SnapshotHistory } from './patterns/behavioral/snapshot';
 
 // Utilitarios de método
 export { Memoize } from './patterns/utility/memoize';
