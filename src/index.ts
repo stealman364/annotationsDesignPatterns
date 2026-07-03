@@ -20,6 +20,7 @@ export { StrategyFor, StrategySelector } from './patterns/behavioral/strategy';
 export { CommandHistory, Revertible, type Command } from './patterns/behavioral/command';
 export { Snapshot, SnapshotHistory } from './patterns/behavioral/snapshot';
 export { HandlerChain, HandlerFor, type Handler } from './patterns/behavioral/handler-chain';
+export { IterableOver, type WithIterator } from './patterns/behavioral/iterable-over';
 
 // Utilitarios de método
 export { Memoize } from './patterns/utility/memoize';

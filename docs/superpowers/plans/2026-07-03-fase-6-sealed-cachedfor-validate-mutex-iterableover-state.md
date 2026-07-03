@@ -425,7 +425,7 @@ git commit -m "feat: decorador @Validate"
 - Modify: `src/index.ts`
 - Test: `tests/mutex.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/mutex.test.ts`:
 
@@ -487,12 +487,12 @@ describe('@Mutex', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/mutex.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/mutex.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/mutex.ts`:
 
@@ -531,12 +531,12 @@ export function Mutex<This, Args extends unknown[], Return>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/mutex.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// Utilitarios de método`:
 
