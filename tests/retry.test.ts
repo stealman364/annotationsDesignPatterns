@@ -1,7 +1,11 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Retry } from '../src/patterns/utility/retry';
 
 describe('@Retry', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
   it('reintenta hasta que el método tiene éxito', async () => {
     let attempts = 0;
 
@@ -52,5 +56,34 @@ describe('@Retry', () => {
 
   it('rechaza configuraciones inválidas', () => {
     expect(() => Retry({ attempts: 0 })).toThrow(RangeError);
+  });
+
+  it('aplica backoff exponencial entre intentos', async () => {
+    vi.useFakeTimers();
+    let attempts = 0;
+    const timeline: number[] = [];
+    const start = Date.now();
+
+    class Api {
+      @Retry({ attempts: 3, delayMs: 100, backoffFactor: 2 })
+      async fetch(): Promise<string> {
+        attempts++;
+        timeline.push(Date.now() - start);
+        throw new Error(`fallo ${attempts}`);
+      }
+    }
+
+    const promise = new Api().fetch();
+    const assertion = expect(promise).rejects.toThrow('fallo 3');
+    await vi.advanceTimersByTimeAsync(100); // primera espera: 100 ms
+    await vi.advanceTimersByTimeAsync(200); // segunda espera: 100 * 2 ms
+    await assertion;
+
+    expect(attempts).toBe(3);
+    expect(timeline).toEqual([0, 100, 300]);
+  });
+
+  it('rechaza backoffFactor menor que 1', () => {
+    expect(() => Retry({ attempts: 2, backoffFactor: 0 })).toThrow(RangeError);
   });
 });
