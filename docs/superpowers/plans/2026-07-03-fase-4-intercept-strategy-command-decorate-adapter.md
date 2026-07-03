@@ -502,7 +502,7 @@ git commit -m "feat: patrón Command (CommandHistory y @Revertible)"
 - Modify: `src/index.ts`
 - Test: `tests/decorate.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/decorate.test.ts`:
 
@@ -576,12 +576,12 @@ describe('@Decorate', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/decorate.test.ts`
 Expected: FAIL — no existe `src/patterns/decorate.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/decorate.ts`:
 
@@ -625,7 +625,7 @@ export function Decorate<This, Args extends unknown[], Return>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/decorate.test.ts`
 Expected: PASS (3 tests).
@@ -635,7 +635,7 @@ al aplicar `@Decorate`, especifica los genéricos explícitamente en el punto de
 p. ej. `@Decorate<Calc, [number, number], number>(...)`. No cambies la firma de
 `Decorate` ni de `MethodWrapper`.
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 

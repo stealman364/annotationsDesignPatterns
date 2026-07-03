@@ -14,3 +14,4 @@ export { Intercept, type Interceptor, type Invocation } from './patterns/interce
 export { StrategyFor, StrategySelector } from './patterns/strategy';
 export { CommandHistory, Revertible, type Command } from './patterns/command';
 export { Decorate, type MethodWrapper } from './patterns/decorate';
+export { Adapt, type Adapted } from './patterns/adapt';
