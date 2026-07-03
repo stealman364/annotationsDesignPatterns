@@ -189,7 +189,7 @@ git commit -m "feat: patrón Observer (Subject y @Emits)"
 - Modify: `src/index.ts`
 - Test: `tests/factory.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/factory.test.ts`:
 
@@ -262,12 +262,12 @@ describe('Factory + @RegisterIn', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/factory.test.ts`
 Expected: FAIL — no existe `src/patterns/factory.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/factory.ts`:
 
@@ -330,12 +330,12 @@ export function RegisterIn<Base extends object>(factory: Factory<Base>, key: str
 Nota sobre `any[]`: es la excepción permitida por el proyecto para firmas de
 constructores (`unknown[]` rompería la asignabilidad de constructores concretos).
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/factory.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 
