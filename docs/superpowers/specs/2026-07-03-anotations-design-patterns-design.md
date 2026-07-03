@@ -154,6 +154,28 @@ de inferencia de TS con decoradores TC39); se documenta en el JSDoc.
   `ignoreRestArgs` como única excepción) y Prettier (`printWidth: 100`,
   comillas simples). Scripts `lint`, `format`, `format:check`.
 
+### Ampliación Fase 9 — Inyección de dependencias (aprobada 2026-07-03)
+
+`src/patterns/creational/injection.ts`: `Container` (scopes `singleton`/`transient`;
+providers `useValue`/`useFactory`/`useClass`), `InjectionToken<T>` (token con tipo
+phantom para interfaces), `@Injectable(container, { scope? })` (registra la clase) y
+`@Inject(container, token)` (decorador de CAMPO TC39: resuelve al construir).
+Decisiones: inyección por campos y no por constructor (los decoradores de parámetros
+no existen en TC39 — es justo el hueco frente a NestJS/Angular/tsyringe, que
+requieren el sistema legacy); contenedores explícitos, sin contenedor global
+(coherente con Factory/StrategySelector); resolución eager al construir; sin
+detección de ciclos en v1 (documentado). Si el paquete ya está publicado, esto es
+un `minor` (1.1.0).
+
+### Ampliación Fase 10 — Observabilidad (aprobada 2026-07-03)
+
+`@Log({ logger?, label? })` (utility): registra llamada con argumentos, éxito/error
+y duración; soporta métodos sync y async. `@Measure(callback)` (utility): entrega
+`{ method, durationMs, ok }` a un callback por cada ejecución. `@On(subject, evento)`
+(behavioral): auto-suscribe el método a un `Subject` al construir la instancia
+(complemento de `@Emits`; apilable; la suscripción no se da de baja automáticamente,
+documentado).
+
 ### Mejoras de cache (v1.5, 2026-07-03)
 
 - Opción `key` en `@Memoize` y `@CachedFor`: resolver de clave definido por el
