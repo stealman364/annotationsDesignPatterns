@@ -49,6 +49,25 @@ describe('@CachedFor', () => {
     expect(b.get(1)).toBe(3);
   });
 
+  it('acepta un resolver de clave personalizado', () => {
+    let calls = 0;
+
+    class Repo {
+      @CachedFor(1000, { key: (user: { id: number }) => String(user.id) })
+      load(user: { id: number }): number {
+        void user;
+        return ++calls;
+      }
+    }
+
+    const repo = new Repo();
+    expect(repo.load({ id: 7 })).toBe(1);
+    expect(repo.load({ id: 7 })).toBe(1);
+
+    vi.advanceTimersByTime(1000);
+    expect(repo.load({ id: 7 })).toBe(2);
+  });
+
   it('rechaza TTL no positivos', () => {
     expect(() => CachedFor(0)).toThrow(RangeError);
     expect(() => CachedFor(-1)).toThrow(RangeError);
