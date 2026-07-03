@@ -5,7 +5,7 @@
 > Al terminar, invoca `verify`. Prerrequisito: Fase 5a completada (`npm test` en verde).
 > Los patrones van en la carpeta de su categoría (indicada en cada task). Los tests
 > siguen planos en `tests/`. Marca los checkboxes editando la línea existente
-> (`- [ ]` → `- [x]`), sin añadir líneas nuevas.
+> (`- [x]` → `- [x]`), sin añadir líneas nuevas.
 
 **Goal:** Cuatro patrones GoF que faltaban — `@Flyweight` (instancias compartidas por argumentos), `@Cloneable` (Prototype), `SnapshotHistory` + `@Snapshot` (Memento) y `HandlerChain` + `@HandlerFor` (Chain of Responsibility) — más `@CircuitBreaker` (corta llamadas a métodos async que fallan repetidamente).
 
@@ -22,7 +22,7 @@
 - Modify: `src/index.ts`
 - Test: `tests/flyweight.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/flyweight.test.ts`:
 
@@ -87,12 +87,12 @@ describe('@Flyweight', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/flyweight.test.ts`
 Expected: FAIL — no existe `src/patterns/structural/flyweight.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/structural/flyweight.ts`:
 
@@ -134,12 +134,12 @@ export function Flyweight<T extends new (...args: any[]) => object>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/flyweight.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// Estructurales`:
 
@@ -162,7 +162,7 @@ git commit -m "feat: decorador @Flyweight (patrón Flyweight)"
 - Modify: `src/index.ts`
 - Test: `tests/cloneable.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/cloneable.test.ts`:
 
@@ -223,12 +223,12 @@ describe('@Cloneable', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/cloneable.test.ts`
 Expected: FAIL — no existe `src/patterns/creational/cloneable.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/creational/cloneable.ts`:
 
@@ -271,12 +271,12 @@ export function Cloneable<T extends new (...args: any[]) => object>(
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/cloneable.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// Creacionales`:
 
@@ -299,7 +299,7 @@ git commit -m "feat: decorador @Cloneable (patrón Prototype)"
 - Modify: `src/index.ts`
 - Test: `tests/snapshot.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/snapshot.test.ts`:
 
@@ -362,12 +362,12 @@ describe('SnapshotHistory + @Snapshot', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/snapshot.test.ts`
 Expected: FAIL — no existe `src/patterns/behavioral/snapshot.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/behavioral/snapshot.ts`:
 
@@ -431,12 +431,12 @@ export function Snapshot(history: SnapshotHistory) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/snapshot.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// De comportamiento`:
 
@@ -459,7 +459,7 @@ git commit -m "feat: patrón Memento (SnapshotHistory y @Snapshot)"
 - Modify: `src/index.ts`
 - Test: `tests/handler-chain.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/handler-chain.test.ts`:
 
@@ -524,12 +524,12 @@ describe('HandlerChain + @HandlerFor', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/handler-chain.test.ts`
 Expected: FAIL — no existe `src/patterns/behavioral/handler-chain.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/behavioral/handler-chain.ts`:
 
@@ -590,12 +590,12 @@ export function HandlerFor<Request, Result>(chain: HandlerChain<Request, Result>
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/handler-chain.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// De comportamiento`:
 
@@ -618,7 +618,7 @@ git commit -m "feat: patrón Chain of Responsibility (HandlerChain y @HandlerFor
 - Modify: `src/index.ts`
 - Test: `tests/circuit-breaker.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/circuit-breaker.test.ts`:
 
@@ -704,12 +704,12 @@ describe('@CircuitBreaker', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/circuit-breaker.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/circuit-breaker.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/circuit-breaker.ts`:
 
@@ -788,12 +788,12 @@ export function CircuitBreaker({ failures, resetMs }: CircuitBreakerOptions) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/circuit-breaker.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa, build y commit**
+- [x] **Step 5: Exportar, suite completa, build y commit**
 
 En `src/index.ts`, añade al final del bloque `// Utilitarios de método`:
 
@@ -805,7 +805,7 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, con los 5 archivos nuevos en `dist/patterns/`.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
