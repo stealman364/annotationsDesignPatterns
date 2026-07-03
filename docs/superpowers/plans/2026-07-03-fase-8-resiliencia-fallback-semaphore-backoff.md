@@ -24,7 +24,7 @@
 - Modify: `src/index.ts`
 - Test: `tests/fallback.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/fallback.test.ts`:
 
@@ -81,12 +81,12 @@ describe('@Fallback', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/fallback.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/fallback.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/fallback.ts`:
 
@@ -137,12 +137,12 @@ export function Fallback(fallback: unknown) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/fallback.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// Utilitarios de método`:
 
@@ -165,7 +165,7 @@ git commit -m "feat: decorador @Fallback"
 - Modify: `src/index.ts`
 - Test: `tests/semaphore.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/semaphore.test.ts`:
 
@@ -235,12 +235,12 @@ describe('@Semaphore', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/semaphore.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/semaphore.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/semaphore.ts`:
 
@@ -294,12 +294,12 @@ export function Semaphore(maxConcurrent: number) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/semaphore.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final del bloque `// Utilitarios de método`:
 
@@ -321,7 +321,7 @@ git commit -m "feat: decorador @Semaphore (patrón Bulkhead)"
 - Modify: `src/patterns/utility/retry.ts` (sobrescribir con el contenido completo de abajo)
 - Modify: `tests/retry.test.ts` (sobrescribir con el contenido completo de abajo)
 
-- [ ] **Step 1: Sobrescribir los tests (los 4 existentes se conservan + 2 nuevos)**
+- [x] **Step 1: Sobrescribir los tests (los 4 existentes se conservan + 2 nuevos)**
 
 Sobrescribe `tests/retry.test.ts` COMPLETO con:
 
@@ -417,14 +417,14 @@ describe('@Retry', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que los tests nuevos fallan**
+- [x] **Step 2: Ejecutar y verificar que los tests nuevos fallan**
 
 Run: `npx vitest run tests/retry.test.ts`
 Expected: FAIL — los 4 tests antiguos pasan, pero fallan los 2 nuevos
 (`backoffFactor` no existe todavía; el test de validación no lanza y el de
 backoff no respeta los tiempos).
 
-- [ ] **Step 3: Sobrescribir la implementación**
+- [x] **Step 3: Sobrescribir la implementación**
 
 Sobrescribe `src/patterns/utility/retry.ts` COMPLETO con:
 
@@ -488,12 +488,12 @@ export function Retry({ attempts, delayMs = 0, backoffFactor = 1 }: RetryOptions
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/retry.test.ts`
 Expected: PASS (6 tests).
 
-- [ ] **Step 5: Suite completa, build y commit**
+- [x] **Step 5: Suite completa, build y commit**
 
 `src/index.ts` NO cambia en esta task (`Retry` y `RetryOptions` ya estaban exportados).
 
@@ -501,7 +501,7 @@ Run: `npm test` — Expected: PASS (los 107 tests previos + 8 nuevos de la fase 
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, con `fallback.*` y `semaphore.*` en `dist/patterns/utility/`.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
