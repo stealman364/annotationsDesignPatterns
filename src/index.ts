@@ -39,3 +39,4 @@ export { CachedFor } from './patterns/utility/cached-for';
 export { Validate, type Guard } from './patterns/utility/validate';
 export { Mutex } from './patterns/utility/mutex';
 export { Fallback } from './patterns/utility/fallback';
+export { Semaphore } from './patterns/utility/semaphore';
