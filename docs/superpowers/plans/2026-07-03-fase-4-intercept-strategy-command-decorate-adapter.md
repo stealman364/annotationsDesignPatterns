@@ -173,7 +173,7 @@ git commit -m "feat: decorador @Intercept (patrón Proxy)"
 - Modify: `src/index.ts`
 - Test: `tests/strategy.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/strategy.test.ts`:
 
@@ -231,12 +231,12 @@ describe('StrategySelector + @StrategyFor', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/strategy.test.ts`
 Expected: FAIL — no existe `src/patterns/strategy.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/strategy.ts`:
 
@@ -305,12 +305,12 @@ export function StrategyFor<S extends object>(selector: StrategySelector<S>, key
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/strategy.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa y commit**
+- [x] **Step 5: Exportar, suite completa y commit**
 
 En `src/index.ts`, añade al final:
 

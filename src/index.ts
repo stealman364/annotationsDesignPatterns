@@ -12,3 +12,4 @@ export { Factory, RegisterIn } from './patterns/factory';
 export { builderFor, type Builder } from './patterns/builder';
 export { Intercept, type Interceptor, type Invocation } from './patterns/intercept';
 export { StrategyFor, StrategySelector } from './patterns/strategy';
+export { CommandHistory, Revertible, type Command } from './patterns/command';
