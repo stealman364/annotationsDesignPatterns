@@ -542,7 +542,7 @@ git commit -m "feat: decorador @Timeout"
 - Modify: `src/index.ts`
 - Test: `tests/rate-limit.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/rate-limit.test.ts`:
 
@@ -623,12 +623,12 @@ describe('@RateLimit', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/rate-limit.test.ts`
 Expected: FAIL — no existe `src/patterns/utility/rate-limit.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/utility/rate-limit.ts`:
 
@@ -678,12 +678,12 @@ export function RateLimit(maxCalls: number, windowMs: number) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/rate-limit.test.ts`
 Expected: PASS (4 tests).
 
-- [ ] **Step 5: Exportar, suite completa, build y commit**
+- [x] **Step 5: Exportar, suite completa, build y commit**
 
 En `src/index.ts`, añade al final del bloque `// Utilitarios de método`:
 
@@ -695,7 +695,7 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, `dist/patterns/utility/` contiene los 5 nuevos.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
