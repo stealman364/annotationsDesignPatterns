@@ -10,6 +10,7 @@ export { Adapt, type Adapted } from './patterns/structural/adapt';
 export { Decorate, type MethodWrapper } from './patterns/structural/decorate';
 export { Intercept, type Interceptor, type Invocation } from './patterns/structural/intercept';
 export { Frozen } from './patterns/structural/frozen';
+export { Flyweight } from './patterns/structural/flyweight';
 
 // De comportamiento
 export { Emits, Subject, type Listener } from './patterns/behavioral/observer';
