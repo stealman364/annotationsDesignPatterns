@@ -4,6 +4,12 @@
  * siempre el mismo objeto para los mismos argumentos. Pensado para objetos
  * de valor inmutables que se repiten mucho.
  *
+ * ADVERTENCIA de memoria: la cache interna es un `Map` que retiene las
+ * instancias para siempre (es la esencia del patrón). Úsalo solo con
+ * argumentos de cardinalidad acotada (colores, glifos, configuraciones…);
+ * con claves ilimitadas (IDs, timestamps) la memoria crece sin límite.
+ * La clave es `JSON.stringify(args)`, con sus limitaciones (ver @Memoize).
+ *
  * @example
  * ```ts
  * @Flyweight

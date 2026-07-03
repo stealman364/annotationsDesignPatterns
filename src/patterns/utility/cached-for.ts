@@ -3,6 +3,11 @@
  * argumentos (clave `JSON.stringify(args)`) y por instancia durante `ttlMs`
  * milisegundos; después vuelve a ejecutar el método.
  *
+ * Comparte las limitaciones de clave de @Memoize: argumentos circulares
+ * lanzan, las funciones/`Symbol` pueden colisionar y el orden de las
+ * propiedades de un objeto genera claves distintas. Usa argumentos
+ * primitivos u objetos planos estables.
+ *
  * @example
  * ```ts
  * class Api {

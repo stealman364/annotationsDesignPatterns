@@ -2,6 +2,15 @@
  * Cachea el resultado del método por combinación de argumentos (clave
  * `JSON.stringify(args)`) y por instancia. Pensado para métodos puros.
  *
+ * Limitaciones de la clave `JSON.stringify`:
+ * - lanza con argumentos que contengan referencias circulares;
+ * - las funciones y los `Symbol` se serializan como nada (`undefined`),
+ *   así que argumentos distintos pueden COLISIONAR en la misma entrada;
+ * - `{a:1, b:2}` y `{b:2, a:1}` generan claves distintas (el orden de las
+ *   propiedades importa).
+ * Usa argumentos primitivos u objetos planos estables; para casos complejos,
+ * calcula tú la clave y cachea a mano.
+ *
  * @example
  * ```ts
  * class Api {
