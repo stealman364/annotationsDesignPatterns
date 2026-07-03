@@ -658,7 +658,7 @@ git commit -m "feat: decorador @Decorate (patrón Decorator)"
 - Modify: `src/index.ts`
 - Test: `tests/adapt.test.ts`
 
-- [ ] **Step 1: Escribir los tests que fallan**
+- [x] **Step 1: Escribir los tests que fallan**
 
 Crea `tests/adapt.test.ts`:
 
@@ -711,12 +711,12 @@ describe('@Adapt', () => {
 });
 ```
 
-- [ ] **Step 2: Ejecutar y verificar que falla**
+- [x] **Step 2: Ejecutar y verificar que falla**
 
 Run: `npx vitest run tests/adapt.test.ts`
 Expected: FAIL — no existe `src/patterns/adapt.ts`.
 
-- [ ] **Step 3: Implementación**
+- [x] **Step 3: Implementación**
 
 Crea `src/patterns/adapt.ts`:
 
@@ -775,12 +775,12 @@ export function Adapt(aliases: Record<string, string>) {
 }
 ```
 
-- [ ] **Step 4: Ejecutar y verificar que pasa**
+- [x] **Step 4: Ejecutar y verificar que pasa**
 
 Run: `npx vitest run tests/adapt.test.ts`
 Expected: PASS (3 tests).
 
-- [ ] **Step 5: Exportar, suite completa, build y commit**
+- [x] **Step 5: Exportar, suite completa, build y commit**
 
 En `src/index.ts`, añade al final:
 
@@ -792,7 +792,7 @@ Run: `npm test` — Expected: PASS.
 Run: `npm run typecheck` — Expected: sin errores.
 Run: `npm run build` — Expected: sin errores, `dist/patterns/` contiene los 5 patrones nuevos.
 
-- [ ] **Step 6: Invocar la skill `verify` y después commitear**
+- [x] **Step 6: Invocar la skill `verify` y después commitear**
 
 ```bash
 git add -A
