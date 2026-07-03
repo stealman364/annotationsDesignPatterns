@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { Emits, Subject } from '../src/patterns/behavioral/observer';
 
 describe('Subject', () => {
@@ -61,5 +61,40 @@ describe('@Emits', () => {
 
     expect(() => f.run()).toThrow('boom');
     expect(notified).toBe(false);
+  });
+});
+
+describe('Subject tipado', () => {
+  interface User {
+    name: string;
+  }
+
+  it('los payloads llevan el tipo declarado para cada evento', () => {
+    const subject = new Subject<{ 'user:created': User; count: number }>();
+    const names: string[] = [];
+
+    subject.on('user:created', (user) => names.push(user.name));
+    subject.emit('user:created', { name: 'Ana' });
+    subject.emit('count', 3);
+
+    expect(names).toEqual(['Ana']);
+    expectTypeOf(subject.on<'count'>).parameter(1).toEqualTypeOf<(payload: number) => void>();
+    expectTypeOf(subject.emit<'user:created'>).parameter(1).toEqualTypeOf<User>();
+  });
+
+  it('@Emits funciona sobre una subclase tipada', () => {
+    class UserService extends Subject<{ 'user:created': User }> {
+      @Emits('user:created')
+      create(name: string): User {
+        return { name };
+      }
+    }
+
+    const service = new UserService();
+    const received: User[] = [];
+    service.on('user:created', (user) => received.push(user));
+
+    service.create('Bea');
+    expect(received).toEqual([{ name: 'Bea' }]);
   });
 });
