@@ -34,3 +34,4 @@ export { Timeout } from './patterns/utility/timeout';
 export { RateLimit } from './patterns/utility/rate-limit';
 export { CircuitBreaker, type CircuitBreakerOptions } from './patterns/utility/circuit-breaker';
 export { CachedFor } from './patterns/utility/cached-for';
+export { Validate, type Guard } from './patterns/utility/validate';
