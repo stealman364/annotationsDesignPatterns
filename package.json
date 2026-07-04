@@ -70,7 +70,7 @@
     "test:dist": "npm run build && node scripts/smoke-dist.mjs && node scripts/smoke-dist.cjs",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "npm run prepublishOnly && npm publish",
+    "release": "changeset publish",
     "prepublishOnly": "npm test && npm run typecheck && npm run lint && npm run test:dist",
     "prepare": "lefthook install"
   },
