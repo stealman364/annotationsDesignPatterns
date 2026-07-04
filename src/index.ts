@@ -30,6 +30,7 @@ export { Snapshot, SnapshotHistory } from './patterns/behavioral/snapshot';
 export { HandlerChain, HandlerFor, type Handler } from './patterns/behavioral/handler-chain';
 export { IterableOver, type WithIterator } from './patterns/behavioral/iterable-over';
 export { StateMachine, TransitionTo, When } from './patterns/behavioral/state-machine';
+export { On } from './patterns/behavioral/on';
 
 // Utilitarios de método
 export { Memoize, type KeyResolver, type MemoizeOptions } from './patterns/utility/memoize';
