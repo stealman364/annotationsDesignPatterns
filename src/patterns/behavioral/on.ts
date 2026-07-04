@@ -22,8 +22,8 @@ import type { Subject } from './observer';
  */
 export function On(subject: Subject<Record<string, unknown>>, event: string) {
   return function <This, Return>(
-    target: (this: This, payload: unknown) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, payload: unknown) => Return>,
+    target: (this: This, payload: never) => Return,
+    context: ClassMethodDecoratorContext<This>,
   ): void {
     if (context.kind !== 'method') {
       throw new TypeError('@On solo puede aplicarse a un método');

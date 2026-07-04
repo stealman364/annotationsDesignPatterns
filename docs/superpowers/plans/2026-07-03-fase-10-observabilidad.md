@@ -461,7 +461,9 @@ import type { Subject } from './observer';
 export function On(subject: Subject<Record<string, unknown>>, event: string) {
   return function <This, Return>(
     target: (this: This, payload: never) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, payload: never) => Return>,
+    // Sin segundo genérico: ClassMethodDecoratorContext no admite `never` en
+    // su constraint. El `never` del target es el que permite payloads tipados.
+    context: ClassMethodDecoratorContext<This>,
   ): void {
     if (context.kind !== 'method') {
       throw new TypeError('@On solo puede aplicarse a un método');
