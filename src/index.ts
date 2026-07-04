@@ -50,3 +50,4 @@ export { Mutex } from './patterns/utility/mutex';
 export { Fallback } from './patterns/utility/fallback';
 export { Semaphore } from './patterns/utility/semaphore';
 export { Log, type LogOptions } from './patterns/utility/log';
+export { Measure, type MeasureReport } from './patterns/utility/measure';
