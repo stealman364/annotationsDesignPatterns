@@ -62,6 +62,42 @@ describe('@Emits', () => {
     expect(() => f.run()).toThrow('boom');
     expect(notified).toBe(false);
   });
+
+  it('emite el valor resuelto cuando el método es async', async () => {
+    class UserService extends Subject {
+      @Emits('user:created')
+      async create(name: string): Promise<{ name: string }> {
+        return { name };
+      }
+    }
+
+    const service = new UserService();
+    const received: unknown[] = [];
+    service.on('user:created', (payload) => received.push(payload));
+
+    const result = await service.create('Ana');
+
+    expect(result).toEqual({ name: 'Ana' });
+    expect(received).toEqual([{ name: 'Ana' }]);
+  });
+
+  it('no emite si la promesa rechaza', async () => {
+    class Failing extends Subject {
+      @Emits('done')
+      async run(): Promise<void> {
+        throw new Error('boom');
+      }
+    }
+
+    const f = new Failing();
+    let notified = false;
+    f.on('done', () => {
+      notified = true;
+    });
+
+    await expect(f.run()).rejects.toThrow('boom');
+    expect(notified).toBe(false);
+  });
 });
 
 describe('Subject tipado', () => {

@@ -1,0 +1,27 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      files: git ls-files
+      run: npm run format:check
+    lint:
+      files: git ls-files
+      run: npm run lint
+
+pre-push:
+  parallel: false
+  commands:
+    typecheck:
+      files: git ls-files
+      run: npm run typecheck
+    test:
+      files: git ls-files
+      run: npm test
+    dist:
+      files: git ls-files
+      run: npm run test:dist
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx commitlint --edit "$1"

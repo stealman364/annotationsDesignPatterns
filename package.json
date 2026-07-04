@@ -2,6 +2,14 @@
   "name": "annotations-design-patterns",
   "version": "1.0.0",
   "description": "Design patterns as standard TC39 TypeScript decorators: GoF patterns, resilience toolkit (retry, circuit breaker, fallback) and method utilities. Zero dependencies, tree-shakeable.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stealman364/annotationsDesignPatterns.git"
+  },
+  "homepage": "https://github.com/stealman364/annotationsDesignPatterns#readme",
+  "bugs": {
+    "url": "https://github.com/stealman364/annotationsDesignPatterns/issues"
+  },
   "keywords": [
     "decorators",
     "typescript",
@@ -59,7 +67,12 @@
     "lint": "eslint src tests *.ts",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\"",
-    "prepublishOnly": "npm test && npm run typecheck && npm run lint && npm run build"
+    "test:dist": "npm run build && node scripts/smoke-dist.mjs && node scripts/smoke-dist.cjs",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "npm run prepublishOnly && npm publish",
+    "prepublishOnly": "npm test && npm run typecheck && npm run lint && npm run test:dist",
+    "prepare": "lefthook install"
   },
   "author": "Enrique <enrique.azarquiel@gmail.com>",
   "license": "ISC",
@@ -67,8 +80,12 @@
     "node": ">=18"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^10.0.1",
     "eslint": "^10.6.0",
+    "lefthook": "^2.1.9",
     "prettier": "^3.9.4",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",

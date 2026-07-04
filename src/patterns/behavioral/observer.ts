@@ -34,6 +34,8 @@ export class Subject<Events extends Record<string, unknown> = Record<string, unk
  * Tras ejecutar el método con éxito, emite `event` en el propio objeto
  * (que debe extender `Subject`) con el valor de retorno como payload.
  * Si el método lanza, no se emite nada.
+ * Si el método devuelve una `Promise`, el evento se emite con el valor resuelto;
+ * si la promesa rechaza, no se emite nada.
  *
  * @example
  * ```ts
@@ -53,6 +55,12 @@ export function Emits(event: string) {
     }
     return function (this: This, ...args: Args): Return {
       const result = target.call(this, ...args);
+      if (result instanceof Promise) {
+        return result.then((value: unknown) => {
+          this.emit(event, value);
+          return value;
+        }) as Return;
+      }
       this.emit(event, result);
       return result;
     };
