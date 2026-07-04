@@ -77,7 +77,7 @@
   "author": "Enrique <enrique.azarquiel@gmail.com>",
   "license": "ISC",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

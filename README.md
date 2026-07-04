@@ -28,7 +28,7 @@ class ApiClient {
 
 - TypeScript **5.0+** con target `ES2022` o superior.
 - **No** actives `experimentalDecorators`: esta librería usa los decoradores estándar.
-- Node 18+ (o cualquier bundler moderno: Vite, esbuild, webpack…).
+- Node 20+ (o cualquier bundler moderno: Vite, esbuild, webpack…).
 
 ## Instalación
 
