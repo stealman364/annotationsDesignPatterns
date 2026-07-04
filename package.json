@@ -1,6 +1,6 @@
 {
   "name": "annotations-design-patterns",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Design patterns as standard TC39 TypeScript decorators: GoF patterns, resilience toolkit (retry, circuit breaker, fallback) and method utilities. Zero dependencies, tree-shakeable.",
   "repository": {
     "type": "git",
