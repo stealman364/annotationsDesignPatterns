@@ -1,3 +1,7 @@
+import { fallback as fallbackOperator } from '../../operators/fallback';
+import type { MaybePromise } from '../../core/types';
+import { adaptOperator } from '../../decorators/adapters';
+
 /**
  * Si el método asíncrono rechaza, devuelve el valor de respaldo en lugar de
  * propagar el error. El respaldo puede ser un valor directo o una función
@@ -24,26 +28,16 @@
  * ```
  */
 export function Fallback<R = unknown>(fallback: R | ((...args: never[]) => R | Promise<R>)) {
-  return function <This, Args extends unknown[], Return>(
+  return function <This extends object, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
     context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>,
   ): (this: This, ...args: Args) => Promise<Return> {
-    if (context.kind !== 'method') {
-      throw new TypeError('@Fallback solo puede aplicarse a un método');
-    }
-    return async function (this: This, ...args: Args): Promise<Return> {
-      try {
-        return await target.call(this, ...args);
-      } catch (error) {
-        const value =
-          typeof fallback === 'function'
-            ? await (fallback as unknown as (error: unknown, ...args: Args) => unknown)(
-                error,
-                ...args,
-              )
-            : fallback;
-        return value as Return;
-      }
-    };
+    return adaptOperator<This, Args, Return>(
+      () =>
+        fallbackOperator<This, Args, Return>(
+          fallback as Return | ((error: unknown, ...args: Args) => MaybePromise<Return>),
+        ),
+      { decoratorName: '@Fallback' },
+    )(target, context);
   };
 }

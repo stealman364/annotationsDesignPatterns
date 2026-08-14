@@ -1,3 +1,5 @@
+import { cachedFor } from '../../operators/cached-for';
+import { adaptOperator } from '../../decorators/adapters';
 import type { KeyResolver } from './memoize';
 
 export interface CachedForOptions {
@@ -13,6 +15,8 @@ export interface CachedForOptions {
  * Como @Memoize pero con caducidad: cachea el resultado por combinación de
  * argumentos y por instancia durante `ttlMs` milisegundos; después vuelve a
  * ejecutar el método.
+ * Por compatibilidad, el TTL comienza al invocar el método incluso cuando el
+ * resultado es una Promise pendiente.
  *
  * La clave por defecto es `JSON.stringify(args)` y comparte las limitaciones
  * de @Memoize (circulares lanzan, funciones/`Symbol` colisionan, el orden de
@@ -34,33 +38,16 @@ export function CachedFor(ttlMs: number, options: CachedForOptions = {}) {
   if (ttlMs <= 0) {
     throw new RangeError('@CachedFor requiere un TTL mayor que 0 ms');
   }
-  return function <This, Args extends unknown[], Return>(
+  return function <This extends object, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,
     context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
   ): (this: This, ...args: Args) => Return {
-    if (context.kind !== 'method') {
-      throw new TypeError('@CachedFor solo puede aplicarse a un método');
-    }
-    const computeKey =
-      (options.key as ((...args: Args) => string) | undefined) ??
-      ((...args: Args) => JSON.stringify(args));
-    const caches = new WeakMap<object, Map<string, { value: Return; expiresAt: number }>>();
-    return function (this: This, ...args: Args): Return {
-      const self = this as object;
-      let cache = caches.get(self);
-      if (!cache) {
-        cache = new Map<string, { value: Return; expiresAt: number }>();
-        caches.set(self, cache);
-      }
-      const cacheKey = computeKey(...args);
-      const entry = cache.get(cacheKey);
-      const now = Date.now();
-      if (entry && now < entry.expiresAt) {
-        return entry.value;
-      }
-      const value = target.call(this, ...args);
-      cache.set(cacheKey, { value, expiresAt: now + ttlMs });
-      return value;
-    };
+    return adaptOperator<This, Args, Return>(
+      () =>
+        cachedFor<This, Args, Return>(ttlMs, {
+          key: options.key as ((...args: Args) => string) | undefined,
+        }),
+      { decoratorName: '@CachedFor', scope: 'instance' },
+    )(target, context);
   };
 }

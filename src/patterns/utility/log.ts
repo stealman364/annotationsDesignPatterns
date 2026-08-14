@@ -13,6 +13,17 @@ function formatArg(arg: unknown): string {
   }
 }
 
+function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
+  try {
+    return (
+      ((typeof value === 'object' && value !== null) || typeof value === 'function') &&
+      typeof (value as PromiseLike<unknown>).then === 'function'
+    );
+  } catch {
+    return true;
+  }
+}
+
 /**
  * Registra cada llamada al método: entrada con argumentos, y salida con
  * éxito (✓) o error (✗) y duración en ms. Si el método devuelve una
@@ -44,8 +55,8 @@ export function Log({ logger = console.log, label }: LogOptions = {}) {
       const start = Date.now();
       try {
         const result = target.call(this, ...args);
-        if (result instanceof Promise) {
-          return result.then(
+        if (isPromiseLike(result)) {
+          return Promise.resolve(result).then(
             (value: unknown) => {
               logger(`← ${name} ✓ ${Date.now() - start} ms`);
               return value;

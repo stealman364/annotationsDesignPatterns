@@ -34,6 +34,49 @@
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "operators": [
+        "dist/public/operators.d.ts"
+      ],
+      "pipe": [
+        "dist/public/pipe.d.ts"
+      ],
+      "run": [
+        "dist/public/run.d.ts"
+      ],
+      "policy": [
+        "dist/policy/index.d.ts"
+      ],
+      "decorators": [
+        "dist/decorators/index.d.ts"
+      ],
+      "experimental": [
+        "dist/experimental/index.d.ts"
+      ],
+      "observability": [
+        "dist/observability/index.d.ts"
+      ],
+      "node": [
+        "dist/node/index.d.ts"
+      ],
+      "store": [
+        "dist/store/index.d.ts"
+      ],
+      "behavioral/*": [
+        "dist/patterns/behavioral/*.d.ts"
+      ],
+      "creational/*": [
+        "dist/patterns/creational/*.d.ts"
+      ],
+      "structural/*": [
+        "dist/patterns/structural/*.d.ts"
+      ],
+      "utility/*": [
+        "dist/patterns/utility/*.d.ts"
+      ]
+    }
+  },
   "exports": {
     ".": {
       "import": {
@@ -45,14 +88,134 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./*": {
+    "./operators": {
       "import": {
-        "types": "./dist/patterns/*.d.ts",
-        "default": "./dist/patterns/*.js"
+        "types": "./dist/public/operators.d.ts",
+        "default": "./dist/public/operators.js"
       },
       "require": {
-        "types": "./dist/patterns/*.d.cts",
-        "default": "./dist/patterns/*.cjs"
+        "types": "./dist/public/operators.d.cts",
+        "default": "./dist/public/operators.cjs"
+      }
+    },
+    "./pipe": {
+      "import": {
+        "types": "./dist/public/pipe.d.ts",
+        "default": "./dist/public/pipe.js"
+      },
+      "require": {
+        "types": "./dist/public/pipe.d.cts",
+        "default": "./dist/public/pipe.cjs"
+      }
+    },
+    "./run": {
+      "import": {
+        "types": "./dist/public/run.d.ts",
+        "default": "./dist/public/run.js"
+      },
+      "require": {
+        "types": "./dist/public/run.d.cts",
+        "default": "./dist/public/run.cjs"
+      }
+    },
+    "./policy": {
+      "import": {
+        "types": "./dist/policy/index.d.ts",
+        "default": "./dist/policy/index.js"
+      },
+      "require": {
+        "types": "./dist/policy/index.d.cts",
+        "default": "./dist/policy/index.cjs"
+      }
+    },
+    "./decorators": {
+      "import": {
+        "types": "./dist/decorators/index.d.ts",
+        "default": "./dist/decorators/index.js"
+      },
+      "require": {
+        "types": "./dist/decorators/index.d.cts",
+        "default": "./dist/decorators/index.cjs"
+      }
+    },
+    "./experimental": {
+      "import": {
+        "types": "./dist/experimental/index.d.ts",
+        "default": "./dist/experimental/index.js"
+      },
+      "require": {
+        "types": "./dist/experimental/index.d.cts",
+        "default": "./dist/experimental/index.cjs"
+      }
+    },
+    "./observability": {
+      "import": {
+        "types": "./dist/observability/index.d.ts",
+        "default": "./dist/observability/index.js"
+      },
+      "require": {
+        "types": "./dist/observability/index.d.cts",
+        "default": "./dist/observability/index.cjs"
+      }
+    },
+    "./node": {
+      "import": {
+        "types": "./dist/node/index.d.ts",
+        "default": "./dist/node/index.js"
+      },
+      "require": {
+        "types": "./dist/node/index.d.cts",
+        "default": "./dist/node/index.cjs"
+      }
+    },
+    "./store": {
+      "import": {
+        "types": "./dist/store/index.d.ts",
+        "default": "./dist/store/index.js"
+      },
+      "require": {
+        "types": "./dist/store/index.d.cts",
+        "default": "./dist/store/index.cjs"
+      }
+    },
+    "./behavioral/*": {
+      "import": {
+        "types": "./dist/patterns/behavioral/*.d.ts",
+        "default": "./dist/patterns/behavioral/*.js"
+      },
+      "require": {
+        "types": "./dist/patterns/behavioral/*.d.cts",
+        "default": "./dist/patterns/behavioral/*.cjs"
+      }
+    },
+    "./creational/*": {
+      "import": {
+        "types": "./dist/patterns/creational/*.d.ts",
+        "default": "./dist/patterns/creational/*.js"
+      },
+      "require": {
+        "types": "./dist/patterns/creational/*.d.cts",
+        "default": "./dist/patterns/creational/*.cjs"
+      }
+    },
+    "./structural/*": {
+      "import": {
+        "types": "./dist/patterns/structural/*.d.ts",
+        "default": "./dist/patterns/structural/*.js"
+      },
+      "require": {
+        "types": "./dist/patterns/structural/*.d.cts",
+        "default": "./dist/patterns/structural/*.cjs"
+      }
+    },
+    "./utility/*": {
+      "import": {
+        "types": "./dist/patterns/utility/*.d.ts",
+        "default": "./dist/patterns/utility/*.js"
+      },
+      "require": {
+        "types": "./dist/patterns/utility/*.d.cts",
+        "default": "./dist/patterns/utility/*.cjs"
       }
     }
   },
@@ -62,12 +225,18 @@
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "audit:any": "npm run build && node scripts/audit-any.mjs",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src tests *.ts",
-    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\"",
-    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"*.ts\" \"*.js\" \"*.json\"",
+    "lint": "eslint src tests scripts *.ts",
+    "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.{js,mjs,cjs}\" \"*.ts\" \"*.js\" \"*.json\" \".github/**/*.yml\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.{js,mjs,cjs}\" \"*.ts\" \"*.js\" \"*.json\" \".github/**/*.yml\"",
     "test:dist": "npm run build && node scripts/smoke-dist.mjs && node scripts/smoke-dist.cjs",
+    "test:package": "npm run build && node scripts/smoke-package.mjs",
+    "lint:package": "npm run build && publint",
+    "types:package": "npm run build && attw --pack",
+    "pack:verify": "npm run build && node scripts/verify-package.mjs",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "changeset publish",
@@ -80,13 +249,17 @@
     "node": ">=20"
   },
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
     "@changesets/cli": "^2.31.0",
     "@commitlint/cli": "^21.2.0",
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^10.0.1",
+    "@types/node": "^20.19.43",
+    "@vitest/coverage-v8": "^4.1.9",
     "eslint": "^10.6.0",
     "lefthook": "^2.1.9",
     "prettier": "^3.9.4",
+    "publint": "^0.3.22",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.62.1",

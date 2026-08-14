@@ -10,6 +10,7 @@ export {
   Inject,
   Injectable,
   InjectionToken,
+  CircularDependencyError,
   type Scope,
   type Token,
 } from './patterns/creational/injection';
@@ -33,22 +34,22 @@ export { StateMachine, TransitionTo, When } from './patterns/behavioral/state-ma
 export { On } from './patterns/behavioral/on';
 
 // Utilitarios de método
-export { Memoize, type KeyResolver, type MemoizeOptions } from './patterns/utility/memoize';
+export { Memoize, type KeyResolver, type MemoizeOptions } from './decorators';
 export { MemoizeByRef } from './patterns/utility/memoize-by-ref';
 export { Debounce } from './patterns/utility/debounce';
 export { Throttle } from './patterns/utility/throttle';
-export { Retry, type RetryOptions } from './patterns/utility/retry';
+export { Retry, type RetryOptions } from './decorators';
 export { Lazy } from './patterns/utility/lazy';
 export { Once } from './patterns/utility/once';
 export { Deprecated } from './patterns/utility/deprecated';
 export { Bind } from './patterns/utility/bind';
-export { Timeout } from './patterns/utility/timeout';
+export { Timeout } from './decorators';
 export { RateLimit } from './patterns/utility/rate-limit';
-export { CircuitBreaker, type CircuitBreakerOptions } from './patterns/utility/circuit-breaker';
-export { CachedFor, type CachedForOptions } from './patterns/utility/cached-for';
+export { CircuitBreaker, type CircuitBreakerOptions } from './decorators';
+export { CachedFor, type CachedForOptions } from './decorators';
 export { Validate, type Guard } from './patterns/utility/validate';
 export { Mutex } from './patterns/utility/mutex';
-export { Fallback } from './patterns/utility/fallback';
+export { Fallback } from './decorators';
 export { Semaphore } from './patterns/utility/semaphore';
 export { Log, type LogOptions } from './patterns/utility/log';
 export { Measure, type MeasureReport } from './patterns/utility/measure';

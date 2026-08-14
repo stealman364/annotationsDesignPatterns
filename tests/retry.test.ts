@@ -54,8 +54,40 @@ describe('@Retry', () => {
     expect(attempts).toBe(1);
   });
 
-  it('rechaza configuraciones inválidas', () => {
-    expect(() => Retry({ attempts: 0 })).toThrow(RangeError);
+  it.each([Number.NaN, Infinity, 0, -1])(
+    'rechaza attempts no finito o menor que uno: %s',
+    (attempts) => {
+      expect(() => Retry({ attempts })).toThrow(RangeError);
+    },
+  );
+
+  it.each([-1, Number.NaN, Infinity])('rechaza delayMs negativo o no finito: %s', (delayMs) => {
+    expect(() => Retry({ attempts: 2, delayMs })).toThrow(RangeError);
+  });
+
+  it.each([0, -1, Number.NaN, Infinity])(
+    'rechaza backoffFactor menor que uno o no finito: %s',
+    (backoffFactor) => {
+      expect(() => Retry({ attempts: 2, backoffFactor })).toThrow(RangeError);
+    },
+  );
+
+  it('usa delayMs y backoffFactor por defecto válidos', async () => {
+    let attempts = 0;
+
+    class Api {
+      @Retry({ attempts: 2 })
+      async fetch(): Promise<string> {
+        attempts++;
+        if (attempts === 1) {
+          throw new Error('fallo temporal');
+        }
+        return 'ok';
+      }
+    }
+
+    await expect(new Api().fetch()).resolves.toBe('ok');
+    expect(attempts).toBe(2);
   });
 
   it('aplica backoff exponencial entre intentos', async () => {
@@ -83,7 +115,37 @@ describe('@Retry', () => {
     expect(timeline).toEqual([0, 100, 300]);
   });
 
-  it('rechaza backoffFactor menor que 1', () => {
-    expect(() => Retry({ attempts: 2, backoffFactor: 0 })).toThrow(RangeError);
+  it('propaga exactamente el último valor lanzado de forma síncrona al agotar intentos', async () => {
+    const firstFailure = { kind: 'first failure' };
+    const lastFailure = { kind: 'last failure' };
+    let attempts = 0;
+
+    class Api {
+      @Retry({ attempts: 2 })
+      fetch(): Promise<never> {
+        attempts++;
+        throw attempts === 1 ? firstFailure : lastFailure;
+      }
+    }
+
+    await expect(new Api().fetch()).rejects.toBe(lastFailure);
+    expect(attempts).toBe(2);
+  });
+
+  it('propaga exactamente el último valor rechazado al agotar intentos', async () => {
+    const firstFailure = { kind: 'first rejection' };
+    const lastFailure = { kind: 'last rejection' };
+    let attempts = 0;
+
+    class Api {
+      @Retry({ attempts: 2 })
+      fetch(): Promise<never> {
+        attempts++;
+        return Promise.reject(attempts === 1 ? firstFailure : lastFailure);
+      }
+    }
+
+    await expect(new Api().fetch()).rejects.toBe(lastFailure);
+    expect(attempts).toBe(2);
   });
 });

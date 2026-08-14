@@ -1,0 +1,10 @@
+export { CachedFor } from '../patterns/utility/cached-for';
+export type { CachedForOptions } from '../patterns/utility/cached-for';
+export { CircuitBreaker } from '../patterns/utility/circuit-breaker';
+export type { CircuitBreakerOptions } from '../patterns/utility/circuit-breaker';
+export { Fallback } from '../patterns/utility/fallback';
+export { Memoize } from '../patterns/utility/memoize';
+export type { KeyResolver, MemoizeOptions } from '../patterns/utility/memoize';
+export { Retry } from '../patterns/utility/retry';
+export type { RetryOptions } from '../patterns/utility/retry';
+export { Timeout } from '../patterns/utility/timeout';

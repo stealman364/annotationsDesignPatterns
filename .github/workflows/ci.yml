@@ -22,5 +22,11 @@ jobs:
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
+      - run: npm run test:coverage
+      - run: npm run audit:any
       - run: npm run test:dist
       - run: npm pack --dry-run
+      - run: npm run lint:package
+      - run: npm run types:package
+      - run: npm run pack:verify
+      - run: npm run test:package

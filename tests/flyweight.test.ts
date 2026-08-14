@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { Flyweight } from '../src/patterns/structural/flyweight';
 
 describe('@Flyweight', () => {
@@ -54,5 +54,21 @@ describe('@Flyweight', () => {
     }
 
     expect(new A(1)).not.toBe(new B(1));
+  });
+
+  it('preserva la tupla de argumentos y el tipo de instancia del constructor', () => {
+    @Flyweight
+    class Glyph {
+      constructor(
+        public readonly character: string,
+        public readonly weight?: number,
+      ) {}
+    }
+
+    expectTypeOf<ConstructorParameters<typeof Glyph>>().toEqualTypeOf<
+      [character: string, weight?: number]
+    >();
+    expectTypeOf<InstanceType<typeof Glyph>>().toEqualTypeOf<Glyph>();
+    expectTypeOf(new Glyph('A', 700)).toEqualTypeOf<Glyph>();
   });
 });

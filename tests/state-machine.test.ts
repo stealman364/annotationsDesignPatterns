@@ -33,6 +33,15 @@ describe('StateMachine + @When + @TransitionTo', () => {
     expect(doc.state).toBe('published');
   });
 
+  it('preserves a synchronous return value and commits during the same call', () => {
+    const doc = new Doc();
+
+    const result = doc.submit();
+
+    expect(result).toBe('enviado');
+    expect(doc.state).toBe('review');
+  });
+
   it('lanza si el método se llama en un estado no permitido', () => {
     const doc = new Doc();
     doc.submit();

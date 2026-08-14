@@ -1,6 +1,13 @@
 /** Ciclo de vida de una dependencia: instancia única o una por resolución. */
 export type Scope = 'singleton' | 'transient';
 
+export class CircularDependencyError extends Error {
+  constructor(readonly tokenPath: readonly string[]) {
+    super(`Dependencia circular detectada: ${tokenPath.join(' -> ')}`);
+    this.name = 'CircularDependencyError';
+  }
+}
+
 /**
  * Token tipado para registrar valores que no son clases (interfaces,
  * primitivos, configuración). El tipo `T` es phantom: solo existe para que
@@ -40,8 +47,8 @@ function describeToken(token: unknown): string {
  * inyectan por CAMPOS con @Inject; las clases se registran con @Injectable
  * o manualmente con `register`.
  *
- * Limitación: no detecta ciclos (A inyecta B y B inyecta A desborda la
- * pila); rompe el ciclo con un useFactory o rediseña el grafo.
+ * Detecta ciclos de resolución (por ejemplo, A inyecta B y B inyecta A) y
+ * lanza `CircularDependencyError` con la ruta de tokens implicada.
  *
  * @example
  * ```ts
@@ -61,6 +68,7 @@ function describeToken(token: unknown): string {
 export class Container {
   #registrations = new Map<unknown, Registration>();
   #singletons = new Map<unknown, unknown>();
+  #resolving: unknown[] = [];
 
   /** Registra un provider para el token. Lanza si el token ya está registrado. */
   register<T>(token: Token<T>, provider: Provider<T>): void {
@@ -86,17 +94,33 @@ export class Container {
 
   /** Resuelve el token según su scope. Lanza si no está registrado. */
   resolve<T>(token: Token<T>): T {
+    const cycleStart = this.#resolving.indexOf(token);
+    if (cycleStart !== -1) {
+      throw new CircularDependencyError(
+        [...this.#resolving.slice(cycleStart), token].map(describeToken),
+      );
+    }
     const registration = this.#registrations.get(token);
     if (!registration) {
       throw new Error(`Token "${describeToken(token)}" no registrado en el contenedor`);
     }
     if (registration.scope === 'singleton') {
       if (!this.#singletons.has(token)) {
-        this.#singletons.set(token, registration.factory());
+        this.#resolving.push(token);
+        try {
+          this.#singletons.set(token, registration.factory());
+        } finally {
+          this.#resolving.pop();
+        }
       }
       return this.#singletons.get(token) as T;
     }
-    return registration.factory() as T;
+    this.#resolving.push(token);
+    try {
+      return registration.factory() as T;
+    } finally {
+      this.#resolving.pop();
+    }
   }
 
   has(token: Token<unknown>): boolean {

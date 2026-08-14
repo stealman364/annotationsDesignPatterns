@@ -75,5 +75,13 @@ describe('@CircuitBreaker', () => {
   it('rechaza configuraciones inválidas', () => {
     expect(() => CircuitBreaker({ failures: 0, resetMs: 1000 })).toThrow(RangeError);
     expect(() => CircuitBreaker({ failures: 1, resetMs: 0 })).toThrow(RangeError);
+    expect(() => CircuitBreaker({ failures: Number.NaN, resetMs: 1000 })).toThrow(RangeError);
+    expect(() => CircuitBreaker({ failures: Number.POSITIVE_INFINITY, resetMs: 1000 })).toThrow(
+      RangeError,
+    );
+    expect(() => CircuitBreaker({ failures: 1, resetMs: Number.NaN })).toThrow(RangeError);
+    expect(() => CircuitBreaker({ failures: 1, resetMs: Number.POSITIVE_INFINITY })).toThrow(
+      RangeError,
+    );
   });
 });

@@ -21,6 +21,17 @@ export class StateMachine<State extends string = string> {
   }
 }
 
+function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
+  try {
+    return (
+      ((typeof value === 'object' && value !== null) || typeof value === 'function') &&
+      typeof (value as PromiseLike<unknown>).then === 'function'
+    );
+  } catch {
+    return true;
+  }
+}
+
 /**
  * Guarda de estado: el método solo puede llamarse cuando la máquina está
  * en alguno de los estados permitidos; en otro caso lanza `Error` y el
@@ -72,6 +83,12 @@ export function TransitionTo(next: string) {
     }
     return function (this: This, ...args: Args): Return {
       const result = target.call(this, ...args);
+      if (isPromiseLike(result)) {
+        return Promise.resolve(result).then((value) => {
+          this.transitionTo(next);
+          return value;
+        }) as Return;
+      }
       this.transitionTo(next);
       return result;
     };

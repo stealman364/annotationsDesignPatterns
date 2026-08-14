@@ -68,6 +68,38 @@ describe('@CachedFor', () => {
     expect(repo.load({ id: 7 })).toBe(2);
   });
 
+  it('conserva una entrada nueva si una Promise caducada se rechaza después', async () => {
+    const failure = new Error('unavailable');
+    let rejectFirst!: (reason: Error) => void;
+    let calls = 0;
+
+    class Api {
+      @CachedFor(1_000)
+      load(id: string): Promise<string> {
+        void id;
+        calls++;
+        if (calls === 1) {
+          return new Promise((_, reject) => {
+            rejectFirst = reject;
+          });
+        }
+        return Promise.resolve('fresh');
+      }
+    }
+
+    const api = new Api();
+    const expired = api.load('profile');
+    vi.advanceTimersByTime(1_000);
+    const replacement = api.load('profile');
+
+    rejectFirst(failure);
+    await expect(expired).rejects.toBe(failure);
+    await expect(replacement).resolves.toBe('fresh');
+
+    expect(api.load('profile')).toBe(replacement);
+    expect(calls).toBe(2);
+  });
+
   it('rechaza TTL no positivos', () => {
     expect(() => CachedFor(0)).toThrow(RangeError);
     expect(() => CachedFor(-1)).toThrow(RangeError);

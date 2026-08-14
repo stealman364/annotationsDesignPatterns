@@ -19,23 +19,30 @@
  * new Color('red') === new Color('red'); // true
  * ```
  */
-export function Flyweight<T extends new (...args: any[]) => object>(
+export function Flyweight<T extends new (...args: never[]) => object>(
   target: T,
   context: ClassDecoratorContext<T>,
 ): T {
   if (context.kind !== 'class') {
     throw new TypeError('@Flyweight solo puede aplicarse a una clase');
   }
-  const instances = new Map<string, InstanceType<T>>();
+  const caches = new WeakMap<object, Map<string, InstanceType<T>>>();
   return new Proxy(target, {
     construct(original, args, newTarget) {
+      const constructor = newTarget as object;
+      let instances = caches.get(constructor);
+      if (!instances) {
+        instances = new Map<string, InstanceType<T>>();
+        caches.set(constructor, instances);
+      }
       const key = JSON.stringify(args);
       let instance = instances.get(key);
       if (!instance) {
-        instance = Reflect.construct(original, args, newTarget) as InstanceType<T>;
-        instances.set(key, instance);
+        const created = Reflect.construct(original, args, newTarget) as InstanceType<T>;
+        instances.set(key, created);
+        instance = created;
       }
-      return instance;
+      return instance as InstanceType<T>;
     },
   });
 }

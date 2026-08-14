@@ -63,6 +63,22 @@ describe('@Emits', () => {
     expect(notified).toBe(false);
   });
 
+  it('emite null como un valor síncrono', () => {
+    class Service extends Subject {
+      @Emits('done')
+      run(): null {
+        return null;
+      }
+    }
+
+    const service = new Service();
+    const received: unknown[] = [];
+    service.on('done', (payload) => received.push(payload));
+
+    expect(service.run()).toBeNull();
+    expect(received).toEqual([null]);
+  });
+
   it('emite el valor resuelto cuando el método es async', async () => {
     class UserService extends Subject {
       @Emits('user:created')
@@ -97,6 +113,56 @@ describe('@Emits', () => {
 
     await expect(f.run()).rejects.toThrow('boom');
     expect(notified).toBe(false);
+  });
+});
+
+describe('@Emits with custom thenables', () => {
+  it('emite el valor de un thenable tras resolverlo', async () => {
+    class Service extends Subject {
+      @Emits('done')
+      run() {
+        return {
+          then(onfulfilled: (value: string) => unknown): void {
+            queueMicrotask(() => onfulfilled('resolved'));
+          },
+        };
+      }
+    }
+
+    const service = new Service();
+    const received: unknown[] = [];
+    service.on('done', (payload) => received.push(payload));
+
+    const result = service.run();
+
+    expect(received).toEqual([]);
+    await expect(Promise.resolve(result)).resolves.toBe('resolved');
+    expect(received).toEqual(['resolved']);
+  });
+
+  it('no emite cuando un thenable rechaza y conserva la razón', async () => {
+    const reason = new Error('boom');
+
+    class Failing extends Subject {
+      @Emits('done')
+      run() {
+        return {
+          then(
+            _onfulfilled: (value: never) => unknown,
+            onrejected: (error: unknown) => unknown,
+          ): void {
+            queueMicrotask(() => onrejected(reason));
+          },
+        };
+      }
+    }
+
+    const service = new Failing();
+    const received: unknown[] = [];
+    service.on('done', (payload) => received.push(payload));
+
+    await expect(Promise.resolve(service.run())).rejects.toBe(reason);
+    expect(received).toEqual([]);
   });
 });
 

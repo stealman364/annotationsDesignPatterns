@@ -47,4 +47,20 @@ describe('@Fallback', () => {
 
     await expect(new Api().getName()).resolves.toBe('respaldo-async');
   });
+
+  it('conserva el receiver y los argumentos con un proveedor asíncrono', async () => {
+    class Api {
+      constructor(private readonly prefix: string) {}
+
+      @Fallback(async (error: unknown, id: number) => {
+        expect(error).toBeInstanceOf(Error);
+        return `fallback:${id}`;
+      })
+      async getName(id: number): Promise<string> {
+        throw new Error(`${this.prefix}:${id}`);
+      }
+    }
+
+    await expect(new Api('api').getName(7)).resolves.toBe('fallback:7');
+  });
 });

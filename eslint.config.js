@@ -12,4 +12,19 @@ export default tseslint.config(
       '@typescript-eslint/no-explicit-any': ['error', { ignoreRestArgs: true }],
     },
   },
+  {
+    files: ['scripts/**/*.cjs'],
+    languageOptions: {
+      globals: { console: 'readonly', require: 'readonly' },
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
+    },
+  },
+  {
+    files: ['scripts/**/*.{js,mjs}'],
+    languageOptions: {
+      globals: { URL: 'readonly', console: 'readonly', process: 'readonly' },
+    },
+  },
 );

@@ -1,15 +1,7 @@
-export interface RetryOptions {
-  /** Número total de intentos (incluido el primero). Mínimo 1. */
-  attempts: number;
-  /** Espera antes del primer reintento en milisegundos. Por defecto 0 (sin espera). */
-  delayMs?: number;
-  /**
-   * Multiplicador de la espera entre reintentos (backoff exponencial):
-   * la espera n vale `delayMs * backoffFactor^(n-1)`. Por defecto 1
-   * (espera fija, comportamiento original). Mínimo 1.
-   */
-  backoffFactor?: number;
-}
+import { normalizeRetryOptions, retry, type RetryOptions } from '../../operators/retry';
+import { adaptOperator } from '../../decorators/adapters';
+
+export type { RetryOptions } from '../../operators/retry';
 
 /**
  * Reintenta un método asíncrono cuando lanza o rechaza, hasta agotar los
@@ -24,34 +16,17 @@ export interface RetryOptions {
  * }
  * ```
  */
-export function Retry({ attempts, delayMs = 0, backoffFactor = 1 }: RetryOptions) {
-  if (attempts < 1) {
-    throw new RangeError('@Retry requiere al menos 1 intento');
-  }
-  if (backoffFactor < 1) {
-    throw new RangeError('@Retry requiere un backoffFactor mayor o igual que 1');
-  }
-  return function <This, Args extends unknown[], Return>(
+export function Retry(options: RetryOptions) {
+  // Las expresiones de decorador se evalúan antes de aplicar el decorador.
+  // Conservamos una copia ya validada para que una mutación posterior del
+  // objeto del consumidor no cambie el pipeline que se va a instalar.
+  const normalizedOptions = normalizeRetryOptions(options);
+  return function <This extends object, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Promise<Return>,
     context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Promise<Return>>,
   ): (this: This, ...args: Args) => Promise<Return> {
-    if (context.kind !== 'method') {
-      throw new TypeError('@Retry solo puede aplicarse a un método');
-    }
-    return async function (this: This, ...args: Args): Promise<Return> {
-      let lastError: unknown;
-      for (let attempt = 1; attempt <= attempts; attempt++) {
-        try {
-          return await target.call(this, ...args);
-        } catch (error) {
-          lastError = error;
-          if (attempt < attempts && delayMs > 0) {
-            const wait = delayMs * backoffFactor ** (attempt - 1);
-            await new Promise((resolve) => setTimeout(resolve, wait));
-          }
-        }
-      }
-      throw lastError;
-    };
+    return adaptOperator<This, Args, Return>(() => retry<This, Args, Return>(normalizedOptions), {
+      decoratorName: '@Retry',
+    })(target, context);
   };
 }

@@ -5,6 +5,17 @@ export interface MeasureReport {
   ok: boolean;
 }
 
+function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
+  try {
+    return (
+      ((typeof value === 'object' && value !== null) || typeof value === 'function') &&
+      typeof (value as PromiseLike<unknown>).then === 'function'
+    );
+  } catch {
+    return true;
+  }
+}
+
 /**
  * Mide la duración de cada ejecución del método y la entrega al callback
  * (para métricas, histogramas, APM…). Si el método devuelve una Promise,
@@ -34,8 +45,8 @@ export function Measure(onMeasure: (report: MeasureReport) => void) {
       };
       try {
         const result = target.call(this, ...args);
-        if (result instanceof Promise) {
-          return result.then(
+        if (isPromiseLike(result)) {
+          return Promise.resolve(result).then(
             (value: unknown) => {
               report(true);
               return value;

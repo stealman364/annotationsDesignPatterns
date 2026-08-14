@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from 'vitest';
 import {
+  CircularDependencyError,
   Container,
   Inject,
   Injectable,
@@ -60,6 +61,17 @@ describe('Container', () => {
     container.register(T, { useValue: 1 });
 
     expect(() => container.register(T, { useValue: 2 })).toThrow('ya está registrado');
+  });
+
+  it('identifica ciclos de factories con la ruta de tokens', () => {
+    const container = new Container();
+    const A = new InjectionToken<object>('A');
+    const B = new InjectionToken<object>('B');
+    container.register(A, { useFactory: () => container.resolve(B) });
+    container.register(B, { useFactory: () => container.resolve(A) });
+
+    expect(() => container.resolve(A)).toThrow(CircularDependencyError);
+    expect(() => container.resolve(A)).toThrow('A -> B -> A');
   });
 });
 

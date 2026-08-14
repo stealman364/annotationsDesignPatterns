@@ -32,6 +32,20 @@ describe('@Measure', () => {
     expect(reports[0]).toMatchObject({ method: 'run', ok: false });
   });
 
+  it('trata null como un valor síncrono', () => {
+    const reports: MeasureReport[] = [];
+
+    class Service {
+      @Measure((report) => reports.push(report))
+      run(): null {
+        return null;
+      }
+    }
+
+    expect(new Service().run()).toBeNull();
+    expect(reports).toMatchObject([{ method: 'run', ok: true }]);
+  });
+
   it('mide métodos async hasta que resuelven o rechazan', async () => {
     const reports: MeasureReport[] = [];
 
@@ -53,5 +67,47 @@ describe('@Measure', () => {
       ['ok', true],
       ['bad', false],
     ]);
+  });
+  it('reporta el éxito de un thenable sólo tras resolverlo', async () => {
+    const reports: MeasureReport[] = [];
+
+    class Service {
+      @Measure((report) => reports.push(report))
+      run() {
+        return {
+          then(onfulfilled: (value: string) => unknown): void {
+            queueMicrotask(() => onfulfilled('resolved'));
+          },
+        };
+      }
+    }
+
+    const result = new Service().run();
+
+    expect(reports).toEqual([]);
+    await expect(Promise.resolve(result)).resolves.toBe('resolved');
+    expect(reports).toMatchObject([{ method: 'run', ok: true }]);
+  });
+
+  it('reporta el rechazo de un thenable y conserva la razón', async () => {
+    const reports: MeasureReport[] = [];
+    const reason = new Error('boom');
+
+    class Service {
+      @Measure((report) => reports.push(report))
+      run() {
+        return {
+          then(
+            _onfulfilled: (value: never) => unknown,
+            onrejected: (error: unknown) => unknown,
+          ): void {
+            queueMicrotask(() => onrejected(reason));
+          },
+        };
+      }
+    }
+
+    await expect(Promise.resolve(new Service().run())).rejects.toBe(reason);
+    expect(reports).toMatchObject([{ method: 'run', ok: false }]);
   });
 });

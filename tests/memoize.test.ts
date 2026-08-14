@@ -49,6 +49,32 @@ describe('@Memoize', () => {
 
     expect(new Greeter('Ana').greet()).toBe('Hola, Ana');
   });
+
+  it('comparte la Promise en vuelo entre llamadas concurrentes con la misma clave', async () => {
+    let resolve!: (value: string) => void;
+    let calls = 0;
+
+    class Api {
+      @Memoize
+      load(id: string): Promise<string> {
+        void id;
+        calls++;
+        return new Promise((done) => {
+          resolve = done;
+        });
+      }
+    }
+
+    const api = new Api();
+    const first = api.load('profile');
+    const second = api.load('profile');
+
+    expect(second).toBe(first);
+    expect(calls).toBe(1);
+
+    resolve('ready');
+    await expect(first).resolves.toBe('ready');
+  });
 });
 
 describe('@Memoize con resolver de clave', () => {
