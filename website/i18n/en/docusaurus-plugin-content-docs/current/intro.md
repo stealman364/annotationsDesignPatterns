@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Welcome to annotations-design-patterns
 
-**Design patterns as standard TC39 TypeScript decorators.** Classic GoF patterns, a complete resilience toolkit, and method utilities — all as declarative annotations on your classes.
+**Design patterns as standard TC39 TypeScript decorators and as composable functions.** Classic GoF patterns, dependency injection, a complete resilience toolkit, and method utilities. Resilience and caching are also available as functional operators: see the [operators](./guides/operators.md) guide.
 
 ```ts
 import { Singleton, Retry, Timeout, Fallback } from 'annotations-design-patterns';
@@ -25,7 +25,7 @@ class ApiClient {
 - **Standard TC39 decorators** — works with TypeScript 5+ without `experimentalDecorators` or `reflect-metadata`. Classic collections are still tied to the legacy system.
 - **Zero dependencies** — each pattern is self-contained and tree-shakeable.
 - **Strict typing** — with type tests in addition to behavior tests; any `any` is bounded.
-- **34 public symbols**: 14 GoF patterns + resilience + utilities, covered in this documentation.
+- **15 GoF patterns** + dependency injection + resilience + utilities, covered in this documentation.
 
 ## Requirements
 

@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Bienvenida a annotations-design-patterns
 
-**Patrones de diseño como decoradores TypeScript estándar (TC39).** Los patrones GoF clásicos, un toolkit de resiliencia completo y utilidades de método — todo como anotaciones declarativas sobre tus clases.
+**Patrones de diseño como decoradores TypeScript estándar (TC39) y como funciones componibles.** Los patrones GoF clásicos, inyección de dependencias, un toolkit de resiliencia completo y utilidades de método. La resiliencia y la caché también están disponibles como operadores funcionales: consulta la guía de [operadores](./guides/operators.md).
 
 ```ts
 import { Singleton, Retry, Timeout, Fallback } from 'annotations-design-patterns';
@@ -25,7 +25,7 @@ class ApiClient {
 - **Decoradores TC39 estándar** — funciona con TypeScript 5+ sin `experimentalDecorators` ni `reflect-metadata`. Las colecciones clásicas siguen ancladas al sistema legacy.
 - **Cero dependencias** — cada patrón autocontenido, tree-shakeable.
 - **Tipado estricto** — con tests de tipos además de los de comportamiento; cualquier `any` queda acotado.
-- **34 símbolos públicos**: 14 patrones GoF + resiliencia + utilidades, cubiertos en esta documentación.
+- **15 patrones GoF** + inyección de dependencias + resiliencia + utilidades de método, cubiertos en esta documentación.
 
 ## Requisitos
 

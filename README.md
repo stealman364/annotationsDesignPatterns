@@ -1,20 +1,40 @@
 # annotations-design-patterns
 
-**Patrones de diseño como decoradores TypeScript estándar (TC39).** Los patrones GoF clásicos, un toolkit de resiliencia completo y utilidades de método — todo como anotaciones declarativas sobre tus clases.
+**Patrones de diseño como decoradores TypeScript estándar (TC39) y como funciones componibles.** Los patrones GoF clásicos, inyección de dependencias, un toolkit de resiliencia completo y utilidades de método.
 
-```ts
-import { Singleton, Retry, Timeout, Fallback } from 'annotations-design-patterns';
+Se puede usar de dos formas:
 
-@Singleton
-class ApiClient {
-  @Fallback<User[]>([])
-  @Retry({ attempts: 3, delayMs: 200, backoffFactor: 2 })
-  @Timeout(5000)
-  async fetchUsers(): Promise<User[]> {
-    /* ... */
+- **Con anotaciones (decoradores)** sobre clases y métodos:
+
+  ```ts
+  import { Singleton, Retry, Timeout, Fallback } from 'annotations-design-patterns';
+
+  @Singleton
+  class ApiClient {
+    @Fallback<User[]>([])
+    @Retry({ attempts: 3, delayMs: 200, backoffFactor: 2 })
+    @Timeout(5000)
+    async fetchUsers(): Promise<User[]> {
+      /* ... */
+    }
   }
-}
-```
+  ```
+
+- **Con funciones**, sin decoradores, componiendo operadores sobre cualquier función:
+
+  ```ts
+  import { fallback, retry, timeout } from 'annotations-design-patterns/operators';
+  import { pipe } from 'annotations-design-patterns/pipe';
+
+  const fetchUsers = pipe(
+    loadUsers,
+    fallback<object, readonly [], User[]>([]),
+    retry({ attempts: 3, delayMs: 200, backoffFactor: 2 }),
+    timeout(5000),
+  );
+  ```
+
+Consulta [Dos formas de usarla](#dos-formas-de-usarla) para saber qué está disponible en cada estilo.
 
 ## ¿Por qué esta librería?
 
@@ -22,7 +42,8 @@ class ApiClient {
 - **Cero dependencias** — cada patrón son unas decenas de líneas autocontenidas.
 - **Tree-shakeable** — `sideEffects: false` + ESM: tu bundle solo incluye lo que importas. También hay imports granulares por ruta.
 - **Tipado estricto** — con tests de tipos (`expectTypeOf`) además de los de comportamiento (446 tests); quedan `any` acotados en decoradores no modificados.
-- **34 símbolos públicos**: 14 patrones GoF + resiliencia + utilidades.
+- **Dos estilos**: decoradores para clases y operadores funcionales (`pipe`, `run`, `definePolicy`) para funciones sueltas.
+- **15 patrones GoF** + inyección de dependencias + resiliencia + utilidades de método.
 
 > ¿Actualizas desde 1.x? Consulta la [guía de migración a 2.0](./website/docs/migration/2.0.md): `@TransitionTo` asíncrono, aislamiento de caches en herencia y el nuevo error de ciclos de DI cambian comportamientos observables.
 
@@ -38,7 +59,36 @@ class ApiClient {
 npm install annotations-design-patterns
 ```
 
+## Dos formas de usarla
+
+| Estilo                 | Cuándo usarlo                                                                           | Imports                                            |
+| ---------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| Anotaciones (`@Retry`) | Métodos y clases propias; la política queda declarada junto al código                   | raíz `annotations-design-patterns` o `/decorators` |
+| Funciones (`retry()`)  | Funciones sueltas, código de terceros, o cuando no puedes o no quieres usar decoradores | `/operators`, `/pipe`, `/run`, `/policy`           |
+
+Los patrones GoF, la inyección de dependencias y la mayoría de utilidades de
+método existen **solo como decoradores**, porque actúan sobre clases. La
+resiliencia y la caché existen en los dos estilos y comparten el mismo motor
+interno, así que se comportan igual:
+
+| Decorador                     | Operador funcional       | Notas                                                       |
+| ----------------------------- | ------------------------ | ----------------------------------------------------------- |
+| `@Retry(opts)`                | `retry(opts)`            |                                                             |
+| `@Timeout(ms)`                | `timeout(ms)`            |                                                             |
+| `@Fallback(valor \| fn)`      | `fallback(valor \| fn)`  |                                                             |
+| `@CircuitBreaker(opts)`       | `circuitBreaker(opts)`   |                                                             |
+| `@Memoize` / `@Memoize(opts)` | `memoize(opts)`          | `memoizeWithHandle()` añade `invalidate(key)` y `clear()`   |
+| `@CachedFor(ttlMs, opts)`     | `cachedFor(ttlMs, opts)` | `cachedForWithHandle()` añade `invalidate(key)` y `clear()` |
+| —                             | `overlap(opts)`          | Solo funcional: `drop`, `share` o cola FIFO por clave       |
+| —                             | `keyedLock(opts)`        | Solo funcional: serializa por clave                         |
+| —                             | `definePolicy(config)`   | Solo funcional: agrupa las cuatro capas de resiliencia      |
+| `@Mutex` / `@Semaphore(n)`    | —                        | Solo decorador                                              |
+
 ## Catálogo
+
+Todos los símbolos del catálogo son decoradores o clases que se importan desde
+la raíz del paquete. Para la versión funcional, consulta
+[API funcional](#api-funcional).
 
 ### Creacionales
 
@@ -48,6 +98,7 @@ npm install annotations-design-patterns
 | `Factory<Base>` + `@RegisterIn(factory, clave)` | Registro de constructores por clave; `factory.create('clave', args)`                                  |
 | `builderFor(Clase)`                             | Builder fluido generado por tipos: `withNombre(v)…build()`                                            |
 | `@Cloneable` + `WithClone<T>`                   | Patrón Prototype: añade `clone()` (copia superficial)                                                 |
+| `Container` + `@Injectable` + `@Inject`         | Inyección de dependencias por campos, con `InjectionToken` y scopes `singleton`/`transient`           |
 
 ### Estructurales
 
@@ -64,6 +115,7 @@ npm install annotations-design-patterns
 | Símbolo                                                           | Qué hace                                                                                    |
 | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `Subject<Events>` + `@Emits('evento')`                            | Observer con mapa de eventos tipado; espera Promises y thenables                            |
+| `@On(subject, 'evento')`                                          | Suscribe el método al evento al construir cada instancia (complemento de `@Emits`)          |
 | `StrategySelector<S>` + `@StrategyFor(selector, clave)`           | Strategy intercambiable en runtime (`use`/`current`)                                        |
 | `CommandHistory` + `@Revertible(history, 'metodoInverso')`        | Command con deshacer LIFO                                                                   |
 | `SnapshotHistory` + `@Snapshot(history)`                          | Memento: guarda el estado antes de cada mutación                                            |
@@ -77,7 +129,7 @@ npm install annotations-design-patterns
 | -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | `@Memoize` / `@Memoize({ key })`                               | Cache por argumentos e instancia; clave personalizable                                                                       |
 | `@MemoizeByRef`                                                | Memoización por identidad (trie de `WeakMap`; admite circulares y funciones)                                                 |
-| `@CachedFor(ttlMs, { key? })`                                  | Memoize con caducidad desde la invocación (también para Promises pendientes); rechazos no quedan cacheados                  |
+| `@CachedFor(ttlMs, { key? })`                                  | Memoize con caducidad desde la invocación (también para Promises pendientes); rechazos no quedan cacheados                   |
 | `@Debounce(ms)` / `@Throttle(ms)` / `@RateLimit(n, ventanaMs)` | Control de frecuencia de llamadas                                                                                            |
 | `@Retry({ attempts, delayMs?, backoffFactor? })`               | Reintentos con backoff exponencial opcional; opciones numéricas finitas (`attempts ≥ 1`, `delayMs ≥ 0`, `backoffFactor ≥ 1`) |
 | `@Timeout(ms)`                                                 | Rechaza métodos async que exceden el límite; no cancela el trabajo subyacente                                                |
@@ -88,12 +140,13 @@ npm install annotations-design-patterns
 | `@Bind`                                                        | Liga `this` al desestructurar o pasar como callback                                                                          |
 | `@Deprecated(mensaje?)`                                        | Aviso de obsolescencia por `console.warn` (una vez)                                                                          |
 | `@Validate(guard)`                                             | Precondiciones de argumentos: lanza `TypeError` con el motivo                                                                |
-
-`@Log` y `@Measure` también esperan Promises y thenables antes de informar éxito o error.
+| `@Log(opts?)` / `@Measure(onMeasure)`                          | Registra llamadas / mide su duración; esperan Promises y thenables antes de informar éxito o error                           |
 
 ## API funcional
 
-La API funcional no necesita decoradores y se publica mediante tres subpaths estables:
+La API funcional no necesita decoradores: envuelve cualquier función con los
+mismos operadores de resiliencia y caché. Se publica mediante tres subpaths
+estables:
 
 ```ts
 import { fallback, retry } from 'annotations-design-patterns/operators';

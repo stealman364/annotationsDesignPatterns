@@ -22,16 +22,20 @@ test: cover dist imports
 chore: configure lefthook
 ```
 
-Lefthook runs Commitlint on `commit-msg`.
+Lefthook runs Commitlint on `commit-msg`. Header and body lines must be at most
+100 characters.
 
 ## Local Quality Gates
 
-Before each commit, Lefthook runs the lightweight checks:
+Before each commit, Lefthook runs the lightweight checks on staged files only
+(files under `website/` are excluded):
 
-```bash
-npm run format:check
-npm run lint
-```
+- Prettier formats staged files and re-stages them, so formatting never blocks
+  a commit;
+- ESLint checks staged `.ts` files.
+
+Hook output is printed without colors so it stays readable in the VS Code Git
+log.
 
 Before each push, Lefthook runs the heavier checks:
 
