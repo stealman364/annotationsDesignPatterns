@@ -8,16 +8,57 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  color: var(--adp-text);
+  background: var(--adp-surface);
+  border-bottom: 1px solid var(--adp-border);
+}
+
+.heroLogo {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 1rem;
+}
+
+.heroTitle {
+  overflow-wrap: anywhere;
+}
+
+.accent {
+  color: var(--adp-accent);
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
 }
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   align-items: center;
   justify-content: center;
+}
+
+.install {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.5rem 1rem;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  color: var(--adp-text-muted);
+  background: var(--adp-bg);
+  border: 1px solid var(--adp-border);
+  border-radius: var(--adp-radius-sm);
+}
+
+.styles {
+  padding: 3rem 0 1rem;
+}
+
+.lead {
+  max-width: 40rem;
+  margin: 0 auto 2rem;
 }

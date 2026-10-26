@@ -7,9 +7,17 @@
     "message": "Annotations Design Patterns",
     "description": "The alt text of navbar logo"
   },
-  "item.label.Documentation": {
+  "item.label.Documentación": {
     "message": "Documentation",
-    "description": "Navbar item with label Documentation"
+    "description": "Navbar item with label Documentación"
+  },
+  "item.label.Referencia de API": {
+    "message": "API reference",
+    "description": "Navbar item with label Referencia de API"
+  },
+  "item.label.npm": {
+    "message": "npm",
+    "description": "Navbar item with label npm"
   },
   "item.label.GitHub": {
     "message": "GitHub",

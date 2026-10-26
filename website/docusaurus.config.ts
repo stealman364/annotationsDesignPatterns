@@ -5,6 +5,27 @@ import typedocBaseJson from './typedoc.base.json';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+// Code colors carry meaning: teal = own API (decorators, functions),
+// amber = values and configuration, violet = TypeScript keywords.
+// Light mode uses darker tones so every token keeps WCAG AA contrast.
+const brandTokens = (api: string, value: string, keyword: string) => [
+  { types: ['decorator', 'function'], style: { color: api } },
+  { types: ['number', 'boolean'], style: { color: value } },
+  { types: ['keyword'], style: { color: keyword } },
+];
+
+const lightCodeTheme = {
+  ...prismThemes.github,
+  plain: { ...prismThemes.github.plain, color: '#20252b', backgroundColor: '#f6f8f9' },
+  styles: [...prismThemes.github.styles, ...brandTokens('#07727e', '#9a6700', '#8250df')],
+};
+
+const darkCodeTheme = {
+  ...prismThemes.dracula,
+  plain: { ...prismThemes.dracula.plain, color: '#f3f5f7', backgroundColor: '#24272b' },
+  styles: [...prismThemes.dracula.styles, ...brandTokens('#24c7d1', '#f2b84b', '#c792ea')],
+};
+
 const typedocBaseConfig = {
   ...typedocBaseJson,
   sidebar: {
@@ -14,7 +35,7 @@ const typedocBaseConfig = {
 
 const config: Config = {
   title: 'Annotations Design Patterns',
-  tagline: 'Design patterns as standard TC39 TypeScript decorators',
+  tagline: 'Patrones de diseño para TypeScript como decoradores TC39 o funciones componibles',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -159,7 +180,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
     },
@@ -167,14 +188,30 @@ const config: Config = {
       title: 'Annotations Design Patterns',
       logo: {
         alt: 'Annotations Design Patterns',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
+        srcDark: 'img/logo-dark.png',
       },
       items: [
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
           position: 'left',
-          label: 'Documentation',
+          label: 'Documentación',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'apiSidebar',
+          label: 'Referencia de API',
+          position: 'left',
+        },
+        {
+          href: 'https://www.npmjs.com/package/annotations-design-patterns',
+          label: 'npm',
+          position: 'right',
+        },
+        {
+          type: 'localeDropdown',
+          position: 'right',
         },
         {
           href: 'https://github.com/stealman364/annotationsDesignPatterns',
@@ -187,29 +224,41 @@ const config: Config = {
       style: 'dark',
       links: [
         {
-          title: 'Documentation',
+          title: 'Documentación',
           items: [
             {
-              label: 'Getting Started',
+              label: 'Empezar',
               to: '/docs/intro',
+            },
+            {
+              label: 'Referencia de API',
+              to: '/docs/api/root',
+            },
+            {
+              label: 'Migración a 2.0',
+              to: '/docs/migration/2.0',
             },
           ],
         },
         {
-          title: 'Community',
+          title: 'Proyecto',
           items: [
             {
               label: 'GitHub',
               href: 'https://github.com/stealman364/annotationsDesignPatterns',
             },
+            {
+              label: 'npm',
+              href: 'https://www.npmjs.com/package/annotations-design-patterns',
+            },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Annotations Design Patterns. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Enrique · ISC`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: lightCodeTheme,
+      darkTheme: darkCodeTheme,
     },
   } satisfies Preset.ThemeConfig,
 };

@@ -3,8 +3,8 @@
     "message": "Next",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.Guides": {
+  "sidebar.tutorialSidebar.category.Guías": {
     "message": "Guides",
-    "description": "The label for category 'Guides' in sidebar 'tutorialSidebar'"
+    "description": "The label for category 'Guías' in sidebar 'tutorialSidebar'"
   }
 }

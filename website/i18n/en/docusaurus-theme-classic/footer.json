@@ -1,22 +1,34 @@
 {
-  "link.title.Documentation": {
+  "link.title.Documentación": {
     "message": "Documentation",
-    "description": "The title of the footer links column with title=Documentation in the footer"
+    "description": "The title of the footer links column with title=Documentación in the footer"
   },
-  "link.title.Community": {
-    "message": "Community",
-    "description": "The title of the footer links column with title=Community in the footer"
+  "link.title.Proyecto": {
+    "message": "Project",
+    "description": "The title of the footer links column with title=Proyecto in the footer"
   },
-  "link.item.label.Getting Started": {
-    "message": "Getting Started",
-    "description": "The label of footer link with label=Getting Started linking to /docs/intro"
+  "link.item.label.Empezar": {
+    "message": "Getting started",
+    "description": "The label of footer link with label=Empezar linking to /docs/intro"
+  },
+  "link.item.label.Referencia de API": {
+    "message": "API reference",
+    "description": "The label of footer link with label=Referencia de API linking to /docs/api/root"
+  },
+  "link.item.label.Migración a 2.0": {
+    "message": "Migrating to 2.0",
+    "description": "The label of footer link with label=Migración a 2.0 linking to /docs/migration/2.0"
   },
   "link.item.label.GitHub": {
     "message": "GitHub",
     "description": "The label of footer link with label=GitHub linking to https://github.com/stealman364/annotationsDesignPatterns"
   },
+  "link.item.label.npm": {
+    "message": "npm",
+    "description": "The label of footer link with label=npm linking to https://www.npmjs.com/package/annotations-design-patterns"
+  },
   "copyright": {
-    "message": "Copyright © 2026 Annotations Design Patterns. Built with Docusaurus.",
+    "message": "© 2026 Enrique · ISC",
     "description": "The footer copyright"
   }
 }

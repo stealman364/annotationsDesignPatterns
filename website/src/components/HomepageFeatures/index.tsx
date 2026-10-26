@@ -1,57 +1,81 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import Translate from '@docusaurus/Translate';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
 type FeatureItem = {
-  title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  title: ReactNode;
   description: ReactNode;
+  to: string;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: <Translate id="home.features.tc39.title">Decoradores TC39 estándar</Translate>,
     description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
+      <Translate id="home.features.tc39.text">
+        Funciona con TypeScript 5+ sin experimentalDecorators ni reflect-metadata.
+      </Translate>
     ),
+    to: '/docs/guides/decorators',
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: <Translate id="home.features.gof.title">Patrones GoF e inyección</Translate>,
     description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
+      <Translate id="home.features.gof.text">
+        15 patrones clásicos (Singleton, Observer, State, Builder…) e inyección de dependencias con
+        Container.
+      </Translate>
     ),
+    to: '/docs/guides/decorators',
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: <Translate id="home.features.resilience.title">Resiliencia</Translate>,
     description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
+      <Translate id="home.features.resilience.text">
+        Retry, Timeout, CircuitBreaker y Fallback, y políticas reutilizables con definePolicy.
+      </Translate>
     ),
+    to: '/docs/guides/policy',
+  },
+  {
+    title: <Translate id="home.features.concurrency.title">Concurrencia y caché</Translate>,
+    description: (
+      <Translate id="home.features.concurrency.text">
+        Memoize, CachedFor, overlap y keyedLock, con invalidación explícita por clave.
+      </Translate>
+    ),
+    to: '/docs/guides/concurrency',
+  },
+  {
+    title: <Translate id="home.features.observability.title">Observabilidad opt-in</Translate>,
+    description: (
+      <Translate id="home.features.observability.text">
+        Eventos estructurados y errores con códigos estables, sin dependencias de logging.
+      </Translate>
+    ),
+    to: '/docs/guides/observability',
+  },
+  {
+    title: <Translate id="home.features.deps.title">Cero dependencias</Translate>,
+    description: (
+      <Translate id="home.features.deps.text">
+        ESM y CJS, tree-shakeable, con imports granulares por ruta.
+      </Translate>
+    ),
+    to: '/docs/guides/granular-imports',
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, description, to }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
+    <div className={clsx('col col--4', styles.feature)}>
+      <Link to={to} className={styles.card}>
         <Heading as="h3">{title}</Heading>
         <p>{description}</p>
-      </div>
+      </Link>
     </div>
   );
 }

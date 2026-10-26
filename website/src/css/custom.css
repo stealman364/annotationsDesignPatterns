@@ -4,27 +4,74 @@
  * work well for content-centric websites.
  */
 
-/* You can override the default Infima variables here. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Brand: graphite + teal, mostly monochrome. Teal is reserved for links, active
+ * states, own APIs in code and small indicators. Light mode uses a deep teal so
+ * text keeps WCAG AA contrast on white (4.75:1). */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
+  --ifm-font-family-base:
+    'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-font-family-monospace:
+    'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --ifm-heading-font-family: 'Inter', system-ui, sans-serif;
+
+  --ifm-color-primary: #087f8c;
+  --ifm-color-primary-dark: #07727e;
+  --ifm-color-primary-darker: #076c77;
+  --ifm-color-primary-darkest: #055963;
+  --ifm-color-primary-light: #098c9a;
+  --ifm-color-primary-lighter: #0992a1;
+  --ifm-color-primary-lightest: #0ba5b5;
+
+  --ifm-code-font-size: 92%;
+  --ifm-code-border-radius: var(--adp-radius-sm);
+  --ifm-card-border-radius: var(--adp-radius-md);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --adp-bg: #ffffff;
+  --adp-surface: #f6f8f9;
+  --adp-border: #dde3e6;
+  --adp-text: #20252b;
+  --adp-text-muted: #5f6b73;
+  --adp-accent: #087f8c;
+  --adp-warning: #9a6700;
+  --adp-radius-sm: 6px;
+  --adp-radius-md: 8px;
+  --adp-radius-lg: 12px;
+
+  --ifm-background-color: var(--adp-bg);
+  --ifm-font-color-base: var(--adp-text);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #24c7d1;
+  --ifm-color-primary-dark: #1fb4bd;
+  --ifm-color-primary-darker: #1dabb4;
+  --ifm-color-primary-darkest: #188d94;
+  --ifm-color-primary-light: #39cdd6;
+  --ifm-color-primary-lighter: #44d0d9;
+  --ifm-color-primary-lightest: #69dae0;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --adp-bg: #1b1b1d;
+  --adp-surface: #24272b;
+  --adp-border: #363b40;
+  --adp-text: #f3f5f7;
+  --adp-text-muted: #a9b2b8;
+  --adp-accent: #24c7d1;
+  --adp-warning: #f2b84b;
+}
+
+/* Infrastructure, not consumer app: hairline borders instead of soft shadows. */
+.theme-code-block {
+  border: 1px solid var(--adp-border);
+  border-radius: var(--adp-radius-md);
+  box-shadow: none;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--adp-border);
+  box-shadow: none;
 }

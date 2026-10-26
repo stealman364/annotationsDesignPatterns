@@ -325,5 +325,74 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "home.hero.subtitle": {
+    "message": "Design patterns, resilience and caching for TypeScript: as standard TC39 decorators or as composable functions."
+  },
+  "home.hero.start": {
+    "message": "Get started"
+  },
+  "home.hero.api": {
+    "message": "API reference"
+  },
+  "home.styles.title": {
+    "message": "Two ways to use it"
+  },
+  "home.styles.lead": {
+    "message": "Resilience and caching share the same engine in both styles: pick the one that fits your code."
+  },
+  "home.styles.decorators": {
+    "message": "With annotations"
+  },
+  "home.styles.decorators.text": {
+    "message": "For your own classes and methods: the policy is declared next to the code."
+  },
+  "home.styles.functions": {
+    "message": "With functions"
+  },
+  "home.styles.functions.text": {
+    "message": "For standalone functions, third-party code, or projects without decorators."
+  },
+  "home.meta.title": {
+    "message": "Home"
+  },
+  "home.meta.description": {
+    "message": "Design patterns, resilience and caching for TypeScript, as TC39 decorators or composable functions."
+  },
+  "home.features.tc39.title": {
+    "message": "Standard TC39 decorators"
+  },
+  "home.features.tc39.text": {
+    "message": "Works with TypeScript 5+ without experimentalDecorators or reflect-metadata."
+  },
+  "home.features.gof.title": {
+    "message": "GoF patterns and injection"
+  },
+  "home.features.gof.text": {
+    "message": "15 classic patterns (Singleton, Observer, State, Builder…) and dependency injection with Container."
+  },
+  "home.features.resilience.title": {
+    "message": "Resilience"
+  },
+  "home.features.resilience.text": {
+    "message": "Retry, Timeout, CircuitBreaker and Fallback, plus reusable policies with definePolicy."
+  },
+  "home.features.concurrency.title": {
+    "message": "Concurrency and caching"
+  },
+  "home.features.concurrency.text": {
+    "message": "Memoize, CachedFor, overlap and keyedLock, with explicit per-key invalidation."
+  },
+  "home.features.observability.title": {
+    "message": "Opt-in observability"
+  },
+  "home.features.observability.text": {
+    "message": "Structured events and errors with stable codes, with no logging dependency."
+  },
+  "home.features.deps.title": {
+    "message": "Zero dependencies"
+  },
+  "home.features.deps.text": {
+    "message": "ESM and CJS, tree-shakeable, with granular per-path imports."
   }
 }
