@@ -32,8 +32,15 @@ jobs:
         with:
           node-version: 20.x
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            website/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      # website/ is not a workspace of the root package: install its own deps.
+      - name: Install docs site dependencies
+        working-directory: website
+        run: npm ci
       - name: Build docs site
         working-directory: website
         run: |

@@ -1,19 +1,41 @@
-import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { readdirSync, readFileSync } from 'node:fs';
+import { join, resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import * as publicApi from '../../src/index';
 
-const phaseTwoArchitectureDocument = resolve('docs/architecture/phase-2-core.md');
+// Allowed dependency graph: core → operators → patterns.
+const sourceRoot = resolve('src');
+
+function relativeImportsOf(layer: string): { file: string; specifier: string }[] {
+  const layerDir = join(sourceRoot, layer);
+  const files = readdirSync(layerDir, { recursive: true, encoding: 'utf8' }).filter((file) =>
+    file.endsWith('.ts'),
+  );
+
+  return files.flatMap((file) => {
+    const source = readFileSync(join(layerDir, file), 'utf8');
+    return [...source.matchAll(/from '(\.[^']+)'/g)].map((match) => ({
+      file: `${layer}/${file}`,
+      specifier: match[1]!,
+    }));
+  });
+}
 
 describe('phase 2 architecture boundaries', () => {
-  it('documents the allowed inward dependency graph', () => {
-    expect(existsSync(phaseTwoArchitectureDocument)).toBe(true);
+  it('core does not import any other layer', () => {
+    const outward = relativeImportsOf('core').filter(({ specifier }) =>
+      specifier.startsWith('../'),
+    );
 
-    const document = readFileSync(phaseTwoArchitectureDocument, 'utf8');
+    expect(outward).toEqual([]);
+  });
 
-    expect(document).toContain('core → operators → patterns');
-    expect(document).toMatch(/core` must not import patterns/);
-    expect(document).toMatch(/operators may import only core/);
+  it('operators may import only core', () => {
+    const outward = relativeImportsOf('operators').filter(
+      ({ specifier }) => specifier.startsWith('../') && !specifier.startsWith('../core/'),
+    );
+
+    expect(outward).toEqual([]);
   });
 
   it('does not expose internal core or operators from the public root', () => {

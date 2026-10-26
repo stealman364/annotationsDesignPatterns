@@ -41,7 +41,7 @@ Consulta [Dos formas de usarla](#dos-formas-de-usarla) para saber qué está dis
 - **Decoradores TC39 estándar** — funciona con TypeScript 5+ sin `experimentalDecorators` ni `reflect-metadata`. Las colecciones clásicas de decoradores (core-decorators, lodash-decorators, decko…) siguen ancladas al sistema legacy.
 - **Cero dependencias** — cada patrón son unas decenas de líneas autocontenidas.
 - **Tree-shakeable** — `sideEffects: false` + ESM: tu bundle solo incluye lo que importas. También hay imports granulares por ruta.
-- **Tipado estricto** — con tests de tipos (`expectTypeOf`) además de los de comportamiento (446 tests); quedan `any` acotados en decoradores no modificados.
+- **Tipado estricto** — con tests de tipos (`expectTypeOf`) además de los de comportamiento (447 tests); quedan `any` acotados en decoradores no modificados.
 - **Dos estilos**: decoradores para clases y operadores funcionales (`pipe`, `run`, `definePolicy`) para funciones sueltas.
 - **15 patrones GoF** + inyección de dependencias + resiliencia + utilidades de método.
 
@@ -246,14 +246,14 @@ const stricterPolicy = profilePolicy.extend({ retry: { attempts: 5 } });
 El orden por defecto es `fallback -> circuitBreaker -> retry -> timeout`. Las
 capas se desactivan con `false`; `retry` exige `idempotent: true`, y las
 combinaciones peligrosas se rechazan con `InvalidPolicyError` antes de ejecutar.
-Consulta la [arquitectura de políticas](./docs/architecture/phase-6-policy.md)
-para `shouldRetry`, timeout global e `describe()`.
+Consulta la [guía de políticas](./website/docs/guides/policy.md) para `describe()`
+y más ejemplos.
 
 `pipe(método, exterior, interior)` ejecuta primero el operador exterior. En esta primera
 versión funcional, todas las etapas deben conservar el mismo receiver, tupla de argumentos
 y tipo de resultado; no hay transformaciones heterogéneas entre operadores. Consulta la
-[arquitectura de la API funcional](./docs/architecture/phase-3-functional-api.md) para el
-orden completo, los operadores disponibles y sus límites.
+[guía de `pipe`](./website/docs/guides/pipe.md) para el orden de los operadores y la
+[guía de operadores](./website/docs/guides/operators.md) para la lista completa.
 
 ## Concurrencia e invalidación
 
@@ -273,11 +273,10 @@ const load = pipe(loadProfile, deduplicate, cache.operator);
 cache.handle.invalidate('42');
 ```
 
-Consulta la [arquitectura de concurrencia](./docs/architecture/phase-7-concurrency.md)
-para semántica de cola, abortos de waiters y generaciones de caché.
-[`switchOverlap`](./docs/experiments/switch-overlap.md) y
-[`hedge`](./docs/experiments/hedge.md) siguen siendo experimentales y no se
-exponen como APIs estables.
+Consulta la [guía de concurrencia](./website/docs/guides/concurrency.md) para la
+semántica de cola y los abortos de waiters. `switchOverlap` y `hedge` siguen
+siendo [experimentales](./website/docs/guides/experimental.md) y no se exponen
+como APIs estables.
 
 ## Store async y contexto Node
 
@@ -301,8 +300,8 @@ await runWithRequestContext({ requestId: 'request-42' }, async () => {
 `AsyncMemoryStore` es local al proceso e indica de forma explícita sus
 capabilities; un store remoto debe declarar por separado su atomicidad y
 consistencia. El subpath `/node` requiere Node 20+ y usa `AsyncLocalStorage`;
-no lo importes en clientes de navegador. Consulta [la arquitectura de stores y Node](./docs/architecture/phase-8-store-node.md)
-para los límites de TTL, locks y distribución.
+no lo importes en clientes de navegador. Consulta la [guía de stores y Node](./website/docs/guides/store-node.md)
+para los límites de TTL y distribución.
 
 ## Ejemplos destacados
 

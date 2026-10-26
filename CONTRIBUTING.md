@@ -119,4 +119,15 @@ Behavior changes should include unit tests. Type-level API changes should includ
 Publishing is protected by `prepublishOnly`, which runs tests, typechecking,
 linting, and the dist smoke checks before npm can publish the package.
 
-See `docs/RELEASE.md` for the release checklist.
+Releases are published manually from a local checkout:
+
+```bash
+npm run version         # consume changesets, bump version, update CHANGELOG.md
+git commit -am "chore(release): vX.Y.Z"
+npm login
+npm run release         # changeset publish: runs prepublishOnly, publishes, tags
+git push --follow-tags
+```
+
+Review the generated `CHANGELOG.md` before publishing: a published version can
+never be republished.
