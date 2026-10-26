@@ -34,6 +34,10 @@ interface SharedReservation<Result> {
   resolve(value: Result | PromiseLike<Result>): void;
 }
 
+/**
+ * Error lanzado cuando una invocación se descarta por solapamiento
+ * en modo `'drop'`.
+ */
 export class OverlapDroppedError extends PolicyError {
   readonly key: PropertyKey;
 
@@ -48,6 +52,10 @@ export class OverlapDroppedError extends PolicyError {
   }
 }
 
+/**
+ * Error lanzado cuando la cola de espera de un solapamiento alcanza
+ * su límite configurado en modo `'queue'`.
+ */
 export class OverlapQueueFullError extends PolicyError {
   readonly key: PropertyKey;
 
@@ -148,6 +156,23 @@ function resolveKey<This, Args extends readonly unknown[]>(
   return context?.key ?? options.key(createKeyContext(receiver, args, context));
 }
 
+/**
+ * Controla invocaciones superpuestas por clave resuelta en tiempo de ejecución.
+ * En modo `'drop'` descarta las nuevas; en `'share'` devuelve el resultado activo;
+ * en `'queue'` espera en FIFO.
+ *
+ * @param options configuración con `mode`, `key` para particionar estado, y `maxQueue` opcional.
+ * @returns operador que coordina superpposiciones por clave.
+ *
+ * @example
+ * ```ts
+ * const op = overlap({
+ *   mode: 'queue',
+ *   key: (ctx) => ctx.receiver.constructor.name,
+ *   maxQueue: 10,
+ * });
+ * ```
+ */
 export function overlap<This, Args extends readonly unknown[], Result>(
   options: OverlapOptions<This, Args>,
 ): Operator<This, Args, Result, Result> {

@@ -1,7 +1,7 @@
 /**
  * Limita a `maxConcurrent` las ejecuciones simultáneas del método asíncrono
  * en la misma instancia (patrón Bulkhead); las llamadas que exceden el
- * límite esperan en cola FIFO. Generaliza @Mutex (que equivale a
+ * límite esperan en cola FIFO. Generaliza `@Mutex` (que equivale a
  * Semaphore(1)). Un fallo libera el hueco con normalidad.
  *
  * @example

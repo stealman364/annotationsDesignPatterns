@@ -1,3 +1,7 @@
+/**
+ * Interfaz de un comando reversible (patrón Command).
+ * La ejecución se realiza en `execute` y la reversión en `undo`.
+ */
 export interface Command {
   execute(): void;
   undo(): void;

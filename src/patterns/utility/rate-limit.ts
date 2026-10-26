@@ -2,7 +2,7 @@
  * Limita el método a `maxCalls` ejecuciones por ventana deslizante de
  * `windowMs` milisegundos, por instancia. Las llamadas que exceden el
  * límite se descartan en silencio. El método debe devolver `void`.
- * Generalización de @Throttle (que equivale a RateLimit(1, intervalo)).
+ * Generalización de `@Throttle` (que equivale a RateLimit(1, intervalo)).
  *
  * @example
  * ```ts

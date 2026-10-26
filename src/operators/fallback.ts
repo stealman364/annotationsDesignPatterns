@@ -18,6 +18,13 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   }
 }
 
+/**
+ * Operador de respaldo: si el método falla, devuelve un valor de respaldo
+ * (directo o generado por una función que recibe el error y los argumentos).
+ *
+ * @param value respaldo directo o función `(error, ...args) => valor | Promise<valor>`.
+ * @returns operador que proporciona el respaldo ante cualquier error.
+ */
 export function fallback<This, Args extends readonly unknown[], Result>(
   value: FallbackValue<Args, Result>,
 ): Operator<This, Args, Result, Result> {

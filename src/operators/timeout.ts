@@ -67,6 +67,16 @@ function createAbortScope(signals: readonly (AbortSignal | undefined)[]): AbortS
   };
 }
 
+/**
+ * Operador de límite de tiempo: si el método no resuelve en `milliseconds` ms,
+ * rechaza con error. El método original sigue ejecutándose, pero su resultado
+ * se descarta. Personalizable con `createTimeoutError` y cancelable con `signal`.
+ *
+ * @param milliseconds límite de tiempo en milisegundos.
+ * @param createTimeoutError personalizador del error lanzado al expirar el tiempo.
+ * @param options señal opcional para cancelar el límite antes del vencimiento.
+ * @returns operador que gestiona el límite de tiempo.
+ */
 export function timeout<This, Args extends readonly unknown[], Result>(
   milliseconds: number,
   createTimeoutError: () => Error = () => new TimeoutError(milliseconds),

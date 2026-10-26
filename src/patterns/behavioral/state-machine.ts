@@ -36,7 +36,7 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
  * Guarda de estado: el método solo puede llamarse cuando la máquina está
  * en alguno de los estados permitidos; en otro caso lanza `Error` y el
  * método no se ejecuta. Colócalo como decorador MÁS EXTERNO (encima de
- * @TransitionTo) para que la guarda se evalúe primero.
+ * `@TransitionTo`) para que la guarda se evalúe primero.
  *
  * @example
  * ```ts
@@ -71,7 +71,7 @@ export function When(...allowed: string[]) {
  * Tras ejecutar el método con éxito, transiciona la máquina al estado
  * indicado. Si el método lanza, el estado no cambia.
  *
- * @example ver @When
+ * @example ver `@When` para el decorador de guarda.
  */
 export function TransitionTo(next: string) {
   return function <This extends StateMachine<string>, Args extends unknown[], Return>(

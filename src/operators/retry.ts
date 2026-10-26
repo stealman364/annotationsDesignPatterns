@@ -4,7 +4,10 @@ import { withoutContext, type ContextualOperator } from '../core/contextual-oper
 import type { Operator } from '../core/operator';
 import type { AnyMethod, MaybePromise } from '../core/types';
 
-export interface RetryInvocationContext<This, Args extends readonly unknown[]> {
+/**
+ * Contexto de una invocación reintentada (interno).
+ */
+interface RetryInvocationContext<This, Args extends readonly unknown[]> {
   readonly receiver: This;
   readonly args: Args;
   readonly operationId?: string;
@@ -102,6 +105,14 @@ export function normalizeRetryOptions<
   return { attempts, delayMs, backoffFactor, shouldRetry };
 }
 
+/**
+ * Operador de reintentos: re-ejecuta el método si lanza o rechaza,
+ * hasta agotar los intentos. Con `backoffFactor`, la espera crece
+ * exponencialmente. Personalizable con `shouldRetry`.
+ *
+ * @param options configuración con `attempts`, `delayMs`, `backoffFactor`, y `shouldRetry` opcional.
+ * @returns operador que reintentar según la configuración.
+ */
 export function retry<This, Args extends readonly unknown[], Result>(
   options: RetryOptions<This, Args>,
 ): Operator<This, Args, Result, Result> {

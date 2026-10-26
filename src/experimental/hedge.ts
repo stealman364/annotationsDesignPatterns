@@ -28,6 +28,15 @@ function assertOptions(options: HedgeOptions): void {
   }
 }
 
+/**
+ * Experimental operador "hedging" (cobertura): tras `delayMs` ms,
+ * inicia una llamada secundaria en paralelo. Devuelve el resultado del
+ * primero que se resuelva con éxito; si ambos fallan, rechaza con el último error.
+ * El método debe ser idempotente. ADVERTENCIA: es experimental y puede cambiar.
+ *
+ * @param options configuración con `delayMs` (espera antes del hedge) e `idempotent: true`.
+ * @returns operador que aplica la estrategia de hedging.
+ */
 export function hedge<This, Args extends readonly unknown[], Result>(
   options: HedgeOptions,
 ): Operator<This, Args, Result, Result> {

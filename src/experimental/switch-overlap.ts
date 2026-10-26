@@ -18,7 +18,10 @@ export interface SwitchOverlapOptions<This, Args extends readonly unknown[]> {
   readonly key: (context: SwitchOverlapKeyContext<This, Args>) => PropertyKey;
 }
 
-/** The consumer-facing result of an invocation that a newer call superseded. */
+/**
+ * Error lanzado cuando una invocación es superada por una llamada más reciente
+ * en el mismo solapamiento (experimental).
+ */
 export class OverlapSupersededError extends PolicyError {
   readonly key: PropertyKey;
 
@@ -86,8 +89,13 @@ function assertOptions<This, Args extends readonly unknown[]>(
 }
 
 /**
- * Experimental latest-wins coordination. Superseding a call rejects its
- * consumer immediately, but it cannot cancel the underlying work on its own.
+ * Experimental operador de solapamiento "gana-el-último": cuando llega una llamada
+ * nueva en la misma clave, rechaza inmediatamente la anterior con
+ * `OverlapSupersededError`. El trabajo anterior sigue ejecutándose (no puede cancelarse
+ * en JavaScript puro). ADVERTENCIA: es experimental y puede cambiar.
+ *
+ * @param options configuración con `key` para particionar estado.
+ * @returns operador que aplica la estrategia experimental de gana-el-último.
  */
 export function switchOverlap<This, Args extends readonly unknown[], Result>(
   options: SwitchOverlapOptions<This, Args>,

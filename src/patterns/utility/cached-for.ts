@@ -12,14 +12,14 @@ export interface CachedForOptions {
 }
 
 /**
- * Como @Memoize pero con caducidad: cachea el resultado por combinación de
+ * Como `@Memoize` pero con caducidad: cachea el resultado por combinación de
  * argumentos y por instancia durante `ttlMs` milisegundos; después vuelve a
  * ejecutar el método.
  * Por compatibilidad, el TTL comienza al invocar el método incluso cuando el
  * resultado es una Promise pendiente.
  *
  * La clave por defecto es `JSON.stringify(args)` y comparte las limitaciones
- * de @Memoize (circulares lanzan, funciones/`Symbol` colisionan, el orden de
+ * de `@Memoize` (circulares lanzan, funciones/`Symbol` colisionan, el orden de
  * propiedades genera claves distintas); para esos casos aporta tu propio
  * resolver con la opción `key`.
  *

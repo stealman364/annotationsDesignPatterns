@@ -1,12 +1,28 @@
+# Plain output: VS Code's Git log does not render ANSI colors or the meta box.
+colors: false
+output:
+  - execution_out
+  - failure
+
 pre-commit:
   parallel: true
   commands:
     format:
       glob: '*.{ts,js,cjs,mjs,json}'
-      run: npx prettier --check {staged_files}
+      exclude:
+        - 'website/**'
+      env:
+        NO_COLOR: '1'
+      run: npx prettier --write --log-level warn {staged_files}
+      stage_fixed: true
     lint:
       glob: '*.ts'
+      exclude:
+        - 'website/**'
+      env:
+        NO_COLOR: '1'
       run: npx eslint {staged_files}
+      fail_text: 'ESLint found errors. Fix them (npm run lint) and commit again.'
 
 pre-push:
   parallel: false
@@ -21,4 +37,10 @@ pre-push:
 commit-msg:
   commands:
     commitlint:
+      env:
+        NO_COLOR: '1'
       run: npx commitlint --edit {1}
+      fail_text: >-
+        Invalid commit message. Expected "type(scope): description"
+        (types: feat, fix, docs, chore, refactor, test...),
+        header and body lines up to 100 characters.

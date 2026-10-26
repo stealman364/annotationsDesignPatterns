@@ -21,6 +21,9 @@ export class InjectionToken<T> {
 /** Un token es una clase (se resuelve a su instancia) o un InjectionToken. */
 export type Token<T> = InjectionToken<T> | (new () => T);
 
+/**
+ * Tipo interno: proveedor de una dependencia.
+ */
 type Provider<T> =
   | { useValue: T }
   | { useFactory: () => T; scope?: Scope }
@@ -44,7 +47,7 @@ function describeToken(token: unknown): string {
 /**
  * Contenedor de inyección de dependencias 100 % TC39 (sin
  * `experimentalDecorators` ni `reflect-metadata`). Las dependencias se
- * inyectan por CAMPOS con @Inject; las clases se registran con @Injectable
+ * inyectan por CAMPOS con `@Inject`; las clases se registran con `@Injectable`
  * o manualmente con `register`.
  *
  * Detecta ciclos de resolución (por ejemplo, A inyecta B y B inyecta A) y
@@ -148,7 +151,7 @@ export function Injectable(container: Container, options: { scope?: Scope } = {}
 /**
  * Decorador de CAMPO: al construir cada instancia, el campo se inicializa
  * resolviendo el token en el contenedor (resolución eager). Funciona tanto
- * en clases registradas con @Injectable como en clases instanciadas a mano.
+ * en clases registradas con `@Injectable` como en clases instanciadas a mano.
  *
  * @example ver Container
  */

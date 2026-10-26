@@ -24,7 +24,7 @@ class ApiClient {
 - **Tipado estricto** — con tests de tipos (`expectTypeOf`) además de los de comportamiento (446 tests); quedan `any` acotados en decoradores no modificados.
 - **34 símbolos públicos**: 14 patrones GoF + resiliencia + utilidades.
 
-> ¿Actualizas desde 1.x? Consulta la [guía de migración a 2.0](./docs/migration-2.0.md): `@TransitionTo` asíncrono, aislamiento de caches en herencia y el nuevo error de ciclos de DI cambian comportamientos observables.
+> ¿Actualizas desde 1.x? Consulta la [guía de migración a 2.0](./website/docs/migration/2.0.md): `@TransitionTo` asíncrono, aislamiento de caches en herencia y el nuevo error de ciclos de DI cambian comportamientos observables.
 
 ## Requisitos
 

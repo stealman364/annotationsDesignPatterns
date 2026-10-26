@@ -11,6 +11,31 @@ export interface RunOptions {
   readonly signal?: AbortSignal;
 }
 
+/**
+ * Invoca un método con contexto de operación: operationId, metadata, observabilidad
+ * de eventos y señal de aborto. Sin opciones, es una invocación directa.
+ *
+ * @param receiver instancia sobre la que invocar el método.
+ * @param args argumentos del método.
+ * @param method función a invocar.
+ * @param options contexto de ejecución (operationId, metadata, observabilidad, cancelación).
+ * @returns resultado del método o su promesa.
+ *
+ * @example
+ * ```ts
+ * const service = new UserService();
+ * const user = await run(
+ *   service,
+ *   ['123'],
+ *   service.fetchUser,
+ *   {
+ *     operationId: 'fetch-user-x',
+ *     metadata: { userId: '123' },
+ *     eventSink: logger,
+ *   },
+ * );
+ * ```
+ */
 export function run<This, Args extends readonly unknown[], Result>(
   receiver: This,
   args: Args,

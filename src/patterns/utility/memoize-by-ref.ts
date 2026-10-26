@@ -14,7 +14,7 @@ function isObjectLike(value: unknown): value is object {
 }
 
 /**
- * Como @Memoize pero comparando los argumentos por IDENTIDAD (referencia),
+ * Como `@Memoize` pero comparando los argumentos por IDENTIDAD (referencia),
  * sin serialización: cada nivel de un trie interno indexa un argumento —
  * los primitivos en un `Map` (SameValueZero: `NaN` funciona) y los
  * objetos/funciones en un `WeakMap`, de modo que las entradas se liberan

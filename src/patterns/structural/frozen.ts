@@ -1,7 +1,7 @@
 /**
  * Congela (`Object.freeze`) cada instancia inmediatamente después de
  * construirla: las propiedades no pueden modificarse ni añadirse.
- * Nota: no uses @Frozen en clases pensadas para ser extendidas, porque
+ * Nota: no uses `@Frozen` en clases pensadas para ser extendidas, porque
  * las subclases no podrán inicializar sus propios campos.
  *
  * @example

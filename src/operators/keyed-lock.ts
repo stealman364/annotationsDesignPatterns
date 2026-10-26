@@ -20,6 +20,10 @@ export interface KeyedLockOptions<This, Args extends readonly unknown[]> {
   readonly maxQueue?: number;
 }
 
+/**
+ * Error lanzado cuando la cola de espera de un candado con clave
+ * alcanza su límite configurado.
+ */
 export class KeyedLockQueueFullError extends PolicyError {
   readonly key: PropertyKey;
 

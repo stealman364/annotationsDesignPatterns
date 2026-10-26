@@ -1,3 +1,6 @@
+/**
+ * Tipo interno de los métodos fluidos del builder.
+ */
 type BuilderMethods<T> = {
   [K in keyof T & string as `with${Capitalize<K>}`]-?: (value: T[K]) => Builder<T>;
 };

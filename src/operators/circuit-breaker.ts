@@ -59,6 +59,15 @@ export function validateCircuitBreakerOptions(options: CircuitBreakerOptions): v
   normalizeCircuitBreakerOptions(options);
 }
 
+/**
+ * Operador de disjuntor (circuit breaker): tras `failures` fallos
+ * consecutivos, rechaza durante `resetMs` ms. Luego intenta con una llamada
+ * de prueba; si tiene éxito, cierra el circuito; si falla, lo vuelve a abrir.
+ *
+ * @param options configuración con `failures` y `resetMs`.
+ * @param createOpenError personalizador del error lanzado cuando el circuito está abierto.
+ * @returns operador que gestiona el estado del circuito.
+ */
 export function circuitBreaker<This, Args extends readonly unknown[], Result>(
   options: CircuitBreakerOptions,
   createOpenError: () => Error = () => new CircuitBreakerOpenError(),

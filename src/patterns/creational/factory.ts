@@ -1,3 +1,6 @@
+/**
+ * Tipo interno: constructor de una clase base.
+ */
 type Ctor<Base> = new (...args: any[]) => Base;
 
 /**
