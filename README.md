@@ -2,6 +2,8 @@
 
 **Patrones de diseño como decoradores TypeScript estándar (TC39) y como funciones componibles.** Los patrones GoF clásicos, inyección de dependencias, un toolkit de resiliencia completo y utilidades de método.
 
+📖 **[Documentación completa](https://stealman364.github.io/annotationsDesignPatterns/)**: guías, referencia de API y migración a 2.0 ([English](https://stealman364.github.io/annotationsDesignPatterns/en/)).
+
 Se puede usar de dos formas:
 
 - **Con anotaciones (decoradores)** sobre clases y métodos:
