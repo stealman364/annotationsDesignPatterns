@@ -19,7 +19,7 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
  * payload: `class Service extends Subject<{ 'user:created': User }>`.
  * Sin genérico, los payloads son `unknown` (comportamiento original).
  */
-export class Subject<Events extends Record<string, unknown> = Record<string, unknown>> {
+export class Subject<Events extends object = Record<string, unknown>> {
   #listeners = new Map<string, Set<Listener>>();
 
   /** Suscribe un listener al evento. Devuelve la función para desuscribirse. */
@@ -35,9 +35,14 @@ export class Subject<Events extends Record<string, unknown> = Record<string, unk
     };
   }
 
-  /** Notifica a todos los listeners del evento. */
+  /** Notifica, en orden, a los listeners presentes al empezar esta emisión. */
   emit<K extends keyof Events & string>(event: K, payload: Events[K]): void {
-    this.#listeners.get(event)?.forEach((listener) => listener(payload));
+    const listeners = this.#listeners.get(event);
+    if (listeners !== undefined) {
+      for (const listener of [...listeners]) {
+        listener(payload);
+      }
+    }
   }
 }
 
@@ -47,6 +52,8 @@ export class Subject<Events extends Record<string, unknown> = Record<string, unk
  * Si el método lanza, no se emite nada.
  * Si el método devuelve una `Promise`, el evento se emite con el valor resuelto;
  * si la promesa rechaza, no se emite nada.
+ * En un Subject tipado, el nombre y el valor resuelto deben coincidir con
+ * el contrato de `emit` de la clase.
  *
  * @example
  * ```ts
@@ -56,10 +63,13 @@ export class Subject<Events extends Record<string, unknown> = Record<string, unk
  * }
  * ```
  */
-export function Emits(event: string) {
+export function Emits<Event extends string>(event: Event) {
   return function <This extends Subject<Record<string, unknown>>, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,
-    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>,
+    context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> &
+      // Check the concrete generic emit method directly: inferring its event
+      // map through Subject<infer Events> would lose the key/payload relation.
+      (This['emit'] extends (event: Event, payload: Awaited<Return>) => void ? unknown : never),
   ): (this: This, ...args: Args) => Return {
     if (context.kind !== 'method') {
       throw new TypeError('@Emits solo puede aplicarse a un método');

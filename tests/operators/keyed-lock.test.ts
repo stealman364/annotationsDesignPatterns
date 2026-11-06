@@ -3,6 +3,8 @@ import type { EventSink, PolicyEvent } from '../../src/core/events';
 import type { AnyMethod, Operator } from '../../src/public/types';
 import { pipe } from '../../src/public/pipe';
 import { run } from '../../src/public/run';
+import { createOperationContext } from '../../src/core/context';
+import { invokeWithContext } from '../../src/core/invocation';
 import { TimeoutError, timeout } from '../../src/operators/timeout';
 import {
   keyedLock,
@@ -393,13 +395,15 @@ describe('keyedLock operator', () => {
     });
     const waiting = run(receiver, ['waiting'] as const, operation, { key: 'account' });
 
-    controller.abort(new Error('caller stopped waiting'));
-    await Promise.resolve();
+    const reason = new Error('caller stopped waiting');
+    const assertion = expect(holder).rejects.toBe(reason);
+    controller.abort(reason);
+    await assertion;
 
     expect(starts).toEqual(['active']);
 
     active.resolve('active complete');
-    await expect(holder).resolves.toBe('active complete');
+    await Promise.resolve();
     expect(starts).toEqual(['active', 'waiting']);
 
     queued.resolve('waiting complete');
@@ -421,10 +425,15 @@ describe('keyedLock operator', () => {
 
     controller.abort(reason);
 
-    const rejected = run(receiver, ['cancelled'] as const, operation, {
-      key: 'account',
-      signal: controller.signal,
-    });
+    const rejected = invokeWithContext(
+      receiver,
+      ['cancelled'] as const,
+      operation,
+      createOperationContext(receiver, ['cancelled'] as const, {
+        key: 'account',
+        signal: controller.signal,
+      }),
+    );
 
     await expect(rejected).rejects.toBe(reason);
     expect(calls).toBe(0);

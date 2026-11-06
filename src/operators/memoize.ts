@@ -1,4 +1,6 @@
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
+import { raceWithSignal, sharedContext } from '../core/cancellation';
+import { assertObjectReceiver } from '../core/receiver';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import type { Operator } from '../core/operator';
@@ -7,6 +9,8 @@ import { CacheHandleStore, type CacheHandle } from './cache-handle';
 
 export interface MemoizeOperatorOptions<Args extends readonly unknown[]> {
   readonly key?: (...args: Args) => string;
+  /** Isolate entries by object/function receiver identity. Opt-in, without handles. */
+  readonly perReceiver?: boolean;
 }
 
 export interface MemoizeWithHandle<This, Args extends readonly unknown[], Result> {
@@ -28,24 +32,42 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
 function createWrapper<This, Args extends readonly unknown[], Result>(
   next: ContextualMethod<This, Args, Result>,
   options: MemoizeOperatorOptions<Args>,
-  cache: CacheHandleStore<MaybePromise<Result>>,
+  sharedCache: CacheHandleStore<MaybePromise<Result>>,
 ): ContextualMethod<This, Args, Result> {
   const key = options.key ?? ((...args: Args) => JSON.stringify(args));
+  const receiverCaches =
+    options.perReceiver === true
+      ? new WeakMap<object, CacheHandleStore<MaybePromise<Result>>>()
+      : undefined;
 
   return function (
     this: This,
     context: RuntimeOperationContext<This, Args> | undefined,
     ...args: Args
   ): MaybePromise<Result> {
+    if (context?.signal !== undefined && Boolean(context.signal.aborted))
+      return Promise.reject(context.signal.reason);
+    let cache = sharedCache;
+    if (receiverCaches !== undefined) {
+      assertObjectReceiver(this, 'memoize perReceiver');
+      let receiverCache = receiverCaches.get(this);
+      if (receiverCache === undefined) {
+        receiverCache = new CacheHandleStore<MaybePromise<Result>>('memoize');
+        receiverCaches.set(this, receiverCache);
+      }
+      cache = receiverCache;
+    }
     const cacheKey = key(...args);
     const cached = cache.get(cacheKey);
     if (cached !== undefined) {
       emitPolicyEvent(context, 'memoize', 'cache.hit', {});
-      return cached.value;
+      return raceWithSignal(cached.value, context?.signal);
     }
 
     emitPolicyEvent(context, 'memoize', 'cache.miss', {});
-    const result = next.call(this, context, ...args);
+    if (context?.signal !== undefined && Boolean(context.signal.aborted))
+      return Promise.reject(context.signal.reason);
+    const result = next.call(this, sharedContext(context), ...args);
     const replacement = cache.set(cacheKey, result, context);
     if (isPromiseLike(result)) {
       void Promise.resolve(result).catch((error: unknown) => {
@@ -54,14 +76,22 @@ function createWrapper<This, Args extends readonly unknown[], Result>(
         }
       });
     }
-    return result;
+    return raceWithSignal(result, context?.signal);
   };
 }
 
 function createMemoizeOperator<This, Args extends readonly unknown[], Result>(
   options: MemoizeOperatorOptions<Args>,
   createCache: () => CacheHandleStore<MaybePromise<Result>>,
+  withHandle = false,
 ): Operator<This, Args, Result, Result> {
+  const perReceiver = options.perReceiver;
+  if (perReceiver !== undefined && typeof perReceiver !== 'boolean') {
+    throw new TypeError('memoize requires perReceiver to be a boolean');
+  }
+  if (withHandle && perReceiver === true) {
+    throw new TypeError('memoizeWithHandle does not support perReceiver');
+  }
   const operator: ContextualOperator<This, Args, Result, Result> = {
     name: 'memoize',
     apply(next: AnyMethod<This, Args, Result>): AnyMethod<This, Args, Result> {
@@ -69,7 +99,7 @@ function createMemoizeOperator<This, Args extends readonly unknown[], Result>(
         function (this: This, _context, ...args: Args): MaybePromise<Result> {
           return next.call(this, ...args);
         },
-        options,
+        { key: options.key, perReceiver },
         createCache(),
       );
       return withoutContext(wrapper);
@@ -77,7 +107,7 @@ function createMemoizeOperator<This, Args extends readonly unknown[], Result>(
     applyWithContext(
       next: ContextualMethod<This, Args, Result>,
     ): ContextualMethod<This, Args, Result> {
-      return createWrapper(next, options, createCache());
+      return createWrapper(next, { key: options.key, perReceiver }, createCache());
     },
   };
 
@@ -99,11 +129,11 @@ export function memoize<This, Args extends readonly unknown[], Result>(
  * The cache is shared by applications of this returned operator only.
  */
 export function memoizeWithHandle<This, Args extends readonly unknown[], Result>(
-  options: MemoizeOperatorOptions<Args> = {},
+  options: Omit<MemoizeOperatorOptions<Args>, 'perReceiver'> = {},
 ): MemoizeWithHandle<This, Args, Result> {
   const cache = new CacheHandleStore<MaybePromise<Result>>('memoize');
   return Object.freeze({
     handle: cache.handle,
-    operator: createMemoizeOperator(options, () => cache),
+    operator: createMemoizeOperator(options, () => cache, true),
   });
 }

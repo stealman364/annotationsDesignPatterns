@@ -1,3 +1,5 @@
+import { assertObjectReceiver } from '../../core/receiver';
+import { isDuration } from '../../core/numeric';
 /**
  * Limita la frecuencia de ejecución: la primera llamada se ejecuta
  * inmediatamente y las siguientes se descartan hasta que pasen
@@ -12,7 +14,7 @@
  * ```
  */
 export function Throttle(intervalMs: number) {
-  if (intervalMs <= 0) {
+  if (!isDuration(intervalMs, false)) {
     throw new RangeError('@Throttle requiere un intervalo mayor que 0 ms');
   }
   return function <This, Args extends unknown[]>(
@@ -24,13 +26,13 @@ export function Throttle(intervalMs: number) {
     }
     const lastRun = new WeakMap<object, number>();
     return function (this: This, ...args: Args): void {
-      const self = this as object;
+      assertObjectReceiver(this, '@Throttle');
       const now = Date.now();
-      const previous = lastRun.get(self);
+      const previous = lastRun.get(this);
       if (previous !== undefined && now - previous < intervalMs) {
         return;
       }
-      lastRun.set(self, now);
+      lastRun.set(this, now);
       target.call(this, ...args);
     };
   };

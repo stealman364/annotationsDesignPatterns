@@ -1,3 +1,4 @@
+import { isTtl } from '../../core/numeric';
 import { cachedFor } from '../../operators/cached-for';
 import { adaptOperator } from '../../decorators/adapters';
 import type { KeyResolver } from './memoize';
@@ -35,7 +36,7 @@ export interface CachedForOptions {
  * ```
  */
 export function CachedFor(ttlMs: number, options: CachedForOptions = {}) {
-  if (ttlMs <= 0) {
+  if (!isTtl(ttlMs, false)) {
     throw new RangeError('@CachedFor requiere un TTL mayor que 0 ms');
   }
   return function <This extends object, Args extends unknown[], Return>(

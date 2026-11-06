@@ -1,3 +1,4 @@
+import { isTimerDelay } from '../core/numeric';
 import type { AsyncStore, StoreCapabilities, StoreEntryOptions } from '../core/store';
 
 export type RemoteStoreOperation = 'get' | 'has' | 'set' | 'delete' | 'clear';
@@ -36,7 +37,7 @@ function validateOptions(options: RemoteAsyncStoreOptions): number | undefined {
   if (options.timeoutMs === undefined) {
     return undefined;
   }
-  if (!Number.isFinite(options.timeoutMs) || options.timeoutMs < 0) {
+  if (!isTimerDelay(options.timeoutMs, true)) {
     throw new RangeError('RemoteAsyncStore timeoutMs must be a finite, non-negative number');
   }
   return options.timeoutMs;

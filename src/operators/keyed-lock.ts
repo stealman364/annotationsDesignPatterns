@@ -1,3 +1,4 @@
+import { isCount } from '../core/numeric';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
@@ -83,10 +84,7 @@ function normalizeOptions<This, Args extends readonly unknown[]>(
   if (typeof options.key !== 'function') {
     throw new TypeError('keyedLock requires a key resolver');
   }
-  if (
-    options.maxQueue !== undefined &&
-    (!Number.isInteger(options.maxQueue) || options.maxQueue < 0)
-  ) {
+  if (options.maxQueue !== undefined && !isCount(options.maxQueue, 0)) {
     throw new RangeError('keyedLock requires maxQueue to be a non-negative integer');
   }
 

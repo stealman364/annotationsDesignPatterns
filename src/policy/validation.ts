@@ -1,10 +1,19 @@
+import { isBackoffFactor, isCount, isDuration, isTimerDelay } from '../core/numeric';
 import { PolicyError } from '../core/errors';
 import { isPolicyLayer, POLICY_LAYERS } from './default-order';
 
 const policyConfigKeys = ['fallback', 'circuitBreaker', 'retry', 'timeout', 'order'] as const;
 const fallbackKeys = ['value'] as const;
-const circuitBreakerKeys = ['failures', 'resetMs'] as const;
-const retryKeys = ['attempts', 'delayMs', 'backoffFactor', 'idempotent', 'shouldRetry'] as const;
+const circuitBreakerKeys = ['failures', 'resetMs', 'isFailure'] as const;
+const retryKeys = [
+  'attempts',
+  'delayMs',
+  'backoffFactor',
+  'maxDelayMs',
+  'jitter',
+  'idempotent',
+  'shouldRetry',
+] as const;
 const timeoutKeys = ['ms', 'scope', 'abortSignal'] as const;
 
 type PolicyConfigKey = (typeof policyConfigKeys)[number];
@@ -39,21 +48,6 @@ function assertKnownKeys(
   }
 }
 
-function assertFiniteNumber(
-  value: unknown,
-  path: string,
-  minimum: number,
-  inclusive: boolean,
-): void {
-  if (
-    typeof value !== 'number' ||
-    !Number.isFinite(value) ||
-    (inclusive ? value < minimum : value <= minimum)
-  ) {
-    throw new InvalidPolicyError(path);
-  }
-}
-
 function validateFallback(value: unknown, requireComplete: boolean): void {
   if (value === false || value === undefined) {
     return;
@@ -82,10 +76,13 @@ function validateCircuitBreaker(value: unknown, requireComplete: boolean): void 
     throw new InvalidPolicyError('circuitBreaker.resetMs');
   }
   if (value.failures !== undefined) {
-    assertFiniteNumber(value.failures, 'circuitBreaker.failures', 1, true);
+    if (!isCount(value.failures, 1)) throw new InvalidPolicyError('circuitBreaker.failures');
   }
   if (value.resetMs !== undefined) {
-    assertFiniteNumber(value.resetMs, 'circuitBreaker.resetMs', 0, false);
+    if (!isDuration(value.resetMs, false)) throw new InvalidPolicyError('circuitBreaker.resetMs');
+  }
+  if (value.isFailure !== undefined && typeof value.isFailure !== 'function') {
+    throw new InvalidPolicyError('circuitBreaker.isFailure');
   }
 }
 
@@ -101,7 +98,7 @@ function validateRetry(value: unknown, requireComplete: boolean): void {
     throw new InvalidPolicyError('retry.attempts');
   }
   if (value.attempts !== undefined) {
-    assertFiniteNumber(value.attempts, 'retry.attempts', 1, true);
+    if (!isCount(value.attempts, 1)) throw new InvalidPolicyError('retry.attempts');
   }
   if (requireComplete && value.idempotent !== true) {
     throw new InvalidPolicyError('retry.idempotent');
@@ -110,10 +107,21 @@ function validateRetry(value: unknown, requireComplete: boolean): void {
     throw new InvalidPolicyError('retry.idempotent');
   }
   if (value.delayMs !== undefined) {
-    assertFiniteNumber(value.delayMs, 'retry.delayMs', 0, true);
+    if (!isTimerDelay(value.delayMs, true)) throw new InvalidPolicyError('retry.delayMs');
   }
   if (value.backoffFactor !== undefined) {
-    assertFiniteNumber(value.backoffFactor, 'retry.backoffFactor', 1, true);
+    if (!isBackoffFactor(value.backoffFactor)) throw new InvalidPolicyError('retry.backoffFactor');
+  }
+  if (value.maxDelayMs !== undefined && !isTimerDelay(value.maxDelayMs, true)) {
+    throw new InvalidPolicyError('retry.maxDelayMs');
+  }
+  if (
+    value.jitter !== undefined &&
+    value.jitter !== 'none' &&
+    value.jitter !== 'full' &&
+    value.jitter !== 'equal'
+  ) {
+    throw new InvalidPolicyError('retry.jitter');
   }
   if (value.shouldRetry !== undefined && typeof value.shouldRetry !== 'function') {
     throw new InvalidPolicyError('retry.shouldRetry');
@@ -141,7 +149,7 @@ function validateTimeout(value: unknown, requireComplete: boolean): void {
     throw new InvalidPolicyError('timeout.ms');
   }
   if (value.ms !== undefined) {
-    assertFiniteNumber(value.ms, 'timeout.ms', 0, false);
+    if (!isTimerDelay(value.ms, false)) throw new InvalidPolicyError('timeout.ms');
   }
   if (value.scope !== undefined && value.scope !== 'perAttempt' && value.scope !== 'global') {
     throw new InvalidPolicyError('timeout.scope');
@@ -191,15 +199,4 @@ export function validatePolicyConfig(config: unknown): void {
   validateCircuitBreaker(record.circuitBreaker, true);
   validateRetry(record.retry, true);
   validateTimeout(record.timeout, true);
-
-  const retryEnabled = record.retry !== false && record.retry !== undefined;
-  const timeout = record.timeout;
-  if (
-    retryEnabled &&
-    isRecord(timeout) &&
-    timeout.scope === 'global' &&
-    !isAbortSignal(timeout.abortSignal)
-  ) {
-    throw new InvalidPolicyError('timeout.abortSignal');
-  }
 }

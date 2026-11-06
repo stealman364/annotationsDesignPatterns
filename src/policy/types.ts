@@ -1,5 +1,6 @@
 import type { MaybePromise } from '../core/types';
 import type { Operator } from '../core/operator';
+import type { InvocationInfo } from '../core/invocation-info';
 
 /** Names of the built-in policy layers. */
 export type PolicyLayer = 'fallback' | 'circuitBreaker' | 'retry' | 'timeout';
@@ -17,9 +18,13 @@ export interface FallbackPolicyOptions<Args extends readonly unknown[], Result> 
   readonly value: Result | FallbackProvider<Args, Result>;
 }
 
-export interface CircuitBreakerPolicyOptions {
+export interface CircuitBreakerPolicyOptions<
+  This = unknown,
+  Args extends readonly unknown[] = readonly unknown[],
+> {
   readonly failures: number;
   readonly resetMs: number;
+  readonly isFailure?: (error: unknown, info: InvocationInfo<This, Args>) => boolean;
 }
 
 /** Context made available to a policy-level retry decision. */
@@ -36,6 +41,8 @@ export interface RetryPolicyOptions<This, Args extends readonly unknown[]> {
   readonly attempts: number;
   readonly delayMs?: number;
   readonly backoffFactor?: number;
+  readonly maxDelayMs?: number;
+  readonly jitter?: 'none' | 'full' | 'equal';
   /** Retry is opt-in only for operations explicitly declared idempotent. */
   readonly idempotent: true;
   readonly shouldRetry?: (
@@ -50,7 +57,7 @@ export type TimeoutScope = 'perAttempt' | 'global';
 export interface TimeoutPolicyOptions {
   readonly ms: number;
   readonly scope?: TimeoutScope;
-  /** Required for a global timeout combined with retry. */
+  /** Optional static signal; prefer a fresh signal per invocation through run(). */
   readonly abortSignal?: AbortSignal;
 }
 
@@ -62,7 +69,7 @@ export interface TimeoutPolicyOptions {
  */
 export interface PolicyConfig<Args extends readonly unknown[], Result, This = unknown> {
   readonly fallback?: false | Readonly<FallbackPolicyOptions<Args, Result>>;
-  readonly circuitBreaker?: false | Readonly<CircuitBreakerPolicyOptions>;
+  readonly circuitBreaker?: false | Readonly<CircuitBreakerPolicyOptions<This, Args>>;
   readonly retry?: false | Readonly<RetryPolicyOptions<This, Args>>;
   readonly timeout?: false | Readonly<TimeoutPolicyOptions>;
   readonly order?: PolicyOrder;
@@ -71,7 +78,7 @@ export interface PolicyConfig<Args extends readonly unknown[], Result, This = un
 /** Closed patch format used by `DefinedPolicy.extend()`. */
 export interface PolicyConfigExtension<Args extends readonly unknown[], Result, This = unknown> {
   readonly fallback?: false | Readonly<Partial<FallbackPolicyOptions<Args, Result>>>;
-  readonly circuitBreaker?: false | Readonly<Partial<CircuitBreakerPolicyOptions>>;
+  readonly circuitBreaker?: false | Readonly<Partial<CircuitBreakerPolicyOptions<This, Args>>>;
   readonly retry?: false | Readonly<Partial<RetryPolicyOptions<This, Args>>>;
   readonly timeout?: false | Readonly<Partial<TimeoutPolicyOptions>>;
   readonly order?: PolicyOrder;

@@ -1,3 +1,5 @@
+import { assertObjectReceiver } from '../../core/receiver';
+import { isCount, isDuration } from '../../core/numeric';
 /**
  * Limita el método a `maxCalls` ejecuciones por ventana deslizante de
  * `windowMs` milisegundos, por instancia. Las llamadas que exceden el
@@ -13,10 +15,10 @@
  * ```
  */
 export function RateLimit(maxCalls: number, windowMs: number) {
-  if (maxCalls < 1) {
+  if (!isCount(maxCalls, 1)) {
     throw new RangeError('@RateLimit requiere al menos 1 llamada por ventana');
   }
-  if (windowMs <= 0) {
+  if (!isDuration(windowMs, false)) {
     throw new RangeError('@RateLimit requiere una ventana mayor que 0 ms');
   }
   return function <This, Args extends unknown[]>(
@@ -28,15 +30,15 @@ export function RateLimit(maxCalls: number, windowMs: number) {
     }
     const timestamps = new WeakMap<object, number[]>();
     return function (this: This, ...args: Args): void {
-      const self = this as object;
+      assertObjectReceiver(this, '@RateLimit');
       const now = Date.now();
-      const recent = (timestamps.get(self) ?? []).filter((t) => now - t < windowMs);
+      const recent = (timestamps.get(this) ?? []).filter((t) => now - t < windowMs);
       if (recent.length >= maxCalls) {
-        timestamps.set(self, recent);
+        timestamps.set(this, recent);
         return;
       }
       recent.push(now);
-      timestamps.set(self, recent);
+      timestamps.set(this, recent);
       target.call(this, ...args);
     };
   };

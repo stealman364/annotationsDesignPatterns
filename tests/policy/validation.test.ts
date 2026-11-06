@@ -27,14 +27,13 @@ describe('validatePolicyConfig', () => {
     expectInvalid({ retry: { attempts: 2 } }, 'retry.idempotent');
   });
 
-  it('requires an abort signal for a global timeout composed with retry', () => {
-    expectInvalid(
-      {
+  it('allows a reusable global timeout composed with retry without a static signal', () => {
+    expect(() =>
+      validatePolicyConfig({
         retry: { attempts: 2, idempotent: true },
         timeout: { ms: 100, scope: 'global' },
-      },
-      'timeout.abortSignal',
-    );
+      }),
+    ).not.toThrow();
   });
 
   it('rejects an unknown custom order entry with an actionable path', () => {

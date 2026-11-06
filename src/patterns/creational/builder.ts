@@ -12,6 +12,10 @@ export type Builder<T> = BuilderMethods<T> & { build(): T };
  * Crea un builder fluido para una clase con constructor sin argumentos
  * (patrón Builder). Cada propiedad `foo` de la clase genera un método
  * `withFoo(valor)`; `build()` instancia la clase y aplica los valores.
+ * Los sufijos que empiezan con dos mayúsculas se conservan: `withURL`
+ * escribe `URL` y `withHTTPPort` escribe `HTTPPort`; `withName` escribe `name`.
+ * Esta regla es léxica: nombres ambiguos como `uRL` y `URL` comparten
+ * `withURL`, que siempre elige `URL`, sin inspeccionar el constructor.
  *
  * Es un helper y no un decorador `@Buildable` a propósito: los decoradores
  * TC39 no pueden añadir métodos estáticos al tipo de la clase, así que un
@@ -40,7 +44,8 @@ export function builderFor<T extends object>(ctor: new () => T): Builder<T> {
       }
       if (prop.startsWith('with') && prop.length > 4) {
         const head = prop[4] as string;
-        const key = head.toLowerCase() + prop.slice(5);
+        const suffix = prop.slice(4);
+        const key = /^[A-Z]{2}/.test(suffix) ? suffix : head.toLowerCase() + prop.slice(5);
         return (value: unknown): object => {
           values.set(key, value);
           return proxy;

@@ -1,0 +1,233 @@
+{
+  "baseline": "91f1142 / 2.0.0",
+  "current": "2.2.0-rc.0",
+  "entrypoints": 48,
+  "deltas": [
+    {
+      "name": "dist/index.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "Emits",
+          "before": "declare function Emits(event: string): <This extends Subject<Record<string, unknown>>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>) => (this: This, ...args: Args) => Return;",
+          "after": "declare function Emits<Event extends string>(event: Event): <This extends Subject<Record<string, unknown>>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> & (This[\"emit\"] extends (event: Event, payload: Awaited<Return>) => void ? unknown : never)) => (this: This, ...args: Args) => Return;"
+        },
+        {
+          "symbol": "Subject",
+          "before": "declare class Subject<Events extends Record<string, unknown> = Record<string, unknown>> { #private; /** Suscribe un listener al evento. Devuelve la función para desuscribirse. */ on<K extends keyof Events & string>(event: K, listener: Listener<Events[K]>): () => void; /** Notifica a todos los listeners del evento. */ emit<K extends keyof Events & string>(event: K, payload: Events[K]): void; }",
+          "after": "declare class Subject<Events extends object = Record<string, unknown>> { #private; /** Suscribe un listener al evento. Devuelve la función para desuscribirse. */ on<K extends keyof Events & string>(event: K, listener: Listener<Events[K]>): () => void; /** Notifica, en orden, a los listeners presentes al empezar esta emisión. */ emit<K extends keyof Events & string>(event: K, payload: Events[K]): void; }"
+        },
+        {
+          "symbol": "CommandHistory",
+          "before": "declare class CommandHistory { #private; /** Apunta un comando ya ejecutado. Normalmente lo llama @Revertible. */ push(command: Command): void; /** Deshace el último comando. Lanza si el historial está vacío. */ undoLast(): void; get size(): number; }",
+          "after": "declare class CommandHistory { #private; /** Apunta un comando ya ejecutado. Normalmente lo llama @Revertible. */ push(command: Command): void; /** Deshace el último comando de forma síncrona. Si undo lanza, conserva el comando. */ undoLast(): void; get size(): number; }"
+        },
+        {
+          "symbol": "TransitionTo",
+          "before": "declare function TransitionTo(next: string): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>) => (this: This, ...args: Args) => Return;",
+          "after": "declare function TransitionTo<const Next extends string>(next: Next): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> & ValidStates<Next, This['state']>) => (this: This, ...args: Args) => Return;"
+        },
+        {
+          "symbol": "When",
+          "before": "declare function When(...allowed: string[]): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>) => (this: This, ...args: Args) => Return;",
+          "after": "declare function When<const Allowed extends readonly string[]>(...allowed: Allowed): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> & ValidStates<Allowed[number], This['state']>) => (this: This, ...args: Args) => Return;"
+        },
+        {
+          "symbol": "On",
+          "before": "declare function On(subject: Subject<Record<string, unknown>>, event: string): <This, Return>(target: (this: This, payload: never) => Return, context: ClassMethodDecoratorContext<This>) => void;",
+          "after": "declare function On<Events extends object, Key extends keyof Events & string>(subject: Subject<Events>, event: Key): <This, Return>(target: (this: This, payload: Events[Key]) => Return, context: ClassMethodDecoratorContext<This>) => void;\ndeclare function On<Bus extends Subject<Record<string, unknown>>, Key extends Parameters<Bus['emit']>[0]>(subject: Bus, event: Key): <This, Payload, Return>(target: (this: This, payload: Payload) => Return, context: ClassMethodDecoratorContext<This> & (Bus['on'] extends (event: Key, listener: (payload: Payload) => Return) => unknown ? unknown : never)) => void;"
+        },
+        {
+          "symbol": "CircuitBreakerOptions",
+          "before": "interface CircuitBreakerOptions { readonly failures: number; readonly resetMs: number; }",
+          "after": "interface CircuitBreakerOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { readonly failures: number; readonly resetMs: number; /** A synchronous false result ignores the error without treating it as success. */ readonly isFailure?: (error: unknown, info: InvocationInfo<This, Args>) => boolean; }"
+        },
+        {
+          "symbol": "RetryOptions",
+          "before": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }",
+          "after": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; /** Optional cap applied before jitter, independently of the portable timer cap. */ maxDelayMs?: number; /** Randomize capped waits; the default 'none' does not call Math.random(). */ jitter?: 'none' | 'full' | 'equal'; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }"
+        }
+      ]
+    },
+    {
+      "name": "dist/public/operators.d.ts",
+      "added": [
+        "InvocationInfo",
+        "SemaphoreKeyContext",
+        "SemaphoreOptions",
+        "SemaphoreQueueFullError",
+        "semaphore"
+      ],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "CircuitBreakerOptions",
+          "before": "interface CircuitBreakerOptions { readonly failures: number; readonly resetMs: number; }",
+          "after": "interface CircuitBreakerOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { readonly failures: number; readonly resetMs: number; /** A synchronous false result ignores the error without treating it as success. */ readonly isFailure?: (error: unknown, info: InvocationInfo<This, Args>) => boolean; }"
+        },
+        {
+          "symbol": "circuitBreaker",
+          "before": "declare function circuitBreaker<This, Args extends readonly unknown[], Result>(options: CircuitBreakerOptions, createOpenError?: () => Error): Operator<This, Args, Result, Result>;",
+          "after": "declare function circuitBreaker<This, Args extends readonly unknown[], Result>(options: CircuitBreakerOptions<This, Args>, createOpenError?: () => Error): Operator<This, Args, Result, Result>;"
+        },
+        {
+          "symbol": "RetryOptions",
+          "before": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }",
+          "after": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; /** Optional cap applied before jitter, independently of the portable timer cap. */ maxDelayMs?: number; /** Randomize capped waits; the default 'none' does not call Math.random(). */ jitter?: 'none' | 'full' | 'equal'; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }"
+        },
+        {
+          "symbol": "CachedForOperatorOptions",
+          "before": "interface CachedForOperatorOptions<Args extends readonly unknown[]> { readonly key?: (...args: Args) => string; }",
+          "after": "interface CachedForOperatorOptions<Args extends readonly unknown[]> { readonly key?: (...args: Args) => string; /** Isolate entries by object/function receiver identity. Opt-in, without handles. */ readonly perReceiver?: boolean; /** Maximum retained entries, including pending results. FIFO; hits do not reorder. */ readonly maxEntries?: number; }"
+        },
+        {
+          "symbol": "MemoizeOperatorOptions",
+          "before": "interface MemoizeOperatorOptions<Args extends readonly unknown[]> { readonly key?: (...args: Args) => string; }",
+          "after": "interface MemoizeOperatorOptions<Args extends readonly unknown[]> { readonly key?: (...args: Args) => string; /** Isolate entries by object/function receiver identity. Opt-in, without handles. */ readonly perReceiver?: boolean; }"
+        },
+        {
+          "symbol": "cachedForWithHandle",
+          "before": "declare function cachedForWithHandle<This, Args extends readonly unknown[], Result>(ttlMs: number, options?: CachedForOperatorOptions<Args>): CachedForWithHandle<This, Args, Result>;",
+          "after": "declare function cachedForWithHandle<This, Args extends readonly unknown[], Result>(ttlMs: number, options?: Omit<CachedForOperatorOptions<Args>, 'perReceiver'>): CachedForWithHandle<This, Args, Result>;"
+        },
+        {
+          "symbol": "memoizeWithHandle",
+          "before": "declare function memoizeWithHandle<This, Args extends readonly unknown[], Result>(options?: MemoizeOperatorOptions<Args>): MemoizeWithHandle<This, Args, Result>;",
+          "after": "declare function memoizeWithHandle<This, Args extends readonly unknown[], Result>(options?: Omit<MemoizeOperatorOptions<Args>, 'perReceiver'>): MemoizeWithHandle<This, Args, Result>;"
+        }
+      ]
+    },
+    {
+      "name": "dist/policy/index.d.ts",
+      "added": ["InvocationInfo"],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "CircuitBreakerPolicyOptions",
+          "before": "interface CircuitBreakerPolicyOptions { readonly failures: number; readonly resetMs: number; }",
+          "after": "interface CircuitBreakerPolicyOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { readonly failures: number; readonly resetMs: number; readonly isFailure?: (error: unknown, info: InvocationInfo<This, Args>) => boolean; }"
+        },
+        {
+          "symbol": "PolicyConfig",
+          "before": "interface PolicyConfig<Args extends readonly unknown[], Result, This = unknown> { readonly fallback?: false | Readonly<FallbackPolicyOptions<Args, Result>>; readonly circuitBreaker?: false | Readonly<CircuitBreakerPolicyOptions>; readonly retry?: false | Readonly<RetryPolicyOptions<This, Args>>; readonly timeout?: false | Readonly<TimeoutPolicyOptions>; readonly order?: PolicyOrder; }",
+          "after": "interface PolicyConfig<Args extends readonly unknown[], Result, This = unknown> { readonly fallback?: false | Readonly<FallbackPolicyOptions<Args, Result>>; readonly circuitBreaker?: false | Readonly<CircuitBreakerPolicyOptions<This, Args>>; readonly retry?: false | Readonly<RetryPolicyOptions<This, Args>>; readonly timeout?: false | Readonly<TimeoutPolicyOptions>; readonly order?: PolicyOrder; }"
+        },
+        {
+          "symbol": "PolicyConfigExtension",
+          "before": "interface PolicyConfigExtension<Args extends readonly unknown[], Result, This = unknown> { readonly fallback?: false | Readonly<Partial<FallbackPolicyOptions<Args, Result>>>; readonly circuitBreaker?: false | Readonly<Partial<CircuitBreakerPolicyOptions>>; readonly retry?: false | Readonly<Partial<RetryPolicyOptions<This, Args>>>; readonly timeout?: false | Readonly<Partial<TimeoutPolicyOptions>>; readonly order?: PolicyOrder; }",
+          "after": "interface PolicyConfigExtension<Args extends readonly unknown[], Result, This = unknown> { readonly fallback?: false | Readonly<Partial<FallbackPolicyOptions<Args, Result>>>; readonly circuitBreaker?: false | Readonly<Partial<CircuitBreakerPolicyOptions<This, Args>>>; readonly retry?: false | Readonly<Partial<RetryPolicyOptions<This, Args>>>; readonly timeout?: false | Readonly<Partial<TimeoutPolicyOptions>>; readonly order?: PolicyOrder; }"
+        },
+        {
+          "symbol": "RetryPolicyOptions",
+          "before": "interface RetryPolicyOptions<This, Args extends readonly unknown[]> { readonly attempts: number; readonly delayMs?: number; readonly backoffFactor?: number; /** Retry is opt-in only for operations explicitly declared idempotent. */ readonly idempotent: true; readonly shouldRetry?: (error: unknown, attempt: number, context: PolicyRetryContext<This, Args>) => boolean; }",
+          "after": "interface RetryPolicyOptions<This, Args extends readonly unknown[]> { readonly attempts: number; readonly delayMs?: number; readonly backoffFactor?: number; readonly maxDelayMs?: number; readonly jitter?: 'none' | 'full' | 'equal'; /** Retry is opt-in only for operations explicitly declared idempotent. */ readonly idempotent: true; readonly shouldRetry?: (error: unknown, attempt: number, context: PolicyRetryContext<This, Args>) => boolean; }"
+        },
+        {
+          "symbol": "TimeoutPolicyOptions",
+          "before": "interface TimeoutPolicyOptions { readonly ms: number; readonly scope?: TimeoutScope; /** Required for a global timeout combined with retry. */ readonly abortSignal?: AbortSignal; }",
+          "after": "interface TimeoutPolicyOptions { readonly ms: number; readonly scope?: TimeoutScope; /** Optional static signal; prefer a fresh signal per invocation through run(). */ readonly abortSignal?: AbortSignal; }"
+        }
+      ]
+    },
+    {
+      "name": "dist/decorators/index.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "CircuitBreakerOptions",
+          "before": "interface CircuitBreakerOptions { readonly failures: number; readonly resetMs: number; }",
+          "after": "interface CircuitBreakerOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { readonly failures: number; readonly resetMs: number; /** A synchronous false result ignores the error without treating it as success. */ readonly isFailure?: (error: unknown, info: InvocationInfo<This, Args>) => boolean; }"
+        },
+        {
+          "symbol": "RetryOptions",
+          "before": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }",
+          "after": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; /** Optional cap applied before jitter, independently of the portable timer cap. */ maxDelayMs?: number; /** Randomize capped waits; the default 'none' does not call Math.random(). */ jitter?: 'none' | 'full' | 'equal'; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }"
+        }
+      ]
+    },
+    {
+      "name": "dist/patterns/behavioral/command.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "CommandHistory",
+          "before": "declare class CommandHistory { #private; /** Apunta un comando ya ejecutado. Normalmente lo llama @Revertible. */ push(command: Command): void; /** Deshace el último comando. Lanza si el historial está vacío. */ undoLast(): void; get size(): number; }",
+          "after": "declare class CommandHistory { #private; /** Apunta un comando ya ejecutado. Normalmente lo llama @Revertible. */ push(command: Command): void; /** Deshace el último comando de forma síncrona. Si undo lanza, conserva el comando. */ undoLast(): void; get size(): number; }"
+        }
+      ]
+    },
+    {
+      "name": "dist/patterns/behavioral/observer.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "Emits",
+          "before": "declare function Emits(event: string): <This extends Subject<Record<string, unknown>>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>) => (this: This, ...args: Args) => Return;",
+          "after": "declare function Emits<Event extends string>(event: Event): <This extends Subject<Record<string, unknown>>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> & (This[\"emit\"] extends (event: Event, payload: Awaited<Return>) => void ? unknown : never)) => (this: This, ...args: Args) => Return;"
+        },
+        {
+          "symbol": "Subject",
+          "before": "declare class Subject<Events extends Record<string, unknown> = Record<string, unknown>> { #private; /** Suscribe un listener al evento. Devuelve la función para desuscribirse. */ on<K extends keyof Events & string>(event: K, listener: Listener<Events[K]>): () => void; /** Notifica a todos los listeners del evento. */ emit<K extends keyof Events & string>(event: K, payload: Events[K]): void; }",
+          "after": "declare class Subject<Events extends object = Record<string, unknown>> { #private; /** Suscribe un listener al evento. Devuelve la función para desuscribirse. */ on<K extends keyof Events & string>(event: K, listener: Listener<Events[K]>): () => void; /** Notifica, en orden, a los listeners presentes al empezar esta emisión. */ emit<K extends keyof Events & string>(event: K, payload: Events[K]): void; }"
+        }
+      ]
+    },
+    {
+      "name": "dist/patterns/behavioral/on.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "On",
+          "before": "declare function On(subject: Subject<Record<string, unknown>>, event: string): <This, Return>(target: (this: This, payload: never) => Return, context: ClassMethodDecoratorContext<This>) => void;",
+          "after": "declare function On<Events extends object, Key extends keyof Events & string>(subject: Subject<Events>, event: Key): <This, Return>(target: (this: This, payload: Events[Key]) => Return, context: ClassMethodDecoratorContext<This>) => void;\ndeclare function On<Bus extends Subject<Record<string, unknown>>, Key extends Parameters<Bus['emit']>[0]>(subject: Bus, event: Key): <This, Payload, Return>(target: (this: This, payload: Payload) => Return, context: ClassMethodDecoratorContext<This> & (Bus['on'] extends (event: Key, listener: (payload: Payload) => Return) => unknown ? unknown : never)) => void;"
+        }
+      ]
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "TransitionTo",
+          "before": "declare function TransitionTo(next: string): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>) => (this: This, ...args: Args) => Return;",
+          "after": "declare function TransitionTo<const Next extends string>(next: Next): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> & ValidStates<Next, This['state']>) => (this: This, ...args: Args) => Return;"
+        },
+        {
+          "symbol": "When",
+          "before": "declare function When(...allowed: string[]): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return>) => (this: This, ...args: Args) => Return;",
+          "after": "declare function When<const Allowed extends readonly string[]>(...allowed: Allowed): <This extends StateMachine<string>, Args extends unknown[], Return>(target: (this: This, ...args: Args) => Return, context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> & ValidStates<Allowed[number], This['state']>) => (this: This, ...args: Args) => Return;"
+        }
+      ]
+    },
+    {
+      "name": "dist/patterns/utility/circuit-breaker.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "CircuitBreakerOptions",
+          "before": "interface CircuitBreakerOptions { readonly failures: number; readonly resetMs: number; }",
+          "after": "interface CircuitBreakerOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { readonly failures: number; readonly resetMs: number; /** A synchronous false result ignores the error without treating it as success. */ readonly isFailure?: (error: unknown, info: InvocationInfo<This, Args>) => boolean; }"
+        }
+      ]
+    },
+    {
+      "name": "dist/patterns/utility/retry.d.ts",
+      "added": [],
+      "removed": [],
+      "changed": [
+        {
+          "symbol": "RetryOptions",
+          "before": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }",
+          "after": "interface RetryOptions<This = unknown, Args extends readonly unknown[] = readonly unknown[]> { /** Número total de intentos, incluido el primero. Mínimo 1. */ attempts: number; /** Espera antes del primer reintento en milisegundos. Por defecto 0. */ delayMs?: number; /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */ backoffFactor?: number; /** Optional cap applied before jitter, independently of the portable timer cap. */ maxDelayMs?: number; /** Randomize capped waits; the default 'none' does not call Math.random(). */ jitter?: 'none' | 'full' | 'equal'; shouldRetry?: (error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean; }"
+        }
+      ]
+    }
+  ]
+}

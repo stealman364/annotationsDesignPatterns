@@ -1,3 +1,4 @@
+import { isTimerDelay } from '../../core/numeric';
 import { TimeoutError, timeout } from '../../operators/timeout';
 import { adaptOperator } from '../../decorators/adapters';
 
@@ -16,7 +17,7 @@ import { adaptOperator } from '../../decorators/adapters';
  * ```
  */
 export function Timeout(ms: number) {
-  if (ms <= 0) {
+  if (!isTimerDelay(ms, false)) {
     throw new RangeError('@Timeout requiere un límite mayor que 0 ms');
   }
   return function <This extends object, Args extends unknown[], Return>(

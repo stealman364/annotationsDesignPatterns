@@ -1,3 +1,4 @@
+import { isTimerDelay } from '../core/numeric';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import type { Operator } from '../core/operator';
@@ -23,7 +24,7 @@ function assertOptions(options: HedgeOptions): void {
   if (options.idempotent !== true) {
     throw new TypeError('hedge requires idempotent: true');
   }
-  if (!Number.isFinite(options.delayMs) || options.delayMs < 0) {
+  if (!isTimerDelay(options.delayMs, true)) {
     throw new RangeError('hedge requires a finite delayMs greater than or equal to 0');
   }
 }

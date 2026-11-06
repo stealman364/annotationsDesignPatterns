@@ -1,3 +1,4 @@
+import { assertObjectReceiver } from '../../core/receiver';
 /**
  * Evalúa el getter una sola vez por instancia y cachea el resultado
  * (incluidos `undefined` y `null`). Inicialización perezosa.
@@ -20,11 +21,11 @@ export function Lazy<This, Return>(
   const cache = new WeakMap<object, Return>();
   const computed = new WeakSet<object>();
   return function (this: This): Return {
-    const self = this as object;
-    if (!computed.has(self)) {
-      cache.set(self, target.call(this));
-      computed.add(self);
+    assertObjectReceiver(this, '@Lazy');
+    if (!computed.has(this)) {
+      cache.set(this, target.call(this));
+      computed.add(this);
     }
-    return cache.get(self) as Return;
+    return cache.get(this) as Return;
   };
 }

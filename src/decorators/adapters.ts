@@ -1,5 +1,6 @@
 import type { Operator } from '../core/operator';
 import type { AnyMethod } from '../core/types';
+import { assertObjectReceiver } from '../core/receiver';
 
 export type DecoratorOperatorScope = 'shared' | 'instance';
 
@@ -46,6 +47,7 @@ export function adaptOperator<This extends object, Args extends readonly unknown
 
     const wrappers = new WeakMap<This, AnyMethod<This, Args, Result>>();
     return function (this: This, ...args: Args) {
+      assertObjectReceiver(this, decoratorName);
       let wrapped = wrappers.get(this);
       if (!wrapped) {
         wrapped = createOperator(

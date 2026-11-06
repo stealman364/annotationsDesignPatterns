@@ -1,0 +1,1929 @@
+{
+  "baseline": "91f1142 / 2.0.0 rebuilt with current toolchain",
+  "current": "2.2.0-rc.0",
+  "node": "v22.18.0",
+  "entries": [
+    {
+      "name": "dist/index.js",
+      "before": {
+        "raw": 56163,
+        "gzip": 11387
+      },
+      "after": {
+        "raw": 76520,
+        "gzip": 14947
+      },
+      "delta": {
+        "raw": 20357,
+        "gzip": 3560
+      }
+    },
+    {
+      "name": "dist/index.cjs",
+      "before": {
+        "raw": 51738,
+        "gzip": 10636
+      },
+      "after": {
+        "raw": 69264,
+        "gzip": 13760
+      },
+      "delta": {
+        "raw": 17526,
+        "gzip": 3124
+      }
+    },
+    {
+      "name": "dist/public/operators.js",
+      "before": {
+        "raw": 35197,
+        "gzip": 6383
+      },
+      "after": {
+        "raw": 53601,
+        "gzip": 9481
+      },
+      "delta": {
+        "raw": 18404,
+        "gzip": 3098
+      }
+    },
+    {
+      "name": "dist/public/operators.cjs",
+      "before": {
+        "raw": 34152,
+        "gzip": 6512
+      },
+      "after": {
+        "raw": 50863,
+        "gzip": 9383
+      },
+      "delta": {
+        "raw": 16711,
+        "gzip": 2871
+      }
+    },
+    {
+      "name": "dist/public/pipe.js",
+      "before": {
+        "raw": 2214,
+        "gzip": 738
+      },
+      "after": {
+        "raw": 2141,
+        "gzip": 713
+      },
+      "delta": {
+        "raw": -73,
+        "gzip": -25
+      }
+    },
+    {
+      "name": "dist/public/pipe.cjs",
+      "before": {
+        "raw": 2469,
+        "gzip": 916
+      },
+      "after": {
+        "raw": 2864,
+        "gzip": 1001
+      },
+      "delta": {
+        "raw": 395,
+        "gzip": 85
+      }
+    },
+    {
+      "name": "dist/public/run.js",
+      "before": {
+        "raw": 2399,
+        "gzip": 817
+      },
+      "after": {
+        "raw": 4664,
+        "gzip": 1365
+      },
+      "delta": {
+        "raw": 2265,
+        "gzip": 548
+      }
+    },
+    {
+      "name": "dist/public/run.cjs",
+      "before": {
+        "raw": 2530,
+        "gzip": 946
+      },
+      "after": {
+        "raw": 3925,
+        "gzip": 1301
+      },
+      "delta": {
+        "raw": 1395,
+        "gzip": 355
+      }
+    },
+    {
+      "name": "dist/policy/index.js",
+      "before": {
+        "raw": 28829,
+        "gzip": 6013
+      },
+      "after": {
+        "raw": 37044,
+        "gzip": 7405
+      },
+      "delta": {
+        "raw": 8215,
+        "gzip": 1392
+      }
+    },
+    {
+      "name": "dist/policy/index.cjs",
+      "before": {
+        "raw": 28688,
+        "gzip": 6214
+      },
+      "after": {
+        "raw": 35735,
+        "gzip": 7417
+      },
+      "delta": {
+        "raw": 7047,
+        "gzip": 1203
+      }
+    },
+    {
+      "name": "dist/decorators/index.js",
+      "before": {
+        "raw": 25832,
+        "gzip": 5326
+      },
+      "after": {
+        "raw": 38653,
+        "gzip": 7455
+      },
+      "delta": {
+        "raw": 12821,
+        "gzip": 2129
+      }
+    },
+    {
+      "name": "dist/decorators/index.cjs",
+      "before": {
+        "raw": 22803,
+        "gzip": 5017
+      },
+      "after": {
+        "raw": 33916,
+        "gzip": 6922
+      },
+      "delta": {
+        "raw": 11113,
+        "gzip": 1905
+      }
+    },
+    {
+      "name": "dist/experimental/index.js",
+      "before": {
+        "raw": 9639,
+        "gzip": 2426
+      },
+      "after": {
+        "raw": 10430,
+        "gzip": 2649
+      },
+      "delta": {
+        "raw": 791,
+        "gzip": 223
+      }
+    },
+    {
+      "name": "dist/experimental/index.cjs",
+      "before": {
+        "raw": 9687,
+        "gzip": 2556
+      },
+      "after": {
+        "raw": 9986,
+        "gzip": 2672
+      },
+      "delta": {
+        "raw": 299,
+        "gzip": 116
+      }
+    },
+    {
+      "name": "dist/observability/index.js",
+      "before": {
+        "raw": 574,
+        "gzip": 268
+      },
+      "after": {
+        "raw": 574,
+        "gzip": 268
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/observability/index.cjs",
+      "before": {
+        "raw": 1687,
+        "gzip": 675
+      },
+      "after": {
+        "raw": 1687,
+        "gzip": 675
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/node/index.js",
+      "before": {
+        "raw": 663,
+        "gzip": 297
+      },
+      "after": {
+        "raw": 663,
+        "gzip": 297
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/node/index.cjs",
+      "before": {
+        "raw": 1789,
+        "gzip": 707
+      },
+      "after": {
+        "raw": 1789,
+        "gzip": 707
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/store/index.js",
+      "before": {
+        "raw": 5809,
+        "gzip": 1691
+      },
+      "after": {
+        "raw": 6591,
+        "gzip": 1940
+      },
+      "delta": {
+        "raw": 782,
+        "gzip": 249
+      }
+    },
+    {
+      "name": "dist/store/index.cjs",
+      "before": {
+        "raw": 7090,
+        "gzip": 2096
+      },
+      "after": {
+        "raw": 7468,
+        "gzip": 2237
+      },
+      "delta": {
+        "raw": 378,
+        "gzip": 141
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/command.js",
+      "before": {
+        "raw": 1373,
+        "gzip": 613
+      },
+      "after": {
+        "raw": 2091,
+        "gzip": 855
+      },
+      "delta": {
+        "raw": 718,
+        "gzip": 242
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/handler-chain.js",
+      "before": {
+        "raw": 911,
+        "gzip": 443
+      },
+      "after": {
+        "raw": 911,
+        "gzip": 443
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/iterable-over.js",
+      "before": {
+        "raw": 867,
+        "gzip": 431
+      },
+      "after": {
+        "raw": 867,
+        "gzip": 431
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/observer.js",
+      "before": {
+        "raw": 1411,
+        "gzip": 647
+      },
+      "after": {
+        "raw": 1536,
+        "gzip": 687
+      },
+      "delta": {
+        "raw": 125,
+        "gzip": 40
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/on.js",
+      "before": {
+        "raw": 437,
+        "gzip": 287
+      },
+      "after": {
+        "raw": 437,
+        "gzip": 287
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/snapshot.js",
+      "before": {
+        "raw": 1061,
+        "gzip": 544
+      },
+      "after": {
+        "raw": 1061,
+        "gzip": 544
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.js",
+      "before": {
+        "raw": 1744,
+        "gzip": 670
+      },
+      "after": {
+        "raw": 1744,
+        "gzip": 670
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/strategy.js",
+      "before": {
+        "raw": 1330,
+        "gzip": 582
+      },
+      "after": {
+        "raw": 1330,
+        "gzip": 582
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/command.cjs",
+      "before": {
+        "raw": 2310,
+        "gzip": 966
+      },
+      "after": {
+        "raw": 3028,
+        "gzip": 1199
+      },
+      "delta": {
+        "raw": 718,
+        "gzip": 233
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/handler-chain.cjs",
+      "before": {
+        "raw": 1866,
+        "gzip": 802
+      },
+      "after": {
+        "raw": 1866,
+        "gzip": 802
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/iterable-over.cjs",
+      "before": {
+        "raw": 1818,
+        "gzip": 761
+      },
+      "after": {
+        "raw": 1818,
+        "gzip": 761
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/observer.cjs",
+      "before": {
+        "raw": 2351,
+        "gzip": 978
+      },
+      "after": {
+        "raw": 2476,
+        "gzip": 1021
+      },
+      "delta": {
+        "raw": 125,
+        "gzip": 43
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/on.cjs",
+      "before": {
+        "raw": 1355,
+        "gzip": 640
+      },
+      "after": {
+        "raw": 1355,
+        "gzip": 640
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/snapshot.cjs",
+      "before": {
+        "raw": 2001,
+        "gzip": 897
+      },
+      "after": {
+        "raw": 2001,
+        "gzip": 897
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.cjs",
+      "before": {
+        "raw": 2703,
+        "gzip": 1022
+      },
+      "after": {
+        "raw": 2703,
+        "gzip": 1022
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/strategy.cjs",
+      "before": {
+        "raw": 2270,
+        "gzip": 933
+      },
+      "after": {
+        "raw": 2270,
+        "gzip": 933
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/builder.js",
+      "before": {
+        "raw": 1072,
+        "gzip": 520
+      },
+      "after": {
+        "raw": 1146,
+        "gzip": 555
+      },
+      "delta": {
+        "raw": 74,
+        "gzip": 35
+      }
+    },
+    {
+      "name": "dist/patterns/creational/cloneable.js",
+      "before": {
+        "raw": 548,
+        "gzip": 328
+      },
+      "after": {
+        "raw": 548,
+        "gzip": 328
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/factory.js",
+      "before": {
+        "raw": 991,
+        "gzip": 482
+      },
+      "after": {
+        "raw": 991,
+        "gzip": 482
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/injection.js",
+      "before": {
+        "raw": 3375,
+        "gzip": 1057
+      },
+      "after": {
+        "raw": 3375,
+        "gzip": 1057
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/singleton.js",
+      "before": {
+        "raw": 636,
+        "gzip": 336
+      },
+      "after": {
+        "raw": 636,
+        "gzip": 336
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/builder.cjs",
+      "before": {
+        "raw": 2005,
+        "gzip": 866
+      },
+      "after": {
+        "raw": 2079,
+        "gzip": 901
+      },
+      "delta": {
+        "raw": 74,
+        "gzip": 35
+      }
+    },
+    {
+      "name": "dist/patterns/creational/cloneable.cjs",
+      "before": {
+        "raw": 1487,
+        "gzip": 660
+      },
+      "after": {
+        "raw": 1487,
+        "gzip": 660
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/factory.cjs",
+      "before": {
+        "raw": 1928,
+        "gzip": 841
+      },
+      "after": {
+        "raw": 1928,
+        "gzip": 841
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/injection.cjs",
+      "before": {
+        "raw": 4330,
+        "gzip": 1417
+      },
+      "after": {
+        "raw": 4330,
+        "gzip": 1417
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/creational/singleton.cjs",
+      "before": {
+        "raw": 1575,
+        "gzip": 692
+      },
+      "after": {
+        "raw": 1575,
+        "gzip": 692
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/adapt.js",
+      "before": {
+        "raw": 802,
+        "gzip": 420
+      },
+      "after": {
+        "raw": 802,
+        "gzip": 420
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/decorate.js",
+      "before": {
+        "raw": 361,
+        "gzip": 238
+      },
+      "after": {
+        "raw": 361,
+        "gzip": 238
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/flyweight.js",
+      "before": {
+        "raw": 904,
+        "gzip": 419
+      },
+      "after": {
+        "raw": 904,
+        "gzip": 419
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/frozen.js",
+      "before": {
+        "raw": 468,
+        "gzip": 284
+      },
+      "after": {
+        "raw": 468,
+        "gzip": 284
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/intercept.js",
+      "before": {
+        "raw": 619,
+        "gzip": 336
+      },
+      "after": {
+        "raw": 619,
+        "gzip": 336
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/sealed.js",
+      "before": {
+        "raw": 466,
+        "gzip": 284
+      },
+      "after": {
+        "raw": 466,
+        "gzip": 284
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/adapt.cjs",
+      "before": {
+        "raw": 1729,
+        "gzip": 750
+      },
+      "after": {
+        "raw": 1729,
+        "gzip": 750
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/decorate.cjs",
+      "before": {
+        "raw": 1297,
+        "gzip": 599
+      },
+      "after": {
+        "raw": 1297,
+        "gzip": 599
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/flyweight.cjs",
+      "before": {
+        "raw": 1843,
+        "gzip": 768
+      },
+      "after": {
+        "raw": 1843,
+        "gzip": 768
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/frozen.cjs",
+      "before": {
+        "raw": 1398,
+        "gzip": 637
+      },
+      "after": {
+        "raw": 1398,
+        "gzip": 637
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/intercept.cjs",
+      "before": {
+        "raw": 1558,
+        "gzip": 684
+      },
+      "after": {
+        "raw": 1558,
+        "gzip": 684
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/structural/sealed.cjs",
+      "before": {
+        "raw": 1396,
+        "gzip": 634
+      },
+      "after": {
+        "raw": 1396,
+        "gzip": 634
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/bind.js",
+      "before": {
+        "raw": 530,
+        "gzip": 334
+      },
+      "after": {
+        "raw": 530,
+        "gzip": 334
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/cached-for.js",
+      "before": {
+        "raw": 6785,
+        "gzip": 1992
+      },
+      "after": {
+        "raw": 13327,
+        "gzip": 3483
+      },
+      "delta": {
+        "raw": 6542,
+        "gzip": 1491
+      }
+    },
+    {
+      "name": "dist/patterns/utility/circuit-breaker.js",
+      "before": {
+        "raw": 8132,
+        "gzip": 2358
+      },
+      "after": {
+        "raw": 14377,
+        "gzip": 3640
+      },
+      "delta": {
+        "raw": 6245,
+        "gzip": 1282
+      }
+    },
+    {
+      "name": "dist/patterns/utility/debounce.js",
+      "before": {
+        "raw": 811,
+        "gzip": 426
+      },
+      "after": {
+        "raw": 2101,
+        "gzip": 837
+      },
+      "delta": {
+        "raw": 1290,
+        "gzip": 411
+      }
+    },
+    {
+      "name": "dist/patterns/utility/deprecated.js",
+      "before": {
+        "raw": 643,
+        "gzip": 361
+      },
+      "after": {
+        "raw": 643,
+        "gzip": 361
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/fallback.js",
+      "before": {
+        "raw": 4000,
+        "gzip": 1285
+      },
+      "after": {
+        "raw": 7096,
+        "gzip": 2005
+      },
+      "delta": {
+        "raw": 3096,
+        "gzip": 720
+      }
+    },
+    {
+      "name": "dist/patterns/utility/lazy.js",
+      "before": {
+        "raw": 543,
+        "gzip": 324
+      },
+      "after": {
+        "raw": 968,
+        "gzip": 475
+      },
+      "delta": {
+        "raw": 425,
+        "gzip": 151
+      }
+    },
+    {
+      "name": "dist/patterns/utility/log.js",
+      "before": {
+        "raw": 1529,
+        "gzip": 603
+      },
+      "after": {
+        "raw": 1529,
+        "gzip": 603
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/measure.js",
+      "before": {
+        "raw": 1226,
+        "gzip": 517
+      },
+      "after": {
+        "raw": 1226,
+        "gzip": 517
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/memoize-by-ref.js",
+      "before": {
+        "raw": 1481,
+        "gzip": 586
+      },
+      "after": {
+        "raw": 1914,
+        "gzip": 718
+      },
+      "delta": {
+        "raw": 433,
+        "gzip": 132
+      }
+    },
+    {
+      "name": "dist/patterns/utility/memoize.js",
+      "before": {
+        "raw": 6667,
+        "gzip": 1943
+      },
+      "after": {
+        "raw": 12339,
+        "gzip": 3333
+      },
+      "delta": {
+        "raw": 5672,
+        "gzip": 1390
+      }
+    },
+    {
+      "name": "dist/patterns/utility/mutex.js",
+      "before": {
+        "raw": 580,
+        "gzip": 368
+      },
+      "after": {
+        "raw": 1006,
+        "gzip": 513
+      },
+      "delta": {
+        "raw": 426,
+        "gzip": 145
+      }
+    },
+    {
+      "name": "dist/patterns/utility/once.js",
+      "before": {
+        "raw": 568,
+        "gzip": 340
+      },
+      "after": {
+        "raw": 993,
+        "gzip": 484
+      },
+      "delta": {
+        "raw": 425,
+        "gzip": 144
+      }
+    },
+    {
+      "name": "dist/patterns/utility/rate-limit.js",
+      "before": {
+        "raw": 984,
+        "gzip": 487
+      },
+      "after": {
+        "raw": 2291,
+        "gzip": 901
+      },
+      "delta": {
+        "raw": 1307,
+        "gzip": 414
+      }
+    },
+    {
+      "name": "dist/patterns/utility/retry.js",
+      "before": {
+        "raw": 6996,
+        "gzip": 2030
+      },
+      "after": {
+        "raw": 11517,
+        "gzip": 3035
+      },
+      "delta": {
+        "raw": 4521,
+        "gzip": 1005
+      }
+    },
+    {
+      "name": "dist/patterns/utility/semaphore.js",
+      "before": {
+        "raw": 1003,
+        "gzip": 499
+      },
+      "after": {
+        "raw": 13928,
+        "gzip": 3705
+      },
+      "delta": {
+        "raw": 12925,
+        "gzip": 3206
+      }
+    },
+    {
+      "name": "dist/patterns/utility/throttle.js",
+      "before": {
+        "raw": 776,
+        "gzip": 417
+      },
+      "after": {
+        "raw": 2062,
+        "gzip": 823
+      },
+      "delta": {
+        "raw": 1286,
+        "gzip": 406
+      }
+    },
+    {
+      "name": "dist/patterns/utility/timeout.js",
+      "before": {
+        "raw": 7635,
+        "gzip": 2371
+      },
+      "after": {
+        "raw": 11632,
+        "gzip": 3277
+      },
+      "delta": {
+        "raw": 3997,
+        "gzip": 906
+      }
+    },
+    {
+      "name": "dist/patterns/utility/validate.js",
+      "before": {
+        "raw": 704,
+        "gzip": 391
+      },
+      "after": {
+        "raw": 704,
+        "gzip": 391
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/bind.cjs",
+      "before": {
+        "raw": 1454,
+        "gzip": 670
+      },
+      "after": {
+        "raw": 1454,
+        "gzip": 670
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/cached-for.cjs",
+      "before": {
+        "raw": 6103,
+        "gzip": 1937
+      },
+      "after": {
+        "raw": 10677,
+        "gzip": 3025
+      },
+      "delta": {
+        "raw": 4574,
+        "gzip": 1088
+      }
+    },
+    {
+      "name": "dist/patterns/utility/circuit-breaker.cjs",
+      "before": {
+        "raw": 7574,
+        "gzip": 2321
+      },
+      "after": {
+        "raw": 12574,
+        "gzip": 3327
+      },
+      "delta": {
+        "raw": 5000,
+        "gzip": 1006
+      }
+    },
+    {
+      "name": "dist/patterns/utility/debounce.cjs",
+      "before": {
+        "raw": 1747,
+        "gzip": 777
+      },
+      "after": {
+        "raw": 2416,
+        "gzip": 1017
+      },
+      "delta": {
+        "raw": 669,
+        "gzip": 240
+      }
+    },
+    {
+      "name": "dist/patterns/utility/deprecated.cjs",
+      "before": {
+        "raw": 1585,
+        "gzip": 713
+      },
+      "after": {
+        "raw": 1585,
+        "gzip": 713
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/fallback.cjs",
+      "before": {
+        "raw": 3746,
+        "gzip": 1322
+      },
+      "after": {
+        "raw": 6158,
+        "gzip": 1894
+      },
+      "delta": {
+        "raw": 2412,
+        "gzip": 572
+      }
+    },
+    {
+      "name": "dist/patterns/utility/lazy.cjs",
+      "before": {
+        "raw": 1467,
+        "gzip": 679
+      },
+      "after": {
+        "raw": 1792,
+        "gzip": 779
+      },
+      "delta": {
+        "raw": 325,
+        "gzip": 100
+      }
+    },
+    {
+      "name": "dist/patterns/utility/log.cjs",
+      "before": {
+        "raw": 2450,
+        "gzip": 945
+      },
+      "after": {
+        "raw": 2450,
+        "gzip": 945
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/measure.cjs",
+      "before": {
+        "raw": 2159,
+        "gzip": 854
+      },
+      "after": {
+        "raw": 2159,
+        "gzip": 854
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    },
+    {
+      "name": "dist/patterns/utility/memoize-by-ref.cjs",
+      "before": {
+        "raw": 2435,
+        "gzip": 928
+      },
+      "after": {
+        "raw": 2778,
+        "gzip": 1020
+      },
+      "delta": {
+        "raw": 343,
+        "gzip": 92
+      }
+    },
+    {
+      "name": "dist/patterns/utility/memoize.cjs",
+      "before": {
+        "raw": 5999,
+        "gzip": 1894
+      },
+      "after": {
+        "raw": 9801,
+        "gzip": 2875
+      },
+      "delta": {
+        "raw": 3802,
+        "gzip": 981
+      }
+    },
+    {
+      "name": "dist/patterns/utility/mutex.cjs",
+      "before": {
+        "raw": 1507,
+        "gzip": 718
+      },
+      "after": {
+        "raw": 1834,
+        "gzip": 819
+      },
+      "delta": {
+        "raw": 327,
+        "gzip": 101
+      }
+    },
+    {
+      "name": "dist/patterns/utility/once.cjs",
+      "before": {
+        "raw": 1492,
+        "gzip": 693
+      },
+      "after": {
+        "raw": 1817,
+        "gzip": 791
+      },
+      "delta": {
+        "raw": 325,
+        "gzip": 98
+      }
+    },
+    {
+      "name": "dist/patterns/utility/rate-limit.cjs",
+      "before": {
+        "raw": 1926,
+        "gzip": 847
+      },
+      "after": {
+        "raw": 2578,
+        "gzip": 1051
+      },
+      "delta": {
+        "raw": 652,
+        "gzip": 204
+      }
+    },
+    {
+      "name": "dist/patterns/utility/retry.cjs",
+      "before": {
+        "raw": 6688,
+        "gzip": 2081
+      },
+      "after": {
+        "raw": 9830,
+        "gzip": 2755
+      },
+      "delta": {
+        "raw": 3142,
+        "gzip": 674
+      }
+    },
+    {
+      "name": "dist/patterns/utility/semaphore.cjs",
+      "before": {
+        "raw": 1942,
+        "gzip": 851
+      },
+      "after": {
+        "raw": 11360,
+        "gzip": 3227
+      },
+      "delta": {
+        "raw": 9418,
+        "gzip": 2376
+      }
+    },
+    {
+      "name": "dist/patterns/utility/throttle.cjs",
+      "before": {
+        "raw": 1712,
+        "gzip": 766
+      },
+      "after": {
+        "raw": 2228,
+        "gzip": 940
+      },
+      "delta": {
+        "raw": 516,
+        "gzip": 174
+      }
+    },
+    {
+      "name": "dist/patterns/utility/timeout.cjs",
+      "before": {
+        "raw": 7149,
+        "gzip": 2324
+      },
+      "after": {
+        "raw": 9880,
+        "gzip": 2986
+      },
+      "delta": {
+        "raw": 2731,
+        "gzip": 662
+      }
+    },
+    {
+      "name": "dist/patterns/utility/validate.cjs",
+      "before": {
+        "raw": 1640,
+        "gzip": 743
+      },
+      "after": {
+        "raw": 1640,
+        "gzip": 743
+      },
+      "delta": {
+        "raw": 0,
+        "gzip": 0
+      }
+    }
+  ],
+  "exports": [
+    {
+      "name": "./dist/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/public/operators.js",
+      "added": ["SemaphoreQueueFullError", "semaphore"],
+      "removed": []
+    },
+    {
+      "name": "./dist/public/operators.cjs",
+      "added": ["SemaphoreQueueFullError", "semaphore"],
+      "removed": []
+    },
+    {
+      "name": "./dist/public/pipe.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/public/pipe.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/public/run.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/public/run.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/policy/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/policy/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/decorators/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/decorators/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/experimental/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/experimental/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/observability/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/observability/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/node/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/node/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/store/index.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "./dist/store/index.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/command.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/handler-chain.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/iterable-over.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/observer.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/on.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/snapshot.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/strategy.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/command.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/handler-chain.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/iterable-over.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/observer.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/on.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/snapshot.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/behavioral/strategy.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/builder.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/cloneable.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/factory.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/injection.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/singleton.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/builder.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/cloneable.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/factory.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/injection.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/creational/singleton.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/adapt.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/decorate.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/flyweight.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/frozen.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/intercept.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/sealed.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/adapt.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/decorate.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/flyweight.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/frozen.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/intercept.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/structural/sealed.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/bind.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/cached-for.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/circuit-breaker.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/debounce.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/deprecated.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/fallback.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/lazy.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/log.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/measure.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/memoize-by-ref.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/memoize.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/mutex.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/once.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/rate-limit.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/retry.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/semaphore.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/throttle.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/timeout.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/validate.js",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/bind.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/cached-for.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/circuit-breaker.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/debounce.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/deprecated.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/fallback.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/lazy.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/log.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/measure.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/memoize-by-ref.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/memoize.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/mutex.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/once.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/rate-limit.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/retry.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/semaphore.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/throttle.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/timeout.cjs",
+      "added": [],
+      "removed": []
+    },
+    {
+      "name": "dist/patterns/utility/validate.cjs",
+      "added": [],
+      "removed": []
+    }
+  ]
+}

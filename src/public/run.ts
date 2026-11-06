@@ -1,4 +1,5 @@
 import { createOperationContext } from '../core/context';
+import { invokeWithSignal } from '../core/cancellation';
 import { invoke, invokeWithContext } from '../core/invocation';
 import type { EventSink } from '../observability';
 import type { AnyMethod, MaybePromise } from './types';
@@ -46,5 +47,6 @@ export function run<This, Args extends readonly unknown[], Result>(
     return invoke(receiver, args, method);
   }
 
-  return invokeWithContext(receiver, args, method, createOperationContext(receiver, args, options));
+  const context = createOperationContext(receiver, args, options);
+  return invokeWithSignal(() => invokeWithContext(receiver, args, method, context), options.signal);
 }

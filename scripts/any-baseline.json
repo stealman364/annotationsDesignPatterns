@@ -1,0 +1,26 @@
+{
+  "baselineCommit": "91f1142",
+  "description": "Reviewed v2.0.0 debt budgets per file. Reductions pass; new or increased debt fails. Changes require explicit review, never automatic rebasing.",
+  "source": {
+    "src/patterns/behavioral/iterable-over.ts": 1,
+    "src/patterns/creational/cloneable.ts": 1,
+    "src/patterns/creational/factory.ts": 2,
+    "src/patterns/structural/adapt.ts": 1,
+    "src/patterns/structural/frozen.ts": 1,
+    "src/patterns/structural/sealed.ts": 1
+  },
+  "declarations": {
+    "dist/patterns/behavioral/iterable-over.d.cts": 1,
+    "dist/patterns/behavioral/iterable-over.d.ts": 1,
+    "dist/patterns/creational/cloneable.d.cts": 1,
+    "dist/patterns/creational/cloneable.d.ts": 1,
+    "dist/patterns/creational/factory.d.cts": 2,
+    "dist/patterns/creational/factory.d.ts": 2,
+    "dist/patterns/structural/adapt.d.cts": 1,
+    "dist/patterns/structural/adapt.d.ts": 1,
+    "dist/patterns/structural/frozen.d.cts": 1,
+    "dist/patterns/structural/frozen.d.ts": 1,
+    "dist/patterns/structural/sealed.d.cts": 1,
+    "dist/patterns/structural/sealed.d.ts": 1
+  }
+}

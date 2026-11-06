@@ -1,0 +1,389 @@
+{
+  "measurement": "Reachable distribution modules per public entrypoint, raw and gzip level 9; not a consumer tree-shaken bundle.",
+  "entries": {
+    "dist/decorators/index.cjs": {
+      "raw": 35712,
+      "gzip": 7296
+    },
+    "dist/decorators/index.js": {
+      "raw": 40704,
+      "gzip": 7872
+    },
+    "dist/experimental/index.cjs": {
+      "raw": 10496,
+      "gzip": 2816
+    },
+    "dist/experimental/index.js": {
+      "raw": 11008,
+      "gzip": 2816
+    },
+    "dist/index.cjs": {
+      "raw": 69888,
+      "gzip": 14016
+    },
+    "dist/index.js": {
+      "raw": 77568,
+      "gzip": 15296
+    },
+    "dist/node/index.cjs": {
+      "raw": 1920,
+      "gzip": 768
+    },
+    "dist/node/index.js": {
+      "raw": 768,
+      "gzip": 320
+    },
+    "dist/observability/index.cjs": {
+      "raw": 1792,
+      "gzip": 768
+    },
+    "dist/observability/index.js": {
+      "raw": 640,
+      "gzip": 320
+    },
+    "dist/patterns/behavioral/command.cjs": {
+      "raw": 3200,
+      "gzip": 1280
+    },
+    "dist/patterns/behavioral/command.js": {
+      "raw": 2304,
+      "gzip": 960
+    },
+    "dist/patterns/behavioral/handler-chain.cjs": {
+      "raw": 2048,
+      "gzip": 896
+    },
+    "dist/patterns/behavioral/handler-chain.js": {
+      "raw": 1024,
+      "gzip": 512
+    },
+    "dist/patterns/behavioral/iterable-over.cjs": {
+      "raw": 1920,
+      "gzip": 832
+    },
+    "dist/patterns/behavioral/iterable-over.js": {
+      "raw": 1024,
+      "gzip": 512
+    },
+    "dist/patterns/behavioral/observer.cjs": {
+      "raw": 2688,
+      "gzip": 1088
+    },
+    "dist/patterns/behavioral/observer.js": {
+      "raw": 1664,
+      "gzip": 768
+    },
+    "dist/patterns/behavioral/on.cjs": {
+      "raw": 1536,
+      "gzip": 704
+    },
+    "dist/patterns/behavioral/on.js": {
+      "raw": 512,
+      "gzip": 320
+    },
+    "dist/patterns/behavioral/snapshot.cjs": {
+      "raw": 2176,
+      "gzip": 960
+    },
+    "dist/patterns/behavioral/snapshot.js": {
+      "raw": 1152,
+      "gzip": 576
+    },
+    "dist/patterns/behavioral/state-machine.cjs": {
+      "raw": 2944,
+      "gzip": 1088
+    },
+    "dist/patterns/behavioral/state-machine.js": {
+      "raw": 1920,
+      "gzip": 704
+    },
+    "dist/patterns/behavioral/strategy.cjs": {
+      "raw": 2432,
+      "gzip": 1024
+    },
+    "dist/patterns/behavioral/strategy.js": {
+      "raw": 1408,
+      "gzip": 640
+    },
+    "dist/patterns/creational/builder.cjs": {
+      "raw": 2304,
+      "gzip": 960
+    },
+    "dist/patterns/creational/builder.js": {
+      "raw": 1280,
+      "gzip": 640
+    },
+    "dist/patterns/creational/cloneable.cjs": {
+      "raw": 1664,
+      "gzip": 704
+    },
+    "dist/patterns/creational/cloneable.js": {
+      "raw": 640,
+      "gzip": 384
+    },
+    "dist/patterns/creational/factory.cjs": {
+      "raw": 2048,
+      "gzip": 896
+    },
+    "dist/patterns/creational/factory.js": {
+      "raw": 1152,
+      "gzip": 512
+    },
+    "dist/patterns/creational/injection.cjs": {
+      "raw": 4608,
+      "gzip": 1536
+    },
+    "dist/patterns/creational/injection.js": {
+      "raw": 3584,
+      "gzip": 1152
+    },
+    "dist/patterns/creational/singleton.cjs": {
+      "raw": 1664,
+      "gzip": 768
+    },
+    "dist/patterns/creational/singleton.js": {
+      "raw": 768,
+      "gzip": 384
+    },
+    "dist/patterns/structural/adapt.cjs": {
+      "raw": 1920,
+      "gzip": 832
+    },
+    "dist/patterns/structural/adapt.js": {
+      "raw": 896,
+      "gzip": 448
+    },
+    "dist/patterns/structural/decorate.cjs": {
+      "raw": 1408,
+      "gzip": 640
+    },
+    "dist/patterns/structural/decorate.js": {
+      "raw": 384,
+      "gzip": 256
+    },
+    "dist/patterns/structural/flyweight.cjs": {
+      "raw": 2048,
+      "gzip": 832
+    },
+    "dist/patterns/structural/flyweight.js": {
+      "raw": 1024,
+      "gzip": 448
+    },
+    "dist/patterns/structural/frozen.cjs": {
+      "raw": 1536,
+      "gzip": 704
+    },
+    "dist/patterns/structural/frozen.js": {
+      "raw": 512,
+      "gzip": 320
+    },
+    "dist/patterns/structural/intercept.cjs": {
+      "raw": 1664,
+      "gzip": 768
+    },
+    "dist/patterns/structural/intercept.js": {
+      "raw": 768,
+      "gzip": 384
+    },
+    "dist/patterns/structural/sealed.cjs": {
+      "raw": 1536,
+      "gzip": 704
+    },
+    "dist/patterns/structural/sealed.js": {
+      "raw": 512,
+      "gzip": 320
+    },
+    "dist/patterns/utility/bind.cjs": {
+      "raw": 1536,
+      "gzip": 704
+    },
+    "dist/patterns/utility/bind.js": {
+      "raw": 640,
+      "gzip": 384
+    },
+    "dist/patterns/utility/cached-for.cjs": {
+      "raw": 10880,
+      "gzip": 3136
+    },
+    "dist/patterns/utility/cached-for.js": {
+      "raw": 13568,
+      "gzip": 3648
+    },
+    "dist/patterns/utility/circuit-breaker.cjs": {
+      "raw": 13312,
+      "gzip": 3520
+    },
+    "dist/patterns/utility/circuit-breaker.js": {
+      "raw": 15104,
+      "gzip": 3840
+    },
+    "dist/patterns/utility/debounce.cjs": {
+      "raw": 2688,
+      "gzip": 1088
+    },
+    "dist/patterns/utility/debounce.js": {
+      "raw": 2304,
+      "gzip": 896
+    },
+    "dist/patterns/utility/deprecated.cjs": {
+      "raw": 1792,
+      "gzip": 768
+    },
+    "dist/patterns/utility/deprecated.js": {
+      "raw": 768,
+      "gzip": 384
+    },
+    "dist/patterns/utility/fallback.cjs": {
+      "raw": 6528,
+      "gzip": 1920
+    },
+    "dist/patterns/utility/fallback.js": {
+      "raw": 7552,
+      "gzip": 2112
+    },
+    "dist/patterns/utility/lazy.cjs": {
+      "raw": 1920,
+      "gzip": 896
+    },
+    "dist/patterns/utility/lazy.js": {
+      "raw": 1152,
+      "gzip": 512
+    },
+    "dist/patterns/utility/log.cjs": {
+      "raw": 2688,
+      "gzip": 1024
+    },
+    "dist/patterns/utility/log.js": {
+      "raw": 1664,
+      "gzip": 640
+    },
+    "dist/patterns/utility/measure.cjs": {
+      "raw": 2304,
+      "gzip": 960
+    },
+    "dist/patterns/utility/measure.js": {
+      "raw": 1408,
+      "gzip": 576
+    },
+    "dist/patterns/utility/memoize-by-ref.cjs": {
+      "raw": 2944,
+      "gzip": 1088
+    },
+    "dist/patterns/utility/memoize-by-ref.js": {
+      "raw": 2048,
+      "gzip": 832
+    },
+    "dist/patterns/utility/memoize.cjs": {
+      "raw": 10112,
+      "gzip": 3008
+    },
+    "dist/patterns/utility/memoize.js": {
+      "raw": 12928,
+      "gzip": 3520
+    },
+    "dist/patterns/utility/mutex.cjs": {
+      "raw": 2048,
+      "gzip": 896
+    },
+    "dist/patterns/utility/mutex.js": {
+      "raw": 1152,
+      "gzip": 576
+    },
+    "dist/patterns/utility/once.cjs": {
+      "raw": 2048,
+      "gzip": 896
+    },
+    "dist/patterns/utility/once.js": {
+      "raw": 1152,
+      "gzip": 576
+    },
+    "dist/patterns/utility/rate-limit.cjs": {
+      "raw": 2816,
+      "gzip": 1152
+    },
+    "dist/patterns/utility/rate-limit.js": {
+      "raw": 2432,
+      "gzip": 960
+    },
+    "dist/patterns/utility/retry.cjs": {
+      "raw": 10368,
+      "gzip": 2944
+    },
+    "dist/patterns/utility/retry.js": {
+      "raw": 12160,
+      "gzip": 3200
+    },
+    "dist/patterns/utility/semaphore.cjs": {
+      "raw": 12032,
+      "gzip": 3392
+    },
+    "dist/patterns/utility/semaphore.js": {
+      "raw": 14720,
+      "gzip": 3904
+    },
+    "dist/patterns/utility/throttle.cjs": {
+      "raw": 2432,
+      "gzip": 1024
+    },
+    "dist/patterns/utility/throttle.js": {
+      "raw": 2304,
+      "gzip": 896
+    },
+    "dist/patterns/utility/timeout.cjs": {
+      "raw": 10112,
+      "gzip": 3072
+    },
+    "dist/patterns/utility/timeout.js": {
+      "raw": 11776,
+      "gzip": 3328
+    },
+    "dist/patterns/utility/validate.cjs": {
+      "raw": 1792,
+      "gzip": 832
+    },
+    "dist/patterns/utility/validate.js": {
+      "raw": 768,
+      "gzip": 448
+    },
+    "dist/policy/index.cjs": {
+      "raw": 37632,
+      "gzip": 7808
+    },
+    "dist/policy/index.js": {
+      "raw": 38912,
+      "gzip": 7808
+    },
+    "dist/public/operators.cjs": {
+      "raw": 53504,
+      "gzip": 9856
+    },
+    "dist/public/operators.js": {
+      "raw": 56320,
+      "gzip": 9984
+    },
+    "dist/public/pipe.cjs": {
+      "raw": 3072,
+      "gzip": 1088
+    },
+    "dist/public/pipe.js": {
+      "raw": 2304,
+      "gzip": 768
+    },
+    "dist/public/run.cjs": {
+      "raw": 4224,
+      "gzip": 1408
+    },
+    "dist/public/run.js": {
+      "raw": 4992,
+      "gzip": 1472
+    },
+    "dist/store/index.cjs": {
+      "raw": 7936,
+      "gzip": 2368
+    },
+    "dist/store/index.js": {
+      "raw": 7040,
+      "gzip": 2048
+    }
+  }
+}

@@ -15,6 +15,7 @@ describe('public operators', () => {
       'OverlapDroppedError',
       'OverlapQueueFullError',
       'PolicyError',
+      'SemaphoreQueueFullError',
       'TimeoutError',
       'cachedFor',
       'cachedForWithHandle',
@@ -26,6 +27,7 @@ describe('public operators', () => {
       'memoizeWithHandle',
       'overlap',
       'retry',
+      'semaphore',
       'timeout',
     ]);
     expect(new operators.TimeoutError(10)).toBeInstanceOf(Error);

@@ -1,4 +1,5 @@
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
+import { callerSignal, invokeWithSignal, isCallerCancellation } from '../core/cancellation';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import type { Operator } from '../core/operator';
@@ -40,13 +41,17 @@ export function fallback<This, Args extends readonly unknown[], Result>(
       context: RuntimeOperationContext<This, Args> | undefined,
       ...args: Args
     ): MaybePromise<Result> {
+      if (context?.signal?.aborted === true) return Promise.reject(context.signal.reason);
       const useFallback = (error: unknown): MaybePromise<Result> => {
+        const signal = callerSignal(context);
+        const failure = signal?.aborted === true ? signal.reason : error;
+        if (isCallerCancellation(failure, context)) return Promise.reject(failure);
         emitPolicyEvent(context, 'fallback', 'fallback.used', { error });
-        return resolve(error, args);
+        return invokeWithSignal(() => resolve(error, args), context?.signal);
       };
 
       try {
-        const result = next.call(this, context, ...args);
+        const result = invokeWithSignal(() => next.call(this, context, ...args), context?.signal);
         return isPromiseLike(result)
           ? Promise.resolve(result).catch((error: unknown) => useFallback(error))
           : result;
