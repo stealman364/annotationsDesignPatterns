@@ -1,3 +1,5 @@
+import { assertObjectReceiver } from '../../core/receiver';
+import { isTimerDelay } from '../../core/numeric';
 /**
  * Retrasa la ejecución del método hasta que pasen `delayMs` milisegundos sin
  * nuevas llamadas; solo se ejecuta la última. El método debe devolver `void`
@@ -12,7 +14,7 @@
  * ```
  */
 export function Debounce(delayMs: number) {
-  if (delayMs <= 0) {
+  if (!isTimerDelay(delayMs, false)) {
     throw new RangeError('@Debounce requiere un retardo mayor que 0 ms');
   }
   return function <This, Args extends unknown[]>(
@@ -24,15 +26,15 @@ export function Debounce(delayMs: number) {
     }
     const timers = new WeakMap<object, ReturnType<typeof setTimeout>>();
     return function (this: This, ...args: Args): void {
-      const self = this as object;
-      const pending = timers.get(self);
+      assertObjectReceiver(this, '@Debounce');
+      const pending = timers.get(this);
       if (pending !== undefined) {
         clearTimeout(pending);
       }
       timers.set(
-        self,
+        this,
         setTimeout(() => {
-          timers.delete(self);
+          timers.delete(this);
           target.call(this, ...args);
         }, delayMs),
       );

@@ -18,3 +18,6 @@ export { retry } from '../operators/retry';
 export type { RetryOptions } from '../operators/retry';
 export { TimeoutError, timeout } from '../operators/timeout';
 export type { TimeoutOptions } from '../operators/timeout';
+export { semaphore, SemaphoreQueueFullError } from '../operators/semaphore';
+export type { SemaphoreKeyContext, SemaphoreOptions } from '../operators/semaphore';
+export type { InvocationInfo } from '../core/invocation-info';

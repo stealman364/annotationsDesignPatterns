@@ -1,3 +1,4 @@
+import { isTtl } from '../core/numeric';
 import type {
   AtomicAsyncStore,
   AsyncStoreUpdater,
@@ -89,7 +90,7 @@ export class AsyncMemoryStore<K, V> implements AtomicAsyncStore<K, V> {
       return { value };
     }
 
-    if (!Number.isFinite(ttlMs) || ttlMs < 0) {
+    if (!isTtl(ttlMs, true)) {
       throw new RangeError('ttlMs must be a finite, non-negative number');
     }
 

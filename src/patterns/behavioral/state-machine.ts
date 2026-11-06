@@ -32,6 +32,12 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   }
 }
 
+type ValidStates<Selected extends string, State extends string> = [
+  Exclude<Selected, State>,
+] extends [never]
+  ? unknown
+  : never;
+
 /**
  * Guarda de estado: el método solo puede llamarse cuando la máquina está
  * en alguno de los estados permitidos; en otro caso lanza `Error` y el
@@ -47,6 +53,13 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
  * }
  * ```
  */
+export function When<const Allowed extends readonly string[]>(
+  ...allowed: Allowed
+): <This extends StateMachine<string>, Args extends unknown[], Return>(
+  target: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> &
+    ValidStates<Allowed[number], This['state']>,
+) => (this: This, ...args: Args) => Return;
 export function When(...allowed: string[]) {
   return function <This extends StateMachine<string>, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,
@@ -73,6 +86,13 @@ export function When(...allowed: string[]) {
  *
  * @example ver `@When` para el decorador de guarda.
  */
+export function TransitionTo<const Next extends string>(
+  next: Next,
+): <This extends StateMachine<string>, Args extends unknown[], Return>(
+  target: (this: This, ...args: Args) => Return,
+  context: ClassMethodDecoratorContext<This, (this: This, ...args: Args) => Return> &
+    ValidStates<Next, This['state']>,
+) => (this: This, ...args: Args) => Return;
 export function TransitionTo(next: string) {
   return function <This extends StateMachine<string>, Args extends unknown[], Return>(
     target: (this: This, ...args: Args) => Return,

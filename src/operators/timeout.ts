@@ -1,4 +1,6 @@
+import { isTimerDelay } from '../core/numeric';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
+import { invokeWithSignal, withExecutionSignal } from '../core/cancellation';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import type { Operator } from '../core/operator';
@@ -82,6 +84,11 @@ export function timeout<This, Args extends readonly unknown[], Result>(
   createTimeoutError: () => Error = () => new TimeoutError(milliseconds),
   options: TimeoutOptions = {},
 ): Operator<This, Args, Result, Result> {
+  if (!isTimerDelay(milliseconds, true)) {
+    throw new RangeError(
+      'timeout requires a finite non-negative limit within the portable timer range',
+    );
+  }
   const createWrapper = (
     next: ContextualMethod<This, Args, Result>,
   ): ContextualMethod<This, Args, Result> =>
@@ -97,10 +104,16 @@ export function timeout<This, Args extends readonly unknown[], Result>(
         return Promise.reject(error);
       }
 
-      const timeoutContext =
-        context === undefined
-          ? undefined
-          : Object.freeze({ ...context, signal: abortScope.signal });
+      const timeoutContext = withExecutionSignal(
+        context ??
+          Object.freeze({
+            receiver: this,
+            args: Object.freeze([...args]) as unknown as Args,
+            operationId: 'internal-timeout',
+            metadata: Object.freeze({}),
+          }),
+        abortScope.signal,
+      );
       let timer: ReturnType<typeof setTimeout> | undefined;
       let onAbort: (() => void) | undefined;
       const cleanup = (): void => {
@@ -123,7 +136,9 @@ export function timeout<This, Args extends readonly unknown[], Result>(
         abortScope.signal.addEventListener('abort', onAbort, { once: true });
       });
       try {
-        const operation = Promise.resolve(next.call(this, timeoutContext, ...args));
+        const operation = Promise.resolve(
+          invokeWithSignal(() => next.call(this, timeoutContext, ...args), abortScope.signal),
+        );
         return Promise.race([operation, limit, aborted]).finally(cleanup);
       } catch (error) {
         cleanup();

@@ -1,4 +1,7 @@
+import { isCount } from '../core/numeric';
+import { PermitQueue, type Release } from '../core/permit-queue';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
+import { raceWithSignal, sharedContext } from '../core/cancellation';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import { PolicyError, type PolicyErrorOptions } from '../core/errors';
@@ -12,20 +15,6 @@ interface NormalizedOverlapOptions<This, Args extends readonly unknown[]> {
   readonly mode: OverlapOptions<This, Args>['mode'];
   readonly key: OverlapOptions<This, Args>['key'];
   readonly maxQueue: number;
-}
-
-interface QueuedInvocation<This, Args extends readonly unknown[], Result> {
-  readonly receiver: This;
-  readonly context: RuntimeOperationContext<This, Args> | undefined;
-  readonly args: Args;
-  readonly resolve: (value: Result | PromiseLike<Result>) => void;
-  readonly reject: (reason?: unknown) => void;
-}
-
-interface QueueState<This, Args extends readonly unknown[], Result> {
-  active: boolean;
-  draining: boolean;
-  readonly queued: Array<QueuedInvocation<This, Args, Result>>;
 }
 
 interface SharedReservation<Result> {
@@ -114,10 +103,7 @@ function normalizeOverlapOptions<This, Args extends readonly unknown[]>(
   if (typeof options.key !== 'function') {
     throw new TypeError('overlap requires a key resolver');
   }
-  if (
-    options.maxQueue !== undefined &&
-    (!Number.isInteger(options.maxQueue) || options.maxQueue < 0)
-  ) {
+  if (options.maxQueue !== undefined && !isCount(options.maxQueue, 0)) {
     throw new RangeError('overlap requires maxQueue to be a non-negative integer');
   }
 
@@ -180,104 +166,67 @@ export function overlap<This, Args extends readonly unknown[], Result>(
   const createWrapper = (
     next: ContextualMethod<This, Args, Result>,
   ): ContextualMethod<This, Args, Result> => {
-    const active = new Map<PropertyKey, PromiseLike<Result>>();
-    const queues = new Map<PropertyKey, QueueState<This, Args, Result>>();
+    const active = new Map<PropertyKey, { promise: PromiseLike<Result>; joined: boolean }>();
+    const queues = new Map<PropertyKey, PermitQueue>();
 
     const createQueueWrapper = function (
       this: This,
       context: RuntimeOperationContext<This, Args> | undefined,
       ...args: Args
     ): MaybePromise<Result> {
+      if (context?.signal?.aborted === true) return Promise.reject(context.signal.reason);
       const key = resolveKey(this, args, context, normalized);
-      const state = queues.get(key) ?? { active: false, draining: false, queued: [] };
-      queues.set(key, state);
-
-      const emitStarted = (entryContext: RuntimeOperationContext<This, Args> | undefined): void => {
-        emitPolicyEvent(entryContext, 'overlap', 'overlap.started', { key });
+      const queue = queues.get(key) ?? new PermitQueue(1, normalized.maxQueue);
+      queues.set(key, queue);
+      const clean = (): void => {
+        if (queue.isIdle && queues.get(key) === queue) queues.delete(key);
       };
-      const emitCompleted = (
-        entryContext: RuntimeOperationContext<This, Args> | undefined,
-      ): void => {
-        emitPolicyEvent(entryContext, 'overlap', 'overlap.completed', { key });
-      };
-
-      const startQueued = (): void => {
-        if (state.draining) {
-          return;
+      const execute = (release: Release): MaybePromise<Result> => {
+        if (context?.signal?.aborted === true) {
+          release();
+          clean();
+          return Promise.reject(context.signal.reason);
         }
-
-        state.draining = true;
+        emitPolicyEvent(context, 'overlap', 'overlap.started', { key });
+        const complete = (): void => {
+          emitPolicyEvent(context, 'overlap', 'overlap.completed', { key });
+          release();
+          clean();
+        };
         try {
-          while (true) {
-            const entry = state.queued.shift();
-            if (entry === undefined) {
-              state.active = false;
-              if (queues.get(key) === state) {
-                queues.delete(key);
-              }
-              return;
-            }
-
-            emitStarted(entry.context);
-            try {
-              const result = next.call(entry.receiver, entry.context, ...entry.args);
-              if (isPromiseLike(result)) {
-                void Promise.resolve(result).then(
-                  (value) => {
-                    entry.resolve(value);
-                    emitCompleted(entry.context);
-                    startQueued();
-                  },
-                  (error: unknown) => {
-                    entry.reject(error);
-                    emitCompleted(entry.context);
-                    startQueued();
-                  },
-                );
-                return;
-              }
-              entry.resolve(result);
-              emitCompleted(entry.context);
-            } catch (error) {
-              entry.reject(error);
-              emitCompleted(entry.context);
-            }
+          // An event sink may abort after admission but before user work.
+          if (context?.signal !== undefined && Boolean(context.signal.aborted)) {
+            complete();
+            return Promise.reject(context.signal.reason);
           }
-        } finally {
-          state.draining = false;
+          const result = next.call(this, context, ...args);
+          if (isPromiseLike(result)) {
+            // Cancellation stops this caller waiting, while permit ownership
+            // lasts until the actual inner execution settles.
+            void Promise.resolve(result).then(complete, complete);
+            return raceWithSignal(result, context?.signal);
+          }
+          complete();
+          return raceWithSignal(result, context?.signal);
+        } catch (error) {
+          complete();
+          if (context?.signal !== undefined && Boolean(context.signal.aborted))
+            return Promise.reject(context.signal.reason);
+          throw error;
         }
       };
-
-      const completeActive = (): void => {
-        emitCompleted(context);
-        startQueued();
-      };
-
-      if (state.active) {
-        if (state.queued.length >= normalized.maxQueue) {
-          emitPolicyEvent(context, 'overlap', 'overlap.dropped', { key });
-          return Promise.reject(new OverlapQueueFullError(key));
-        }
+      const acquired = queue.acquire(context?.signal, () => {
         emitPolicyEvent(context, 'overlap', 'overlap.queued', { key });
-        return new Promise<Result>((resolve, reject) => {
-          state.queued.push({ receiver: this, context, args, resolve, reject });
-        });
+      });
+      if (acquired === undefined) {
+        emitPolicyEvent(context, 'overlap', 'overlap.dropped', { key });
+        return Promise.reject(new OverlapQueueFullError(key));
       }
-
-      state.active = true;
-      emitStarted(context);
-      try {
-        const result = next.call(this, context, ...args);
-        if (isPromiseLike(result)) {
-          void Promise.resolve(result).then(completeActive, completeActive);
-          return result;
-        }
-        completeActive();
-        return result;
-      } catch (error) {
-        completeActive();
+      if (typeof acquired === 'function') return execute(acquired);
+      return acquired.then(execute, (error: unknown) => {
+        clean();
         throw error;
-      }
+      });
     };
 
     const createDropOrShareWrapper = function (
@@ -285,11 +234,14 @@ export function overlap<This, Args extends readonly unknown[], Result>(
       context: RuntimeOperationContext<This, Args> | undefined,
       ...args: Args
     ): MaybePromise<Result> {
+      if (context?.signal !== undefined && Boolean(context.signal.aborted))
+        return Promise.reject(context.signal.reason);
       const key = resolveKey(this, args, context, normalized);
       const inFlight = active.get(key);
       if (inFlight !== undefined) {
         if (normalized.mode === 'share') {
-          return inFlight;
+          inFlight.joined = true;
+          return raceWithSignal(inFlight.promise, context?.signal);
         }
         emitPolicyEvent(context, 'overlap', 'overlap.dropped', { key });
         return Promise.reject(new OverlapDroppedError(key));
@@ -300,20 +252,30 @@ export function overlap<This, Args extends readonly unknown[], Result>(
       // reentrant share call receive the canonical promise while the first
       // invocation has not yet produced its own asynchronous result.
       const reservation = shared?.promise ?? new Promise<Result>(() => undefined);
-      active.set(key, reservation);
+      const running = { promise: reservation, joined: false };
+      active.set(key, running);
       emitPolicyEvent(context, 'overlap', 'overlap.started', { key });
       const complete = (): void => {
-        if (active.get(key) === reservation) {
+        if (active.get(key) === running) {
           active.delete(key);
         }
         emitPolicyEvent(context, 'overlap', 'overlap.completed', { key });
       };
       try {
-        const result = next.call(this, context, ...args);
+        if (context?.signal !== undefined && Boolean(context.signal.aborted) && !running.joined) {
+          shared?.reject(context.signal.reason);
+          complete();
+          return Promise.reject(context.signal.reason);
+        }
+        const result = next.call(
+          this,
+          normalized.mode === 'share' ? sharedContext(context) : context,
+          ...args,
+        );
         if (!isPromiseLike(result)) {
           shared?.resolve(result);
           complete();
-          return result;
+          return raceWithSignal(result, context?.signal);
         }
         void Promise.resolve(result).then(
           (value) => {
@@ -325,7 +287,7 @@ export function overlap<This, Args extends readonly unknown[], Result>(
             complete();
           },
         );
-        return shared?.promise ?? result;
+        return raceWithSignal(shared?.promise ?? result, context?.signal);
       } catch (error) {
         shared?.reject(error);
         complete();

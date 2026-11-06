@@ -1,3 +1,6 @@
+import { isCount } from '../../core/numeric';
+import { adaptOperator } from '../../decorators/adapters';
+import { semaphore } from '../../operators/semaphore';
 /**
  * Limita a `maxConcurrent` las ejecuciones simultáneas del método asíncrono
  * en la misma instancia (patrón Bulkhead); las llamadas que exceden el
@@ -13,7 +16,7 @@
  * ```
  */
 export function Semaphore(maxConcurrent: number) {
-  if (maxConcurrent < 1) {
+  if (!isCount(maxConcurrent, 1)) {
     throw new RangeError('@Semaphore requiere al menos 1 ejecución concurrente');
   }
   return function <This, Args extends unknown[], Return>(
@@ -23,24 +26,23 @@ export function Semaphore(maxConcurrent: number) {
     if (context.kind !== 'method') {
       throw new TypeError('@Semaphore solo puede aplicarse a un método');
     }
-    const states = new WeakMap<object, { active: number; queue: Array<() => void> }>();
-    return async function (this: This, ...args: Args): Promise<Return> {
-      const self = this as object;
-      let state = states.get(self);
-      if (!state) {
-        state = { active: 0, queue: [] };
-        states.set(self, state);
-      }
-      const s = state;
-      if (s.active >= maxConcurrent) {
-        await new Promise<void>((resolve) => s.queue.push(resolve));
-      }
-      s.active++;
+    const wrapped = adaptOperator<object, Args, Return>(
+      () => semaphore<object, Args, Return>({ permits: maxConcurrent }),
+      { scope: 'instance', decoratorName: '@Semaphore' },
+    )(
+      target as (this: object, ...args: Args) => Promise<Return>,
+      context as unknown as ClassMethodDecoratorContext<
+        object,
+        (this: object, ...args: Args) => Promise<Return>
+      >,
+    );
+    return function (this: This, ...args: Args): Promise<Return> {
       try {
-        return await target.call(this, ...args);
-      } finally {
-        s.active--;
-        s.queue.shift()?.();
+        return Promise.resolve(wrapped.call(this as object, ...args));
+      } catch (error) {
+        // The adapter validates instance receivers synchronously; Semaphore has
+        // always exposed invocation failures through a rejected Promise.
+        return Promise.reject(error);
       }
     };
   };

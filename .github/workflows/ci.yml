@@ -24,6 +24,7 @@ jobs:
       - run: npm test
       - run: npm run test:coverage
       - run: npm run audit:any
+      - run: npm run bundle:check
       - run: npm run test:dist
       - run: npm pack --dry-run
       - run: npm run lint:package

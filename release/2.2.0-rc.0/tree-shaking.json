@@ -1,0 +1,15 @@
+{
+  "entry": "import { builderFor } from './dist/index.js'; console.log(builderFor(class User {}).build());",
+  "bytes": 519,
+  "included": [
+    {
+      "file": "dist/chunk-IKLUOUM3.js",
+      "bytesInOutput": 486
+    },
+    {
+      "file": "<stdin>",
+      "bytesInOutput": 32
+    }
+  ],
+  "output": "function i(m){let n=new Map,p=new Proxy(Object.create(null),{get(a,r){if(typeof r!=\"string\")throw new TypeError(\"Los m\\xE9todos del builder deben ser strings\");if(r===\"build\")return()=>{let o=new m;for(let[t,e]of n)o[t]=e;return o};if(r.startsWith(\"with\")&&r.length>4){let o=r[4],t=r.slice(4),e=/^[A-Z]{2}/.test(t)?t:o.toLowerCase()+r.slice(5);return f=>(n.set(e,f),p)}throw new TypeError(`M\\xE9todo desconocido en el builder: \"${r}\". Usa with<Propiedad>(valor) o build()`)}});return p}console.log(i(class{}).build());\n"
+}

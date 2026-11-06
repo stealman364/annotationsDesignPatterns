@@ -136,6 +136,8 @@ function createOperators<This, Args extends readonly unknown[], Result>(
               attempts: options.attempts,
               delayMs: options.delayMs,
               backoffFactor: options.backoffFactor,
+              maxDelayMs: options.maxDelayMs,
+              jitter: options.jitter,
               shouldRetry: options.shouldRetry,
             }),
           );
@@ -217,6 +219,8 @@ function layerDescription<This, Args extends readonly unknown[], Result>(
               attempts: options.attempts,
               delayMs: options.delayMs ?? 0,
               backoffFactor: options.backoffFactor ?? 1,
+              maxDelayMs: options.maxDelayMs,
+              jitter: options.jitter,
               idempotent: options.idempotent,
               shouldRetry: options.shouldRetry,
             }),

@@ -1,3 +1,4 @@
+import { assertObjectReceiver } from '../../core/receiver';
 /**
  * Ejecuta el método una sola vez por instancia; las llamadas siguientes
  * devuelven el resultado de la primera (incluidos `undefined` y `null`)
@@ -21,11 +22,11 @@ export function Once<This, Args extends unknown[], Return>(
   const results = new WeakMap<object, Return>();
   const executed = new WeakSet<object>();
   return function (this: This, ...args: Args): Return {
-    const self = this as object;
-    if (!executed.has(self)) {
-      results.set(self, target.call(this, ...args));
-      executed.add(self);
+    assertObjectReceiver(this, '@Once');
+    if (!executed.has(this)) {
+      results.set(this, target.call(this, ...args));
+      executed.add(this);
     }
-    return results.get(self) as Return;
+    return results.get(this) as Return;
   };
 }

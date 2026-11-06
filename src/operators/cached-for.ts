@@ -1,4 +1,7 @@
+import { isCount, isTtl } from '../core/numeric';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
+import { raceWithSignal, sharedContext } from '../core/cancellation';
+import { assertObjectReceiver } from '../core/receiver';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import type { Operator } from '../core/operator';
@@ -7,6 +10,10 @@ import { CacheHandleStore, type CacheHandle } from './cache-handle';
 
 export interface CachedForOperatorOptions<Args extends readonly unknown[]> {
   readonly key?: (...args: Args) => string;
+  /** Isolate entries by object/function receiver identity. Opt-in, without handles. */
+  readonly perReceiver?: boolean;
+  /** Maximum retained entries, including pending results. FIFO; hits do not reorder. */
+  readonly maxEntries?: number;
 }
 
 export interface CachedForWithHandle<This, Args extends readonly unknown[], Result> {
@@ -34,28 +41,48 @@ function createWrapper<This, Args extends readonly unknown[], Result>(
   next: ContextualMethod<This, Args, Result>,
   ttlMs: number,
   options: CachedForOperatorOptions<Args>,
-  cache: CacheHandleStore<CacheEntry<Result>>,
+  sharedCache: CacheHandleStore<CacheEntry<Result>>,
 ): ContextualMethod<This, Args, Result> {
   const key = options.key ?? ((...args: Args) => JSON.stringify(args));
+  const maxEntries = options.maxEntries;
+  const receiverCaches =
+    options.perReceiver === true
+      ? new WeakMap<object, CacheHandleStore<CacheEntry<Result>>>()
+      : undefined;
 
   return function (
     this: This,
     context: RuntimeOperationContext<This, Args> | undefined,
     ...args: Args
   ): MaybePromise<Result> {
+    if (context?.signal !== undefined && Boolean(context.signal.aborted))
+      return Promise.reject(context.signal.reason);
+    let cache = sharedCache;
+    if (receiverCaches !== undefined) {
+      assertObjectReceiver(this, 'cachedFor perReceiver');
+      let receiverCache = receiverCaches.get(this);
+      if (receiverCache === undefined) {
+        receiverCache = new CacheHandleStore<CacheEntry<Result>>('cachedFor', maxEntries);
+        receiverCaches.set(this, receiverCache);
+      }
+      cache = receiverCache;
+    }
     const cacheKey = key(...args);
     const entry = cache.get(cacheKey);
     const now = Date.now();
     if (entry !== undefined && now < entry.value.expiresAt) {
       emitPolicyEvent(context, 'cachedFor', 'cache.hit', {});
-      return entry.value.value;
+      return raceWithSignal(entry.value.value, context?.signal);
     }
     if (entry !== undefined) {
       cache.deleteIfCurrent(cacheKey, entry);
     }
+    cache.pruneExpired((value) => now >= value.expiresAt);
 
     emitPolicyEvent(context, 'cachedFor', 'cache.miss', {});
-    const value = next.call(this, context, ...args);
+    if (context?.signal !== undefined && Boolean(context.signal.aborted))
+      return Promise.reject(context.signal.reason);
+    const value = next.call(this, sharedContext(context), ...args);
     const replacement = cache.set(cacheKey, { value, expiresAt: now + ttlMs }, context);
     if (isPromiseLike(value)) {
       void Promise.resolve(value).catch((error: unknown) => {
@@ -64,15 +91,30 @@ function createWrapper<This, Args extends readonly unknown[], Result>(
         }
       });
     }
-    return value;
+    return raceWithSignal(value, context?.signal);
   };
 }
 
 function createCachedForOperator<This, Args extends readonly unknown[], Result>(
   ttlMs: number,
   options: CachedForOperatorOptions<Args>,
-  createCache: () => CacheHandleStore<CacheEntry<Result>>,
+  createCache: (maxEntries: number | undefined) => CacheHandleStore<CacheEntry<Result>>,
+  withHandle = false,
 ): Operator<This, Args, Result, Result> {
+  const perReceiver = options.perReceiver;
+  const maxEntries = options.maxEntries;
+  if (perReceiver !== undefined && typeof perReceiver !== 'boolean') {
+    throw new TypeError('cachedFor requires perReceiver to be a boolean');
+  }
+  if (withHandle && perReceiver === true) {
+    throw new TypeError('cachedForWithHandle does not support perReceiver');
+  }
+  if (!isTtl(ttlMs, true)) {
+    throw new RangeError('cachedFor requires a non-negative TTL');
+  }
+  if (maxEntries !== undefined && !isCount(maxEntries, 1)) {
+    throw new RangeError('cachedFor requires maxEntries to be a positive safe integer');
+  }
   const operator: ContextualOperator<This, Args, Result, Result> = {
     name: 'cachedFor',
     apply(next: AnyMethod<This, Args, Result>): AnyMethod<This, Args, Result> {
@@ -81,15 +123,20 @@ function createCachedForOperator<This, Args extends readonly unknown[], Result>(
           return next.call(this, ...args);
         },
         ttlMs,
-        options,
-        createCache(),
+        { key: options.key, perReceiver, maxEntries },
+        createCache(maxEntries),
       );
       return withoutContext(wrapper);
     },
     applyWithContext(
       next: ContextualMethod<This, Args, Result>,
     ): ContextualMethod<This, Args, Result> {
-      return createWrapper(next, ttlMs, options, createCache());
+      return createWrapper(
+        next,
+        ttlMs,
+        { key: options.key, perReceiver, maxEntries },
+        createCache(maxEntries),
+      );
     },
   };
 
@@ -104,7 +151,7 @@ export function cachedFor<This, Args extends readonly unknown[], Result>(
   return createCachedForOperator(
     ttlMs,
     options,
-    () => new CacheHandleStore<CacheEntry<Result>>('cachedFor'),
+    (maxEntries) => new CacheHandleStore<CacheEntry<Result>>('cachedFor', maxEntries),
   );
 }
 
@@ -114,11 +161,20 @@ export function cachedFor<This, Args extends readonly unknown[], Result>(
  */
 export function cachedForWithHandle<This, Args extends readonly unknown[], Result>(
   ttlMs: number,
-  options: CachedForOperatorOptions<Args> = {},
+  options: Omit<CachedForOperatorOptions<Args>, 'perReceiver'> = {},
 ): CachedForWithHandle<This, Args, Result> {
-  const cache = new CacheHandleStore<CacheEntry<Result>>('cachedFor');
+  const receiverOptions: CachedForOperatorOptions<Args> = options;
+  const maxEntries = options.maxEntries;
+  const configuration: CachedForOperatorOptions<Args> = {
+    get key() {
+      return options.key;
+    },
+    perReceiver: receiverOptions.perReceiver,
+    maxEntries,
+  };
+  const cache = new CacheHandleStore<CacheEntry<Result>>('cachedFor', maxEntries);
   return Object.freeze({
     handle: cache.handle,
-    operator: createCachedForOperator(ttlMs, options, () => cache),
+    operator: createCachedForOperator(ttlMs, configuration, () => cache, true),
   });
 }

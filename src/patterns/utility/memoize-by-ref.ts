@@ -1,3 +1,4 @@
+import { assertObjectReceiver } from '../../core/receiver';
 interface CacheNode<Return> {
   hasResult: boolean;
   result: Return | undefined;
@@ -46,11 +47,11 @@ export function MemoizeByRef<This, Args extends unknown[], Return>(
   }
   const roots = new WeakMap<object, CacheNode<Return>>();
   return function (this: This, ...args: Args): Return {
-    const self = this as object;
-    let node = roots.get(self);
+    assertObjectReceiver(this, '@MemoizeByRef');
+    let node = roots.get(this);
     if (!node) {
       node = createNode<Return>();
-      roots.set(self, node);
+      roots.set(this, node);
     }
     for (const arg of args) {
       if (isObjectLike(arg)) {

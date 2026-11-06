@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -138,6 +138,30 @@ try {
     consumerDirectory,
   );
 
+  const rcTypes = join(consumerDirectory, 'rc-types.ts');
+  const rcRuntime = join(consumerDirectory, 'rc-runtime.mjs');
+  writeFileSync(rcTypes, readFileSync(new URL('./fixtures/rc-types.ts', import.meta.url)));
+  writeFileSync(rcRuntime, readFileSync(new URL('./fixtures/rc-runtime.mjs', import.meta.url)));
+  run(process.execPath, [rcRuntime], consumerDirectory);
+  for (const filename of [rcTypes, rcTypes.replace(/\.ts$/, '.cts')]) {
+    if (filename !== rcTypes) writeFileSync(filename, readFileSync(rcTypes));
+    run(
+      process.execPath,
+      [
+        resolve(repositoryRoot, 'node_modules/typescript/bin/tsc'),
+        '--module',
+        'NodeNext',
+        '--moduleResolution',
+        'NodeNext',
+        '--strict',
+        '--noEmit',
+        '--target',
+        'ES2022',
+        filename,
+      ],
+      consumerDirectory,
+    );
+  }
   console.log('packed consumer smoke ESM/CJS/types OK');
 } finally {
   if (existsSync(temporaryDirectory)) {

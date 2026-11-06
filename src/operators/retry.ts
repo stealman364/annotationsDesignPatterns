@@ -1,4 +1,6 @@
+import { isBackoffFactor, isCount, isTimerDelay, MAX_TIMER_DELAY_MS } from '../core/numeric';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
+import { invokeWithSignal } from '../core/cancellation';
 import { emitPolicyEvent } from '../core/context';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import type { Operator } from '../core/operator';
@@ -26,6 +28,10 @@ export interface RetryOptions<
   delayMs?: number;
   /** Multiplicador del backoff exponencial. Por defecto 1. Mínimo 1. */
   backoffFactor?: number;
+  /** Optional cap applied before jitter, independently of the portable timer cap. */
+  maxDelayMs?: number;
+  /** Randomize capped waits; the default 'none' does not call Math.random(). */
+  jitter?: 'none' | 'full' | 'equal';
   shouldRetry?: (
     error: unknown,
     attempt: number,
@@ -37,6 +43,8 @@ interface NormalizedRetryOptions<This, Args extends readonly unknown[]> {
   readonly attempts: number;
   readonly delayMs: number;
   readonly backoffFactor: number;
+  readonly maxDelayMs: number | undefined;
+  readonly jitter: 'none' | 'full' | 'equal';
   readonly shouldRetry:
     | ((error: unknown, attempt: number, context: RetryInvocationContext<This, Args>) => boolean)
     | undefined;
@@ -81,12 +89,6 @@ function isPromiseLike(value: unknown): value is PromiseLike<unknown> {
   }
 }
 
-function assertFiniteNumberAtLeast(value: number, minimum: number, option: string): void {
-  if (!Number.isFinite(value) || value < minimum) {
-    throw new RangeError(`@Retry requiere ${option}`);
-  }
-}
-
 export function normalizeRetryOptions<
   This = unknown,
   Args extends readonly unknown[] = readonly unknown[],
@@ -94,15 +96,29 @@ export function normalizeRetryOptions<
   attempts,
   delayMs = 0,
   backoffFactor = 1,
+  maxDelayMs,
+  jitter = 'none',
   shouldRetry,
 }: RetryOptions<This, Args>): NormalizedRetryOptions<This, Args> {
-  assertFiniteNumberAtLeast(attempts, 1, 'al menos 1 intento');
-  assertFiniteNumberAtLeast(delayMs, 0, 'un delayMs finito mayor o igual que 0');
-  assertFiniteNumberAtLeast(backoffFactor, 1, 'un backoffFactor finito mayor o igual que 1');
+  if (!isCount(attempts, 1)) {
+    throw new RangeError('@Retry requiere al menos 1 intento');
+  }
+  if (!isTimerDelay(delayMs, true)) {
+    throw new RangeError('@Retry requiere un delayMs finito mayor o igual que 0');
+  }
+  if (!isBackoffFactor(backoffFactor)) {
+    throw new RangeError('@Retry requiere un backoffFactor finito mayor o igual que 1');
+  }
+  if (maxDelayMs !== undefined && !isTimerDelay(maxDelayMs, true)) {
+    throw new RangeError('@Retry requires maxDelayMs within the portable timer range');
+  }
+  if (jitter !== 'none' && jitter !== 'full' && jitter !== 'equal') {
+    throw new RangeError('@Retry requires jitter to be none, full, or equal');
+  }
   if (shouldRetry !== undefined && typeof shouldRetry !== 'function') {
     throw new TypeError('@Retry requiere shouldRetry como funciÃ³n');
   }
-  return { attempts, delayMs, backoffFactor, shouldRetry };
+  return { attempts, delayMs, backoffFactor, maxDelayMs, jitter, shouldRetry };
 }
 
 /**
@@ -116,7 +132,8 @@ export function normalizeRetryOptions<
 export function retry<This, Args extends readonly unknown[], Result>(
   options: RetryOptions<This, Args>,
 ): Operator<This, Args, Result, Result> {
-  const { attempts, delayMs, backoffFactor, shouldRetry } = normalizeRetryOptions(options);
+  const { attempts, delayMs, backoffFactor, maxDelayMs, jitter, shouldRetry } =
+    normalizeRetryOptions(options);
   const createWrapper = (
     next: ContextualMethod<This, Args, Result>,
   ): ContextualMethod<This, Args, Result> =>
@@ -145,7 +162,14 @@ export function retry<This, Args extends readonly unknown[], Result>(
               signal: context?.signal,
             });
           } catch (decisionError) {
-            return Promise.reject(decisionError);
+            return Promise.reject(
+              context?.signal !== undefined && Boolean(context.signal.aborted)
+                ? abortReason(context.signal)
+                : decisionError,
+            );
+          }
+          if (context?.signal !== undefined && Boolean(context.signal.aborted)) {
+            return Promise.reject(abortReason(context.signal));
           }
         }
         if (!mayRetry) {
@@ -153,7 +177,20 @@ export function retry<This, Args extends readonly unknown[], Result>(
           return Promise.reject(error);
         }
         const invokeNext = (): MaybePromise<Result> => invoke(attempt + 1);
-        if (delayMs === 0) {
+        const cap =
+          delayMs === 0
+            ? 0
+            : Math.min(
+                MAX_TIMER_DELAY_MS,
+                maxDelayMs ?? MAX_TIMER_DELAY_MS,
+                delayMs * backoffFactor ** (attempt - 1),
+              );
+        let wait = cap;
+        if (cap > 0 && jitter !== 'none') {
+          const random = Math.random();
+          wait = jitter === 'full' ? random * cap : cap / 2 + random * (cap / 2);
+        }
+        if (wait === 0) {
           return Promise.resolve().then(() => {
             if (context?.signal?.aborted === true) {
               throw abortReason(context.signal);
@@ -161,7 +198,6 @@ export function retry<This, Args extends readonly unknown[], Result>(
             return invokeNext();
           });
         }
-        const wait = delayMs * backoffFactor ** (attempt - 1);
         return waitForRetry(wait, context?.signal).then(invokeNext);
       };
 
@@ -171,7 +207,7 @@ export function retry<This, Args extends readonly unknown[], Result>(
         }
         emitPolicyEvent(context, 'retry', 'retry.attempt', { attempt });
         try {
-          const result = next.call(this, context, ...args);
+          const result = invokeWithSignal(() => next.call(this, context, ...args), context?.signal);
           return isPromiseLike(result)
             ? Promise.resolve(result).catch((error: unknown) => retryAfter(error, attempt))
             : result;
