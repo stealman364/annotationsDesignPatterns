@@ -2,28 +2,28 @@
   "measurement": "Reachable distribution modules per public entrypoint, raw and gzip level 9; not a consumer tree-shaken bundle.",
   "entries": {
     "dist/decorators/index.cjs": {
-      "raw": 35712,
-      "gzip": 7296
+      "raw": 43264,
+      "gzip": 8640
     },
     "dist/decorators/index.js": {
-      "raw": 40704,
-      "gzip": 7872
+      "raw": 49024,
+      "gzip": 9344
     },
     "dist/experimental/index.cjs": {
-      "raw": 10496,
-      "gzip": 2816
+      "raw": 28544,
+      "gzip": 6400
     },
     "dist/experimental/index.js": {
-      "raw": 11008,
-      "gzip": 2816
+      "raw": 29824,
+      "gzip": 6464
     },
     "dist/index.cjs": {
-      "raw": 69888,
-      "gzip": 14016
+      "raw": 83456,
+      "gzip": 16512
     },
     "dist/index.js": {
-      "raw": 77568,
-      "gzip": 15296
+      "raw": 92160,
+      "gzip": 17984
     },
     "dist/node/index.cjs": {
       "raw": 1920,
@@ -34,12 +34,12 @@
       "gzip": 320
     },
     "dist/observability/index.cjs": {
-      "raw": 1792,
-      "gzip": 768
+      "raw": 3712,
+      "gzip": 1280
     },
     "dist/observability/index.js": {
-      "raw": 640,
-      "gzip": 320
+      "raw": 2304,
+      "gzip": 896
     },
     "dist/patterns/behavioral/command.cjs": {
       "raw": 3200,
@@ -90,12 +90,12 @@
       "gzip": 576
     },
     "dist/patterns/behavioral/state-machine.cjs": {
-      "raw": 2944,
-      "gzip": 1088
+      "raw": 5760,
+      "gzip": 1856
     },
     "dist/patterns/behavioral/state-machine.js": {
-      "raw": 1920,
-      "gzip": 704
+      "raw": 4736,
+      "gzip": 1536
     },
     "dist/patterns/behavioral/strategy.cjs": {
       "raw": 2432,
@@ -202,20 +202,20 @@
       "gzip": 384
     },
     "dist/patterns/utility/cached-for.cjs": {
-      "raw": 10880,
-      "gzip": 3136
+      "raw": 18816,
+      "gzip": 4864
     },
     "dist/patterns/utility/cached-for.js": {
-      "raw": 13568,
-      "gzip": 3648
+      "raw": 21248,
+      "gzip": 5248
     },
     "dist/patterns/utility/circuit-breaker.cjs": {
       "raw": 13312,
       "gzip": 3520
     },
     "dist/patterns/utility/circuit-breaker.js": {
-      "raw": 15104,
-      "gzip": 3840
+      "raw": 16640,
+      "gzip": 4096
     },
     "dist/patterns/utility/debounce.cjs": {
       "raw": 2688,
@@ -235,7 +235,7 @@
     },
     "dist/patterns/utility/fallback.cjs": {
       "raw": 6528,
-      "gzip": 1920
+      "gzip": 2048
     },
     "dist/patterns/utility/fallback.js": {
       "raw": 7552,
@@ -274,12 +274,12 @@
       "gzip": 832
     },
     "dist/patterns/utility/memoize.cjs": {
-      "raw": 10112,
-      "gzip": 3008
+      "raw": 18176,
+      "gzip": 4800
     },
     "dist/patterns/utility/memoize.js": {
-      "raw": 12928,
-      "gzip": 3520
+      "raw": 20736,
+      "gzip": 5120
     },
     "dist/patterns/utility/mutex.cjs": {
       "raw": 2048,
@@ -318,7 +318,7 @@
       "gzip": 3392
     },
     "dist/patterns/utility/semaphore.js": {
-      "raw": 14720,
+      "raw": 15488,
       "gzip": 3904
     },
     "dist/patterns/utility/throttle.cjs": {
@@ -334,8 +334,8 @@
       "gzip": 3072
     },
     "dist/patterns/utility/timeout.js": {
-      "raw": 11776,
-      "gzip": 3328
+      "raw": 12544,
+      "gzip": 3520
     },
     "dist/patterns/utility/validate.cjs": {
       "raw": 1792,
@@ -354,12 +354,12 @@
       "gzip": 7808
     },
     "dist/public/operators.cjs": {
-      "raw": 53504,
-      "gzip": 9856
+      "raw": 68224,
+      "gzip": 12480
     },
     "dist/public/operators.js": {
-      "raw": 56320,
-      "gzip": 9984
+      "raw": 70400,
+      "gzip": 12416
     },
     "dist/public/pipe.cjs": {
       "raw": 3072,
@@ -370,20 +370,20 @@
       "gzip": 768
     },
     "dist/public/run.cjs": {
-      "raw": 4224,
-      "gzip": 1408
+      "raw": 5120,
+      "gzip": 1600
     },
     "dist/public/run.js": {
-      "raw": 4992,
-      "gzip": 1472
+      "raw": 5760,
+      "gzip": 1600
     },
     "dist/store/index.cjs": {
-      "raw": 7936,
-      "gzip": 2368
+      "raw": 8576,
+      "gzip": 2496
     },
     "dist/store/index.js": {
-      "raw": 7040,
-      "gzip": 2048
+      "raw": 7552,
+      "gzip": 2176
     }
   }
 }

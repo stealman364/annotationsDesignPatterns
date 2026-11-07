@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-11-07T20:38:25.992Z",
+  "head": "e45a61529374ef35985e6da456c445f4bebe3264",
+  "dirty": true,
+  "localVersion": "2.3.0-rc.0",
+  "node": "v22.18.0",
+  "source": {
+    "files": 97,
+    "sha256": "ae265f420b8662bea4e21beff4f6c493386d0fdb1386864cd78b624557b8e900"
+  },
+  "distribution": {
+    "files": 266,
+    "sha256": "8a00c15d310af8730e2725aff63ec6e4b3f91685b06f87bddff0c19e00662757"
+  },
+  "tests": 1112,
+  "suites": 134,
+  "remoteCiRun": false,
+  "published": false
+}

@@ -1,0 +1,385 @@
+{
+  "reason": "Localized 2.3 API additions: shared cancellation, handles, optimistic state, experimental cache and observability. Unaffected entrypoint limits retained. Memoize default consumer also retains the optional cancellation implementation; this cost is explicitly accepted for this local RC.",
+  "entrypoints": [
+    {
+      "name": "dist/index.js",
+      "previous": {
+        "raw": 77568,
+        "gzip": 15296
+      },
+      "measured": {
+        "raw": 87730,
+        "gzip": 17093
+      },
+      "budget": {
+        "raw": 92160,
+        "gzip": 17984
+      }
+    },
+    {
+      "name": "dist/index.cjs",
+      "previous": {
+        "raw": 69888,
+        "gzip": 14016
+      },
+      "measured": {
+        "raw": 79393,
+        "gzip": 15672
+      },
+      "budget": {
+        "raw": 83456,
+        "gzip": 16512
+      }
+    },
+    {
+      "name": "dist/public/operators.js",
+      "previous": {
+        "raw": 56320,
+        "gzip": 9984
+      },
+      "measured": {
+        "raw": 66998,
+        "gzip": 11771
+      },
+      "budget": {
+        "raw": 70400,
+        "gzip": 12416
+      }
+    },
+    {
+      "name": "dist/public/operators.cjs",
+      "previous": {
+        "raw": 53504,
+        "gzip": 9856
+      },
+      "measured": {
+        "raw": 64951,
+        "gzip": 11857
+      },
+      "budget": {
+        "raw": 68224,
+        "gzip": 12480
+      }
+    },
+    {
+      "name": "dist/public/run.js",
+      "previous": {
+        "raw": 4992,
+        "gzip": 1472
+      },
+      "measured": {
+        "raw": 5382,
+        "gzip": 1500
+      },
+      "budget": {
+        "raw": 5760,
+        "gzip": 1600
+      }
+    },
+    {
+      "name": "dist/public/run.cjs",
+      "previous": {
+        "raw": 4224,
+        "gzip": 1408
+      },
+      "measured": {
+        "raw": 4787,
+        "gzip": 1501
+      },
+      "budget": {
+        "raw": 5120,
+        "gzip": 1600
+      }
+    },
+    {
+      "name": "dist/decorators/index.js",
+      "previous": {
+        "raw": 40704,
+        "gzip": 7872
+      },
+      "measured": {
+        "raw": 46575,
+        "gzip": 8881
+      },
+      "budget": {
+        "raw": 49024,
+        "gzip": 9344
+      }
+    },
+    {
+      "name": "dist/decorators/index.cjs",
+      "previous": {
+        "raw": 35712,
+        "gzip": 7296
+      },
+      "measured": {
+        "raw": 41148,
+        "gzip": 8222
+      },
+      "budget": {
+        "raw": 43264,
+        "gzip": 8640
+      }
+    },
+    {
+      "name": "dist/experimental/index.js",
+      "previous": {
+        "raw": 11008,
+        "gzip": 2816
+      },
+      "measured": {
+        "raw": 28292,
+        "gzip": 6100
+      },
+      "budget": {
+        "raw": 29824,
+        "gzip": 6464
+      }
+    },
+    {
+      "name": "dist/experimental/index.cjs",
+      "previous": {
+        "raw": 10496,
+        "gzip": 2816
+      },
+      "measured": {
+        "raw": 27147,
+        "gzip": 6059
+      },
+      "budget": {
+        "raw": 28544,
+        "gzip": 6400
+      }
+    },
+    {
+      "name": "dist/observability/index.js",
+      "previous": {
+        "raw": 640,
+        "gzip": 320
+      },
+      "measured": {
+        "raw": 2186,
+        "gzip": 797
+      },
+      "budget": {
+        "raw": 2304,
+        "gzip": 896
+      }
+    },
+    {
+      "name": "dist/observability/index.cjs",
+      "previous": {
+        "raw": 1792,
+        "gzip": 768
+      },
+      "measured": {
+        "raw": 3441,
+        "gzip": 1201
+      },
+      "budget": {
+        "raw": 3712,
+        "gzip": 1280
+      }
+    },
+    {
+      "name": "dist/store/index.js",
+      "previous": {
+        "raw": 7040,
+        "gzip": 2048
+      },
+      "measured": {
+        "raw": 7190,
+        "gzip": 2048
+      },
+      "budget": {
+        "raw": 7552,
+        "gzip": 2176
+      }
+    },
+    {
+      "name": "dist/store/index.cjs",
+      "previous": {
+        "raw": 7936,
+        "gzip": 2368
+      },
+      "measured": {
+        "raw": 8067,
+        "gzip": 2343
+      },
+      "budget": {
+        "raw": 8576,
+        "gzip": 2496
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.js",
+      "previous": {
+        "raw": 1920,
+        "gzip": 704
+      },
+      "measured": {
+        "raw": 4505,
+        "gzip": 1404
+      },
+      "budget": {
+        "raw": 4736,
+        "gzip": 1536
+      }
+    },
+    {
+      "name": "dist/patterns/behavioral/state-machine.cjs",
+      "previous": {
+        "raw": 2944,
+        "gzip": 1088
+      },
+      "measured": {
+        "raw": 5472,
+        "gzip": 1734
+      },
+      "budget": {
+        "raw": 5760,
+        "gzip": 1856
+      }
+    },
+    {
+      "name": "dist/patterns/utility/cached-for.js",
+      "previous": {
+        "raw": 13568,
+        "gzip": 3648
+      },
+      "measured": {
+        "raw": 20220,
+        "gzip": 4964
+      },
+      "budget": {
+        "raw": 21248,
+        "gzip": 5248
+      }
+    },
+    {
+      "name": "dist/patterns/utility/circuit-breaker.js",
+      "previous": {
+        "raw": 15104,
+        "gzip": 3840
+      },
+      "measured": {
+        "raw": 15793,
+        "gzip": 3892
+      },
+      "budget": {
+        "raw": 16640,
+        "gzip": 4096
+      }
+    },
+    {
+      "name": "dist/patterns/utility/memoize.js",
+      "previous": {
+        "raw": 12928,
+        "gzip": 3520
+      },
+      "measured": {
+        "raw": 19650,
+        "gzip": 4866
+      },
+      "budget": {
+        "raw": 20736,
+        "gzip": 5120
+      }
+    },
+    {
+      "name": "dist/patterns/utility/cached-for.cjs",
+      "previous": {
+        "raw": 10880,
+        "gzip": 3136
+      },
+      "measured": {
+        "raw": 17818,
+        "gzip": 4624
+      },
+      "budget": {
+        "raw": 18816,
+        "gzip": 4864
+      }
+    },
+    {
+      "name": "dist/patterns/utility/memoize.cjs",
+      "previous": {
+        "raw": 10112,
+        "gzip": 3008
+      },
+      "measured": {
+        "raw": 17287,
+        "gzip": 4530
+      },
+      "budget": {
+        "raw": 18176,
+        "gzip": 4800
+      }
+    }
+  ],
+  "consumer": {
+    "name": "memoize",
+    "previous": {
+      "bytes": 5100,
+      "gzip": 1950
+    },
+    "measured": {
+      "bytes": 7910,
+      "gzip": 2800
+    },
+    "budget": {
+      "bytes": 9000,
+      "gzip": 3250
+    }
+  },
+  "followupReview": {
+    "reason": "Direct EventSink asynchronous failure isolation adds a small shared runtime guard. Adjust only exceeded metrics for three additional entrypoints; all consumer limits retained.",
+    "entrypoints": [
+      {
+        "name": "dist/patterns/utility/semaphore.js",
+        "previous": {
+          "raw": 14720,
+          "gzip": 3904
+        },
+        "measured": {
+          "raw": 14736,
+          "gzip": 3877
+        },
+        "budget": {
+          "raw": 15488,
+          "gzip": 3904
+        }
+      },
+      {
+        "name": "dist/patterns/utility/timeout.js",
+        "previous": {
+          "raw": 11776,
+          "gzip": 3328
+        },
+        "measured": {
+          "raw": 11876,
+          "gzip": 3332
+        },
+        "budget": {
+          "raw": 12544,
+          "gzip": 3520
+        }
+      },
+      {
+        "name": "dist/patterns/utility/fallback.cjs",
+        "previous": {
+          "raw": 6528,
+          "gzip": 1920
+        },
+        "measured": {
+          "raw": 6326,
+          "gzip": 1922
+        },
+        "budget": {
+          "raw": 6528,
+          "gzip": 2048
+        }
+      }
+    ]
+  }
+}

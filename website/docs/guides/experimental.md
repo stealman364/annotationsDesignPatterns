@@ -2,82 +2,91 @@
 sidebar_position: 9
 ---
 
-# Experimental: `switchOverlap` y `hedge`
+# APIs experimentales
 
-Dos operadores bajo investigación que **no son APIs estables**. Úsalos solo si sabes qué haces y acepta que su comportamiento o firma pueden cambiar en versiones futuras.
+Estos operadores son opcionales y pueden cambiar en futuras versiones. Antes de usarlos en producción, revisa cómo gestionan la concurrencia y la cancelación.
 
 ## `switchOverlap`
 
-Deduplicación con cambio de canal cuando falla una operación.
+`switchOverlap` aplica una política de «gana la llamada más reciente» a llamadas simultáneas con la misma clave. Una llamada nueva rechaza el resultado de la anterior con `OverlapSupersededError` e inicia su propio trabajo.
 
 ```ts
 import { switchOverlap } from 'annotations-design-patterns/experimental';
+import { pipe } from 'annotations-design-patterns/pipe';
+
+interface Data {
+  readonly value: string;
+}
+
+declare function fetchData(id: string): Promise<Data>;
 
 const load = pipe(
   fetchData,
-  switchOverlap({ key: ({ args }) => args[0], backoffMs: 100 }),
+  switchOverlap<object, readonly [string], Data>({
+    key: ({ args }) => args[0],
+  }),
 );
 ```
 
-**Comportamiento:**
-- Primera llamada inicia la operación
-- Llamadas posteriores con la misma clave esperan
-- Si falla, los waiters se activan y pueden reintentar independientemente (cambio de canal)
+Al sustituir una llamada, se rechaza el resultado que esperaba su consumidor, pero el trabajo subyacente continúa. JavaScript no puede detenerlo salvo que la propia operación coopere con la cancelación. Este operador no pone llamadas en cola ni deduplica sus resultados.
 
-**Por qué experimental:**
-- La semántica de "cambio" vs "fallos independientes" no está totalmente validada en producción
-- Pueden haber edge cases con timeouts y backoff
+## `hedge`
 
-## `hedge` (Hedged requests)
-
-Lanza múltiples solicitudes en paralelo y retorna la primera exitosa.
+`hedge` inicia la operación de inmediato y, tras `delayMs`, lanza una copia si para entonces ninguna llamada ha tenido éxito. Devuelve el primer resultado satisfactorio. La operación debe ser idempotente, ya que ambas llamadas pueden realizar trabajo. El operador no cancela la llamada perdedora: esta puede continuar después de que se resuelva la promesa devuelta. Si ambas llamadas fallan, la promesa devuelta se rechaza.
 
 ```ts
 import { hedge } from 'annotations-design-patterns/experimental';
+import { pipe } from 'annotations-design-patterns/pipe';
+
+interface Data {
+  readonly value: string;
+}
+
+declare function fetchData(id: string): Promise<Data>;
 
 const fastFetch = pipe(
-  fetch,
-  hedge({ delayBeforeHedgeMs: 100, maxHedges: 2 }),
+  fetchData,
+  hedge<object, readonly [string], Data>({ delayMs: 100, idempotent: true }),
 );
 ```
 
-**Comportamiento:**
-- Primera llamada se ejecuta inmediatamente
-- Si no termina en `delayBeforeHedgeMs`, se lanza una segunda copia
-- Retorna la primera que termina exitosamente
-- Cancela las demás
+`delayMs` debe ser un número finito no negativo. La API no ofrece una opción `maxHedges`; esta implementación lanza como máximo una copia adicional.
 
-**Por qué experimental:**
-- El uso de cancellations (`AbortSignal`) está en evolución
-- Validación en escenarios reales aún en curso
-- Puede ser costoso para operaciones pesadas
+## Nuevas APIs experimentales en 2.3
 
-## Alternativa estable
+La versión candidata 2.3 añade cancelación compartida experimental para `memoize`, `cachedFor` y `overlap` en modo `share`, mediante `cancelWhenUnused`. Cuando el último consumidor interesado se retira, la operación compartida recibe una señal de cancelación. El trabajo subyacente solo se detiene si la atiende; la expulsión o invalidación de una entrada de caché no cuenta como retirada de consumidores.
 
-Para la mayoría de casos de producción, **usa `overlap` con `mode: 'share'`** o `definePolicy` con las capas estables:
+`observeOperation` registra el resultado y la duración visibles en su posición de la tubería. Los datos de invocación se incluyen solo si se solicitan. La observación corresponde al resultado del consumidor, que puede terminar antes que el trabajo compartido del backend.
+
+`asyncCachedFor` usa un proveedor asíncrono que declara capacidad TTL, una clave, un espacio de nombres, una versión de esquema, un codec, una política de fallos y un plazo de I/O. El plazo limita cuánto espera el consumidor; no garantiza que se detenga una petición al proveedor ya iniciada. `VersionedMemoryStore` es una implementación local de referencia para compare-and-set, no un servicio de coordinación distribuida.
+
+Consulta la [guía de migración a 2.3](../migration/2.3.md) para conocer el estado de la versión, sus garantías y otros límites. La [referencia de la API experimental](/docs/api/experimental) contiene las firmas exportadas.
+
+## Alternativas estables
+
+Para llamadas dentro del proceso que deban compartir un resultado en vez de sustituirse, usa el operador estable `overlap` con `mode: 'share'`:
 
 ```ts
-// Estable: comparte resultado sin cancelaciones complejas
+import { overlap } from 'annotations-design-patterns/operators';
+import { pipe } from 'annotations-design-patterns/pipe';
+
+interface Data {
+  readonly value: string;
+}
+
+declare function fetchData(id: string): Promise<Data>;
+
 const safeFetch = pipe(
-  fetch,
-  overlap({ mode: 'share', key: ({ args }) => args[0] }),
+  fetchData,
+  overlap<object, readonly [string], Data>({
+    mode: 'share',
+    key: ({ args }) => args[0],
+  }),
 );
-
-// O con política:
-const policy = definePolicy({ retry: { attempts: 3, idempotent: true } });
-const load = pipe(fetch, policy.operator());
 ```
 
-## Ubicación en la codebase
+Para reintentos y fallback, usa la API estable `definePolicy` de `annotations-design-patterns/policy`.
 
-Ambos operadores viven en `/api/experimental`:
+## Informar de problemas
 
-```ts
-import type { SwitchOverlap, Hedge } from 'annotations-design-patterns/experimental';
-```
-
-Para documentación completa (aunque sujeta a cambios), consulta la [Referencia de experimental](/docs/api/experimental).
-
-## Reporte de problemas
-
-Si encuentras comportamientos inesperados, repórtalo en GitHub — la API y semántica están en revisión activa.
+Si encuentras un comportamiento inesperado, abre un issue con la versión del paquete y una reproducción mínima.

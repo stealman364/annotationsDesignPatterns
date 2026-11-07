@@ -1,0 +1,141 @@
+{
+  "date": "2026-11-07",
+  "timezone": "Europe/Madrid",
+  "subject": "local working candidate; not a newly published release",
+  "package": {
+    "name": "annotations-design-patterns",
+    "version": "2.2.0",
+    "runtimeDependencies": {},
+    "optionalDependencies": {},
+    "tarball": {
+      "filename": "annotations-design-patterns-2.2.0.tgz",
+      "integrity": "sha512-KXmJ0p5adDhxpvrfFYtAzRGpoNXR9zSJmfI+mbA/SjdoaozOlSKNYidjLZrhqPLzsOjS+2VHChnXpWowuwq1BA==",
+      "sha256": "0e6a621b8eac2044664c9cbd3b609f2b1d4789c555b772fbb3ca456586888f90",
+      "size": 138165,
+      "unpackedSize": 669620,
+      "fileCount": 268,
+      "retained": false
+    }
+  },
+  "source": {
+    "commit": "e45a61529374ef35985e6da456c445f4bebe3264",
+    "dirty": true,
+    "runtimeSourceUnchanged": true,
+    "trackedDiffSha256": "d545396d753b99d67b6f4f17f5562fd95427c2ef3d68cdf4fabc1f32f135fc3f",
+    "identityNote": "The HEAD commit alone does not identify this dirty candidate. The tracked diff hash excludes untracked files; this record is not a source attestation."
+  },
+  "environment": {
+    "node": "v22.18.0",
+    "npm": "10.8.2",
+    "platform": "win32",
+    "arch": "x64",
+    "typescript": "5.9.3",
+    "esbuild": "0.27.7"
+  },
+  "checks": [
+    {
+      "name": "format:check",
+      "status": "pass"
+    },
+    {
+      "name": "lint",
+      "status": "pass"
+    },
+    {
+      "name": "typecheck",
+      "status": "pass"
+    },
+    {
+      "name": "build",
+      "status": "pass"
+    },
+    {
+      "name": "vitest coverage, no cache, runner config loader",
+      "status": "pass",
+      "files": 118,
+      "tests": 924,
+      "coverage": {
+        "statements": 92.94,
+        "branches": 89.55,
+        "functions": 98.01,
+        "lines": 93.13
+      }
+    },
+    {
+      "name": "audit-any.mjs",
+      "status": "pass",
+      "sourceOccurrences": 7,
+      "declarationOccurrences": 14
+    },
+    {
+      "name": "bundle-budget.mjs",
+      "status": "pass",
+      "entrypoints": 96
+    },
+    {
+      "name": "smoke-dist.mjs / smoke-dist.cjs",
+      "status": "pass"
+    },
+    {
+      "name": "publint 0.3.22",
+      "status": "pass"
+    },
+    {
+      "name": "attw --pack 0.18.5",
+      "status": "pass"
+    },
+    {
+      "name": "verify-package.mjs",
+      "status": "pass",
+      "files": 268
+    },
+    {
+      "name": "smoke-package.mjs",
+      "status": "pass"
+    },
+    {
+      "name": "check-typescript-compat.mjs --compiler all",
+      "status": "pass",
+      "compilers": ["5.0.4", "5.9.3"],
+      "consumers": ["strict NodeNext .ts", "strict NodeNext .cts"]
+    },
+    {
+      "name": "consumer-bundles.mjs",
+      "status": "pass",
+      "cases": 6,
+      "report": "2026-11-07-local-consumers.json"
+    },
+    {
+      "name": "actionlint 1.7.12",
+      "status": "pass",
+      "limitations": "shellcheck and pyflakes disabled; no remote workflow run"
+    },
+    {
+      "name": "release validation simulations",
+      "status": "pass",
+      "scenarios": ["matching tag accepted", "branch rejected", "mismatched version rejected"]
+    },
+    {
+      "name": "git diff --check",
+      "status": "pass"
+    }
+  ],
+  "delegation": {
+    "workers": 3,
+    "model": "gpt-6-luna",
+    "review": "coordinator integration and verification; no cost telemetry recorded"
+  },
+  "externalStepsNotExecuted": [
+    "GitHub remote CI",
+    "npm trusted publisher configuration",
+    "GitHub npm-release environment reviewer configuration",
+    "workflow dispatch",
+    "package publication",
+    "commit or push"
+  ],
+  "limitations": [
+    "This is a local engineering verification record, not npm provenance.",
+    "The existing published 2.2.0 package remains unchanged.",
+    "Third-party scores were not re-evaluated for this local candidate."
+  ]
+}

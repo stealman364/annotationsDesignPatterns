@@ -1,0 +1,386 @@
+{
+  "dist/index.js": {
+    "raw": 87898,
+    "gzip": 17559
+  },
+  "dist/index.cjs": {
+    "raw": 79561,
+    "gzip": 15684
+  },
+  "dist/public/operators.js": {
+    "raw": 67166,
+    "gzip": 11800
+  },
+  "dist/public/operators.cjs": {
+    "raw": 65119,
+    "gzip": 11877
+  },
+  "dist/public/pipe.js": {
+    "raw": 2141,
+    "gzip": 713
+  },
+  "dist/public/pipe.cjs": {
+    "raw": 2864,
+    "gzip": 1001
+  },
+  "dist/public/run.js": {
+    "raw": 5550,
+    "gzip": 1535
+  },
+  "dist/public/run.cjs": {
+    "raw": 4787,
+    "gzip": 1501
+  },
+  "dist/policy/index.js": {
+    "raw": 38517,
+    "gzip": 7681
+  },
+  "dist/policy/index.cjs": {
+    "raw": 36114,
+    "gzip": 7508
+  },
+  "dist/decorators/index.js": {
+    "raw": 46743,
+    "gzip": 8903
+  },
+  "dist/decorators/index.cjs": {
+    "raw": 41316,
+    "gzip": 8245
+  },
+  "dist/experimental/index.js": {
+    "raw": 28595,
+    "gzip": 6153
+  },
+  "dist/experimental/index.cjs": {
+    "raw": 27450,
+    "gzip": 6092
+  },
+  "dist/observability/index.js": {
+    "raw": 2186,
+    "gzip": 797
+  },
+  "dist/observability/index.cjs": {
+    "raw": 3441,
+    "gzip": 1201
+  },
+  "dist/node/index.js": {
+    "raw": 663,
+    "gzip": 297
+  },
+  "dist/node/index.cjs": {
+    "raw": 1789,
+    "gzip": 707
+  },
+  "dist/store/index.js": {
+    "raw": 7140,
+    "gzip": 2050
+  },
+  "dist/store/index.cjs": {
+    "raw": 8017,
+    "gzip": 2347
+  },
+  "dist/patterns/behavioral/command.js": {
+    "raw": 2091,
+    "gzip": 855
+  },
+  "dist/patterns/behavioral/handler-chain.js": {
+    "raw": 911,
+    "gzip": 443
+  },
+  "dist/patterns/behavioral/iterable-over.js": {
+    "raw": 867,
+    "gzip": 431
+  },
+  "dist/patterns/behavioral/observer.js": {
+    "raw": 1536,
+    "gzip": 687
+  },
+  "dist/patterns/behavioral/on.js": {
+    "raw": 437,
+    "gzip": 287
+  },
+  "dist/patterns/behavioral/snapshot.js": {
+    "raw": 1061,
+    "gzip": 544
+  },
+  "dist/patterns/behavioral/state-machine.js": {
+    "raw": 4505,
+    "gzip": 1404
+  },
+  "dist/patterns/behavioral/strategy.js": {
+    "raw": 1330,
+    "gzip": 582
+  },
+  "dist/patterns/behavioral/command.cjs": {
+    "raw": 3028,
+    "gzip": 1199
+  },
+  "dist/patterns/behavioral/handler-chain.cjs": {
+    "raw": 1866,
+    "gzip": 802
+  },
+  "dist/patterns/behavioral/iterable-over.cjs": {
+    "raw": 1818,
+    "gzip": 761
+  },
+  "dist/patterns/behavioral/observer.cjs": {
+    "raw": 2476,
+    "gzip": 1021
+  },
+  "dist/patterns/behavioral/on.cjs": {
+    "raw": 1355,
+    "gzip": 640
+  },
+  "dist/patterns/behavioral/snapshot.cjs": {
+    "raw": 2001,
+    "gzip": 897
+  },
+  "dist/patterns/behavioral/state-machine.cjs": {
+    "raw": 5472,
+    "gzip": 1734
+  },
+  "dist/patterns/behavioral/strategy.cjs": {
+    "raw": 2270,
+    "gzip": 933
+  },
+  "dist/patterns/creational/builder.js": {
+    "raw": 1146,
+    "gzip": 555
+  },
+  "dist/patterns/creational/cloneable.js": {
+    "raw": 548,
+    "gzip": 328
+  },
+  "dist/patterns/creational/factory.js": {
+    "raw": 991,
+    "gzip": 482
+  },
+  "dist/patterns/creational/injection.js": {
+    "raw": 3375,
+    "gzip": 1057
+  },
+  "dist/patterns/creational/singleton.js": {
+    "raw": 636,
+    "gzip": 336
+  },
+  "dist/patterns/creational/builder.cjs": {
+    "raw": 2079,
+    "gzip": 901
+  },
+  "dist/patterns/creational/cloneable.cjs": {
+    "raw": 1487,
+    "gzip": 660
+  },
+  "dist/patterns/creational/factory.cjs": {
+    "raw": 1928,
+    "gzip": 841
+  },
+  "dist/patterns/creational/injection.cjs": {
+    "raw": 4330,
+    "gzip": 1417
+  },
+  "dist/patterns/creational/singleton.cjs": {
+    "raw": 1575,
+    "gzip": 692
+  },
+  "dist/patterns/structural/adapt.js": {
+    "raw": 802,
+    "gzip": 420
+  },
+  "dist/patterns/structural/decorate.js": {
+    "raw": 361,
+    "gzip": 238
+  },
+  "dist/patterns/structural/flyweight.js": {
+    "raw": 904,
+    "gzip": 419
+  },
+  "dist/patterns/structural/frozen.js": {
+    "raw": 468,
+    "gzip": 284
+  },
+  "dist/patterns/structural/intercept.js": {
+    "raw": 619,
+    "gzip": 336
+  },
+  "dist/patterns/structural/sealed.js": {
+    "raw": 466,
+    "gzip": 284
+  },
+  "dist/patterns/structural/adapt.cjs": {
+    "raw": 1729,
+    "gzip": 750
+  },
+  "dist/patterns/structural/decorate.cjs": {
+    "raw": 1297,
+    "gzip": 599
+  },
+  "dist/patterns/structural/flyweight.cjs": {
+    "raw": 1843,
+    "gzip": 768
+  },
+  "dist/patterns/structural/frozen.cjs": {
+    "raw": 1398,
+    "gzip": 637
+  },
+  "dist/patterns/structural/intercept.cjs": {
+    "raw": 1558,
+    "gzip": 684
+  },
+  "dist/patterns/structural/sealed.cjs": {
+    "raw": 1396,
+    "gzip": 634
+  },
+  "dist/patterns/utility/bind.js": {
+    "raw": 530,
+    "gzip": 334
+  },
+  "dist/patterns/utility/cached-for.js": {
+    "raw": 20388,
+    "gzip": 5017
+  },
+  "dist/patterns/utility/circuit-breaker.js": {
+    "raw": 15961,
+    "gzip": 3943
+  },
+  "dist/patterns/utility/debounce.js": {
+    "raw": 2101,
+    "gzip": 837
+  },
+  "dist/patterns/utility/deprecated.js": {
+    "raw": 643,
+    "gzip": 361
+  },
+  "dist/patterns/utility/fallback.js": {
+    "raw": 7340,
+    "gzip": 2025
+  },
+  "dist/patterns/utility/lazy.js": {
+    "raw": 968,
+    "gzip": 475
+  },
+  "dist/patterns/utility/log.js": {
+    "raw": 1529,
+    "gzip": 603
+  },
+  "dist/patterns/utility/measure.js": {
+    "raw": 1226,
+    "gzip": 517
+  },
+  "dist/patterns/utility/memoize-by-ref.js": {
+    "raw": 1914,
+    "gzip": 718
+  },
+  "dist/patterns/utility/memoize.js": {
+    "raw": 19818,
+    "gzip": 4913
+  },
+  "dist/patterns/utility/mutex.js": {
+    "raw": 1006,
+    "gzip": 513
+  },
+  "dist/patterns/utility/once.js": {
+    "raw": 993,
+    "gzip": 484
+  },
+  "dist/patterns/utility/rate-limit.js": {
+    "raw": 2291,
+    "gzip": 901
+  },
+  "dist/patterns/utility/retry.js": {
+    "raw": 11761,
+    "gzip": 3056
+  },
+  "dist/patterns/utility/semaphore.js": {
+    "raw": 14736,
+    "gzip": 3877
+  },
+  "dist/patterns/utility/throttle.js": {
+    "raw": 2062,
+    "gzip": 823
+  },
+  "dist/patterns/utility/timeout.js": {
+    "raw": 11876,
+    "gzip": 3332
+  },
+  "dist/patterns/utility/validate.js": {
+    "raw": 704,
+    "gzip": 391
+  },
+  "dist/patterns/utility/bind.cjs": {
+    "raw": 1454,
+    "gzip": 670
+  },
+  "dist/patterns/utility/cached-for.cjs": {
+    "raw": 17986,
+    "gzip": 4651
+  },
+  "dist/patterns/utility/circuit-breaker.cjs": {
+    "raw": 12953,
+    "gzip": 3420
+  },
+  "dist/patterns/utility/debounce.cjs": {
+    "raw": 2416,
+    "gzip": 1017
+  },
+  "dist/patterns/utility/deprecated.cjs": {
+    "raw": 1585,
+    "gzip": 713
+  },
+  "dist/patterns/utility/fallback.cjs": {
+    "raw": 6326,
+    "gzip": 1922
+  },
+  "dist/patterns/utility/lazy.cjs": {
+    "raw": 1792,
+    "gzip": 779
+  },
+  "dist/patterns/utility/log.cjs": {
+    "raw": 2450,
+    "gzip": 945
+  },
+  "dist/patterns/utility/measure.cjs": {
+    "raw": 2159,
+    "gzip": 854
+  },
+  "dist/patterns/utility/memoize-by-ref.cjs": {
+    "raw": 2778,
+    "gzip": 1020
+  },
+  "dist/patterns/utility/memoize.cjs": {
+    "raw": 17455,
+    "gzip": 4553
+  },
+  "dist/patterns/utility/mutex.cjs": {
+    "raw": 1834,
+    "gzip": 819
+  },
+  "dist/patterns/utility/once.cjs": {
+    "raw": 1817,
+    "gzip": 791
+  },
+  "dist/patterns/utility/rate-limit.cjs": {
+    "raw": 2578,
+    "gzip": 1051
+  },
+  "dist/patterns/utility/retry.cjs": {
+    "raw": 9998,
+    "gzip": 2782
+  },
+  "dist/patterns/utility/semaphore.cjs": {
+    "raw": 11656,
+    "gzip": 3294
+  },
+  "dist/patterns/utility/throttle.cjs": {
+    "raw": 2228,
+    "gzip": 940
+  },
+  "dist/patterns/utility/timeout.cjs": {
+    "raw": 10048,
+    "gzip": 3025
+  },
+  "dist/patterns/utility/validate.cjs": {
+    "raw": 1640,
+    "gzip": 743
+  }
+}

@@ -45,6 +45,7 @@ interface NormalizedKeyedLockOptions<This, Args extends readonly unknown[]> {
 }
 
 interface Invocation<This, Args extends readonly unknown[], Result> {
+  readonly next: ContextualMethod<This, Args, Result>;
   readonly receiver: This;
   readonly context: RuntimeOperationContext<This, Args> | undefined;
   readonly args: Args;
@@ -126,14 +127,14 @@ function resolveKey<This, Args extends readonly unknown[]>(
  * Serializes executions sharing a resolver key. It owns a FIFO queue per key;
  * a waiting invocation can withdraw through the invocation AbortSignal.
  */
-export function keyedLock<This, Args extends readonly unknown[], Result>(
-  options: KeyedLockOptions<This, Args>,
+function createKeyedLockOperator<This, Args extends readonly unknown[], Result>(
+  normalized: NormalizedKeyedLockOptions<This, Args>,
+  sharedStates?: Map<PropertyKey, LockState<This, Args, Result>>,
 ): Operator<This, Args, Result, Result> {
-  const normalized = normalizeOptions(options);
   const createWrapper = (
     next: ContextualMethod<This, Args, Result>,
   ): ContextualMethod<This, Args, Result> => {
-    const states = new Map<PropertyKey, LockState<This, Args, Result>>();
+    const states = sharedStates ?? new Map<PropertyKey, LockState<This, Args, Result>>();
 
     return function (
       this: This,
@@ -174,7 +175,7 @@ export function keyedLock<This, Args extends readonly unknown[], Result>(
         emitPolicyEvent(entry.context, 'keyedLock', 'keyedLock.acquired', { key });
 
         try {
-          const result = next.call(entry.receiver, entry.context, ...entry.args);
+          const result = entry.next.call(entry.receiver, entry.context, ...entry.args);
           if (isPromiseLike(result)) {
             void Promise.resolve(result).then(
               (value) => {
@@ -228,6 +229,7 @@ export function keyedLock<This, Args extends readonly unknown[], Result>(
       };
 
       const activeInvocation: Invocation<This, Args, Result> = {
+        next,
         receiver: this,
         context,
         args,
@@ -255,6 +257,7 @@ export function keyedLock<This, Args extends readonly unknown[], Result>(
           }
         };
         const entry: Invocation<This, Args, Result> = {
+          next,
           receiver: this,
           context,
           args,
@@ -312,4 +315,35 @@ export function keyedLock<This, Args extends readonly unknown[], Result>(
   };
 
   return operator;
+}
+
+export function keyedLock<This, Args extends readonly unknown[], Result>(
+  options: KeyedLockOptions<This, Args>,
+): Operator<This, Args, Result, Result> {
+  return createKeyedLockOperator(normalizeOptions(options));
+}
+
+export interface KeyedLockSnapshot {
+  readonly active: number;
+  readonly queued: number;
+}
+
+export interface KeyedLockHandle {
+  inspect(key: PropertyKey): KeyedLockSnapshot | undefined;
+}
+
+/** Creates a keyed lock whose queues are shared by every application. */
+export function keyedLockWithHandle<This, Args extends readonly unknown[], Result>(
+  options: KeyedLockOptions<This, Args>,
+): { readonly operator: Operator<This, Args, Result, Result>; readonly handle: KeyedLockHandle } {
+  const normalized = normalizeOptions(options);
+  const states = new Map<PropertyKey, LockState<This, Args, Result>>();
+  const handle: KeyedLockHandle = Object.freeze({
+    inspect(key: PropertyKey): KeyedLockSnapshot | undefined {
+      const state = states.get(key);
+      if (state === undefined) return undefined;
+      return Object.freeze({ active: state.active ? 1 : 0, queued: state.queued.length });
+    },
+  });
+  return Object.freeze({ operator: createKeyedLockOperator(normalized, states), handle });
 }

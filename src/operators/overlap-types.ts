@@ -19,4 +19,6 @@ export interface OverlapOptions<This, Args extends readonly unknown[]> {
   readonly key: (context: OverlapKeyContext<This, Args>) => PropertyKey;
   /** Maximum waiting calls per key. The active call does not count toward it. */
   readonly maxQueue?: number;
+  /** @experimental Only in share mode: abort cooperatively after the last consumer withdraws. */
+  readonly cancelWhenUnused?: boolean;
 }

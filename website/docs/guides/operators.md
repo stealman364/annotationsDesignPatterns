@@ -2,94 +2,93 @@
 sidebar_position: 2
 ---
 
-# API funcional: Operadores y composición
+# API funcional: operadores y composición
 
-Además de decoradores, puedes usar una API funcional sin decoradores: **`pipe`**, **operadores funcionales** y **`run`** para componer pipelines que se ejecutan contra un receiver (objeto) con una tupla de argumentos explícita.
+pipe aplica operadores a una función y run añade contexto explícito con
+operationId, metadata, EventSink, key y AbortSignal. Los operadores son funciones
+componibles independientes de los decoradores de clase.
 
-## Importación
-
-```ts
-import { fallback, retry, timeout, circuitBreaker } from 'annotations-design-patterns/operators';
+~~~ts
+import {
+  fallback, retry, timeout, circuitBreaker, semaphore, memoize, cachedFor,
+} from 'annotations-design-patterns/operators';
 import { pipe } from 'annotations-design-patterns/pipe';
 import { run } from 'annotations-design-patterns/run';
-```
+~~~
 
-## Operadores disponibles
+También existen overlap, keyedLock, memoizeWithHandle y cachedForWithHandle.
+Los experimentales tienen su entrada propia.
 
-Los operadores funcionales mapean 1:1 con los decoradores de resiliencia:
+## Composición y retorno
 
-- `fallback(value | fn)` — Respaldo
-- `retry(options)` — Reintentos
-- `timeout(ms)` — Límite de tiempo
-- `circuitBreaker(options)` — Corta tras fallos
-- `overlap(options)` — Deduplicación por clave
-- `keyedLock(options)` — Serialización por clave
-- `memoize(options)` / `memoizeWithHandle(options)` — Cache
-- Y más...
+El primer operador es el más externo. Esta pipeline entra en fallback, retry,
+timeout y finalmente el método; los resultados vuelven hacia afuera.
 
-## Ejemplo 1: Pipeline síncrona
-
-Una pipeline síncrona conserva su retorno síncrono cuando sus operadores lo permiten:
-
-```ts
-const safeDivide = pipe<object, readonly [divisor: number], number>(
-  function (this: object, divisor: number): number {
-    if (divisor === 0) throw new Error('division by zero');
-    return 100 / divisor;
-  },
-  fallback<object, readonly [divisor: number], number>(0)
-);
-
-// Úsalo como función normal
-safeDivide.call({}, 0); // 0 (fallback)
-safeDivide.call({}, 2); // 50
-```
-
-**`pipe` acepta:**
-1. Una función base (receiver, args, retorno)
-2. Cero o más operadores (se aplican de afuera hacia adentro)
-
-**Generics:**
-- `<ReceiverType, readonly [arg1, arg2, ...], ReturnType>`
-
-## Ejemplo 2: Pipeline asíncrona
-
-Cuando los operadores o el método son async, la pipeline retorna Promise:
-
-```ts
+~~~ts
 const load = pipe<object, readonly [id: string], string>(
-  async function (this: object, id: string): Promise<string> {
-    return fetchProfile(id);
-  },
-  retry<object, readonly [id: string], string>({ attempts: 3 }),
+  async (id) => id,
+  fallback('recovered'),
+  retry({ attempts: 3, delayMs: 100, backoffFactor: 2 }),
+  timeout(5_000),
 );
+await run({}, ['42'], load, { operationId: 'load-42' });
+~~~
 
-const profile = await load.call({}, '42');
-```
+Una pipeline síncrona conserva su retorno síncrono cuando los operadores lo
+permiten; timeout y semaphore siempre devuelven Promise. Receiver y tupla de
+argumentos se conservan. Los genéricos son Receiver, Args readonly y Result.
 
-## Composición con varios operadores
+## Retry y CircuitBreaker
 
-El orden en `pipe` es: **el primer operador es el más externo**. Se ejecutan de afuera hacia adentro:
+Retry permite maxDelayMs y jitter none/full/equal. El delay exponencial se limita
+por el máximo portable y el cap configurado antes del jitter. none es el default.
+Un delay final cero usa una microtask cancelable.
 
-```ts
-const safeFetch = pipe<API, readonly [id: string], User>(
-  async (id: string) => API.getUser(id),
-  timeout<API, readonly [id: string], User>(5000),      // 1º (más externo)
-  retry<API, readonly [id: string], User>({ attempts: 3 }), // 2º
-  fallback<API, readonly [id: string], User>(DEFAULT_USER)  // 3º (más interno)
-);
-```
+CircuitBreaker admite isFailure(error, info) síncrono. info contiene datos
+readonly de la invocación; false ignora sin incrementar ni resetear fallos y
+sin convertir el error en éxito. HALF_OPEN libera la probe sin cerrar. Caller
+cancellation y generaciones obsoletas no pasan por el predicado.
 
-Orden de ejecución: fallback → retry → timeout → método.
+~~~ts
+const protectedRead = circuitBreaker<object, readonly [id: string], string>({
+  failures: 5,
+  resetMs: 30_000,
+  isFailure: (error, info) => info.args[0] !== 'optional' && error instanceof Error,
+});
+~~~
 
-## Para `pipe` y `run` en detalle
+El error original sigue rechazando si se ignora. Si el predicado lanza, rechaza
+con ese error de decisión. Las opciones también llegan a los decoradores y
+definePolicy; describe solo muestra las nuevas opciones cuando se configuran.
 
-Consulta las guías dedicadas: [Pipe](pipe) y [Run](run).
+## Caché y capacidad
 
-## Para operadores específicos
+memoize/cachedFor comparten por pipeline por defecto. perReceiver true permite
+aislar objetos y funciones; un receiver primitivo produce TypeError. Las variantes
+WithHandle ofrecen invalidate/clear y no admiten ese flag.
 
-Consulta la [Referencia de operadores](/docs/api/operators) para:
-- Opciones exactas de cada operador
-- Manejo de errores
-- Semántica de colas y deduplicación
-- Handles para invalidación de caches
+cachedFor acepta maxEntries entero seguro positivo: FIFO por inserción, sin
+reordenar hits. Pending entries cuentan; eviction no cancela consumidores.
+Las cachés limitadas limpian expirados en misses sin timers. TTL empieza al
+invocar, Infinity no caduca y cachedFor(0) funcional desactiva la reutilización.
+
+La clave default sigue siendo JSON.stringify(args), con sus colisiones y
+restricciones; aporta key para identificar valores especiales o entidades.
+[Contratos y tabla de claves](../migration/2.2.md).
+
+## Semaphore y cancelación
+
+semaphore limita ejecuciones por pool o key, mantiene FIFO y retira waiters
+abortados. Una cancelación activa rechaza al llamante con signal.reason; el
+permiso dura hasta que termine el trabajo interno. Un SemaphoreQueueFullError
+puede ser tratado por otras políticas como error normal.
+
+semaphore externo a retry mantiene permiso durante intentos y delays; retry
+externo solicita permiso en cada intento. La [guía de concurrencia](concurrency.md)
+describe estas diferencias con overlap, keyedLock, Mutex y RateLimit.
+
+La cancelación individual no activa fallback ni altera el contador del breaker.
+Las operaciones compartidas aíslan señales por consumidor y pueden continuar
+aunque todos abandonen. Un timeout no fuerza la terminación de código que ignore
+la señal. Consulta [Pipe](pipe.md), [Run](run.md) y la
+[referencia de operadores](/docs/api/operators).

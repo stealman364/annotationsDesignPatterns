@@ -2,7 +2,16 @@ import { performance } from 'node:perf_hooks';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { platform, arch } from 'node:process';
 import { Memoize } from '../dist/index.js';
-import { fallback, memoize, retry, circuitBreaker, semaphore } from '../dist/public/operators.js';
+import {
+  fallback,
+  memoize,
+  retry,
+  circuitBreaker,
+  semaphore,
+  rateLimit,
+} from '../dist/public/operators.js';
+import { observeOperation } from '../dist/experimental/index.js';
+import { executionMethod } from '../dist/public/run.js';
 import { pipe } from '../dist/public/pipe.js';
 import { definePolicy } from '../dist/policy/index.js';
 
@@ -31,6 +40,35 @@ const context = {
 };
 const cases = [
   ['direct call', () => () => direct.call(receiver)],
+  [
+    'executionMethod direct',
+    () => {
+      const fn = executionMethod((_execution, value = 1) => value);
+      return () => fn.call(receiver);
+    },
+  ],
+  [
+    'rateLimit admitted',
+    () => {
+      const fn = rateLimit({ limit: iterations + warmup + 1, windowMs: 60_000 }).apply(direct);
+      return () => fn.call(receiver);
+    },
+  ],
+  [
+    'observeOperation synchronous',
+    () => {
+      const fn = observeOperation({ onComplete() {} }).apply(direct);
+      return () => fn.call(receiver);
+    },
+  ],
+  [
+    'memoize shared cancellation miss',
+    () => {
+      const fn = memoize({ cancelWhenUnused: true, maxEntries: 64 }).apply(direct);
+      let key = 0;
+      return () => fn.call(receiver, ++key);
+    },
+  ],
   [
     'operator',
     () => {

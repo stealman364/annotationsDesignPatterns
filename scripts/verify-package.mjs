@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, mkdirSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const repositoryRoot = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const artifactsDirectory = resolve(repositoryRoot, '.artifacts');
@@ -50,45 +50,72 @@ const requiredFiles = [
   'dist/store/index.d.cts',
 ];
 
-if (existsSync(artifactsDirectory)) {
-  throw new Error('Refusing to delete an existing .artifacts directory. Remove it manually first.');
+export function validateRuntimeDependencies(manifest) {
+  const dependencies = { ...manifest.dependencies, ...manifest.optionalDependencies };
+  if (manifest.name !== undefined && Object.hasOwn(dependencies, manifest.name)) {
+    throw new Error('Package must not depend on itself.');
+  }
+  if (
+    Object.keys(dependencies).length > 0 ||
+    (manifest.bundleDependencies ?? manifest.bundledDependencies)?.length > 0
+  ) {
+    throw new Error('Package contract requires zero runtime dependencies.');
+  }
 }
 
-mkdirSync(artifactsDirectory);
-
-try {
-  const output = execFileSync(
-    npmCommand,
-    ['pack', '--ignore-scripts', '--json', '--pack-destination', artifactsDirectory],
-    {
-      cwd: repositoryRoot,
-      encoding: 'utf8',
-      shell: process.platform === 'win32',
-      stdio: ['ignore', 'pipe', 'inherit'],
-    },
+export function verifyPackage() {
+  validateRuntimeDependencies(
+    JSON.parse(readFileSync(resolve(repositoryRoot, 'package.json'), 'utf8')),
   );
-  const jsonStart = output.indexOf('[');
-  if (jsonStart === -1) {
-    throw new Error('npm pack did not produce JSON output.');
+  if (existsSync(artifactsDirectory)) {
+    throw new Error(
+      'Refusing to delete an existing .artifacts directory. Remove it manually first.',
+    );
   }
 
-  const [packResult] = JSON.parse(output.slice(jsonStart));
-  const files = packResult.files.map(({ path }) => path);
+  mkdirSync(artifactsDirectory);
 
-  const forbiddenFiles = files.filter(
-    (path) => !path.startsWith('dist/') && !allowedMetadata.has(path),
-  );
+  try {
+    const output = execFileSync(
+      npmCommand,
+      ['pack', '--ignore-scripts', '--json', '--pack-destination', artifactsDirectory],
+      {
+        cwd: repositoryRoot,
+        encoding: 'utf8',
+        shell: process.platform === 'win32',
+        stdio: ['ignore', 'pipe', 'inherit'],
+      },
+    );
+    const jsonStart = output.indexOf('[');
+    if (jsonStart === -1) {
+      throw new Error('npm pack did not produce JSON output.');
+    }
 
-  if (forbiddenFiles.length > 0) {
-    throw new Error(`Package contains forbidden files: ${forbiddenFiles.join(', ')}`);
+    const [packResult] = JSON.parse(output.slice(jsonStart));
+    const files = packResult.files.map(({ path }) => path);
+
+    const forbiddenFiles = files.filter(
+      (path) => !path.startsWith('dist/') && !allowedMetadata.has(path),
+    );
+
+    if (forbiddenFiles.length > 0) {
+      throw new Error(`Package contains forbidden files: ${forbiddenFiles.join(', ')}`);
+    }
+
+    const missingFiles = requiredFiles.filter((path) => !files.includes(path));
+    if (missingFiles.length > 0) {
+      throw new Error(`Package is missing required files: ${missingFiles.join(', ')}`);
+    }
+
+    console.log(`package verification OK (${files.length} files)`);
+  } finally {
+    rmSync(artifactsDirectory, { force: true, recursive: true });
   }
+}
 
-  const missingFiles = requiredFiles.filter((path) => !files.includes(path));
-  if (missingFiles.length > 0) {
-    throw new Error(`Package is missing required files: ${missingFiles.join(', ')}`);
-  }
-
-  console.log(`package verification OK (${files.length} files)`);
-} finally {
-  rmSync(artifactsDirectory, { force: true, recursive: true });
+if (
+  process.argv[1] !== undefined &&
+  pathToFileURL(resolve(process.argv[1])).href === import.meta.url
+) {
+  verifyPackage();
 }

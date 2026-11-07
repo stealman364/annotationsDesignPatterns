@@ -57,6 +57,9 @@ const sidebars: SidebarsConfig = {
       ],
     },
     'migration/2.0',
+    'migration/2.1',
+    'migration/2.2',
+    'migration/2.3',
   ],
   apiSidebar: API_ENTRYPOINTS.map(({ dir, label }) => ({
     type: 'category' as const,

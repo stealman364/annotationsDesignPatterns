@@ -1,8 +1,9 @@
 import { isCount } from '../core/numeric';
 import { PermitQueue, type Release } from '../core/permit-queue';
 import type { ContextualMethod, RuntimeOperationContext } from '../core/context';
-import { raceWithSignal, sharedContext } from '../core/cancellation';
-import { emitPolicyEvent } from '../core/context';
+import { raceWithSignal, sharedContext, withSharedExecutionSignal } from '../core/cancellation';
+import { createOperationContext, emitPolicyEvent } from '../core/context';
+import { SharedExecution } from '../core/shared-execution';
 import { withoutContext, type ContextualOperator } from '../core/contextual-operator';
 import { PolicyError, type PolicyErrorOptions } from '../core/errors';
 import type { Operator } from '../core/operator';
@@ -15,6 +16,7 @@ interface NormalizedOverlapOptions<This, Args extends readonly unknown[]> {
   readonly mode: OverlapOptions<This, Args>['mode'];
   readonly key: OverlapOptions<This, Args>['key'];
   readonly maxQueue: number;
+  readonly cancelWhenUnused: boolean;
 }
 
 interface SharedReservation<Result> {
@@ -106,11 +108,18 @@ function normalizeOverlapOptions<This, Args extends readonly unknown[]>(
   if (options.maxQueue !== undefined && !isCount(options.maxQueue, 0)) {
     throw new RangeError('overlap requires maxQueue to be a non-negative integer');
   }
+  if (options.cancelWhenUnused !== undefined && typeof options.cancelWhenUnused !== 'boolean') {
+    throw new TypeError('overlap requires cancelWhenUnused to be a boolean');
+  }
+  if (options.cancelWhenUnused === true && options.mode !== 'share') {
+    throw new TypeError('cancelWhenUnused requires overlap share mode');
+  }
 
   return {
     mode: options.mode,
     key: options.key,
     maxQueue: options.maxQueue ?? Number.POSITIVE_INFINITY,
+    cancelWhenUnused: options.cancelWhenUnused === true,
   };
 }
 
@@ -168,6 +177,7 @@ export function overlap<This, Args extends readonly unknown[], Result>(
   ): ContextualMethod<This, Args, Result> => {
     const active = new Map<PropertyKey, { promise: PromiseLike<Result>; joined: boolean }>();
     const queues = new Map<PropertyKey, PermitQueue>();
+    const cooperative = new Map<PropertyKey, SharedExecution<Result>>();
 
     const createQueueWrapper = function (
       this: This,
@@ -237,6 +247,37 @@ export function overlap<This, Args extends readonly unknown[], Result>(
       if (context?.signal !== undefined && Boolean(context.signal.aborted))
         return Promise.reject(context.signal.reason);
       const key = resolveKey(this, args, context, normalized);
+      if (normalized.cancelWhenUnused) {
+        if (context?.signal !== undefined && Boolean(context.signal.aborted))
+          return Promise.reject(context.signal.reason);
+        const current = cooperative.get(key);
+        if (current !== undefined) return current.join(context?.signal);
+        const execution = new SharedExecution<Result>(
+          () => {
+            if (cooperative.get(key) === execution) cooperative.delete(key);
+          },
+          () => {
+            if (cooperative.get(key) === execution) cooperative.delete(key);
+            emitPolicyEvent(context, 'overlap', 'overlap.completed', { key });
+          },
+        );
+        execution.join(context?.signal);
+        cooperative.set(key, execution);
+        emitPolicyEvent(context, 'overlap', 'overlap.started', { key });
+        const executionContext = withSharedExecutionSignal(
+          context ?? createOperationContext(this, args, {}),
+          execution.signal,
+        );
+        try {
+          return raceWithSignal(
+            execution.start(() => next.call(this, executionContext, ...args)),
+            context?.signal,
+          );
+        } catch (error) {
+          if (context?.signal?.aborted === true) return Promise.reject(context.signal.reason);
+          throw error;
+        }
+      }
       const inFlight = active.get(key);
       if (inFlight !== undefined) {
         if (normalized.mode === 'share') {

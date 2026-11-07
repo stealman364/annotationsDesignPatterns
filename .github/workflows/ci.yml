@@ -5,15 +5,19 @@ on:
     branches: [master, main]
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   ci:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         node-version: [20.x, 22.x]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -21,13 +25,30 @@ jobs:
       - run: npm run format:check
       - run: npm run lint
       - run: npm run typecheck
+      - run: npm run build
       - run: npm test
       - run: npm run test:coverage
-      - run: npm run audit:any
-      - run: npm run bundle:check
-      - run: npm run test:dist
+      - run: node scripts/audit-any.mjs
+      - run: node scripts/bundle-budget.mjs
+      - run: node scripts/smoke-dist.mjs
+      - run: node scripts/smoke-dist.cjs
       - run: npm pack --dry-run
-      - run: npm run lint:package
-      - run: npm run types:package
-      - run: npm run pack:verify
-      - run: npm run test:package
+      - run: npm exec -- publint
+      - run: npm exec -- attw --pack
+      - run: node scripts/verify-package.mjs
+      - run: node scripts/smoke-package.mjs
+      - name: Check supported TypeScript versions
+        run: node scripts/check-typescript-compat.mjs --compiler all
+      - name: Measure consumer bundles
+        run: |
+          mkdir -p quality
+          node scripts/consumer-bundles.mjs --output quality/consumer-bundles.json
+      - name: Upload quality evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: quality-evidence-node-${{ matrix.node-version }}
+          if-no-files-found: ignore
+          path: |
+            coverage/
+            quality/

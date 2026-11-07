@@ -21,3 +21,15 @@ export type { TimeoutOptions } from '../operators/timeout';
 export { semaphore, SemaphoreQueueFullError } from '../operators/semaphore';
 export type { SemaphoreKeyContext, SemaphoreOptions } from '../operators/semaphore';
 export type { InvocationInfo } from '../core/invocation-info';
+export {
+  rateLimit,
+  RateLimitExceededError,
+  isRateLimitExceededError,
+} from '../operators/rate-limit';
+export type { RateLimitOptions } from '../operators/rate-limit';
+export { circuitBreakerWithHandle } from '../operators/circuit-breaker';
+export type { CircuitBreakerHandle, CircuitBreakerSnapshot } from '../operators/circuit-breaker';
+export { keyedLockWithHandle } from '../operators/keyed-lock';
+export type { KeyedLockHandle, KeyedLockSnapshot } from '../operators/keyed-lock';
+export { semaphoreWithHandle } from '../operators/semaphore';
+export type { SemaphoreHandle, SemaphoreSnapshot } from '../operators/semaphore';

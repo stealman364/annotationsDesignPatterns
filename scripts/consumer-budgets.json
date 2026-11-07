@@ -1,0 +1,30 @@
+{
+  "measurement": "Minified browser ESM, esbuild target ES2022, tree shaking enabled; gzip level 9.",
+  "headroom": "Fixed reviewed limits are set approximately 15-20% above the local measurements.",
+  "cases": {
+    "builder": {
+      "bytes": 650,
+      "gzip": 450
+    },
+    "retry-pipeline": {
+      "bytes": 5300,
+      "gzip": 2000
+    },
+    "memoize": {
+      "bytes": 9000,
+      "gzip": 3250
+    },
+    "semaphore": {
+      "bytes": 5600,
+      "gzip": 2250
+    },
+    "policy": {
+      "bytes": 19000,
+      "gzip": 5900
+    },
+    "decorator": {
+      "bytes": 2600,
+      "gzip": 1500
+    }
+  }
+}

@@ -4,6 +4,10 @@ sidebar_position: 1
 
 # Welcome to annotations-design-patterns
 
+> This documentation includes the `2.3.0-rc.0` candidate.
+> The stable reference is `2.2.0`.
+> See [migration to 2.3](./migration/2.3.md) for new and experimental APIs.
+
 **Design patterns as standard TC39 TypeScript decorators and as composable functions.** Classic GoF patterns, dependency injection, a complete resilience toolkit, and method utilities. Resilience and caching are also available as functional operators: see the [operators](./guides/operators.md) guide.
 
 ```ts

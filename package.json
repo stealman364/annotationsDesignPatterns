@@ -1,6 +1,6 @@
 {
   "name": "annotations-design-patterns",
-  "version": "2.2.0",
+  "version": "2.3.0-rc.0",
   "description": "Design patterns as standard TC39 TypeScript decorators: GoF patterns, resilience toolkit (retry, circuit breaker, fallback) and method utilities. Zero dependencies, tree-shakeable.",
   "repository": {
     "type": "git",
@@ -228,9 +228,11 @@
     "test:coverage": "vitest run --coverage",
     "audit:any": "npm run build && node scripts/audit-any.mjs",
     "bundle:check": "npm run build && node scripts/bundle-budget.mjs",
+    "bundle:consumers": "npm run build && node scripts/consumer-bundles.mjs",
     "bench": "npm run build && node benchmarks/runtime.mjs",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
+    "types:compat": "npm run build && node scripts/check-typescript-compat.mjs",
     "lint": "eslint src tests scripts benchmarks examples *.ts",
     "format": "prettier --write \"src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.{js,mjs,cjs}\" \"*.ts\" \"*.js\" \"*.json\" \".github/**/*.yml\" \"benchmarks/**/*.mjs\" \"examples/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\" \"tests/**/*.ts\" \"scripts/**/*.{js,mjs,cjs}\" \"*.ts\" \"*.js\" \"*.json\" \".github/**/*.yml\" \"benchmarks/**/*.mjs\" \"examples/**/*.ts\"",

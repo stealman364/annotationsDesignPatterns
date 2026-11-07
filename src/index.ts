@@ -30,7 +30,14 @@ export { CommandHistory, Revertible, type Command } from './patterns/behavioral/
 export { Snapshot, SnapshotHistory } from './patterns/behavioral/snapshot';
 export { HandlerChain, HandlerFor, type Handler } from './patterns/behavioral/handler-chain';
 export { IterableOver, type WithIterator } from './patterns/behavioral/iterable-over';
-export { StateMachine, TransitionTo, When } from './patterns/behavioral/state-machine';
+export {
+  StateMachine,
+  TransitionTo,
+  When,
+  StateTransitionConflictError,
+  isStateTransitionConflictError,
+} from './patterns/behavioral/state-machine';
+export type { TransitionToOptions } from './patterns/behavioral/state-machine';
 export { On } from './patterns/behavioral/on';
 
 // Utilitarios de método

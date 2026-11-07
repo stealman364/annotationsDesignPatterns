@@ -7,6 +7,7 @@ import { withoutContext, type ContextualOperator } from '../core/contextual-oper
 import type { Operator } from '../core/operator';
 import type { AnyMethod, MaybePromise } from '../core/types';
 import { CacheHandleStore, type CacheHandle } from './cache-handle';
+import { startSharedCache, type SharedCacheValue } from './shared-cache';
 
 export interface CachedForOperatorOptions<Args extends readonly unknown[]> {
   readonly key?: (...args: Args) => string;
@@ -14,6 +15,8 @@ export interface CachedForOperatorOptions<Args extends readonly unknown[]> {
   readonly perReceiver?: boolean;
   /** Maximum retained entries, including pending results. FIFO; hits do not reorder. */
   readonly maxEntries?: number;
+  /** @experimental Cooperatively abort shared work when its last consumer withdraws. */
+  readonly cancelWhenUnused?: boolean;
 }
 
 export interface CachedForWithHandle<This, Args extends readonly unknown[], Result> {
@@ -21,8 +24,7 @@ export interface CachedForWithHandle<This, Args extends readonly unknown[], Resu
   readonly operator: Operator<This, Args, Result, Result>;
 }
 
-interface CacheEntry<Result> {
-  readonly value: MaybePromise<Result>;
+interface CacheEntry<Result> extends SharedCacheValue<Result> {
   readonly expiresAt: number;
 }
 
@@ -71,6 +73,11 @@ function createWrapper<This, Args extends readonly unknown[], Result>(
     const entry = cache.get(cacheKey);
     const now = Date.now();
     if (entry !== undefined && now < entry.value.expiresAt) {
+      if (options.cancelWhenUnused === true) {
+        const result = entry.value.execution?.join(context?.signal) ?? entry.value.value;
+        emitPolicyEvent(context, 'cachedFor', 'cache.hit', {});
+        return raceWithSignal(result, context?.signal);
+      }
       emitPolicyEvent(context, 'cachedFor', 'cache.hit', {});
       return raceWithSignal(entry.value.value, context?.signal);
     }
@@ -78,6 +85,14 @@ function createWrapper<This, Args extends readonly unknown[], Result>(
       cache.deleteIfCurrent(cacheKey, entry);
     }
     cache.pruneExpired((value) => now >= value.expiresAt);
+
+    if (options.cancelWhenUnused === true) {
+      if (context?.signal?.aborted === true) return Promise.reject(context.signal.reason);
+      return startSharedCache(cache, cacheKey, 'cachedFor', next, this, args, context, (value) => ({
+        value,
+        expiresAt: now + ttlMs,
+      }));
+    }
 
     emitPolicyEvent(context, 'cachedFor', 'cache.miss', {});
     if (context?.signal !== undefined && Boolean(context.signal.aborted))
@@ -103,6 +118,10 @@ function createCachedForOperator<This, Args extends readonly unknown[], Result>(
 ): Operator<This, Args, Result, Result> {
   const perReceiver = options.perReceiver;
   const maxEntries = options.maxEntries;
+  const cancelWhenUnused = options.cancelWhenUnused;
+  if (cancelWhenUnused !== undefined && typeof cancelWhenUnused !== 'boolean') {
+    throw new TypeError('cachedFor requires cancelWhenUnused to be a boolean');
+  }
   if (perReceiver !== undefined && typeof perReceiver !== 'boolean') {
     throw new TypeError('cachedFor requires perReceiver to be a boolean');
   }
@@ -123,7 +142,7 @@ function createCachedForOperator<This, Args extends readonly unknown[], Result>(
           return next.call(this, ...args);
         },
         ttlMs,
-        { key: options.key, perReceiver, maxEntries },
+        { key: options.key, perReceiver, maxEntries, cancelWhenUnused },
         createCache(maxEntries),
       );
       return withoutContext(wrapper);
@@ -134,7 +153,7 @@ function createCachedForOperator<This, Args extends readonly unknown[], Result>(
       return createWrapper(
         next,
         ttlMs,
-        { key: options.key, perReceiver, maxEntries },
+        { key: options.key, perReceiver, maxEntries, cancelWhenUnused },
         createCache(maxEntries),
       );
     },
@@ -171,6 +190,7 @@ export function cachedForWithHandle<This, Args extends readonly unknown[], Resul
     },
     perReceiver: receiverOptions.perReceiver,
     maxEntries,
+    cancelWhenUnused: options.cancelWhenUnused,
   };
   const cache = new CacheHandleStore<CacheEntry<Result>>('cachedFor', maxEntries);
   return Object.freeze({

@@ -4,144 +4,118 @@ sidebar_position: 7
 
 # Concurrencia e invalidación
 
-Para operaciones concurrentes, usa `overlap` (deduplicación por clave), `keyedLock` (serialización por clave) o caches con handles (control explícito de invalidación).
+Los operadores se aplican mediante pipe. Elige la capacidad según qué compartes:
+ejecución, permiso o resultado cacheado.
 
-## `overlap`: deduplicación y cola FIFO
+| API | Contrato |
+| --- | --- |
+| overlap drop | Una ejecución por clave; las solapadas rechazan con OverlapDroppedError |
+| overlap share | Comparte el trabajo activo y su resultado por clave; cada señal pertenece a su llamante |
+| overlap queue | Una ejecución por clave con cola FIFO |
+| keyedLock | Exclusión mutua por clave con cola y retirada de waiters abortados |
+| semaphore | Hasta N ejecuciones por pool o clave, con cola FIFO |
+| @Semaphore / @Mutex | Permisos por instancia; Mutex equivale a un permiso |
+| @RateLimit | Ventana temporal por instancia; descarta llamadas void que exceden el límite |
 
-`overlap` evita que múltiples llamadas con la misma clave ejecuten el método paralelamente. Ofrece tres modos:
+No hay rateLimit funcional estable en esta versión. Su diseño permanece en
+POST-2.1-RFCS.md del repositorio.
 
-### `drop` — ignora llamadas duplicadas
+## Semaphore funcional
 
-```ts
-import { overlap } from 'annotations-design-patterns/operators';
+~~~ts
+import { semaphore } from 'annotations-design-patterns/operators';
+import { pipe } from 'annotations-design-patterns/pipe';
+import { run } from 'annotations-design-patterns/run';
 
-@overlap({ mode: 'drop', key: ({ args }) => args[0] })
-async getUser(id: string): Promise<User> {
-  return fetch(`/users/${id}`).then(r => r.json());
-}
-
-// Primera llamada con id='42' inicia
-const p1 = getUser('42');
-// Segunda llamada con id='42' se ignora (devuelve undefined)
-const p2 = getUser('42');
-```
-
-### `share` — comparte resultado
-
-```ts
-@overlap({ mode: 'share', key: ({ args }) => args[0] })
-async getUser(id: string): Promise<User> {
-  return fetch(`/users/${id}`).then(r => r.json());
-}
-
-// Primera y segunda llamada con id='42' devuelven la misma Promise
-const p1 = getUser('42');
-const p2 = getUser('42');
-// p1 === p2 (misma Promise)
-```
-
-### `queue` (FIFO) — serializa con cola
-
-```ts
-@overlap({ mode: 'queue', key: ({ args }) => args[0] })
-async saveUser(id: string, data: User): Promise<void> {
-  return fetch(`/users/${id}`, { method: 'PUT', body: JSON.stringify(data) }).then(() => {});
-}
-
-// Primera llamada se ejecuta
-const p1 = saveUser('42', { name: 'Ana' });
-// Segunda llamada espera en cola
-const p2 = saveUser('42', { name: 'Bob' });
-// p2 se ejecuta solo tras p1 completar
-```
-
-## `keyedLock`: serialización por clave
-
-`keyedLock` es similar a `overlap` con `mode: 'queue'`, pero más controlable:
-
-```ts
-import { keyedLock } from 'annotations-design-patterns/operators';
-
-@keyedLock({ key: ({ args }) => args[0] })
-async updateProfile(id: string, data: Profile): Promise<void> {
-  // Solo una actualización por id concurrente
-  return api.put(`/profiles/${id}`, data);
-}
-```
-
-**Diferencia:** `keyedLock` hace que los waiters esperen a que la operación anterior complete; `overlap` con `queue` (aunque similar) tiene semántica ligeramente distinta en términos de abortos.
-
-## Caches con handles: invalidación explícita
-
-Para tener control sobre cuándo invalidar un cache, usa `memoizeWithHandle` o `cachedForWithHandle`:
-
-```ts
-import { memoizeWithHandle, overlap } from 'annotations-design-patterns/operators';
-
-const deduplicate = overlap({ mode: 'share', key: ({ args }) => args[0] });
-const cache = memoizeWithHandle({ key: (id: string) => id });
-
-const load = pipe(
-  loadProfile,
-  deduplicate,
-  cache.operator
+const limited = pipe<object, readonly [tenantId: string], string>(
+  async (tenantId) => tenantId,
+  semaphore({ permits: 4, maxQueue: 100, key: ({ args }) => args[0] }),
 );
+await run({}, ['tenant-a'], limited, { operationId: 'limited-call' });
+~~~
 
-// Úsalo
-const profile = await load.call({}, '42');
+Sin key, una pipeline aplicada comparte un pool entre receivers. El resolver
+recibe contexto readonly; una key explícita de run tiene prioridad. permits
+requiere entero seguro positivo y maxQueue entero seguro no negativo; omitir
+maxQueue conserva la cola sin límite configurado.
 
-// Invalida una entrada
+Siempre se devuelve Promise y el trabajo admitido empieza síncronamente.
+Cada permiso se conserva hasta que termine la ejecución interna. Una cancelación
+activa deja de esperar el resultado, pero no libera trabajo que sigue ejecutando.
+Una señal preabortada impide ejecutar; un waiter abortado se retira y libera
+capacidad de cola. La transferencia directa mantiene FIFO sin barging.
+
+Una cola llena rechaza con SemaphoreQueueFullError y código POLICY_ERROR.
+Es un error ordinario de política: retry, fallback y un CircuitBreaker externo
+pueden actuar sobre él según la composición. Filtra explícitamente esos casos
+cuando lo necesites, por ejemplo mediante isFailure. La cancelación del llamante
+conserva su tratamiento separado.
+
+## Orden de composición
+
+semaphore externo a retry conserva el permiso durante todos los intentos y
+delays. retry externo a semaphore solicita un permiso de nuevo en cada intento.
+La primera opción limita operaciones lógicas completas; la segunda limita cada
+ejecución admitida. Elige según el recurso protegido.
+
+@Semaphore mantiene aislamiento por instancia y adapta el mismo operador.
+Los eventos existentes son semaphore.queued, semaphore.acquired y
+semaphore.released; no incluyen key automáticamente.
+
+## Overlap y keyedLock
+
+~~~ts
+import { overlap, keyedLock } from 'annotations-design-patterns/operators';
+import { pipe } from 'annotations-design-patterns/pipe';
+
+type Args = readonly [id: string];
+const shared = pipe<object, Args, string>(
+  async (id) => id,
+  overlap({ mode: 'share', key: ({ args }) => args[0] }),
+);
+const locked = pipe<object, Args, string>(
+  async (id) => id,
+  keyedLock({ key: ({ args }) => args[0], maxQueue: 100 }),
+);
+~~~
+
+drop rechaza llamadas solapadas; share devuelve el resultado compartido.
+Con señales, dos consumidores pueden obtener promesas distintas que compiten
+contra sus propias señales. Cancelar al iniciador no cancela al resto. El trabajo
+puede seguir aunque todos abandonen; no hay refcount de cancelación.
+
+overlap queue y keyedLock esperan por clave y rechazan al llenarse su cola.
+El aborto de un waiter lo retira antes de ejecutar. Los nombres de sus eventos
+y errores siguen siendo propios de cada operador. operationId correlaciona
+observaciones; la clave de concurrencia procede del resolver o de run.key.
+
+## Cachés con handles
+
+~~~ts
+import { cachedForWithHandle } from 'annotations-design-patterns/operators';
+import { pipe } from 'annotations-design-patterns/pipe';
+
+const cache = cachedForWithHandle<object, readonly [id: string], string>(
+  60_000,
+  { key: (id) => id, maxEntries: 1_000 },
+);
+const load = pipe((id: string) => id, cache.operator);
+
+load.call({}, '42');
 cache.handle.invalidate('42');
-
-// Borra todo el cache
 cache.handle.clear();
-```
+~~~
 
-### `MemoizeHandle<K>` API
+CacheHandle tiene invalidate(key: string): void y clear(): void. La invalidación
+no cancela consumidores pendientes. Las variantes WithHandle no admiten
+perReceiver y no exponen size. El default sin handle comparte por pipeline;
+perReceiver true permite particiones WeakMap por objeto o función.
 
-- `invalidate(key: K): boolean` — Borra una entrada, retorna `true` si existía
-- `clear(): void` — Borra todo el cache
+maxEntries conserva entradas en orden de inserción, incluyendo pendientes;
+los hits no reordenan. La expulsión por capacidad emite cache.invalidated. Solo
+las cachés limitadas limpian expirados en misses, sin eventos de TTL ni timers.
+El TTL empieza al invocar. Los límites y las claves JSON están detallados en la
+[migración a 2.2](../migration/2.2.md).
 
-## Resolver de clave personalizado
-
-Tanto `overlap`, `keyedLock` como `memoizeWithHandle` aceptan un resolver de clave personalizado:
-
-```ts
-const cache = memoizeWithHandle({
-  key: (user: User) => user.id  // Extrae ID de usuario
-});
-
-const deduplicate = overlap({
-  mode: 'share',
-  key: ({ args }) => {
-    const [id, options] = args;
-    return `${id}:${options?.version ?? 'default'}`;
-  }
-});
-```
-
-## Coexistencia con `run` y operationId
-
-Cuando usas `run` con un `operationId` y además tienes `overlap`/`keyedLock`, el `operationId` no afecta el resolver de clave — es metadata separada para observabilidad:
-
-```ts
-const load = pipe(fetchProfile, overlap({ mode: 'share', key: ({ args }) => args[0] }));
-
-await run(
-  api,
-  ['42'] as const,
-  load,
-  { 
-    operationId: 'profile-load-1',  // Para logs/traces
-    metadata: { requestId: '...' },
-  }
-);
-```
-
-## Nota sobre experimentales
-
-[`switchOverlap`](/docs/guides/experimental#switchoverlap) y [`hedge`](/docs/guides/experimental#hedge-hedged-requests) son experimentales — no están estables. Usa `overlap` con `share` para la mayoría de casos de producción.
-
-## Para detalles y límites
-
-Consulta la [Referencia de operadores](/docs/api/operators).
+switchOverlap y hedge continúan en la entrada experimental.
+[Referencia de operadores](/docs/api/operators).

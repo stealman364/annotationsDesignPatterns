@@ -140,28 +140,37 @@ try {
 
   const rcTypes = join(consumerDirectory, 'rc-types.ts');
   const rcRuntime = join(consumerDirectory, 'rc-runtime.mjs');
+  const v23Types = join(consumerDirectory, 'v23-types.ts');
+  const v23Runtime = join(consumerDirectory, 'v23-runtime.mjs');
   writeFileSync(rcTypes, readFileSync(new URL('./fixtures/rc-types.ts', import.meta.url)));
   writeFileSync(rcRuntime, readFileSync(new URL('./fixtures/rc-runtime.mjs', import.meta.url)));
+  writeFileSync(v23Types, readFileSync(new URL('./fixtures/v23-types.ts', import.meta.url)));
+  writeFileSync(v23Runtime, readFileSync(new URL('./fixtures/v23-runtime.mjs', import.meta.url)));
   run(process.execPath, [rcRuntime], consumerDirectory);
-  for (const filename of [rcTypes, rcTypes.replace(/\.ts$/, '.cts')]) {
-    if (filename !== rcTypes) writeFileSync(filename, readFileSync(rcTypes));
-    run(
-      process.execPath,
-      [
-        resolve(repositoryRoot, 'node_modules/typescript/bin/tsc'),
-        '--module',
-        'NodeNext',
-        '--moduleResolution',
-        'NodeNext',
-        '--strict',
-        '--noEmit',
-        '--target',
-        'ES2022',
-        filename,
-      ],
-      consumerDirectory,
-    );
-  }
+  run(process.execPath, [v23Runtime], consumerDirectory);
+  const rcCts = rcTypes.replace(/\.ts$/, '.cts');
+  const v23Cts = v23Types.replace(/\.ts$/, '.cts');
+  writeFileSync(rcCts, readFileSync(rcTypes));
+  writeFileSync(v23Cts, readFileSync(v23Types));
+  run(
+    process.execPath,
+    [
+      resolve(repositoryRoot, 'node_modules/typescript/bin/tsc'),
+      '--module',
+      'NodeNext',
+      '--moduleResolution',
+      'NodeNext',
+      '--strict',
+      '--noEmit',
+      '--target',
+      'ES2022',
+      rcTypes,
+      rcCts,
+      v23Types,
+      v23Cts,
+    ],
+    consumerDirectory,
+  );
   console.log('packed consumer smoke ESM/CJS/types OK');
 } finally {
   if (existsSync(temporaryDirectory)) {

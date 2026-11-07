@@ -24,6 +24,14 @@ export function withExecutionSignal<This, Args extends readonly unknown[]>(
   return Object.freeze({ ...context, signal, [callerSignalKey]: callerSignal(context) });
 }
 
+/** An independently owned shared scope has its own cancellation root. */
+export function withSharedExecutionSignal<This, Args extends readonly unknown[]>(
+  context: RuntimeOperationContext<This, Args>,
+  signal: AbortSignal,
+): RuntimeOperationContext<This, Args> {
+  return Object.freeze({ ...context, signal, [callerSignalKey]: signal });
+}
+
 /** Shared work has no owner signal. Each consumer waits with its own signal. */
 export function sharedContext<This, Args extends readonly unknown[]>(
   context: RuntimeOperationContext<This, Args> | undefined,

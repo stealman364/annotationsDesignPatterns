@@ -1,0 +1,32 @@
+{
+  "packageVersion": "2.3.0-rc.0",
+  "esbuildVersion": "0.27.7",
+  "measurement": "Package ESM exports; minified browser ESM, esbuild target ES2022, tree shaking enabled; gzip level 9.",
+  "cases": {
+    "builder": {
+      "bytes": 555,
+      "gzip": 392
+    },
+    "retry-pipeline": {
+      "bytes": 4637,
+      "gzip": 1726
+    },
+    "memoize": {
+      "bytes": 7910,
+      "gzip": 2800
+    },
+    "semaphore": {
+      "bytes": 4939,
+      "gzip": 1953
+    },
+    "policy": {
+      "bytes": 16558,
+      "gzip": 5096
+    },
+    "decorator": {
+      "bytes": 2188,
+      "gzip": 1257
+    }
+  },
+  "violations": []
+}

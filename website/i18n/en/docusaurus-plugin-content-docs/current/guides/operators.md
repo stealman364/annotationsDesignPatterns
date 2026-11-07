@@ -2,94 +2,94 @@
 sidebar_position: 2
 ---
 
-# Functional API: Operators and Composition
+# Functional API: operators and composition
 
-Besides decorators, you can use a functional API without decorators: **`pipe`**, **functional operators**, and **`run`** to compose pipelines that execute against a receiver (object) with an explicit tuple of arguments.
+pipe applies operators to a function and run adds explicit context with
+operationId, metadata, EventSink, key and AbortSignal. Operators are composable
+functions independent from class decorators.
 
-## Import
-
-```ts
-import { fallback, retry, timeout, circuitBreaker } from 'annotations-design-patterns/operators';
+~~~ts
+import {
+  fallback, retry, timeout, circuitBreaker, semaphore, memoize, cachedFor,
+} from 'annotations-design-patterns/operators';
 import { pipe } from 'annotations-design-patterns/pipe';
 import { run } from 'annotations-design-patterns/run';
-```
+~~~
 
-## Available operators
+overlap, keyedLock, memoizeWithHandle and cachedForWithHandle are also available.
+Experimental operators have their own entrypoint.
 
-Functional operators map 1:1 with resilience decorators:
+## Composition and return values
 
-- `fallback(value | fn)` — Fallback
-- `retry(options)` — Retries
-- `timeout(ms)` — Time limit
-- `circuitBreaker(options)` — Breaks after failures
-- `overlap(options)` — Deduplication by key
-- `keyedLock(options)` — Serialization by key
-- `memoize(options)` / `memoizeWithHandle(options)` — Cache
-- And more...
+The first operator is outermost. This pipeline enters fallback, retry, timeout
+and finally the method; results return outward.
 
-## Example 1: Synchronous pipeline
-
-A synchronous pipeline preserves its synchronous return when its operators allow it:
-
-```ts
-const safeDivide = pipe<object, readonly [divisor: number], number>(
-  function (this: object, divisor: number): number {
-    if (divisor === 0) throw new Error('division by zero');
-    return 100 / divisor;
-  },
-  fallback<object, readonly [divisor: number], number>(0)
-);
-
-// Use it as a normal function
-safeDivide.call({}, 0); // 0 (fallback)
-safeDivide.call({}, 2); // 50
-```
-
-**`pipe` accepts:**
-1. A base function (receiver, args, return)
-2. Zero or more operators (applied from outside to inside)
-
-**Generics:**
-- `<ReceiverType, readonly [arg1, arg2, ...], ReturnType>`
-
-## Example 2: Asynchronous pipeline
-
-When operators or the method are async, the pipeline returns Promise:
-
-```ts
+~~~ts
 const load = pipe<object, readonly [id: string], string>(
-  async function (this: object, id: string): Promise<string> {
-    return fetchProfile(id);
-  },
-  retry<object, readonly [id: string], string>({ attempts: 3 }),
+  async (id) => id,
+  fallback('recovered'),
+  retry({ attempts: 3, delayMs: 100, backoffFactor: 2 }),
+  timeout(5_000),
 );
+await run({}, ['42'], load, { operationId: 'load-42' });
+~~~
 
-const profile = await load.call({}, '42');
-```
+Synchronous pipelines keep synchronous results where their operators allow it;
+timeout and semaphore always return Promises. Receivers and argument tuples are
+preserved. Generic parameters are Receiver, readonly Args and Result.
 
-## Composition with multiple operators
+## Retry and CircuitBreaker
 
-The order in `pipe` is: **the first operator is the outermost**. They execute from outside to inside:
+Retry supports maxDelayMs and jitter none/full/equal. Exponential delay is capped
+by the portable timer maximum and configured user limit before jitter. none is
+the default. A zero final delay uses a cancellable microtask.
 
-```ts
-const safeFetch = pipe<API, readonly [id: string], User>(
-  async (id: string) => API.getUser(id),
-  timeout<API, readonly [id: string], User>(5000),      // 1st (outermost)
-  retry<API, readonly [id: string], User>({ attempts: 3 }), // 2nd
-  fallback<API, readonly [id: string], User>(DEFAULT_USER)  // 3rd (innermost)
-);
-```
+CircuitBreaker supports synchronous isFailure(error, info). info provides
+readonly invocation data; false ignores the error without incrementing or
+resetting failures and without treating it as success. HALF_OPEN releases its
+probe without closing. Caller cancellation and stale generations bypass the
+predicate.
 
-Execution order: fallback → retry → timeout → method.
+~~~ts
+const protectedRead = circuitBreaker<object, readonly [id: string], string>({
+  failures: 5,
+  resetMs: 30_000,
+  isFailure: (error, info) => info.args[0] !== 'optional' && error instanceof Error,
+});
+~~~
 
-## For `pipe` and `run` in detail
+Ignored errors still reject with their original reason. A throwing predicate
+rejects with its decision error. Decorators and definePolicy share these options;
+describe shows new options only when explicitly configured.
 
-See the dedicated guides: [Pipe](pipe) and [Run](run).
+## Caches and capacity
 
-## For specific operators
+memoize/cachedFor share by pipeline by default. perReceiver true isolates objects
+and functions; primitive receivers produce TypeError. WithHandle variants expose
+invalidate/clear and do not accept that flag.
 
-See the [Operators Reference](/docs/api/operators) for:
-- Exact options for each operator
-- Error handling
-- Queue and deduplication semantics
-- Handles for cache invalidation
+cachedFor accepts positive-safe-integer maxEntries: insertion-order FIFO without
+hit reordering. Pending entries count; eviction does not cancel consumers.
+Bounded caches prune expired entries on misses without timers. TTL starts at
+invocation; Infinity never expires and functional cachedFor(0) disables reuse.
+
+Default keys remain JSON.stringify(args), with its collisions and limitations.
+Supply key to identify special values or entities.
+[Contracts and key table](../migration/2.2.md).
+
+## Semaphore and cancellation
+
+semaphore limits execution per pool or key, preserves FIFO and withdraws aborted
+waiters. Active cancellation rejects the caller with signal.reason; ownership
+lasts until inner execution settles. Other policies may treat
+SemaphoreQueueFullError as an ordinary failure.
+
+An outer semaphore retains its permit across retry attempts and delays; an
+outer retry reacquires per attempt. The [concurrency guide](concurrency.md)
+explains differences from overlap, keyedLock, Mutex and RateLimit.
+
+Individual cancellation invokes no fallback and changes no breaker counter.
+Shared operations isolate consumer signals and may continue after all consumers
+abandon them. A timeout cannot forcibly stop code that ignores its signal.
+See [Pipe](pipe.md), [Run](run.md) and the
+[operator reference](/docs/api/operators).

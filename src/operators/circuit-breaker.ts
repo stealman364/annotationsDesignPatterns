@@ -26,6 +26,18 @@ interface BreakerState {
   generation: number;
 }
 
+export interface CircuitBreakerSnapshot {
+  readonly state: 'CLOSED' | 'OPEN' | 'HALF_OPEN';
+  readonly consecutiveFailures: number;
+  readonly probeInFlight: boolean;
+  readonly openedAt: number | undefined;
+}
+
+export interface CircuitBreakerHandle {
+  inspect(): CircuitBreakerSnapshot | undefined;
+  reset(): void;
+}
+
 interface NormalizedCircuitBreakerOptions<This, Args extends readonly unknown[]> {
   readonly failures: number;
   readonly resetMs: number;
@@ -80,6 +92,16 @@ export function validateCircuitBreakerOptions<
   normalizeCircuitBreakerOptions(options);
 }
 
+function createBreakerState(): BreakerState {
+  return {
+    consecutiveFailures: 0,
+    openedAt: undefined,
+    halfOpenProbeInFlight: false,
+    probeStartedAt: undefined,
+    generation: 0,
+  };
+}
+
 /**
  * Operador de disjuntor (circuit breaker): tras `failures` fallos
  * consecutivos, rechaza durante `resetMs` ms. Luego intenta con una llamada
@@ -89,23 +111,16 @@ export function validateCircuitBreakerOptions<
  * @param createOpenError personalizador del error lanzado cuando el circuito está abierto.
  * @returns operador que gestiona el estado del circuito.
  */
-export function circuitBreaker<This, Args extends readonly unknown[], Result>(
-  options: CircuitBreakerOptions<This, Args>,
-  createOpenError: () => Error = () => new CircuitBreakerOpenError(),
+function createCircuitBreakerOperator<This, Args extends readonly unknown[], Result>(
+  normalizedOptions: NormalizedCircuitBreakerOptions<This, Args>,
+  createOpenError: () => Error,
+  stateForApply: () => BreakerState,
 ): Operator<This, Args, Result, Result> {
-  const normalizedOptions = normalizeCircuitBreakerOptions(options);
   const isFailure = normalizedOptions.isFailure;
   const createWrapper = (
     next: ContextualMethod<This, Args, Result>,
+    state: BreakerState,
   ): ContextualMethod<This, Args, Result> => {
-    const state: BreakerState = {
-      consecutiveFailures: 0,
-      openedAt: undefined,
-      halfOpenProbeInFlight: false,
-      probeStartedAt: undefined,
-      generation: 0,
-    };
-
     return function (
       this: This,
       context: RuntimeOperationContext<This, Args> | undefined,
@@ -236,15 +251,71 @@ export function circuitBreaker<This, Args extends readonly unknown[], Result>(
       return withoutContext(
         createWrapper(function (this: This, _context, ...args: Args): MaybePromise<Result> {
           return next.call(this, ...args);
-        }),
+        }, stateForApply()),
       );
     },
     applyWithContext(
       next: ContextualMethod<This, Args, Result>,
     ): ContextualMethod<This, Args, Result> {
-      return createWrapper(next);
+      return createWrapper(next, stateForApply());
     },
   };
 
   return operator;
+}
+
+export function circuitBreaker<This, Args extends readonly unknown[], Result>(
+  options: CircuitBreakerOptions<This, Args>,
+  createOpenError: () => Error = () => new CircuitBreakerOpenError(),
+): Operator<This, Args, Result, Result> {
+  return createCircuitBreakerOperator<This, Args, Result>(
+    normalizeCircuitBreakerOptions(options),
+    createOpenError,
+    createBreakerState,
+  );
+}
+
+/** Creates a circuit breaker with factory-owned state and read/reset diagnostics. */
+export function circuitBreakerWithHandle<This, Args extends readonly unknown[], Result>(
+  options: CircuitBreakerOptions<This, Args>,
+  createOpenError: () => Error = () => new CircuitBreakerOpenError(),
+): {
+  readonly operator: Operator<This, Args, Result, Result>;
+  readonly handle: CircuitBreakerHandle;
+} {
+  const normalized = normalizeCircuitBreakerOptions(options);
+  let sharedState: BreakerState | undefined;
+  const stateForApply = (): BreakerState => (sharedState ??= createBreakerState());
+  const handle: CircuitBreakerHandle = Object.freeze({
+    inspect(): CircuitBreakerSnapshot | undefined {
+      if (sharedState === undefined) return undefined;
+      return Object.freeze({
+        state:
+          sharedState.openedAt === undefined
+            ? 'CLOSED'
+            : sharedState.halfOpenProbeInFlight
+              ? 'HALF_OPEN'
+              : 'OPEN',
+        consecutiveFailures: sharedState.consecutiveFailures,
+        probeInFlight: sharedState.halfOpenProbeInFlight,
+        openedAt: sharedState.openedAt,
+      });
+    },
+    reset(): void {
+      if (sharedState === undefined) return;
+      sharedState.generation += 1;
+      sharedState.consecutiveFailures = 0;
+      sharedState.openedAt = undefined;
+      sharedState.halfOpenProbeInFlight = false;
+      sharedState.probeStartedAt = undefined;
+    },
+  });
+  return Object.freeze({
+    operator: createCircuitBreakerOperator<This, Args, Result>(
+      normalized,
+      createOpenError,
+      stateForApply,
+    ),
+    handle,
+  });
 }

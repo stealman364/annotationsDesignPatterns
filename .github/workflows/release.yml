@@ -1,0 +1,213 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.validate.outputs.version }}
+      commit: ${{ steps.validate.outputs.commit }}
+      dist_tag: ${{ steps.validate.outputs.dist_tag }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - name: Validate selected tag and package version
+        id: validate
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+          WORKFLOW_REF_TYPE: ${{ github.ref_type }}
+          WORKFLOW_COMMIT: ${{ github.sha }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync, readFileSync } from 'node:fs';
+
+          const tag = process.env.RELEASE_TAG;
+          if (process.env.WORKFLOW_REF_TYPE !== 'tag' || !/^v\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/.test(tag ?? '')) {
+            throw new Error('Tag must be a v-prefixed semantic version tag.');
+          }
+          const { name, version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          if (tag !== `v${version}`) {
+            throw new Error(`Selected tag ${tag} does not match package version ${version}.`);
+          }
+          const commit = process.env.WORKFLOW_COMMIT;
+          const distTag = version.includes('-') ? 'next' : 'latest';
+          appendFileSync(process.env.GITHUB_OUTPUT, `version=${version}\ncommit=${commit}\ndist_tag=${distTag}\n`);
+          console.log(`Validated ${name}@${version} at ${commit}; npm dist-tag: ${distTag}`);
+          NODE
+
+  build:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - name: Confirm checked out commit
+        env:
+          EXPECTED_COMMIT: ${{ needs.validate.outputs.commit }}
+        run: test "$(git rev-parse HEAD)" = "$EXPECTED_COMMIT"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22.x
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+      - run: npm test
+      - run: npm run test:coverage
+      - run: node scripts/audit-any.mjs
+      - run: node scripts/bundle-budget.mjs
+      - run: node scripts/smoke-dist.mjs
+      - run: node scripts/smoke-dist.cjs
+      - run: npm pack --dry-run
+      - run: npm exec -- publint
+      - run: npm exec -- attw --pack
+      - run: node scripts/verify-package.mjs
+      - run: node scripts/smoke-package.mjs
+      - name: Measure consumer bundles
+        run: |
+          mkdir -p quality
+          node scripts/consumer-bundles.mjs --output quality/consumer-bundles.json
+      - name: Create and validate release tarball
+        env:
+          EXPECTED_NAME: annotations-design-patterns
+          EXPECTED_VERSION: ${{ needs.validate.outputs.version }}
+          SOURCE_COMMIT: ${{ needs.validate.outputs.commit }}
+        run: |
+          mkdir -p release-artifact
+          npm pack --ignore-scripts --json --pack-destination release-artifact > release-artifact/pack.json
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { execFileSync } from 'node:child_process';
+          import { basename, join } from 'node:path';
+
+          const { name, version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          if (name !== process.env.EXPECTED_NAME || version !== process.env.EXPECTED_VERSION) {
+            throw new Error(`Unexpected package identity ${name}@${version}.`);
+          }
+          const [pack] = JSON.parse(readFileSync('release-artifact/pack.json', 'utf8'));
+          if (pack.name !== name || pack.version !== version || basename(pack.filename) !== pack.filename) {
+            throw new Error('npm pack metadata does not match the expected package.');
+          }
+          const archive = join('release-artifact', pack.filename);
+          const packed = JSON.parse(execFileSync('tar', ['-xOf', archive, 'package/package.json'], { encoding: 'utf8' }));
+          if (packed.name !== name || packed.version !== version) {
+            throw new Error('The generated tarball contains an unexpected package identity.');
+          }
+          const sha256 = createHash('sha256').update(readFileSync(archive)).digest('hex');
+          writeFileSync('release-artifact/manifest.json', JSON.stringify({
+            name, version, filename: pack.filename, sha256, integrity: pack.integrity,
+            sourceCommit: process.env.SOURCE_COMMIT,
+          }, null, 2) + '\n');
+          writeFileSync('quality/release.json', JSON.stringify({
+            package: `${name}@${version}`,
+            gitRef: `refs/tags/v${version}`,
+            gitCommit: process.env.SOURCE_COMMIT,
+            tarball: pack.filename,
+            sha256,
+            sha512Integrity: pack.integrity,
+            integrity: pack.integrity,
+            validations: [
+              'format:check', 'lint', 'typecheck', 'test', 'test:coverage', 'build',
+              'audit-any.mjs', 'bundle-budget.mjs', 'smoke-dist.mjs', 'smoke-dist.cjs',
+              'npm pack --dry-run', 'publint', 'attw --pack', 'verify-package.mjs',
+              'smoke-package.mjs', 'check-typescript-compat.mjs --compiler all --tarball',
+              'consumer-bundles.mjs --output quality/consumer-bundles.json',
+            ],
+            status: 'validated release candidate; publication occurs only in the protected job',
+          }, null, 2) + '\n');
+          console.log(`Validated ${pack.filename}; sha256 ${sha256}`);
+          NODE
+      - name: Check supported TypeScript versions against release tarball
+        env:
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+        run: node scripts/check-typescript-compat.mjs --compiler all --tarball "release-artifact/annotations-design-patterns-${RELEASE_VERSION}.tgz"
+      - name: Upload validated release candidate and evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: release-candidate-${{ needs.validate.outputs.version }}
+          if-no-files-found: error
+          retention-days: 30
+          path: |
+            release-artifact/
+            coverage/
+            quality/
+
+  publish:
+    needs: [validate, build]
+    runs-on: ubuntu-latest
+    environment:
+      name: npm-release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: release-candidate-${{ needs.validate.outputs.version }}
+          path: release-candidate
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.x
+          registry-url: https://registry.npmjs.org
+      - name: Confirm artifact identity and integrity
+        env:
+          EXPECTED_VERSION: ${{ needs.validate.outputs.version }}
+          EXPECTED_DIST_TAG: ${{ needs.validate.outputs.dist_tag }}
+          EXPECTED_COMMIT: ${{ needs.validate.outputs.commit }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { createHash } from 'node:crypto';
+          import { readFileSync } from 'node:fs';
+          import { basename, join } from 'node:path';
+          import { execFileSync } from 'node:child_process';
+
+          const manifest = JSON.parse(readFileSync('release-candidate/release-artifact/manifest.json', 'utf8'));
+          if (manifest.name !== 'annotations-design-patterns' || manifest.version !== process.env.EXPECTED_VERSION || manifest.sourceCommit !== process.env.EXPECTED_COMMIT) {
+            throw new Error('Downloaded artifact metadata does not match the validated release.');
+          }
+          if (basename(manifest.filename) !== manifest.filename || !manifest.filename.endsWith('.tgz')) {
+            throw new Error('Artifact filename is invalid.');
+          }
+          const archive = join('release-candidate/release-artifact', manifest.filename);
+          const sha256 = createHash('sha256').update(readFileSync(archive)).digest('hex');
+          if (sha256 !== manifest.sha256) throw new Error('Release tarball SHA-256 does not match its validated manifest.');
+          const packageManifest = JSON.parse(execFileSync('tar', ['-xOf', archive, 'package/package.json'], { encoding: 'utf8' }));
+          if (packageManifest.name !== manifest.name || packageManifest.version !== manifest.version) {
+            throw new Error('Downloaded tarball package identity does not match its manifest.');
+          }
+          console.log(`Artifact verified; publishing with npm dist-tag ${process.env.EXPECTED_DIST_TAG}.`);
+          NODE
+      - name: Publish with npm trusted publishing and provenance
+        env:
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+          RELEASE_DIST_TAG: ${{ needs.validate.outputs.dist_tag }}
+        run: |
+          NPM_VERSION="$(npm --version)"
+          node -e 'const [major, minor, patch] = process.argv[1].split(".").map(Number); if (major < 11 || (major === 11 && (minor < 5 || (minor === 5 && patch < 1)))) process.exit(1)' "$NPM_VERSION" || {
+            echo "npm $NPM_VERSION is too old for trusted publishing; npm 11.5.1 or newer is required." >&2
+            exit 1
+          }
+          ARCHIVE="release-candidate/release-artifact/annotations-design-patterns-${RELEASE_VERSION}.tgz"
+          npm publish "$ARCHIVE" --provenance --ignore-scripts --tag "$RELEASE_DIST_TAG"

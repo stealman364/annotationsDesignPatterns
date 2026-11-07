@@ -1,0 +1,25 @@
+{
+  "tests": 1112,
+  "suites": 134,
+  "statements": {
+    "covered": 2349,
+    "total": 2474,
+    "percent": 94.94
+  },
+  "branches": {
+    "covered": 1381,
+    "total": 1505,
+    "percent": 91.76
+  },
+  "functions": {
+    "covered": 637,
+    "total": 646,
+    "percent": 98.6
+  },
+  "lines": {
+    "covered": 2231,
+    "total": 2342,
+    "percent": 95.26
+  },
+  "existingThresholdsUnchanged": true
+}

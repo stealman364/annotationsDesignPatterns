@@ -4,53 +4,15 @@ sidebar_position: 6
 
 # Observabilidad: errores y eventos
 
-La librería emite eventos estructurados desde operadores funcionales sin añadir dependencias de logging. Los decoradores pueden capturar errores específicos como `TimeoutError` o `CircuitBreakerOpenError`.
+EventSink es el contrato pequeño y síncrono del motor. Las pipelines funcionales
+contextuales emiten eventos al pasar un sink a run; logging, transporte, tracing
+y métricas permanecen fuera del motor.
 
-## Errores específicos
+## Exports y logger reales
 
-### `PolicyError`
-
-Clase base para errores de política. Expone:
-
-- `code: PolicyErrorCode` — código estable (`'TIMEOUT'`, `'CIRCUIT_OPEN'`, `'SEMAPHORE_TIMEOUT'`, etc.)
-- `cause: unknown` — error original que causó el rechazo
-- `metadata: Readonly<Record<string, unknown>>` — contexto de la operación
-
-```ts
-import { TimeoutError, CircuitBreakerOpenError } from 'annotations-design-patterns/observability';
-
-try {
-  await method.call(receiver);
-} catch (e) {
-  if (e instanceof TimeoutError) {
-    console.log(`Timeout tras ${e.metadata.ms}ms`);
-  } else if (e instanceof CircuitBreakerOpenError) {
-    console.log('Circuito abierto');
-  }
-}
-```
-
-### `TimeoutError`
-
-Se lanza cuando un método async excede el límite de `@Timeout(ms)`.
-
-- `code: 'TIMEOUT'`
-- `metadata: { ms: number }` — límite en milisegundos
-
-### `CircuitBreakerOpenError`
-
-Se lanza cuando el circuito se abre tras N fallos consecutivos.
-
-- `code: 'CIRCUIT_OPEN'`
-- `metadata: { failures: number, resetMs: number }`
-
-### `SemaphoreTimeoutError`, `MutexTimeoutError`
-
-Se lanzan si se alcanza el timeout esperando un slot en `@Semaphore` o `@Mutex`.
-
-## Eventos con `LoggerEventSink`
-
-La API funcional puede emitir eventos estructurados a través de un sink personalizado:
+`/observability` exporta EventSink y PolicyEvent como tipos, LoggerEventSink y
+NoopEventSink como clases, y los tipos StructuredLogger y LoggerEventSinkOptions.
+Importa los errores desde su entrada correspondiente, como `/operators` o `/policy`.
 
 ```ts
 import { LoggerEventSink } from 'annotations-design-patterns/observability';
@@ -58,83 +20,124 @@ import { retry } from 'annotations-design-patterns/operators';
 import { pipe } from 'annotations-design-patterns/pipe';
 import { run } from 'annotations-design-patterns/run';
 
-const events = new LoggerEventSink({
-  log: (event) => console.info(event)
-});
-
-const load = pipe(fetchProfile, retry({ attempts: 3 }));
-
-await run(api, ['42'] as const, load, {
+const sink = new LoggerEventSink(
+  { log: (event) => console.info(event.kind, event.operationId) },
+  { operators: ['retry'] },
+);
+const load = pipe<object, readonly [id: string], string>(
+  async (id) => id,
+  retry({ attempts: 3 }),
+);
+await run({}, ['42'], load, {
   operationId: 'profile-42',
   metadata: { requestId: 'request-7' },
-  eventSink: events,
+  eventSink: sink,
 });
 ```
 
-### Estructura de evento
+El primer argumento es un logger con método log; el segundo es un filtro opcional
+por operador. NoopEventSink descarta eventos. Los fallos síncronos del sink no
+cambian el resultado. emit no espera Promises: un sink con envíos async debe
+gestionar sus propios errores y transporte.
 
-Cada evento incluye:
+## Esquema de PolicyEvent
+
+Los campos superiores readonly son kind, operator, operationId, timestamp y
+metadata. **timestamp es number: milisegundos Unix epoch**, no Date. operationId
+no está dentro de metadata. metadata contiene los valores explícitos de run;
+args, receiver y signal no se añaden automáticamente.
+
+| Kinds | Campos adicionales superiores |
+| --- | --- |
+| `retry.attempt` | attempt |
+| `retry.exhausted` | attempt, error |
+| `timeout.triggered` | timeoutMs |
+| `circuit.open`, `circuit.half_open`, `circuit.closed` | Ninguno |
+| `cache.hit`, `cache.miss` | Ninguno |
+| `cache.rejected` | error |
+| `cache.invalidated` | key: string |
+| `fallback.used` | error |
+| `semaphore.queued`, `semaphore.acquired`, `semaphore.released` | Ninguno |
+| `overlap.started`, `overlap.queued`, `overlap.dropped`, `overlap.completed` | key: PropertyKey |
+| `keyedLock.queued`, `keyedLock.acquired`, `keyedLock.released` | key: PropertyKey |
 
 ```ts
-{
-  type: string;                              // 'retry-attempt', 'circuit-open', etc.
-  timestamp: Date;
-  metadata: {
-    operationId: string;
-    requestId?: string;
-    args: readonly unknown[];
-    // + metadatos específicos del evento
-  };
-}
+import type { EventSink, PolicyEvent } from 'annotations-design-patterns/observability';
+
+const sink: EventSink = {
+  emit(event: PolicyEvent): void {
+    if (event.kind === 'timeout.triggered') {
+      console.info(event.operationId, event.timeoutMs, event.timestamp);
+    }
+  },
+};
 ```
 
-### Tipos de evento
+circuit.open representa una transición, no cada rechazo de un circuito abierto.
+No hay un evento universal de fin de operación: overlap.completed o
+semaphore.released pueden ocurrir después del aborto del llamante. No deduzcas
+el ciclo completo de un request o span de un único evento de política.
 
-- `retry-attempt` — reintento en curso
-- `circuit-open` — circuito abierto, operación rechazada
-- `timeout-exceeded` — timeout alcanzado
-- `fallback-triggered` — fallback devuelto
-- Y más según los operadores activos
-
-## Sink personalizado
-
-Implementa la interfaz `EventSink` para capturar eventos en tu sistema de logging:
+## Errores y metadata
 
 ```ts
-import type { EventSink, ResilienceEvent } from 'annotations-design-patterns/observability';
+import { TimeoutError, CircuitBreakerOpenError, isPolicyError } from 'annotations-design-patterns/operators';
+```
 
-class MyEventSink implements EventSink {
-  emit(event: ResilienceEvent): void {
-    // Envía a tu sistema de logging (Winston, Pino, etc.)
-    logger.info(`[${event.type}]`, {
-      operationId: event.metadata.operationId,
-      ms: event.metadata.ms,
-    });
-  }
-}
+PolicyError ofrece code, metadata readonly y cause cuando se configura. Los
+errores de negocio y signal.reason se propagan sin envolverse. metadata de run
+no se copia automáticamente a cada error.
 
-await run(api, args, pipeline, {
-  operationId: 'my-op',
-  eventSink: new MyEventSink(),
+| Clase | Entrada | Código / datos propios |
+| --- | --- | --- |
+| TimeoutError | `/operators` | TIMEOUT; no añade ms a metadata por defecto |
+| CircuitBreakerOpenError | `/operators` | CIRCUIT_OPEN; no añade failures/resetMs a metadata |
+| SemaphoreQueueFullError | `/operators` | POLICY_ERROR; key opcional |
+| OverlapDroppedError / OverlapQueueFullError | `/operators` | OVERLAP_DROPPED / OVERLAP_QUEUE_FULL; key |
+| KeyedLockQueueFullError | `/operators` | KEYED_LOCK_QUEUE_FULL; key |
+| InvalidPolicyError | `/policy` | INVALID_POLICY; path y metadata.path |
+
+Para conocer el límite de un timeout, estrecha timeout.triggered y lee timeoutMs.
+Semaphore y Mutex no añaden timeout de espera propio; se compone con señales y
+políticas.
+
+## Recetas externas para tracing y métricas
+
+`examples/event-sink-recipes.ts` es un archivo del repositorio para copiar a tu
+aplicación. createSpanEventSink y createCounterSink **no son exports npm**.
+Aceptan callbacks síncronos y no importan SDKs.
+
+Con un span que ya posee tu aplicación:
+
+```ts
+// Importa desde la copia de la receta en tu aplicación.
+import { createSpanEventSink } from './event-sink-recipes';
+
+const sink = createSpanEventSink((name, attributes, timestampMs) => {
+  span.addEvent(name, attributes, timestampMs);
 });
 ```
 
-## Ciclo de vida de errores
+OpenTelemetry acepta nombre, atributos y tiempo en addEvent; TimeInput admite
+milisegundos epoch. La aplicación mantiene la propiedad del span y decide cuándo
+llamar end. Consulta [Span](https://open-telemetry.github.io/opentelemetry-js/interfaces/_opentelemetry_api._opentelemetry_api.Span.html) y
+[TimeInput](https://open-telemetry.github.io/opentelemetry-js/types/_opentelemetry_api._opentelemetry_api.TimeInput.html).
 
-**Los errores de usuario se propagan sin envolverse.** Solo `PolicyError` enuelve operaciones que fallan por política (timeout, circuit breaker, etc.):
+La receta de contador mantiene labels de cardinalidad limitada:
 
 ```ts
-try {
-  await method.call(receiver);
-} catch (e) {
-  if (e instanceof TimeoutError) {
-    // Causado por timeout, no por el usuario
-  } else if (e instanceof TypeError) {
-    // Error de usuario: se propaga tal cual
-  }
-}
+import { createCounterSink } from './event-sink-recipes';
+
+const sink = createCounterSink((kind, { operator }) => {
+  counter.inc({ kind, operator });
+});
 ```
 
-## Para tipos exactos y eventos detallados
+Configura el contador que posee la aplicación con labelNames kind/operator.
+El cliente documenta labels tipados mediante as const. No conviertas IDs, claves,
+argumentos o metadata en labels. Véase la documentación oficial de
+[labels tipados](https://github.com/prometheus/client_js#strongly-typed-labels).
 
-Consulta la [Referencia de observability](/docs/api/observability).
+La librería no inicia ni termina spans y no registra métricas globales. Mantén
+SDKs y exporters en la aplicación o en un adapter opcional separado.
+[Referencia exacta de observability](/docs/api/observability).

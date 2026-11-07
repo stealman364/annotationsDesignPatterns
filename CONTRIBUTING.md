@@ -116,18 +116,18 @@ Behavior changes should include unit tests. Type-level API changes should includ
 
 ## Publishing Gate
 
-Publishing is protected by `prepublishOnly`, which runs tests, typechecking,
-linting, and the dist smoke checks before npm can publish the package.
+Local source publication runs `prepublishOnly` for tests, typechecking, linting
+and dist smoke checks. The release workflow runs those checks explicitly before
+publishing its validated tarball with lifecycle scripts disabled.
 
-Releases are published manually from a local checkout:
+Prepare version changes with Changesets and review the generated changelog before
+creating the release tag. The manual release workflow validates the tag against
+the package version, checks the package and publishes the validated tarball with
+npm trusted publishing and provenance. It never publishes on push or pull request.
 
-```bash
-npm run version         # consume changesets, bump version, update CHANGELOG.md
-git commit -am "chore(release): vX.Y.Z"
-npm login
-npm run release         # changeset publish: runs prepublishOnly, publishes, tags
-git push --follow-tags
-```
+See [RELEASING.md](RELEASING.md) for the required npm trusted-publisher and GitHub
+environment setup. Those account settings must be configured by the owner before
+the workflow is used. A published version can never be republished.
 
-Review the generated `CHANGELOG.md` before publishing: a published version can
-never be republished.
+See [QUALITY.md](QUALITY.md) for reproducible package, TypeScript compatibility and
+consumer bundle checks, and the distinction between local and published evidence.

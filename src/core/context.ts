@@ -89,7 +89,12 @@ export function emitPolicyEvent<Kind extends PolicyEventKind>(
   } as PolicyEvent;
 
   try {
-    sink.emit(event);
+    const result: unknown = sink.emit(event);
+    // A void callback may still return a promise in TypeScript. Observe an
+    // accidental asynchronous failure without awaiting or changing event order.
+    if (result !== null && (typeof result === 'object' || typeof result === 'function')) {
+      void Promise.resolve(result).catch(() => undefined);
+    }
   } catch {
     // Event sinks are observational. A logger/backend failure is isolated.
   }

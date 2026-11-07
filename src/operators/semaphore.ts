@@ -44,8 +44,9 @@ const emptyMetadata: Readonly<Record<string, unknown>> = Object.freeze({});
  * withdraws queued work and stops waiting for active work; its permit remains
  * held until the underlying invocation actually settles.
  */
-export function semaphore<This, Args extends readonly unknown[], Result>(
+function createSemaphoreOperator<This, Args extends readonly unknown[], Result>(
   options: SemaphoreOptions<This, Args>,
+  poolsForApply: () => Map<PropertyKey | undefined, PermitQueue> = () => new Map(),
 ): Operator<This, Args, Result, Result> {
   const { permits, key: resolveKey, maxQueue } = options;
   if (!isCount(permits, 1))
@@ -60,7 +61,7 @@ export function semaphore<This, Args extends readonly unknown[], Result>(
   const createWrapper = (
     next: ContextualMethod<This, Args, Result>,
   ): ContextualMethod<This, Args, Result> => {
-    const pools = new Map<PropertyKey | undefined, PermitQueue>();
+    const pools = poolsForApply();
     return function (
       this: This,
       context: RuntimeOperationContext<This, Args> | undefined,
@@ -139,4 +140,37 @@ export function semaphore<This, Args extends readonly unknown[], Result>(
     applyWithContext: createWrapper,
   };
   return operator;
+}
+
+export function semaphore<This, Args extends readonly unknown[], Result>(
+  options: SemaphoreOptions<This, Args>,
+): Operator<This, Args, Result, Result> {
+  return createSemaphoreOperator(options);
+}
+
+export interface SemaphoreSnapshot {
+  readonly active: number;
+  readonly queued: number;
+}
+
+export interface SemaphoreHandle {
+  inspect(key?: PropertyKey): SemaphoreSnapshot | undefined;
+}
+
+/** Creates a semaphore whose permit pools are shared by every application. */
+export function semaphoreWithHandle<This, Args extends readonly unknown[], Result>(
+  options: SemaphoreOptions<This, Args>,
+): { readonly operator: Operator<This, Args, Result, Result>; readonly handle: SemaphoreHandle } {
+  const pools = new Map<PropertyKey | undefined, PermitQueue>();
+  const handle: SemaphoreHandle = Object.freeze({
+    inspect(key?: PropertyKey): SemaphoreSnapshot | undefined {
+      const pool = pools.get(key);
+      if (pool === undefined) return undefined;
+      return Object.freeze({ active: pool.activeCount, queued: pool.queueLength });
+    },
+  });
+  return Object.freeze({
+    operator: createSemaphoreOperator<This, Args, Result>(options, () => pools),
+    handle,
+  });
 }
