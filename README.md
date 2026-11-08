@@ -4,7 +4,7 @@
 
 📖 **[Documentación completa](https://stealman364.github.io/annotationsDesignPatterns/)**: guías, referencia de API y migración a 2.0 ([English](https://stealman364.github.io/annotationsDesignPatterns/en/)).
 
-> **Candidato 2.3.0-rc.0:** operadores funcionales, cancelación compartida opt-in,
+> **Candidato 2.3.0-rc.1:** operadores funcionales, cancelación compartida opt-in,
 > transiciones optimistas, observabilidad y handles de diagnóstico.
 > Consulta los [contratos y ejemplos de 2.3](./V2.3-RUNTIME.md).
 > `2.2.0` sigue siendo la referencia estable; el canal previsto para la RC es `next`.

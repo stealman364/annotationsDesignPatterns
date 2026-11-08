@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. This
 project follows Semantic Versioning.
 
+## 2.3.0-rc.1
+
+- Preserve the runtime reviewed in RC0. The RC0 npm publication stopped before
+  publishing because lifecycle output preceded npm pack's JSON metadata.
+- Tolerate that output in the release workflow and save canonical JSON metadata
+  before validating the archive, integrity and source commit.
+- Add regression checks that execute the actual artifact-validation step against
+  a real tarball, with both clean and noisy output and a version mismatch.
+
 ## 2.3.0-rc.0
 
 - Add functional rateLimit, bounded memoize and explicit executionMethod signal access.

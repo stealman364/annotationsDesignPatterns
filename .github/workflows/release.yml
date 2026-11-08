@@ -102,7 +102,11 @@ jobs:
           if (name !== process.env.EXPECTED_NAME || version !== process.env.EXPECTED_VERSION) {
             throw new Error(`Unexpected package identity ${name}@${version}.`);
           }
-          const [pack] = JSON.parse(readFileSync('release-artifact/pack.json', 'utf8'));
+          const packOutput = readFileSync('release-artifact/pack.json', 'utf8');
+          const jsonStart = packOutput.search(/^\s*\[\s*\{/m);
+          if (jsonStart < 0) throw new Error('npm pack did not produce package metadata.');
+          const [pack] = JSON.parse(packOutput.slice(jsonStart));
+          writeFileSync('release-artifact/pack.json', JSON.stringify([pack], null, 2) + '\n');
           if (pack.name !== name || pack.version !== version || basename(pack.filename) !== pack.filename) {
             throw new Error('npm pack metadata does not match the expected package.');
           }

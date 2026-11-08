@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Welcome to annotations-design-patterns
 
-> This documentation includes the `2.3.0-rc.0` candidate.
+> This documentation includes the `2.3.0-rc.1` candidate.
 > The stable reference is `2.2.0`.
 > See [migration to 2.3](./migration/2.3.md) for new and experimental APIs.
 

@@ -2,7 +2,7 @@
 
 The GitHub Actions release workflow prepares and publishes an npm release only after a maintainer starts it manually with a version tag selected as the workflow ref. It checks that the tagged `package.json` has the matching version and uses that immutable workflow commit for validation and publication context. It does not run on tag pushes, branch pushes, or pull requests.
 
-The build job runs the project checks, creates the package tarball with lifecycle scripts disabled, checks the package name and version inside that tarball, and records its npm integrity and source commit. It uploads that exact tarball with candidate quality evidence. The protected publish job downloads the artifact, verifies its recorded SHA-256 and package identity, and publishes the downloaded tarball with npm provenance. Stable versions use the `latest` dist-tag; prereleases use `next`.
+The build job runs the project checks, requests a package tarball with `--ignore-scripts`, checks the package name and version inside that tarball, and records its npm integrity and source commit. Some npm versions still emit prepare output; the workflow extracts and saves canonical JSON metadata before validation. It uploads that exact tarball with candidate quality evidence. The publish job downloads the artifact, verifies its recorded SHA-256 and package identity, and publishes the downloaded tarball with npm provenance. Stable versions use the `latest` dist-tag; prereleases use `next`.
 
 The uploaded `quality/release.json` and `quality/consumer-bundles.json` describe a validated release candidate. They are evidence from this workflow run and do not claim that a package is already published, that remote security services scored it, or that external account settings were completed.
 
