@@ -3,6 +3,11 @@
 Registro actualizado el 8 de noviembre de 2026. Este índice consolida lo realizado
 y lo pendiente. No representa una certificación de seguridad.
 
+**Ampliación del 9 de noviembre:** la
+[prueba aislada de Starlight](STARLIGHT-TRIAL-RESULTS.md) reduce las alertas de
+tooling a dos moderadas, sin altas/críticas, y valida ES/EN y generación de API.
+No se ha sustituido Docusaurus ni desplegado el prototipo.
+
 **Estado posterior a la ejecución delegada:** consultar
 [resultados de consolidación](CONSOLIDATION-RESULTS.md),
 [plan ejecutado](CONSOLIDATION-PLAN.md) y

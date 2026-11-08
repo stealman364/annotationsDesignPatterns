@@ -1,0 +1,32 @@
+---
+title: Annotations Design Patterns
+description: Patrones de diseño para componer comportamientos en TypeScript.
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Una biblioteca TypeScript para componer comportamientos reutilizables con
+decoradores TC39 o funciones componibles. Los ejemplos funcionan con las
+versiones de TypeScript y JavaScript indicadas en la documentación del paquete.
+
+<CardGrid stagger>
+  <LinkCard title="Referencia de API" href={import.meta.env.BASE_URL + 'api/'}>
+    Consulta los diez puntos de entrada públicos generados desde el código fuente.
+  </LinkCard>
+  <LinkCard title="Código fuente" href="https://github.com/stealman364/annotationsDesignPatterns">
+    Explora el proyecto, sus ejemplos y las notas de versión.
+  </LinkCard>
+</CardGrid>
+
+## Dos formas de componer
+
+Los decoradores expresan el comportamiento junto a un método. Las funciones
+componibles permiten construir la misma cadena explícitamente cuando esa forma
+encaja mejor con la aplicación.
+
+```ts
+const protectedCall = retry({ attempts: 3 })(withTimeout(500)(loadProfile));
+```
+
+El ensayo conserva el sitio bajo la ruta base de GitHub Pages y publica un
+selector para leer el contenido equivalente en inglés.
