@@ -39,7 +39,9 @@ function fixture(prefix, run) {
     writeFileSync(join(root, 'package/package.json'), manifest);
     const filename = `${identity.name}-${identity.version}.tgz`;
     const archive = join(root, 'release-artifact', filename);
-    execFileSync('tar', ['-czf', archive, '-C', root, 'package/package.json']);
+    execFileSync('tar', ['-czf', `release-artifact/${filename}`, 'package/package.json'], {
+      cwd: root,
+    });
     const integrity =
       'sha512-' + createHash('sha512').update(readFileSync(archive)).digest('base64');
     const pack = { ...identity, filename, integrity };
