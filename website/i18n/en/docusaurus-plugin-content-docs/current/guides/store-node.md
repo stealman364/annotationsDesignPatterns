@@ -29,13 +29,14 @@ await store.requireAtomicStore(store, 'circuitBreaker');
 
 - `get(key: K): Promise<V | undefined>` — Reads a value
 - `set(key: K, value: V, options?: { ttlMs?: number }): Promise<void>` — Sets a value
-- `update(key: K, fn: (value: V | undefined) => V, options?: { ttlMs?: number }): Promise<void>` — Updates by applying a function
+- `update(key: K, fn: (value: V | undefined) => V | Promise<V>, options?: { ttlMs?: number }): Promise<V>` — Updates by applying a function and returns the committed value
 - `delete(key: K): Promise<boolean>` — Deletes one entry
 - `clear(): Promise<void>` — Clears the entire store
 
 ### Atomicity and TTL
 
 `requireAtomicStore(store, operationName)` validates that the store supports:
+
 - **Atomic operations** — `get`/`set`/`update` without race conditions
 - **TTL** — automatic expiration after `ttlMs`
 
@@ -69,10 +70,7 @@ await runWithRequestContext({ requestId: 'req-42', userId: '123' }, async () => 
 ```ts
 // Example with Express
 app.use((req, res, next) => {
-  runWithRequestContext(
-    { requestId: req.id, userId: req.user?.id },
-    () => next()
-  );
+  runWithRequestContext({ requestId: req.id, userId: req.user?.id }, () => next());
 });
 
 // In your handlers
@@ -96,7 +94,7 @@ const requestStore = new AsyncMemoryStore<string, number>();
 
 await runWithRequestContext({ requestId: 'req-42' }, async () => {
   const ctx = getRequestContext();
-  
+
   // Store counters per request
   await requestStore.update(`${ctx?.requestId}:calls`, (v) => (v ?? 0) + 1);
 });

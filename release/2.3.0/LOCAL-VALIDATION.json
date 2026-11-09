@@ -1,0 +1,50 @@
+{
+  "runtime": "22.23.4",
+  "version": "2.3.0",
+  "results": [
+    {
+      "name": "build",
+      "exit": 0
+    },
+    {
+      "name": "tests",
+      "exit": 0
+    },
+    {
+      "name": "typecheck",
+      "exit": 0
+    },
+    {
+      "name": "lint",
+      "exit": 0
+    },
+    {
+      "name": "publint",
+      "exit": 0
+    },
+    {
+      "name": "types-package",
+      "exit": 0
+    },
+    {
+      "name": "verify-package",
+      "exit": 0
+    },
+    {
+      "name": "packed-consumer",
+      "exit": 0
+    },
+    {
+      "name": "types-compat",
+      "exit": 0
+    },
+    {
+      "name": "bundle-budget",
+      "exit": 0
+    },
+    {
+      "name": "consumer-bundles",
+      "exit": 0
+    }
+  ]
+}

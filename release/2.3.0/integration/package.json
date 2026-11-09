@@ -1,0 +1,10 @@
+{
+  "name": "annotations-design-patterns-v23-consumer-integration",
+  "private": true,
+  "type": "module",
+  "description": "Controlled consumer integration fixture; not third-party adoption evidence.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/app.js"
+  }
+}

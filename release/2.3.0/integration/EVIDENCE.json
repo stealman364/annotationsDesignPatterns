@@ -1,0 +1,186 @@
+{
+  "generatedFrom": "isolated npm install matrix",
+  "claims": "Controlled integration created in this repository; not third-party adoption or production-use evidence.",
+  "artifacts": {
+    "prerelease": [
+      {
+        "packageSpec": "2.3.0-rc.1",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0-rc.1",
+        "node": "v20.20.2",
+        "typescript": "5.9.3",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-Ga1KchKEfwHpeYiptY+dl6bCvEOEWuleJF9rfwFTKgRt7n0Y/GyaWII04LvuXdf2s8uIdGZukOuCfEajZF0/bA==",
+        "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0-rc.1.tgz",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine stale/manual/inverted guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      },
+      {
+        "packageSpec": "2.3.0-rc.1",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0-rc.1",
+        "node": "v20.20.2",
+        "typescript": "5.0.4",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-Ga1KchKEfwHpeYiptY+dl6bCvEOEWuleJF9rfwFTKgRt7n0Y/GyaWII04LvuXdf2s8uIdGZukOuCfEajZF0/bA==",
+        "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0-rc.1.tgz",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine stale/manual/inverted guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      },
+      {
+        "packageSpec": "2.3.0-rc.1",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0-rc.1",
+        "node": "v22.23.4",
+        "typescript": "5.9.3",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-Ga1KchKEfwHpeYiptY+dl6bCvEOEWuleJF9rfwFTKgRt7n0Y/GyaWII04LvuXdf2s8uIdGZukOuCfEajZF0/bA==",
+        "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0-rc.1.tgz",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine stale/manual/inverted guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      },
+      {
+        "packageSpec": "2.3.0-rc.1",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0-rc.1",
+        "node": "v22.23.4",
+        "typescript": "5.0.4",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-Ga1KchKEfwHpeYiptY+dl6bCvEOEWuleJF9rfwFTKgRt7n0Y/GyaWII04LvuXdf2s8uIdGZukOuCfEajZF0/bA==",
+        "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0-rc.1.tgz",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine stale/manual/inverted guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      }
+    ],
+    "stableTarball": [
+      {
+        "packageSpec": "local preliminary 2.3.0 tarball",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0",
+        "node": "v20.20.2",
+        "typescript": "5.9.3",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-EMoDbNPUyReSeMI0OPeCRqcntEni9TUUHWI4ZR9MVakPUIqb6O5D707oX+Fp5+z+dBsBBzC2fkxRkpTogsaR9A==",
+        "resolved": "local npm tarball install",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine inverted completion/manual invalidation/When guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      },
+      {
+        "packageSpec": "local preliminary 2.3.0 tarball",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0",
+        "node": "v20.20.2",
+        "typescript": "5.0.4",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-EMoDbNPUyReSeMI0OPeCRqcntEni9TUUHWI4ZR9MVakPUIqb6O5D707oX+Fp5+z+dBsBBzC2fkxRkpTogsaR9A==",
+        "resolved": "local npm tarball install",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine inverted completion/manual invalidation/When guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      },
+      {
+        "packageSpec": "local preliminary 2.3.0 tarball",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0",
+        "node": "v22.23.4",
+        "typescript": "5.9.3",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-EMoDbNPUyReSeMI0OPeCRqcntEni9TUUHWI4ZR9MVakPUIqb6O5D707oX+Fp5+z+dBsBBzC2fkxRkpTogsaR9A==",
+        "resolved": "local npm tarball install",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine inverted completion/manual invalidation/When guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      },
+      {
+        "packageSpec": "local preliminary 2.3.0 tarball",
+        "packageName": "annotations-design-patterns",
+        "packageVersion": "2.3.0",
+        "node": "v22.23.4",
+        "typescript": "5.0.4",
+        "nodeTypes": "20.19.43",
+        "integrity": "sha512-EMoDbNPUyReSeMI0OPeCRqcntEni9TUUHWI4ZR9MVakPUIqb6O5D707oX+Fp5+z+dBsBBzC2fkxRkpTogsaR9A==",
+        "resolved": "local npm tarball install",
+        "scenarios": [
+          "retry",
+          "timeout+fallback",
+          "circuit breaker",
+          "memoize/coalescing",
+          "memoize promise identity",
+          "executionMethod sync return",
+          "rateLimit",
+          "StateMachine inverted completion/manual invalidation/When guard",
+          "AsyncMemoryStore mutation ordering"
+        ],
+        "result": "PASS"
+      }
+    ]
+  }
+}
