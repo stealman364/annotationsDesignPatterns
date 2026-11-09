@@ -1,0 +1,61 @@
+---
+title: Annotations Design Patterns
+description: Patrones de diseño, resiliencia y caché con decoradores TC39 o funciones componibles.
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Patrones de diseño, resiliencia y caché para TypeScript, con decoradores
+estándar TC39 o funciones componibles. Cero dependencias de ejecución,
+tipado estricto e importaciones granulares.
+
+```sh
+npm install annotations-design-patterns
+```
+
+La versión estable es **2.2.0**. Esta documentación también incluye el candidato
+**2.3.0-rc.1**; la guía de migración identifica sus novedades experimentales.
+
+<CardGrid>
+  <LinkCard title="Empezar" href={import.meta.env.BASE_URL + 'docs/intro/'}>
+    Instalación, requisitos y guías de uso en español.
+  </LinkCard>
+  <LinkCard title="Referencia de API" href={import.meta.env.BASE_URL + 'api/'}>
+    Diez puntos de entrada públicos, firmas, tipos y búsqueda de símbolos.
+  </LinkCard>
+</CardGrid>
+
+## Con decoradores
+
+```ts
+import { Singleton, Retry, Timeout, Fallback } from 'annotations-design-patterns';
+
+@Singleton
+class ApiClient {
+  @Fallback<User[]>([])
+  @Retry({ attempts: 3, delayMs: 200, backoffFactor: 2 })
+  @Timeout(5000)
+  async fetchUsers(): Promise<User[]> {
+    /* ... */
+  }
+}
+```
+
+## Con funciones
+
+```ts
+import { fallback, retry, timeout } from 'annotations-design-patterns/operators';
+import { pipe } from 'annotations-design-patterns/pipe';
+
+const fetchUsers = pipe(
+  loadUsers,
+  fallback<object, readonly [], User[]>([]),
+  retry({ attempts: 3, delayMs: 200, backoffFactor: 2 }),
+  timeout(5000),
+);
+```
+
+Consulta las guías de [decoradores](./docs/guides/decorators/),
+[operadores](./docs/guides/operators/) y [migración a 2.3](./docs/migration/2.3/).
+La API compartida conserva su buscador de símbolos en inglés; la búsqueda de
+guías usa el idioma seleccionado.

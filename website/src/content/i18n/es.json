@@ -1,0 +1,16 @@
+{
+  "skipLink.label": "Ir al contenido",
+  "search.label": "Buscar",
+  "search.cancelLabel": "Cancelar",
+  "themeSelect.accessibleLabel": "Seleccionar tema",
+  "themeSelect.dark": "Oscuro",
+  "themeSelect.light": "Claro",
+  "themeSelect.auto": "Automático",
+  "languageSelect.accessibleLabel": "Seleccionar idioma",
+  "menuButton.accessibleLabel": "Menú",
+  "sidebarNav.accessibleLabel": "Navegación principal",
+  "tableOfContents.onThisPage": "En esta página",
+  "page.previousLink": "Página anterior",
+  "page.nextLink": "Página siguiente",
+  "pagefind.search_label": "Buscar en la página"
+}

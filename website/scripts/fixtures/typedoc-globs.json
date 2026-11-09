@@ -1,0 +1,154 @@
+{
+  "cases": [
+    {
+      "pattern": "**/*.ts",
+      "includeDirectories": false,
+      "paths": [
+        "other/index.ts",
+        "root.ts",
+        "src/a/deep/item.ts",
+        "src/a/index.ts",
+        "src/b/index.ts"
+      ]
+    },
+    {
+      "pattern": "**/*.ts",
+      "includeDirectories": true,
+      "paths": [
+        "other/index.ts",
+        "root.ts",
+        "src/a/deep/item.ts",
+        "src/a/index.ts",
+        "src/b/index.ts"
+      ]
+    },
+    {
+      "pattern": "src/**/*.ts",
+      "includeDirectories": false,
+      "paths": ["src/a/deep/item.ts", "src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/**/*.ts",
+      "includeDirectories": true,
+      "paths": ["src/a/deep/item.ts", "src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/**/index.ts",
+      "includeDirectories": false,
+      "paths": ["src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/**/index.ts",
+      "includeDirectories": true,
+      "paths": ["src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/*.{ts,tsx}",
+      "includeDirectories": false,
+      "paths": []
+    },
+    {
+      "pattern": "src/*.{ts,tsx}",
+      "includeDirectories": true,
+      "paths": []
+    },
+    {
+      "pattern": "src/{a,b}/**/*.ts",
+      "includeDirectories": false,
+      "paths": ["src/a/deep/item.ts", "src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/{a,b}/**/*.ts",
+      "includeDirectories": true,
+      "paths": ["src/a/deep/item.ts", "src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/**",
+      "includeDirectories": false,
+      "paths": ["src/a/deep/item.ts", "src/a/index.ts", "src/b/index.ts", "src/b/view.tsx"]
+    },
+    {
+      "pattern": "src/**",
+      "includeDirectories": true,
+      "paths": [
+        "src/a",
+        "src/a/deep",
+        "src/a/deep/item.ts",
+        "src/a/index.ts",
+        "src/b",
+        "src/b/index.ts",
+        "src/b/view.tsx"
+      ]
+    },
+    {
+      "pattern": "src/**/",
+      "includeDirectories": false,
+      "paths": []
+    },
+    {
+      "pattern": "src/**/",
+      "includeDirectories": true,
+      "paths": []
+    },
+    {
+      "pattern": "**/.hidden/*.ts",
+      "includeDirectories": false,
+      "paths": ["src/.hidden/private.ts"]
+    },
+    {
+      "pattern": "**/.hidden/*.ts",
+      "includeDirectories": true,
+      "paths": ["src/.hidden/private.ts"]
+    },
+    {
+      "pattern": "**/node_modules/**/*.ts",
+      "includeDirectories": false,
+      "paths": ["src/node_modules/dep/index.ts"]
+    },
+    {
+      "pattern": "**/node_modules/**/*.ts",
+      "includeDirectories": true,
+      "paths": ["src/node_modules/dep/index.ts"]
+    },
+    {
+      "pattern": "!src/**/*.ts",
+      "includeDirectories": false,
+      "paths": ["readme.md", "root.ts", "src/b/view.tsx"]
+    },
+    {
+      "pattern": "!src/**/*.ts",
+      "includeDirectories": true,
+      "paths": ["", "readme.md", "root.ts", "src", "src/a", "src/a/deep", "src/b", "src/b/view.tsx"]
+    },
+    {
+      "pattern": "src/../*.ts",
+      "includeDirectories": false,
+      "paths": ["root.ts"]
+    },
+    {
+      "pattern": "src/../*.ts",
+      "includeDirectories": true,
+      "paths": ["root.ts"]
+    },
+    {
+      "pattern": "src/*(a|b)/*.ts",
+      "includeDirectories": false,
+      "paths": ["src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/*(a|b)/*.ts",
+      "includeDirectories": true,
+      "paths": ["src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/{a,b}/index.ts",
+      "includeDirectories": false,
+      "paths": ["src/a/index.ts", "src/b/index.ts"]
+    },
+    {
+      "pattern": "src/{a,b}/index.ts",
+      "includeDirectories": true,
+      "paths": ["src/a/index.ts", "src/b/index.ts"]
+    }
+  ]
+}

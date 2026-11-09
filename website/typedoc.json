@@ -1,10 +1,21 @@
 {
+  "entryPoints": [
+    "../src/index.ts",
+    "../src/decorators/index.ts",
+    "../src/public/operators.ts",
+    "../src/public/pipe.ts",
+    "../src/public/run.ts",
+    "../src/policy/index.ts",
+    "../src/observability/index.ts",
+    "../src/node/index.ts",
+    "../src/store/index.ts",
+    "../src/experimental/index.ts"
+  ],
   "tsconfig": "./tsconfig.typedoc.json",
   "excludeInternal": true,
   "excludePrivate": true,
   "readme": "none",
   "sort": ["source-order"],
-  "plugin": ["typedoc-plugin-markdown"],
   "treatWarningsAsErrors": true,
   "intentionallyNotExported": [
     "BuilderMethods",
@@ -13,12 +24,11 @@
     "Operator",
     "AnyMethod",
     "MaybePromise",
-    "EventSink",
     "FallbackValue",
-    "PolicyErrorCode",
-    "PolicyErrorOptions",
+    "ValidStates",
+    "CounterLabels",
+    "Attributes",
     "RetryInvocationContext",
-    "OverlapKeyContext",
     "RetryAttemptEvent",
     "RetryExhaustedEvent",
     "TimeoutTriggeredEvent",
@@ -40,5 +50,10 @@
     "KeyedLockQueuedEvent",
     "KeyedLockAcquiredEvent",
     "KeyedLockReleasedEvent"
-  ]
+  ],
+  "navigationLinks": {
+    "Guías (ES)": "/annotationsDesignPatterns/docs/intro/",
+    "Guides (EN)": "/annotationsDesignPatterns/en/docs/intro/"
+  },
+  "out": "public/api"
 }

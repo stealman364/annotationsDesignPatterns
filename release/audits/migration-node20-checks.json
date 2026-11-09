@@ -1,0 +1,27 @@
+[
+  {
+    "runtime": "20.20.2",
+    "command": "npm run test:dist",
+    "exit": 0
+  },
+  {
+    "runtime": "20.20.2",
+    "command": "npm run test",
+    "exit": 0
+  },
+  {
+    "runtime": "20.20.2",
+    "command": "npm run lint",
+    "exit": 0
+  },
+  {
+    "runtime": "20.20.2",
+    "command": "npm run typecheck",
+    "exit": 0
+  },
+  {
+    "runtime": "20.20.2",
+    "command": "npm run test:package",
+    "exit": 0
+  }
+]

@@ -3,6 +3,13 @@
 Registro actualizado el 8 de noviembre de 2026. Este índice consolida lo realizado
 y lo pendiente. No representa una certificación de seguridad.
 
+**Estado actualizado el 9 de noviembre:** la
+[migración completa a Starlight](STARLIGHT-MIGRATION-RESULTS.md) deja las auditorías
+completas de raíz y website sin alertas conocidas, con las excepciones de rangos
+y el parche privado documentados. Conserva guías ES/EN, rutas y referencias API.
+Las cifras anteriores de este índice son históricas; consultar el nuevo informe
+para validación local, subida a GitHub y límites pendientes.
+
 **Reducción adicional del 9 de noviembre:** el prototipo alcanza
 [cero alertas completas con un parche privado de compatibilidad](STARLIGHT-REDUCTION-RESULTS.md).
 Se verificaron instalación limpia, build y regresiones de TypeDoc. El parche

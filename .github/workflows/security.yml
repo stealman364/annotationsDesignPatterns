@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 22.x
+          node-version: 22.23.4
           cache: npm
           cache-dependency-path: ${{ matrix.directory }}/package-lock.json
       - run: mkdir -p quality
@@ -43,9 +43,9 @@ jobs:
       - name: Audit root production dependencies
         if: matrix.scope == 'root'
         run: npm audit --omit=dev --audit-level=low --json > quality/audit-production.json
-      - name: Audit all dependencies and reject high or critical findings
+      - name: Audit all dependencies and reject known vulnerabilities of any severity
         if: success() || failure()
-        run: npm audit --audit-level=high --json > quality/audit-full.json
+        run: npm audit --audit-level=low --json > quality/audit-full.json
       - name: Preserve audit reports
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4

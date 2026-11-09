@@ -1,0 +1,340 @@
+[
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/concurrency/",
+    "anchors": [
+      "semaphore-funcional",
+      "orden-de-composición",
+      "overlap-y-keyedlock",
+      "cachés-con-handles"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/decorators/",
+    "anchors": [
+      "creacionales",
+      "estructurales",
+      "de-comportamiento",
+      "kit-de-resiliencia",
+      "básico",
+      "control-de-frecuencia",
+      "aislamiento",
+      "caché-y-observabilidad",
+      "ejemplo-completo-pila-de-resiliencia",
+      "composición-con-decorate-y-intercept",
+      "para-el-detalle-completo"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/experimental/",
+    "anchors": [
+      "switchoverlap",
+      "hedge",
+      "nuevas-apis-experimentales-en-23",
+      "alternativas-estables",
+      "informar-de-problemas"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/granular-imports/",
+    "anchors": [
+      "por-categoría-de-patrón",
+      "fachada-estable-de-decoradores",
+      "api-funcional-subpaths-explícitos",
+      "optimización-de-bundle",
+      "ubicación-interna-no-público",
+      "para-referencia-de-todos-los-símbolos-públicos"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/observability/",
+    "anchors": [
+      "exports-y-logger-reales",
+      "esquema-de-policyevent",
+      "errores-y-metadata",
+      "recetas-externas-para-tracing-y-métricas"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/operators/",
+    "anchors": [
+      "composición-y-retorno",
+      "retry-y-circuitbreaker",
+      "caché-y-capacidad",
+      "semaphore-y-cancelación"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/pipe/",
+    "anchors": [
+      "sintaxis",
+      "ejemplo-pila-de-resiliencia",
+      "orden-de-operadores-de-afuera-hacia-adentro",
+      "conserva-sincronía-cuando-es-posible",
+      "invocación",
+      "para-detalles-de-composición"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/policy/",
+    "anchors": [
+      "importación",
+      "sintaxis-básica",
+      "orden-por-defecto",
+      "ejemplo-completo",
+      "extender-una-política",
+      "validación",
+      "capas-disponibles",
+      "métodos-de-policydefinition",
+      "operator",
+      "extendoverrides",
+      "describe-avanzado",
+      "para-tipos-y-opciones-avanzadas"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/run/",
+    "anchors": [
+      "sintaxis-básica",
+      "generics",
+      "con-observabilidad",
+      "flujo",
+      "ejemplo-completo",
+      "para-tipos-y-opciones"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/guides/store-node/",
+    "anchors": [
+      "asyncmemorystore",
+      "métodos",
+      "atomicidad-y-ttl",
+      "contexto-node-con-asynclocalstorage",
+      "métodos-1",
+      "uso-en-middleware",
+      "combinación-store--contexto",
+      "limitaciones",
+      "para-tipos-y-métodos-avanzados"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/intro/",
+    "anchors": ["por-qué-esta-librería", "requisitos", "instalación", "próximos-pasos"]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/migration/2.0/",
+    "anchors": [
+      "transitionto-espera-el-éxito-asíncrono",
+      "timeout-rechaza-pero-no-cancela",
+      "singleton-y-flyweight-aíslan-la-herencia",
+      "ciclos-síncronos-del-contenedor",
+      "novedades-que-no-requieren-migración"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/migration/2.1/",
+    "anchors": [
+      "la-cancelación-pertenece-a-cada-llamante",
+      "ejecuciones-compartidas-y-caché",
+      "timeout-contexto-y-policies-reutilizables",
+      "colas-semaphore-y-circuitbreaker",
+      "validación-numérica-por-dominio",
+      "revertible-observer-y-builder",
+      "tipos-más-estrictos-y-sus-límites"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/migration/2.2/",
+    "anchors": [
+      "semaphore-funcional-y-decorador",
+      "caché-por-receiver-solo-opt-in",
+      "capacidad-de-cachedfor",
+      "claves-json-y-escape-hatch",
+      "circuitbreaker-isfailure",
+      "retry-con-cap-y-jitter",
+      "tipos-diagnostics-y-límites-que-se-conservan",
+      "observabilidad-y-medición"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/docs/migration/2.3/",
+    "anchors": [
+      "estado-de-las-apis",
+      "admisión-y-capacidad",
+      "señal-efectiva-y-último-consumidor",
+      "statemachine-primer-commit-válido",
+      "handles-y-observabilidad",
+      "caché-externa-y-cas-contratos-experimentales",
+      "cambio-de-temporización-en-asyncmemorystore",
+      "tamaño-y-preparación-de-release"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/concurrency/",
+    "anchors": [
+      "functional-semaphore",
+      "composition-order",
+      "overlap-and-keyedlock",
+      "cache-handles"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/decorators/",
+    "anchors": [
+      "creational",
+      "structural",
+      "behavioral",
+      "resilience-kit",
+      "basic",
+      "frequency-control",
+      "isolation",
+      "cache-and-observability",
+      "complete-example-resilience-stack",
+      "composition-with-decorate-and-intercept",
+      "for-complete-details"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/experimental/",
+    "anchors": [
+      "switchoverlap",
+      "hedge",
+      "new-experimental-apis-in-23",
+      "stable-alternatives",
+      "report-issues"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/granular-imports/",
+    "anchors": [
+      "by-pattern-category",
+      "stable-decorators-facade",
+      "functional-api-explicit-subpaths",
+      "bundle-optimization",
+      "internal-location-not-public",
+      "for-reference-of-all-public-symbols"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/observability/",
+    "anchors": [
+      "actual-exports-and-logger",
+      "policyevent-schema",
+      "errors-and-metadata",
+      "external-tracing-and-metrics-recipes"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/operators/",
+    "anchors": [
+      "composition-and-return-values",
+      "retry-and-circuitbreaker",
+      "caches-and-capacity",
+      "semaphore-and-cancellation"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/pipe/",
+    "anchors": [
+      "syntax",
+      "example-resilience-stack",
+      "operator-order-outside-to-inside",
+      "preserves-synchrony-when-possible",
+      "invocation",
+      "for-composition-details"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/policy/",
+    "anchors": [
+      "import",
+      "basic-syntax",
+      "default-order",
+      "complete-example",
+      "extend-a-policy",
+      "validation",
+      "available-layers",
+      "policydefinition-methods",
+      "operator",
+      "extendoverrides",
+      "describe-advanced",
+      "for-types-and-advanced-options"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/run/",
+    "anchors": [
+      "basic-syntax",
+      "generics",
+      "with-observability",
+      "flow",
+      "complete-example",
+      "for-types-and-options"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/guides/store-node/",
+    "anchors": [
+      "asyncmemorystore",
+      "methods",
+      "atomicity-and-ttl",
+      "node-context-with-asynclocalstorage",
+      "methods-1",
+      "use-in-middleware",
+      "combination-store--context",
+      "limitations",
+      "for-types-and-advanced-methods"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/intro/",
+    "anchors": ["why-this-library", "requirements", "installation", "next-steps"]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/migration/2.0/",
+    "anchors": [
+      "transitionto-waits-for-async-success",
+      "timeout-rejects-but-does-not-cancel",
+      "singleton-and-flyweight-isolate-inheritance",
+      "synchronous-container-cycles",
+      "new-features-that-need-no-migration"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/migration/2.1/",
+    "anchors": [
+      "cancellation-belongs-to-each-caller",
+      "shared-execution-and-caching",
+      "timeout-context-and-reusable-policies",
+      "queues-semaphore-and-circuitbreaker",
+      "numeric-validation-by-domain",
+      "revertible-observer-and-builder",
+      "stricter-types-and-their-limits"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/migration/2.2/",
+    "anchors": [
+      "functional-semaphore-and-decorator",
+      "opt-in-caches-per-receiver",
+      "cachedfor-capacity",
+      "json-keys-and-the-escape-hatch",
+      "circuitbreaker-isfailure",
+      "retry-caps-and-jitter",
+      "types-diagnostics-and-preserved-limits",
+      "observability-and-measurement"
+    ]
+  },
+  {
+    "route": "/annotationsDesignPatterns/en/docs/migration/2.3/",
+    "anchors": [
+      "api-status",
+      "admission-and-capacity",
+      "effective-signal-and-the-last-consumer",
+      "statemachine-first-valid-commit",
+      "handles-and-observation",
+      "external-cache-and-cas-experimental-contracts",
+      "asyncmemorystore-timing-change",
+      "size-and-release-preparation"
+    ]
+  }
+]

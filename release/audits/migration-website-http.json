@@ -1,0 +1,2764 @@
+{
+  "origin": "http://127.0.0.1:4323",
+  "redirectScriptChecks": 444,
+  "successfulRoutes": 689,
+  "missingRouteStatus": 404,
+  "results": [
+    {
+      "route": "/annotationsDesignPatterns/404.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/api/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/concurrency/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/decorators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/experimental/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/observability/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/granular-imports/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/operators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/pipe/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/store-node/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/run/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/guides/policy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/intro/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/migration/2.0/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/migration/2.1/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/migration/2.2/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/migration/2.3/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/concurrency/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/decorators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/observability/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/experimental/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/operators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/granular-imports/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/pipe/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/policy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/run/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/guides/store-node/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/intro/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/migration/2.0/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.CachedFor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/functions/CachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.CircuitBreaker.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Fallback.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/functions/CachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Memoize.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/migration/2.1/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/migration/2.2/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/functions/CircuitBreaker/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/functions/Fallback/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/functions/CircuitBreaker/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/migration/2.3/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/functions/Fallback/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/functions/Memoize/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/functions/Memoize/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/functions/Retry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Retry.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Timeout.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/decorators.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.CachedForOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/functions/Timeout/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/functions/Timeout/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/functions/Retry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/interfaces/CachedForOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/interfaces/CachedForOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.CircuitBreakerOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.MemoizeOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/interfaces/CircuitBreakerOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/interfaces/CircuitBreakerOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/interfaces/MemoizeOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.RetryOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/interfaces/MemoizeOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/interfaces/RetryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/decorators/type-aliases/KeyResolver/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/interfaces/RetryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.KeyResolver.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/decorators/type-aliases/KeyResolver/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/classes/AsyncCacheError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/experimental.AsyncCacheError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/experimental.OverlapSupersededError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/classes/AsyncCacheError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/experimental.VersionedMemoryStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/classes/OverlapSupersededError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/classes/VersionedMemoryStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/classes/VersionedMemoryStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/classes/OverlapSupersededError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/experimental.hedge.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/experimental.asyncCachedFor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/experimental.isAsyncCacheError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/functions/hedge/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/functions/asyncCachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/functions/asyncCachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/functions/isAsyncCacheError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/experimental.observeOperation.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/functions/hedge/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/functions/isAsyncCacheError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/functions/observeOperation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/experimental.switchOverlap.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/functions/observeOperation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/functions/switchOverlap/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/functions/switchOverlap/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.AsyncCacheCodec.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.AsyncCacheDiagnostic.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/experimental.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/AsyncCacheCodec/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/AsyncCacheCodec/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.AsyncCacheProvider.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/AsyncCacheDiagnostic/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/AsyncCacheProvider/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/AsyncCacheDiagnostic/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.AsyncCachedForOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.HedgeOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/AsyncCacheProvider/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/AsyncCachedForOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/HedgeOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/AsyncCachedForOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.ObserveOperationOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/ObserveOperationOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/HedgeOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/ObserveOperationOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/OperationObservation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.OperationObservation.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.SwitchOverlapOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/OperationObservation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/SwitchOverlapOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.VersionedAsyncStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/experimental.VersionedCompareExchangeResult.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/SwitchOverlapOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/VersionedAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/VersionedAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/interfaces/VersionedCompareExchangeResult/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/interfaces/VersionedCompareExchangeResult/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/experimental.AsyncCacheErrorPhase.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/experimental.OperationOutcome.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/experimental.SwitchOverlapKeyContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/type-aliases/AsyncCacheErrorPhase/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/type-aliases/AsyncCacheErrorPhase/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/type-aliases/OperationOutcome/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/type-aliases/OperationOutcome/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/type-aliases/SwitchOverlapKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/type-aliases/SwitchOverlapKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/experimental.VersionedStoreEntry.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/experimental/type-aliases/VersionedStoreEntry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/node.getRequestContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/experimental/type-aliases/VersionedStoreEntry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/node/functions/getRequestContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/node/functions/getRequestContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/node/functions/runWithRequestContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/node.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/node.RequestContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/node.runWithRequestContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/observability.LoggerEventSink.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/node/functions/runWithRequestContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/node/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/node/interfaces/RequestContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/node/interfaces/RequestContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/node/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/classes/LoggerEventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/classes/LoggerEventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/observability.NoopEventSink.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/observability.combineEventSinks.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/classes/NoopEventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/classes/NoopEventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/functions/combineEventSinks/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/observability.createCounterSink.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/functions/combineEventSinks/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/functions/createCounterSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/functions/createCounterSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/functions/createSpanEventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/functions/createSpanEventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/observability.createSpanEventSink.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/observability.EventSink.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/observability.LoggerEventSinkOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/observability.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/interfaces/EventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/interfaces/EventSink/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/interfaces/LoggerEventSinkOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/interfaces/LoggerEventSinkOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/observability.StructuredLogger.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/interfaces/StructuredLogger/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/interfaces/StructuredLogger/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/observability.PolicyEvent.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.CircuitBreakerOpenError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.KeyedLockQueueFullError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/observability/type-aliases/PolicyEvent/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.OverlapDroppedError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/CircuitBreakerOpenError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/observability/type-aliases/PolicyEvent/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/CircuitBreakerOpenError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/KeyedLockQueueFullError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/KeyedLockQueueFullError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/OverlapDroppedError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/OverlapDroppedError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/OverlapQueueFullError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.OverlapQueueFullError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.PolicyError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/OverlapQueueFullError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/PolicyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/PolicyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/RateLimitExceededError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/SemaphoreQueueFullError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/RateLimitExceededError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.RateLimitExceededError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.SemaphoreQueueFullError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/public_operators.TimeoutError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.cachedFor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/classes/TimeoutError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/SemaphoreQueueFullError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/classes/TimeoutError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/cachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.cachedForWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/cachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/cachedForWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/circuitBreaker/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/cachedForWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.circuitBreaker.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.circuitBreakerWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.fallback.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.isPolicyError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/circuitBreaker/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/fallback/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/fallback/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/isPolicyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/isPolicyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/circuitBreakerWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/circuitBreakerWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.isRateLimitExceededError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.keyedLock.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.keyedLockWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/keyedLock/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/keyedLockWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/keyedLockWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/keyedLock/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.memoize.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/memoize/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.memoizeWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/isRateLimitExceededError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/isRateLimitExceededError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/memoize/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/memoizeWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/memoizeWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/overlap/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.overlap.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.rateLimit.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.retry.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.semaphoreWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.semaphore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/rateLimit/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/rateLimit/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/retry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/overlap/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/retry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_operators.timeout.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/semaphore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/semaphore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/semaphoreWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/functions/timeout/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/semaphoreWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/functions/timeout/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/public_operators.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.CacheHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.CachedForOperatorOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.CachedForWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/CacheHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/CacheHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/CachedForWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.CircuitBreakerHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/CachedForWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/CachedForOperatorOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/CachedForOperatorOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/CircuitBreakerHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/CircuitBreakerHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.CircuitBreakerSnapshot.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/CircuitBreakerOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/InvocationInfo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/CircuitBreakerOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.InvocationInfo.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.KeyedLockHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.KeyedLockOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.KeyedLockSnapshot.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/CircuitBreakerSnapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/InvocationInfo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/KeyedLockHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/KeyedLockOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/CircuitBreakerSnapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/KeyedLockHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/KeyedLockSnapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/KeyedLockOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.MemoizeOperatorOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.MemoizeWithHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.OverlapKeyContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/KeyedLockSnapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/MemoizeWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/MemoizeWithHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/OverlapKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/OverlapKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.OverlapOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.PolicyErrorOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/MemoizeOperatorOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/MemoizeOperatorOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/OverlapOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/OverlapOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/PolicyErrorOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/PolicyErrorOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.RateLimitOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.SemaphoreHandle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/RateLimitOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/RateLimitOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.SemaphoreOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/RetryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/SemaphoreHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/RetryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/SemaphoreOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/SemaphoreHandle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.SemaphoreSnapshot.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_operators.TimeoutOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/SemaphoreSnapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/SemaphoreOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/interfaces/TimeoutOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/SemaphoreSnapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/public_operators.KeyedLockKeyContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/public_operators.OverlapMode.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/type-aliases/KeyedLockKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/type-aliases/KeyedLockKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/interfaces/TimeoutOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/type-aliases/OverlapMode/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/type-aliases/OverlapMode/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/type-aliases/PolicyErrorCode/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/public_operators.PolicyErrorCode.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/public_operators.SemaphoreKeyContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_pipe.pipe.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/type-aliases/PolicyErrorCode/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/operators/type-aliases/SemaphoreKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/operators/type-aliases/SemaphoreKeyContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/pipe/functions/pipe/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/pipe/functions/pipe/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/public_pipe.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/policy.InvalidPolicyError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/pipe/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/pipe/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/classes/InvalidPolicyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/classes/InvalidPolicyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/functions/definePolicy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/policy.definePolicy.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/policy.mergePolicyConfig.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/policy.validatePolicyConfig.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/functions/definePolicy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/functions/validatePolicyConfig/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/functions/mergePolicyConfig/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/functions/mergePolicyConfig/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/functions/validatePolicyConfig/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/policy.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/CircuitBreakerPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.CircuitBreakerPolicyOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.DefinedPolicy.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.FallbackPolicyOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.PolicyConfig.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/CircuitBreakerPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/DefinedPolicy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/DefinedPolicy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/FallbackPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/FallbackPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/InvocationInfo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/InvocationInfo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/PolicyConfig/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/PolicyConfig/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.PolicyConfigExtension.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/PolicyConfigExtension/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.PolicyDescriptionLayer.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/PolicyDescription/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/PolicyConfigExtension/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/PolicyDescriptionLayer/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/PolicyDescription/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.PolicyDescription.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/PolicyDescriptionLayer/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.RetryPolicyOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.PolicyRetryContext.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/PolicyRetryContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/PolicyRetryContext/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/RetryPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/TimeoutPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/interfaces/RetryPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/policy.TimeoutPolicyOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/policy.FallbackProvider.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/policy.PolicyLayer.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/interfaces/TimeoutPolicyOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/type-aliases/FallbackProvider/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/type-aliases/PolicyLayer/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/type-aliases/FallbackProvider/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/type-aliases/PolicyLayer/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/policy.PolicyOrder.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/policy.TimeoutScope.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/type-aliases/PolicyOrder/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/variables/policy.DEFAULT_POLICY_ORDER.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/type-aliases/PolicyOrder/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/type-aliases/TimeoutScope/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/type-aliases/TimeoutScope/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/policy/variables/DEFAULT_POLICY_ORDER/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.CircularDependencyError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.CommandHistory.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/policy/variables/DEFAULT_POLICY_ORDER/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/CircularDependencyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/CommandHistory/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/CircularDependencyError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/CommandHistory/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.Container.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/Container/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.Factory.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.HandlerChain.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/Container/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/Factory/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/Factory/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/HandlerChain/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/HandlerChain/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.SnapshotHistory.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.InjectionToken.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/InjectionToken/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/SnapshotHistory/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.StateMachine.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/SnapshotHistory/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/StateMachine/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/InjectionToken/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/StateMachine/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.StateTransitionConflictError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.StrategySelector.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/StateTransitionConflictError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/StateTransitionConflictError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/StrategySelector/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/StrategySelector/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/classes/Subject/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/index.Subject.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Adapt.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/classes/Subject/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Adapt/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Adapt/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Bind.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Bind/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Bind/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/CachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/CachedFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/CircuitBreaker/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Cloneable/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/CircuitBreaker/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Cloneable.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Cloneable/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Debounce/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Debounce.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Decorate/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Decorate.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Deprecated/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Deprecated.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Debounce/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Decorate/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Deprecated/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Emits/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Emits.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Flyweight.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Emits/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Fallback/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Flyweight/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Flyweight/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Fallback/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Frozen.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.HandlerFor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Frozen/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Frozen/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/HandlerFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Inject/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/HandlerFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Inject.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Injectable.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Intercept.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Inject/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Injectable/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Injectable/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Intercept/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Intercept/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/IterableOver/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.IterableOver.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Lazy.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Measure.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Log.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/IterableOver/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Lazy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Lazy/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Log/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Log/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Measure/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Measure/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Memoize/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.MemoizeByRef.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Memoize/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/MemoizeByRef/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/MemoizeByRef/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Mutex.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.On.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Mutex/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/On/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/On/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Mutex/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Once/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Once.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.RateLimit.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.RegisterIn.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/RateLimit/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Once/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/RegisterIn/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/RateLimit/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/RegisterIn/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Retry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Revertible.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Sealed.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Semaphore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Retry/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Sealed/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Revertible/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Revertible/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Sealed/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Semaphore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Semaphore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Singleton.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Singleton/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Snapshot.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Snapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Snapshot/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Singleton/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.StrategyFor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Throttle.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.TransitionTo.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/StrategyFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/StrategyFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Throttle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Throttle/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Timeout/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.Validate.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Timeout/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/TransitionTo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/Validate/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/TransitionTo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.When.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/When/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/Validate/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.builderFor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/index.isStateTransitionConflictError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/builderFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/When/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/functions/isStateTransitionConflictError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/builderFor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/functions/isStateTransitionConflictError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/index.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.Command.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/CachedForOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/Command/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/CircuitBreakerOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/CircuitBreakerOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/CachedForOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.Handler.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.LogOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.Invocation.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/Handler/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/Invocation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/Command/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/Handler/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/Invocation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/LogOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/index.MeasureReport.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/LogOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/MeasureReport/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/MeasureReport/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/MemoizeOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/MemoizeOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/interfaces/RetryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Adapted.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Builder.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Guard.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Adapted/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/interfaces/RetryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Builder/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Adapted/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Guard/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Builder/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Interceptor.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Guard/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Interceptor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Interceptor/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/KeyResolver/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/KeyResolver/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Listener/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Listener.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.MethodWrapper.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Scope.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.Token.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Listener/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.TransitionToOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/MethodWrapper/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Scope/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Scope/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/MethodWrapper/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/Token/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/Token/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/TransitionToOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/TransitionToOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/WithClone/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.WithClone.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/variables/index.LIB_NAME.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_run.executionMethod.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/index.WithIterator.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/WithClone/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/variables/LIB_NAME/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/variables/LIB_NAME/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/root/type-aliases/WithIterator/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/run/functions/executionMethod/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/root/type-aliases/WithIterator/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/run/functions/executionMethod/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/public_run.run.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/run/functions/run/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/public_run.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/run/functions/run/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/run/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/run/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/run/interfaces/ExecutionInfo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/run/interfaces/ExecutionInfo/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/run/interfaces/RunOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_run.RunOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/public_run.ExecutionInfo.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/run/interfaces/RunOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/store.RemoteStoreError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/store.AsyncMemoryStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/store.RemoteAsyncStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/classes/AsyncMemoryStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/classes/AsyncMemoryStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/classes/RemoteAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/classes/RemoteStoreError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/classes/RemoteAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/classes/RemoteStoreError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/classes/StoreCapabilityError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/store.isAtomicAsyncStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/functions/store.requireAtomicStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/classes/store.StoreCapabilityError.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/modules/store.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/classes/StoreCapabilityError/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/functions/isAtomicAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/functions/isAtomicAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/functions/requireAtomicStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/functions/requireAtomicStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/AsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.AsyncStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.AtomicAsyncStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/AsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/AtomicAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.RemoteAsyncStoreOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/AtomicAsyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/RemoteAsyncStoreOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/RemoteAsyncStoreOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/RemoteStoreTransport/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/RemoteStoreTransport/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/StoreCapabilities/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/StoreCapabilities/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.StoreCapabilities.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.StoreEntryOptions.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.RemoteStoreTransport.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/StoreEntryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/interfaces/store.SyncStore.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/interfaces/SyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/StoreEntryOptions/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/interfaces/SyncStore/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/pagefind/pagefind-entry.json",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/type-aliases/RemoteStoreErrorCode/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/type-aliases/AsyncStoreUpdater/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/type-aliases/AsyncStoreUpdater/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/store.AsyncStoreUpdater.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/store.RemoteStoreOperation.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/store.RemoteStoreErrorCode.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/type-aliases/RemoteStoreOperation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/type-aliases/RemoteStoreOperation/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/type-aliases/RemoteStoreErrorCode/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/type-aliases/StoreCapability/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/store.StoreCapability.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/api/types/store.StoreCapabilityPurpose.html",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/type-aliases/StoreCapability/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/docs/api/store/type-aliases/StoreCapabilityPurpose/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/en/docs/api/store/type-aliases/StoreCapabilityPurpose/",
+      "status": 200
+    },
+    {
+      "route": "/annotationsDesignPatterns/img/logo.png",
+      "status": 200
+    }
+  ]
+}
