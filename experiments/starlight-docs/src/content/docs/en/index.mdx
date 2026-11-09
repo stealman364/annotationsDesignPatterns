@@ -1,0 +1,31 @@
+---
+title: Annotations Design Patterns
+description: Compose reusable behavior in TypeScript.
+---
+
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+A TypeScript library for composing reusable behavior with TC39 decorators or
+composable functions. The examples support the TypeScript and JavaScript
+versions listed in the package documentation.
+
+<CardGrid stagger>
+  <LinkCard title="API reference" href={import.meta.env.BASE_URL + 'api/'}>
+    Browse the ten public entrypoints generated from the source code.
+  </LinkCard>
+  <LinkCard title="Source code" href="https://github.com/stealman364/annotationsDesignPatterns">
+    Explore the project, examples, and release notes.
+  </LinkCard>
+</CardGrid>
+
+## Two ways to compose
+
+Decorators express behavior next to a method. Composable functions let you build
+the same chain explicitly when that form fits the application better.
+
+```ts
+const protectedCall = retry({ attempts: 3 })(withTimeout(500)(loadProfile));
+```
+
+This trial keeps the site under the GitHub Pages base path and provides a
+language switcher for the equivalent Spanish content.

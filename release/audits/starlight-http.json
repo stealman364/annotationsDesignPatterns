@@ -1,0 +1,28 @@
+[
+  {
+    "path": "",
+    "status": 200,
+    "lang": "es"
+  },
+  {
+    "path": "en/",
+    "status": 200,
+    "lang": "en"
+  },
+  {
+    "path": "api/",
+    "status": 200
+  },
+  {
+    "path": "api/assets/search.js",
+    "status": 200
+  },
+  {
+    "path": "pagefind/pagefind-entry.json",
+    "status": 200
+  },
+  {
+    "path": "favicon.ico",
+    "status": 200
+  }
+]

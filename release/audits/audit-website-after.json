@@ -1,0 +1,529 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@docusaurus/bundler": {
+      "name": "@docusaurus/bundler",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["copy-webpack-plugin", "css-minimizer-webpack-plugin"],
+      "effects": ["@docusaurus/core"],
+      "range": "<=3.10.2",
+      "nodes": ["node_modules/@docusaurus/bundler"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@docusaurus/core": {
+      "name": "@docusaurus/core",
+      "severity": "critical",
+      "isDirect": true,
+      "via": ["@docusaurus/bundler", "tinypool", "webpack-dev-server"],
+      "effects": [
+        "@docusaurus/plugin-content-blog",
+        "@docusaurus/plugin-content-docs",
+        "@docusaurus/plugin-content-pages",
+        "@docusaurus/plugin-css-cascade-layers",
+        "@docusaurus/plugin-debug",
+        "@docusaurus/plugin-google-analytics",
+        "@docusaurus/plugin-google-gtag",
+        "@docusaurus/plugin-google-tag-manager",
+        "@docusaurus/plugin-sitemap",
+        "@docusaurus/plugin-svgr",
+        "@docusaurus/preset-classic",
+        "@docusaurus/theme-classic",
+        "@docusaurus/theme-search-algolia"
+      ],
+      "range": "<=3.10.2",
+      "nodes": ["node_modules/@docusaurus/core"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@docusaurus/plugin-content-blog": {
+      "name": "@docusaurus/plugin-content-blog",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-content-blog"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-content-docs": {
+      "name": "@docusaurus/plugin-content-docs",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-content-docs"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-content-pages": {
+      "name": "@docusaurus/plugin-content-pages",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-content-pages"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-css-cascade-layers": {
+      "name": "@docusaurus/plugin-css-cascade-layers",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "<=3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-css-cascade-layers"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-debug": {
+      "name": "@docusaurus/plugin-debug",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-debug"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-google-analytics": {
+      "name": "@docusaurus/plugin-google-analytics",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": ">=3.8.0-canary-6324",
+      "nodes": ["node_modules/@docusaurus/plugin-google-analytics"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-google-gtag": {
+      "name": "@docusaurus/plugin-google-gtag",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-google-gtag"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-google-tag-manager": {
+      "name": "@docusaurus/plugin-google-tag-manager",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-google-tag-manager"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-sitemap": {
+      "name": "@docusaurus/plugin-sitemap",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/plugin-sitemap"],
+      "fixAvailable": true
+    },
+    "@docusaurus/plugin-svgr": {
+      "name": "@docusaurus/plugin-svgr",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core", "@svgr/webpack"],
+      "effects": [],
+      "range": "*",
+      "nodes": ["node_modules/@docusaurus/plugin-svgr"],
+      "fixAvailable": true
+    },
+    "@docusaurus/preset-classic": {
+      "name": "@docusaurus/preset-classic",
+      "severity": "critical",
+      "isDirect": true,
+      "via": [
+        "@docusaurus/core",
+        "@docusaurus/plugin-content-blog",
+        "@docusaurus/plugin-content-docs",
+        "@docusaurus/plugin-content-pages",
+        "@docusaurus/plugin-css-cascade-layers",
+        "@docusaurus/plugin-debug",
+        "@docusaurus/plugin-google-analytics",
+        "@docusaurus/plugin-google-gtag",
+        "@docusaurus/plugin-google-tag-manager",
+        "@docusaurus/plugin-sitemap",
+        "@docusaurus/plugin-svgr",
+        "@docusaurus/theme-classic",
+        "@docusaurus/theme-search-algolia"
+      ],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/preset-classic"],
+      "fixAvailable": {
+        "name": "@docusaurus/preset-classic",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@docusaurus/theme-classic": {
+      "name": "@docusaurus/theme-classic",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "@docusaurus/core",
+        "@docusaurus/plugin-content-blog",
+        "@docusaurus/plugin-content-docs",
+        "@docusaurus/plugin-content-pages"
+      ],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/theme-classic"],
+      "fixAvailable": true
+    },
+    "@docusaurus/theme-search-algolia": {
+      "name": "@docusaurus/theme-search-algolia",
+      "severity": "critical",
+      "isDirect": false,
+      "via": ["@docusaurus/core", "@docusaurus/plugin-content-docs"],
+      "effects": [],
+      "range": "3.8.0-canary-6324 - 3.10.2",
+      "nodes": ["node_modules/@docusaurus/theme-search-algolia"],
+      "fixAvailable": true
+    },
+    "@svgr/plugin-svgo": {
+      "name": "@svgr/plugin-svgo",
+      "severity": "low",
+      "isDirect": false,
+      "via": ["deepmerge"],
+      "effects": ["@svgr/webpack"],
+      "range": ">=5.5.0",
+      "nodes": ["node_modules/@svgr/plugin-svgo"],
+      "fixAvailable": true
+    },
+    "@svgr/webpack": {
+      "name": "@svgr/webpack",
+      "severity": "low",
+      "isDirect": false,
+      "via": ["@svgr/plugin-svgo"],
+      "effects": ["@docusaurus/plugin-svgr"],
+      "range": ">=5.5.0",
+      "nodes": ["node_modules/@svgr/webpack"],
+      "fixAvailable": true
+    },
+    "copy-webpack-plugin": {
+      "name": "copy-webpack-plugin",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["serialize-javascript"],
+      "effects": ["@docusaurus/bundler"],
+      "range": "6.1.1 - 13.0.1",
+      "nodes": ["node_modules/copy-webpack-plugin"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "css-minimizer-webpack-plugin": {
+      "name": "css-minimizer-webpack-plugin",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["serialize-javascript"],
+      "effects": ["@docusaurus/bundler"],
+      "range": "1.1.4 - 7.0.4",
+      "nodes": ["node_modules/css-minimizer-webpack-plugin"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "deepmerge": {
+      "name": "deepmerge",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1243505,
+          "name": "deepmerge",
+          "dependency": "deepmerge",
+          "title": "deepmerge mergeObject() allows prototype poisoning of returned objects",
+          "url": "https://github.com/advisories/GHSA-gcqx-w48m-w2h4",
+          "severity": "low",
+          "cwe": ["CWE-1321"],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=4.2.0 <=4.3.1"
+        }
+      ],
+      "effects": ["@svgr/plugin-svgo"],
+      "range": ">=4.2.0",
+      "nodes": ["node_modules/deepmerge"],
+      "fixAvailable": true
+    },
+    "docusaurus-plugin-typedoc": {
+      "name": "docusaurus-plugin-typedoc",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": ["typedoc", "typedoc-docusaurus-theme", "typedoc-plugin-markdown"],
+      "effects": [],
+      "range": ">=1.0.0-next.0",
+      "nodes": ["node_modules/docusaurus-plugin-typedoc"],
+      "fixAvailable": true
+    },
+    "minimatch": {
+      "name": "minimatch",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1244623,
+          "name": "minimatch",
+          "dependency": "minimatch",
+          "title": "minimatch has potential denial of service via globparts amplification",
+          "url": "https://github.com/advisories/GHSA-g3hv-75wg-m249",
+          "severity": "moderate",
+          "cwe": ["CWE-405"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=7.0.0 <11.0.1"
+        }
+      ],
+      "effects": ["typedoc"],
+      "range": "7.0.0 - 11.0.0",
+      "nodes": ["node_modules/typedoc/node_modules/minimatch"],
+      "fixAvailable": {
+        "name": "typedoc",
+        "version": "0.23.25",
+        "isSemVerMajor": true
+      }
+    },
+    "serialize-javascript": {
+      "name": "serialize-javascript",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1113686,
+          "name": "serialize-javascript",
+          "dependency": "serialize-javascript",
+          "title": "Serialize JavaScript is Vulnerable to RCE via RegExp.flags and Date.prototype.toISOString()",
+          "url": "https://github.com/advisories/GHSA-5c6j-r48x-rmvq",
+          "severity": "high",
+          "cwe": ["CWE-96"],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": "<=7.0.2"
+        },
+        {
+          "source": 1119440,
+          "name": "serialize-javascript",
+          "dependency": "serialize-javascript",
+          "title": "Serialize JavaScript has CPU Exhaustion Denial of Service via crafted array-like objects",
+          "url": "https://github.com/advisories/GHSA-qj8w-gfj5-8c6v",
+          "severity": "moderate",
+          "cwe": ["CWE-400", "CWE-834"],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=5.0.0 <7.0.5"
+        },
+        {
+          "source": 1243082,
+          "name": "serialize-javascript",
+          "dependency": "serialize-javascript",
+          "title": "Serialize JavaScript: Cross-site scripting (XSS) via unescaped </script at the end of a serialized function body",
+          "url": "https://github.com/advisories/GHSA-m5mm-p8h7-m29v",
+          "severity": "low",
+          "cwe": ["CWE-79"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<7.1.3"
+        }
+      ],
+      "effects": ["copy-webpack-plugin", "css-minimizer-webpack-plugin"],
+      "range": "<=7.1.2",
+      "nodes": ["node_modules/serialize-javascript"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "sockjs": {
+      "name": "sockjs",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["uuid"],
+      "effects": ["webpack-dev-server"],
+      "range": ">=0.3.17",
+      "nodes": ["node_modules/sockjs"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "tinypool": {
+      "name": "tinypool",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241260,
+          "name": "tinypool",
+          "dependency": "tinypool",
+          "title": "Tinypool: Prototype Pollution gadget in worker options leads to Remote Code Execution",
+          "url": "https://github.com/advisories/GHSA-5gmw-xhrv-c9v3",
+          "severity": "critical",
+          "cwe": ["CWE-1321"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=2.1.0"
+        },
+        {
+          "source": 1241261,
+          "name": "tinypool",
+          "dependency": "tinypool",
+          "title": "Tinypool: Prototype Pollution Gadget to RCE in run() options",
+          "url": "https://github.com/advisories/GHSA-85c8-ppgw-ccpr",
+          "severity": "critical",
+          "cwe": ["CWE-94", "CWE-1321"],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<2.1.2"
+        }
+      ],
+      "effects": ["@docusaurus/core"],
+      "range": "<=2.1.1",
+      "nodes": ["node_modules/tinypool"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "typedoc": {
+      "name": "typedoc",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": ["minimatch"],
+      "effects": [
+        "docusaurus-plugin-typedoc",
+        "typedoc-docusaurus-theme",
+        "typedoc-plugin-markdown"
+      ],
+      "range": "0.23.26 - 0.28.20",
+      "nodes": ["node_modules/typedoc"],
+      "fixAvailable": {
+        "name": "typedoc",
+        "version": "0.23.25",
+        "isSemVerMajor": true
+      }
+    },
+    "typedoc-docusaurus-theme": {
+      "name": "typedoc-docusaurus-theme",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["typedoc", "typedoc-plugin-markdown"],
+      "effects": [],
+      "range": "*",
+      "nodes": ["node_modules/typedoc-docusaurus-theme"],
+      "fixAvailable": true
+    },
+    "typedoc-plugin-markdown": {
+      "name": "typedoc-plugin-markdown",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": ["typedoc"],
+      "effects": ["docusaurus-plugin-typedoc", "typedoc-docusaurus-theme"],
+      "range": ">=3.15.1",
+      "nodes": ["node_modules/typedoc-plugin-markdown"],
+      "fixAvailable": {
+        "name": "typedoc-plugin-markdown",
+        "version": "3.15.0",
+        "isSemVerMajor": true
+      }
+    },
+    "uuid": {
+      "name": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119441,
+          "name": "uuid",
+          "dependency": "uuid",
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "cwe": ["CWE-787", "CWE-1285"],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<11.1.1"
+        }
+      ],
+      "effects": ["sockjs"],
+      "range": "<11.1.1",
+      "nodes": ["node_modules/uuid"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    },
+    "webpack-dev-server": {
+      "name": "webpack-dev-server",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": ["sockjs"],
+      "effects": ["@docusaurus/core"],
+      "range": "2.0.0-beta - 5.2.7",
+      "nodes": ["node_modules/webpack-dev-server"],
+      "fixAvailable": {
+        "name": "@docusaurus/core",
+        "version": "3.7.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 3,
+      "moderate": 11,
+      "high": 1,
+      "critical": 15,
+      "total": 30
+    },
+    "dependencies": {
+      "prod": 1294,
+      "dev": 21,
+      "optional": 52,
+      "peer": 1,
+      "peerOptional": 0,
+      "total": 1367
+    }
+  }
+}

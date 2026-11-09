@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "kind": "api",
+      "identicalJson": true,
+      "beforeSha256": "a104c7c20bc5f76bfe7abaf02c13fffef44e1b3325b7840c413c6caffdebfca1",
+      "afterSha256": "a104c7c20bc5f76bfe7abaf02c13fffef44e1b3325b7840c413c6caffdebfca1"
+    },
+    {
+      "kind": "api-glob",
+      "identicalJson": true,
+      "beforeSha256": "298b56e9604d5bae31cae3aed72ed4b07f72790633a87ff7e78388d24a53facd",
+      "afterSha256": "298b56e9604d5bae31cae3aed72ed4b07f72790633a87ff7e78388d24a53facd"
+    },
+    {
+      "kind": "api-recursive",
+      "identicalJson": true,
+      "beforeSha256": "900ecacff7c0d93294a0033c2d7207e3a63638fbdf5d54e1d981b242be6d9913",
+      "afterSha256": "900ecacff7c0d93294a0033c2d7207e3a63638fbdf5d54e1d981b242be6d9913"
+    }
+  ],
+  "globRegressionCases": 26,
+  "matcherComparisons": 3304,
+  "matchingDifferences": 0,
+  "prefixRowDeduplication": [
+    {
+      "pattern": "**/*.{ts,tsx}",
+      "beforePrefixes": ["", ""],
+      "afterPrefixes": [""]
+    }
+  ]
+}

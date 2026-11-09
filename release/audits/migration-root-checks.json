@@ -1,0 +1,62 @@
+[
+  {
+    "command": "npm run format:check",
+    "exit": 0,
+    "seconds": 7
+  },
+  {
+    "command": "npm run lint",
+    "exit": 0,
+    "seconds": 12
+  },
+  {
+    "command": "npm run typecheck",
+    "exit": 0,
+    "seconds": 9
+  },
+  {
+    "command": "npm run test",
+    "exit": 0,
+    "seconds": 16
+  },
+  {
+    "command": "npm run build",
+    "exit": 0,
+    "seconds": 14
+  },
+  {
+    "command": "npm run lint:package",
+    "exit": 0,
+    "seconds": 24
+  },
+  {
+    "command": "npm run types:package",
+    "exit": 0,
+    "seconds": 26
+  },
+  {
+    "command": "npm run pack:verify",
+    "exit": 0,
+    "seconds": 17
+  },
+  {
+    "command": "npm run test:package",
+    "exit": 0,
+    "seconds": 30
+  },
+  {
+    "command": "npm run bundle:check",
+    "exit": 0,
+    "seconds": 14
+  },
+  {
+    "command": "npm run bundle:consumers",
+    "exit": 0,
+    "seconds": 14
+  },
+  {
+    "command": "npm run types:compat",
+    "exit": 0,
+    "seconds": 30
+  }
+]

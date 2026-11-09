@@ -49,6 +49,11 @@ Retain the consumer JSON report with the exact package version, commit and dirty
 
 ## External observations
 
+For the 2026-11-08 published RC1 observations, local dependency security updates,
+remaining findings and prioritized follow-up, see the
+[audit status and roadmap](release/audits/README.md) and its linked evidence.
+The observations below remain the historical 2.2.0 snapshot.
+
 The following were checked on 2026-11-07 for the published 2.2.0 package. They are historical observations, not live guarantees or candidate-release measurements.
 
 | Service       | Observation                                                               | Source                                                                                            |

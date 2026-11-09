@@ -57,4 +57,4 @@ Pick a guide from the sidebar based on what you want to do:
 
 For a detailed reference of types and signatures, see the [API Reference](/docs/api/root).
 
-> **Note:** The API reference (`/docs/api/*`) is currently available in Spanish only across all language locales. This is a known limitation: TypeDoc does not support native multilingual output, and the JSDoc comments in the source code are written in Spanish. Future versions may provide full English translations of the API documentation.
+> **Note:** Both guide languages link to one shared API reference. Its navigation and symbol search are in English; API descriptions retain the language of the source comments and are not automatically translated. Legacy `/docs/api/*` links redirect to the matching module or symbol.

@@ -259,15 +259,35 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/js": "^10.0.1",
     "@types/node": "^20.19.43",
-    "@vitest/coverage-v8": "^4.1.9",
-    "eslint": "^10.6.0",
+    "@vitest/coverage-v8": "^4.1.12",
+    "eslint": "^10.14.0",
     "lefthook": "^2.1.9",
     "prettier": "^3.9.4",
     "publint": "^0.3.22",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.62.1",
-    "vite": "^7.3.6",
-    "vitest": "^4.1.9"
+    "typescript-eslint": "^8.72.1",
+    "vite": "^7.3.7",
+    "vitest": "^4.1.12"
+  },
+  "overrides": {
+    "eslint": {
+      "minimatch": "11.0.5"
+    },
+    "@eslint/config-array": {
+      "minimatch": "11.0.5"
+    },
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.5"
+    },
+    "tsup": {
+      "esbuild": "0.28.2"
+    },
+    "bundle-require": {
+      "esbuild": "0.28.2"
+    },
+    "vite": {
+      "esbuild": "0.28.2"
+    }
   }
 }
