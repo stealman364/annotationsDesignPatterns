@@ -1,0 +1,35 @@
+{
+  "date": "2026-11-09",
+  "name": "annotations-design-patterns",
+  "version": "2.3.0",
+  "latest": "2.3.0",
+  "sourceCommit": "1d8cb44b9da8822e02703838d0693e0746e6565e",
+  "tag": "v2.3.0",
+  "workflowRun": 42610848603,
+  "workflowUrl": "https://github.com/stealman364/annotationsDesignPatterns/actions/runs/42610848603",
+  "sha256": "f1dfe074f0cf33c92adadefe0d93647f6445f992a0672f1a44df6ccf71ff8077",
+  "shasum": "04a8e59e1b9761c2da2881f2c5723dabf8d2f1b6",
+  "integrity": "sha512-kpog4iWbOIv8x1xeIzn+Sufdo3tM2JF7jlhTlmZhuElgsNnO2MoedM9gZU7lbY6trzpjzdLm9OAhFRgRfyzBtA==",
+  "workflowArtifactMatchesRegistry": true,
+  "runtimeDependencies": {},
+  "engines": {
+    "node": ">=20"
+  },
+  "tarball": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0.tgz",
+  "attestations": {
+    "url": "https://registry.npmjs.org/-/npm/v1/attestations/annotations-design-patterns@2.3.0",
+    "provenance": {
+      "predicateType": "https://slsa.dev/provenance/v1"
+    }
+  },
+  "provenanceMatchesTagCommitAndTarball": true,
+  "provenanceInvocation": "https://github.com/stealman364/annotationsDesignPatterns/actions/runs/42610848603/attempts/1",
+  "githubRelease": "https://github.com/stealman364/annotationsDesignPatterns/releases/tag/v2.3.0",
+  "githubReleaseId": 439068208,
+  "registrySignatureAndAttestationVerified": true,
+  "workflowIntegrationCellsPassed": 4,
+  "registryIntegrationCellsPassed": 4,
+  "publishedEsmCjsChecksPassed": 4,
+  "runtimeAndTestsUnchangedFromRc1": true,
+  "publicWebsiteVersionVerified": "2.3.0"
+}

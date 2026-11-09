@@ -1,7 +1,7 @@
 # Cierre de 2.3.0
 
-Fecha: 9 de noviembre de 2026. Estado inicial: versión estable preparada;
-publicación pendiente del workflow de release y verificación del registro npm.
+Fecha: 9 de noviembre de 2026. **2.3.0 publicada y verificada en npm como
+`latest`**, mediante trusted publishing y con procedencia comprobada.
 
 ## Decisión de alcance
 
@@ -35,8 +35,32 @@ que dependan de ellos. La revisión no encontró otro bloqueo reproducible en la
 
 ## Publicación
 
-Publicar únicamente con tag `v2.3.0` que coincida con package.json. El workflow
-release.yml valida su propio tarball, verifica identidad/integridad y lo publica
-con procedencia mediante trusted publishing y dist-tag `latest`. Tras completarse,
-registrar run, commit del tag, metadata/integridad npm e instalaciones aisladas.
-No reutilizar una versión publicada ni describir un job pendiente como publicado.
+- PR de cierre: [#17](https://github.com/stealman364/annotationsDesignPatterns/pull/17).
+  CI Node 20/22, documentación y seguridad correctas antes de fusionar.
+- [Release pública de GitHub](https://github.com/stealman364/annotationsDesignPatterns/releases/tag/v2.3.0)
+  creada como estable; web pública comprobada con HTTP 200 y contenido 2.3.0.
+- Tag anotado `v2.3.0`, commit `1d8cb44b9da8822e02703838d0693e0746e6565e`.
+- [Release 42610848603](https://github.com/stealman364/annotationsDesignPatterns/actions/runs/42610848603):
+  validate, build y publish completados correctamente. Se publicó el tarball
+  descargado del artefacto validado, sin reconstruirlo en publish.
+- [Metadata verificada](PUBLISHED.json): npm devuelve `2.3.0` para `latest`,
+  sin dependencias de ejecución. SHA-256 del tarball descargado del registro:
+  `f1dfe074f0cf33c92adadefe0d93647f6445f992a0672f1a44df6ccf71ff8077`.
+  Coinciden SHA-256, SHA-1 e integridad SHA-512 con el artefacto de Actions.
+- [Firma y atestación](SIGNATURES.json): `npm audit signatures` verificó la firma
+  del registro y la atestación. La procedencia enlaza el mismo tag, commit,
+  workflow y digest del paquete; [atestaciones públicas](npm-attestations.json).
+- [Artefacto definitivo](integration/WORKFLOW-EVIDENCE.json) y
+  [paquete instalado desde npm](integration/PUBLISHED-EVIDENCE.json): cuatro
+  combinaciones Node 20/22 × TS 5.0/5.9 correctas por cada origen.
+- [Runtime publicado ESM/CJS](PUBLISHED-RUNTIME.json): fixtures de cancelación,
+  colas, caché, retry y contratos 2.3 correctos en Node 20.20.2 y 22.23.4.
+
+La fuente de runtime y sus pruebas no cambian respecto al tag RC1 revisado.
+El tarball definitivo puede diferir del preliminar local por la plataforma de
+build; la comparación de publicación utiliza el artefacto definitivo de Actions.
+`next` conserva la RC1 histórica; la instalación normal usa la estable `latest`.
+
+```sh
+npm install annotations-design-patterns
+```

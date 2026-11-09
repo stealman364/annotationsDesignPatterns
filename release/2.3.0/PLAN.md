@@ -15,11 +15,11 @@ No new runtime features or dependency changes are in scope.
 - [x] Set package/lock version to `2.3.0`; validate build, tests, coverage, types,
       package resolution, packed consumers, budgets and full security audits. Run
       controlled applications against the exact local candidate tarball as well.
-- [ ] Commit and push a release branch; require CI on the final commit, merge
+- [x] Commit and push a release branch; require CI on the final commit, merge
       normally, tag the selected merged commit as `v2.3.0`, and dispatch release.yml
       on that tag. The workflow validates and publishes its own immutable tarball
       through npm trusted publishing with provenance and dist-tag `latest`.
-- [ ] Observe publication completion; verify registry version, integrity,
+- [x] Observe publication completion; verify registry version, integrity,
       provenance, zero runtime dependencies and `latest`. Install published `2.3.0`
       into isolated consumers and rerun integration/ESM/CJS/types. Record actual
       publication and deployed documentation evidence; do not overwrite an npm version.

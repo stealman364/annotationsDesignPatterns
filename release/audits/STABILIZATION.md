@@ -1,9 +1,8 @@
 # Cierre de 2.3 y decisión sobre 3.0
 
-Actualizado el 9 de noviembre de 2026. El usuario autorizó cerrar y publicar
-`2.3.0`. El resultado definitivo de publicación se registra en
-[el cierre de la versión](../2.3.0/CLOSURE.md); una validación previa no se presenta
-como publicación completada.
+Actualizado el 9 de noviembre de 2026. **2.3.0 está publicada en npm como
+`latest`**, con procedencia y consumidores verificados. Consultar
+[el cierre definitivo](../2.3.0/CLOSURE.md) para tag, commit, workflow e integridad.
 
 ## La biblioteca no necesita más funciones para cerrar 2.3
 
@@ -13,17 +12,17 @@ alcance de validación sin resolver los pendientes actuales.
 
 ## Lista de cierre
 
-| Criterio                                       | Evidencia o pendiente                                                                                                                                                                    |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Pruebas internas con herramientas actualizadas | 135 archivos y 1.115 pruebas correctas en Node 22.18.0 y Node 20.20.2 localmente.                                                                                                        |
-| Cobertura y límites existentes                 | Superados en la revisión anterior con las herramientas actualizadas; sin cambios posteriores de runtime.                                                                                 |
-| Tipos y paquete                                | publint, ATTW, fixtures TS 5.0/5.9 y consumidores empaquetados correctos en la revisión anterior.                                                                                        |
-| RC publicada instalada desde npm               | Huella verificada; consumidores aislados correctos en Node 20.20.2 y 22.18.0, fixture ESM/CJS 2.3 y pipeline retry/memoize/rateLimit.                                                    |
-| Revisar el commit final en remoto              | CI Node 20/22 y despliegue de documentación correctos sobre `4ba2e27`. La versión estable requiere además validar su propio commit/tag y tarball.                                        |
-| Dependencias de la documentación               | Migración a Starlight desplegada; auditorías completas de raíz y website sin alertas conocidas. Overrides y parche privado de TypeDoc documentados como excepciones de mantenimiento.    |
-| Integración y experiencia externa              | Aplicaciones controladas funcionales y con decoradores en el cierre 2.3. No se ha observado adopción independiente; esa ausencia queda explícita y no se sustituye por fixtures.         |
-| Condiciones experimentales                     | Conservar las etiquetas y límites de cancelación compartida, caché externa/CAS y observación de operaciones.                                                                             |
-| Decisión de publicar estable                   | Autorizada por el usuario. No hay issues de GitHub actualizadas desde la revisión de la RC que reporten fallos; conservar límites y validar el artefacto exacto antes de mover `latest`. |
+| Criterio                                       | Evidencia o pendiente                                                                                                                                                                 |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Pruebas internas con herramientas actualizadas | 135 archivos y 1.115 pruebas correctas en Node 22.18.0 y Node 20.20.2 localmente.                                                                                                     |
+| Cobertura y límites existentes                 | Superados en la revisión anterior con las herramientas actualizadas; sin cambios posteriores de runtime.                                                                              |
+| Tipos y paquete                                | publint, ATTW, fixtures TS 5.0/5.9 y consumidores empaquetados correctos en la revisión anterior.                                                                                     |
+| RC publicada instalada desde npm               | Huella verificada; consumidores aislados correctos en Node 20.20.2 y 22.18.0, fixture ESM/CJS 2.3 y pipeline retry/memoize/rateLimit.                                                 |
+| Revisar el commit final en remoto              | CI Node 20/22, documentación y seguridad correctas en la PR #17. Release del tag `v2.3.0` sobre `1d8cb44` completada; tarball npm idéntico al artefacto validado de Actions.          |
+| Dependencias de la documentación               | Migración a Starlight desplegada; auditorías completas de raíz y website sin alertas conocidas. Overrides y parche privado de TypeDoc documentados como excepciones de mantenimiento. |
+| Integración y experiencia externa              | Aplicaciones controladas funcionales y con decoradores en el cierre 2.3. No se ha observado adopción independiente; esa ausencia queda explícita y no se sustituye por fixtures.      |
+| Condiciones experimentales                     | Conservar las etiquetas y límites de cancelación compartida, caché externa/CAS y observación de operaciones.                                                                          |
+| Decisión de publicar estable                   | Cerrada: `2.3.0` publicada como `latest`, firma/atestación verificadas y consumidores publicados correctos. Se conservan las etiquetas experimentales y los límites documentados.     |
 
 ## Validación de consumidores antes de estable
 

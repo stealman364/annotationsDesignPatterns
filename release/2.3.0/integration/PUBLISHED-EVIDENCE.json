@@ -1,0 +1,90 @@
+[
+  {
+    "packageSpec": "2.3.0",
+    "packageName": "annotations-design-patterns",
+    "packageVersion": "2.3.0",
+    "node": "v20.20.2",
+    "typescript": "5.9.3",
+    "nodeTypes": "20.19.43",
+    "integrity": "sha512-kpog4iWbOIv8x1xeIzn+Sufdo3tM2JF7jlhTlmZhuElgsNnO2MoedM9gZU7lbY6trzpjzdLm9OAhFRgRfyzBtA==",
+    "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0.tgz",
+    "scenarios": [
+      "retry",
+      "timeout+fallback",
+      "circuit breaker",
+      "memoize/coalescing",
+      "memoize promise identity",
+      "executionMethod sync return",
+      "rateLimit",
+      "StateMachine inverted completion/manual invalidation/When guard",
+      "AsyncMemoryStore mutation ordering"
+    ],
+    "result": "PASS"
+  },
+  {
+    "packageSpec": "2.3.0",
+    "packageName": "annotations-design-patterns",
+    "packageVersion": "2.3.0",
+    "node": "v20.20.2",
+    "typescript": "5.0.4",
+    "nodeTypes": "20.19.43",
+    "integrity": "sha512-kpog4iWbOIv8x1xeIzn+Sufdo3tM2JF7jlhTlmZhuElgsNnO2MoedM9gZU7lbY6trzpjzdLm9OAhFRgRfyzBtA==",
+    "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0.tgz",
+    "scenarios": [
+      "retry",
+      "timeout+fallback",
+      "circuit breaker",
+      "memoize/coalescing",
+      "memoize promise identity",
+      "executionMethod sync return",
+      "rateLimit",
+      "StateMachine inverted completion/manual invalidation/When guard",
+      "AsyncMemoryStore mutation ordering"
+    ],
+    "result": "PASS"
+  },
+  {
+    "packageSpec": "2.3.0",
+    "packageName": "annotations-design-patterns",
+    "packageVersion": "2.3.0",
+    "node": "v22.23.4",
+    "typescript": "5.9.3",
+    "nodeTypes": "20.19.43",
+    "integrity": "sha512-kpog4iWbOIv8x1xeIzn+Sufdo3tM2JF7jlhTlmZhuElgsNnO2MoedM9gZU7lbY6trzpjzdLm9OAhFRgRfyzBtA==",
+    "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0.tgz",
+    "scenarios": [
+      "retry",
+      "timeout+fallback",
+      "circuit breaker",
+      "memoize/coalescing",
+      "memoize promise identity",
+      "executionMethod sync return",
+      "rateLimit",
+      "StateMachine inverted completion/manual invalidation/When guard",
+      "AsyncMemoryStore mutation ordering"
+    ],
+    "result": "PASS"
+  },
+  {
+    "packageSpec": "2.3.0",
+    "packageName": "annotations-design-patterns",
+    "packageVersion": "2.3.0",
+    "node": "v22.23.4",
+    "typescript": "5.0.4",
+    "nodeTypes": "20.19.43",
+    "integrity": "sha512-kpog4iWbOIv8x1xeIzn+Sufdo3tM2JF7jlhTlmZhuElgsNnO2MoedM9gZU7lbY6trzpjzdLm9OAhFRgRfyzBtA==",
+    "resolved": "https://registry.npmjs.org/annotations-design-patterns/-/annotations-design-patterns-2.3.0.tgz",
+    "scenarios": [
+      "retry",
+      "timeout+fallback",
+      "circuit breaker",
+      "memoize/coalescing",
+      "memoize promise identity",
+      "executionMethod sync return",
+      "rateLimit",
+      "StateMachine inverted completion/manual invalidation/When guard",
+      "AsyncMemoryStore mutation ordering"
+    ],
+    "result": "PASS"
+  }
+]

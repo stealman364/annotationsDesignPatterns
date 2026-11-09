@@ -3,6 +3,11 @@
 Registro actualizado el 8 de noviembre de 2026. Este índice consolida lo realizado
 y lo pendiente. No representa una certificación de seguridad.
 
+**Cierre de 2.3, 9 de noviembre:** [2.3.0 publicada y verificada en npm](../2.3.0/CLOSURE.md)
+como `latest`, con procedencia, artefacto idéntico al validado en Actions y
+consumidores Node 20/22 y TS 5.0/5.9 correctos. Las referencias anteriores a
+prerrelease o publicación pendiente se conservan como registros históricos.
+
 **Estado actualizado el 9 de noviembre:** la
 [migración completa a Starlight](STARLIGHT-MIGRATION-RESULTS.md) deja las auditorías
 completas de raíz y website sin alertas conocidas, con las excepciones de rangos
@@ -35,7 +40,7 @@ No se ha sustituido Docusaurus ni desplegado el prototipo.
 
 | Estado                                    | Contenido                                                                                                                                                    |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Publicado en npm                          | `next`: 2.3.0-rc.1; `latest`: 2.2.0. RC1 tiene procedencia de GitHub Actions.                                                                                |
+| Publicado en npm                          | `latest`: 2.3.0; `next`: 2.3.0-rc.1 histórico. La estable tiene procedencia de GitHub Actions e integridad verificada. |
 | Consolidación separada de la RC publicada | Actualización de herramientas, lockfiles, workflow de seguridad e informes de este directorio. Incorporación a la rama predeterminada pendiente de revisión. |
 | Sin activar todavía en GitHub             | Nuevo workflow de seguridad: requiere incorporar estos archivos a la rama predeterminada.                                                                    |
 | Sin publicación adicional                 | Las mejoras de herramientas no han cambiado el contenido de RC1 en npm.                                                                                      |

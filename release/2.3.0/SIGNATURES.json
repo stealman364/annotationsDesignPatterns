@@ -1,0 +1,7 @@
+{
+  "package": "annotations-design-patterns@2.3.0",
+  "command": "npm audit signatures",
+  "exit": 0,
+  "stdout": "audited 1 package in 0s\n\n1 package has a verified registry signature\n\n1 package has a verified attestation\n(use --json --include-attestations to view attestation details)",
+  "stderr": ""
+}
