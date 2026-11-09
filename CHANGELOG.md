@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. This
 project follows Semantic Versioning.
 
+## 2.3.0
+
+- Promote the reviewed 2.3 runtime to stable; preserve Node 20+, TypeScript 5.0+,
+  ESM/CJS subpaths, TC39 decorators and zero runtime dependencies.
+- Include functional rateLimit, FIFO capacity for memoize, executionMethod,
+  opt-in stale-transition rejection, event adapters and diagnostic handles.
+- Keep shared cancellation, observeOperation, external async caching and CAS
+  experimental. No remote provider is certified by this release.
+- Preserve the documented AsyncMemoryStore mutation ordering correction: reads
+  remain non-blocking; updaters must not await same-key mutations or barriers.
+- Refresh development tooling, clear known dependency audit findings, and
+  migrate the documentation website to Starlight without changing library APIs.
+- Validate controlled applications installed from npm and the release tarball;
+  this is integration evidence, not a claim of independent production adoption.
+
 ## 2.3.0-rc.1
 
 - Preserve the runtime reviewed in RC0. The RC0 npm publication stopped before

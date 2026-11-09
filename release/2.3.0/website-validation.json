@@ -1,0 +1,11 @@
+{
+  "htmlFiles": 689,
+  "checkedLinks": 10528,
+  "checkedFragments": 4565,
+  "guidePages": 30,
+  "preservedGuideAnchors": 198,
+  "legacyAliases": 444,
+  "apiModules": 10,
+  "searchLanguages": ["en", "es"],
+  "failures": []
+}

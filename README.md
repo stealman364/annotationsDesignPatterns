@@ -4,11 +4,10 @@
 
 📖 **[Documentación completa](https://stealman364.github.io/annotationsDesignPatterns/)**: guías, referencia de API y migración a 2.0 ([English](https://stealman364.github.io/annotationsDesignPatterns/en/)).
 
-> **Candidato 2.3.0-rc.1:** operadores funcionales, cancelación compartida opt-in,
+> **Versión 2.3.0:** operadores funcionales, cancelación compartida opt-in,
 > transiciones optimistas, observabilidad y handles de diagnóstico.
 > Consulta los [contratos y ejemplos de 2.3](./V2.3-RUNTIME.md).
-> `2.2.0` sigue siendo la referencia estable; el canal previsto para la RC es `next`.
-> Las APIs de /experimental y cancelWhenUnused son experimentales.
+> Las APIs de `/experimental` y `cancelWhenUnused` conservan su estado experimental.
 
 Se puede usar de dos formas:
 
@@ -90,7 +89,7 @@ interno, así que se comportan igual:
 | —                             | `overlap(opts)`          | Solo funcional: `drop`, `share` o cola FIFO por clave       |
 | —                             | `keyedLock(opts)`        | Solo funcional: serializa por clave                         |
 | —                             | `definePolicy(config)`   | Solo funcional: agrupa las cuatro capas de resiliencia      |
-| `@Mutex` / `@Semaphore(n)`    | `semaphore(opts)`        | Decorador por instancia; operador por pipeline o clave       |
+| `@Mutex` / `@Semaphore(n)`    | `semaphore(opts)`        | Decorador por instancia; operador por pipeline o clave      |
 
 ## Catálogo
 

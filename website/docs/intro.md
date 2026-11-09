@@ -4,8 +4,8 @@ sidebar_position: 1
 
 # Bienvenida a annotations-design-patterns
 
-> La documentación incluye el candidato `2.3.0-rc.1`.
-> La versión estable de referencia es `2.2.0`.
+> La documentación corresponde a la versión `2.3.0`.
+> Las APIs señaladas como experimentales conservan esa condición.
 > Consulta la [migración a 2.3](./migration/2.3.md) para distinguir las APIs nuevas y experimentales.
 
 **Patrones de diseño como decoradores TypeScript estándar (TC39) y como funciones componibles.** Los patrones GoF clásicos, inyección de dependencias, un toolkit de resiliencia completo y utilidades de método. La resiliencia y la caché también están disponibles como operadores funcionales: consulta la guía de [operadores](./guides/operators.md).
