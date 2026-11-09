@@ -1,0 +1,22 @@
+[
+  {
+    "name": "idempotent",
+    "exit": 0,
+    "unchanged": true
+  },
+  {
+    "name": "unknown-source",
+    "exit": 1,
+    "unchanged": true
+  },
+  {
+    "name": "wrong-version",
+    "exit": 1,
+    "unchanged": true
+  },
+  {
+    "name": "ancestor-dependency",
+    "exit": 1,
+    "unchanged": true
+  }
+]

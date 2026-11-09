@@ -4,6 +4,31 @@ An isolated Astro Starlight prototype for the Spanish and English documentation
 landing pages. It keeps its own dependencies and lockfile; it does not change
 the published Docusaurus site or library package.
 
+## Private TypeDoc compatibility patch
+
+The full trial audit now reports zero known vulnerabilities (9 November 2026).
+This requires an override of TypeDoc 0.28.20's minimatch dependency to 11.0.5
+**and a private local compatibility patch**. The override alone breaks recursive
+file discovery because minimatch 11 removed `matchOne`. This combination is not
+supported by TypeDoc upstream.
+
+`scripts/prepare-typedoc.mjs` adapts directory traversal to the public partial
+matcher, preserving the original negation behavior. It checks exact dependency
+versions, installation location and full source/output SHA-256 hashes before
+writing into this trial's `node_modules`. Unknown inputs fail without modification;
+an already patched file is accepted unchanged. Review or remove the patch when
+upgrading TypeDoc. It does not modify library sources or the current website.
+
+There is no install lifecycle hook. `api`, `verify:typedoc` and `build:all` run
+preparation explicitly, including after `npm ci --ignore-scripts`. Use
+`build:all` for complete validation; `build` alone only builds Astro pages.
+The 26 permanent glob regression cases use a baseline captured from unmodified
+TypeDoc 0.28.20 with minimatch 10.2.6. Temporary fixtures remain ignored under
+`.validation/`.
+
+See [the reduction report](../../release/audits/STARLIGHT-REDUCTION-RESULTS.md)
+for audit evidence, compatibility comparisons and remaining limitations.
+
 ## Requirements
 
 The library currently supports Node 20, but this documentation toolchain has a

@@ -7,9 +7,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "api": "typedoc --options typedoc.json",
-    "build:all": "npm run api && npm run build && npm run verify",
+    "prepare:typedoc": "node scripts/prepare-typedoc.mjs",
+    "api": "npm run prepare:typedoc && typedoc --options typedoc.json",
+    "verify:typedoc": "npm run prepare:typedoc && node scripts/verify-typedoc-globs.mjs",
+    "build:all": "npm run api && npm run verify:typedoc && npm run build && npm run verify",
     "verify": "node scripts/verify-output.mjs"
+  },
+  "overrides": {
+    "typedoc@0.28.20": {
+      "minimatch": "11.0.5"
+    }
   },
   "devDependencies": {
     "@astrojs/markdown-remark": "7.3.0",
